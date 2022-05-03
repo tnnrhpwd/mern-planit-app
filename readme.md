@@ -28,3 +28,8 @@ Heroku automatically creates a production build and runs the servers via:
 ```
 npm run heroku-postbuild
 ```
+
+### Deploy app via:
+```
+git push heroku master
+```
