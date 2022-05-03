@@ -1,5 +1,9 @@
 # MERN Planit App
 ### Where goals meet actions
+By Steven Tanner Hopwood
+
+___
+
 
 Install Backend Dependancies
 ```
