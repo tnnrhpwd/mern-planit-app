@@ -9,7 +9,7 @@ function Header() {
 
   useEffect(() => {     // RUNS ON START -- Checks browser for color theme preference. Sets dark mode otherwise.
     const theme = localStorage.getItem('theme');
-    if(theme && theme==='light-theme') {
+    if(theme==='light-theme') {
       setLightMode();
     } else if(theme==='dark-theme') {
       setDarkMode();
@@ -55,8 +55,8 @@ function Header() {
         </div>
 
 
-        {(colTheme==="dark-theme") && <button onClick={setLightMode}>Light</button>}
-        {(colTheme==="light-theme") && <button onClick={setDarkMode}>Dark</button>}
+        {(colTheme==="dark-theme") && <button className='planit-header-themebutton' onClick={setLightMode}>Light</button>}
+        {(colTheme==="light-theme") && <button className='planit-header-themebutton' onClick={setDarkMode}>Dark</button>}
         
 
 
@@ -64,14 +64,14 @@ function Header() {
           <input id='planit-header-dropper-checkbox' type='checkbox' checked={showDropper%2===0} onChange={handleCheck}/>
           {(showDropper%2===1) &&
           <ul className='planit-header-dropper-space'>
-            {(colTheme==="dark-theme") && <button onClick={setLightMode}>Light</button>}
-            {(colTheme==="light-theme") && <button onClick={setDarkMode}>Dark</button>}
-            <li>Profile</li>
-            <li>My Goals</li>
-            <li>My Plans</li>
-            <li>Settings</li>
-            <li>About Planit</li>
-            <li>Legal Terms</li>
+            {(colTheme==="dark-theme") && <button className='planit-header-dropper-themebutton' onClick={setLightMode}>Light Mode</button>}
+            {(colTheme==="light-theme") && <button className='planit-header-dropper-themebutton' onClick={setDarkMode}>Dark Mode</button>}
+            <div>Profile</div>
+            <div>My Goals</div>
+            <div>My Plans</div>
+            <div>Settings</div>
+            <div>About Planit</div>
+            <div>Legal Terms</div>
           </ul>
           }
           

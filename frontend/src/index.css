@@ -31,6 +31,7 @@ code {
   --bg-nav2: var(--grey0);
   --bg-page: var(--white0);
   --text-color: var(--dark-blue0);
+  --text-color-inv: var(--white0);
   --bg-accent: var(--light-green0);
   --border-nav: var(--grey1);
   --bg-nav-dropper: var(--grey1);
@@ -40,6 +41,7 @@ code {
   --bg-nav2: var(--dark-blue0-grey);
   --bg-page: var(--grey5);
   --text-color: var(--white0);
+  --text-color-inv: var(--dark-blue0);
   --bg-accent: var(--light-green0);
   --border-nav: var(--dark-blue1);
   --bg-nav-dropper: var(--grey4);
@@ -70,13 +72,28 @@ code {
   margin: calc(var(--nav-size)*0.1);
   vertical-align: middle;
 }
-.planit-header-themetext{
-  color: var(--text-color); 
-
+@media (orientation: portrait) {
+  .planit-header-themebutton{
+    display: none;
+  }
+  .planit-header-dropper-space{
+    display: absolute;
+    font-size: calc(var(--nav-size)*0.35);
+    margin-right: calc(var(--nav-size)*0.6);
+    text-decoration: none;
+    text-align: center;
+  }
+  .planit-header-dropper-themebutton{
+    font-size: calc(var(--nav-size)*0.30);
+    background-color: var(--bg-accent);
+  }
 }
 .planit-header-dropper-checkbox{
   margin-left: auto;
   display: inline-block;
+}
+.planit-header-dropper-space{
+
 }
 .planit-header-dropper{
   margin-left: auto;
@@ -90,6 +107,8 @@ code {
 
 
 
+
 .planit-dashboard{
+  font-size: calc(var(--nav-size)*0.3);
   color: var(--text-color);
 }
