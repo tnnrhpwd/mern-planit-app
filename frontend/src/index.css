@@ -5,9 +5,91 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-page);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+:root{
+  --nav-size: max(6vw,min(70px,16vw));
+  --dark-blue0: #101B22;
+  --dark-blue0-grey: #0c141a;
+  --dark-blue1: #1a2b36;
+  --white0: #F4F7FD;
+  --grey0: #e0e2e8;
+  --grey1: #bbbdc2;
+  --grey2: #8e8f93;
+  --grey3: #5d5d60;
+  --grey4: #2d2d2e;
+  --grey5: #151516;
+  --light-green0: #0dff76;
+}
+.light-theme{
+  --bg-nav1: var(--white0);
+  --bg-nav2: var(--grey0);
+  --bg-page: var(--white0);
+  --text-color: var(--dark-blue0);
+  --bg-accent: var(--light-green0);
+  --border-nav: var(--grey1);
+  --bg-nav-dropper: var(--grey1);
+}
+.dark-theme{
+  --bg-nav1: var(--dark-blue0);
+  --bg-nav2: var(--dark-blue0-grey);
+  --bg-page: var(--grey5);
+  --text-color: var(--white0);
+  --bg-accent: var(--light-green0);
+  --border-nav: var(--dark-blue1);
+  --bg-nav-dropper: var(--grey4);
+}
+.planit-header{
+  background-image: linear-gradient(to right,var(--bg-nav1),var(--bg-nav2));
+  color: var(--text-color);
+  height: var(--nav-size);
+  vertical-align: top;
+  font-size: calc(var(--nav-size)*0.5);
+  display:flex;
+  border-bottom: calc(var(--nav-size)*0.01) solid var(--border-nav);
+  text-decoration: none;
+}
+.planit-header-logo{
+  display: inline-block;
+
+}
+.planit-header-title{
+  display: inline-block;
+  padding-top: calc(var(--nav-size)*0.15);
+  bottom: 0;
+  color: var(--secondary-color);
+  margin-right: auto;
+}
+#planit-header-logo-img{
+  width: calc(var(--nav-size)*0.81);
+  margin: calc(var(--nav-size)*0.1);
+  vertical-align: middle;
+}
+.planit-header-themetext{
+  color: var(--text-color); 
+
+}
+.planit-header-dropper-checkbox{
+  margin-left: auto;
+  display: inline-block;
+}
+.planit-header-dropper{
+  margin-left: auto;
+  display: inline-block;
+  background-color: var(--bg-nav-dropper);
+  columns: 1;
+}
+
+
+
+
+
+
+.planit-dashboard{
+  color: var(--text-color);
 }
