@@ -7,47 +7,33 @@ function Header() {
   const [ showDropper, setShowDropper ] = useState(0);
   const [ colTheme, setColTheme ] = useState(null);
 
-  useEffect(() => {
-
-    const body = document.body;
+  useEffect(() => {     // RUNS ON START -- Checks browser for color theme preference. Sets dark mode otherwise.
     const theme = localStorage.getItem('theme');
     if(theme && theme==='light-theme') {
-      setColTheme('light-theme');
-      if(document.body.classList.contains('dark-theme')){
-        body.classList.replace('dark-theme', 'light-theme');
-      }else{
-        body.classList.add('light-theme');
-      }
+      setLightMode();
+    } else if(theme==='dark-theme') {
+      setDarkMode();
+    } else {
+      setDarkMode();
     }
-    if(theme && theme==='dark-theme') {
-      setColTheme('dark-theme');
-      if(document.body.classList.contains('light-theme')){
-        body.classList.replace('light-theme', 'dark-theme');
-      }else{
-        body.classList.add('dark-theme');
-      }
-    }
-    
   }, []);
 
   function setDarkMode(){
-    setColTheme('dark-theme');
-    if(document.body.classList.contains('light-theme')){
-      document.body.classList.replace('light-theme', 'dark-theme');
-      if(localStorage.getItem('theme')==="light-theme") {localStorage.setItem('theme', 'dark-theme');}
+    setColTheme('dark-theme');  // set theme state variable 
+    localStorage.setItem('theme', 'dark-theme'); // store preference in user storage 
+    if(document.body.classList.contains('light-theme')){ // if theme already set
+      document.body.classList.replace('light-theme', 'dark-theme');// set to dark mode
     }else{
       document.body.classList.add('dark-theme');
-      if(localStorage.getItem('theme')==="light-theme") {localStorage.setItem('theme', 'dark-theme');}
     }
   }
   function setLightMode(){
-    setColTheme('light-theme');
-    if(document.body.classList.contains('dark-theme')){
-      document.body.classList.replace('dark-theme', 'light-theme');
-      if(localStorage.getItem('theme')==="dark-theme") {localStorage.setItem('theme', 'light-theme'); }
+    setColTheme('light-theme');  // set theme state variable 
+    localStorage.setItem('theme', 'light-theme'); // store preference in user storage 
+    if(document.body.classList.contains('dark-theme')){ // if theme already set
+      document.body.classList.replace('dark-theme', 'light-theme');// set to light mode
     }else{
       document.body.classList.add('light-theme');
-      if(localStorage.getItem('theme')==="dark-theme") {localStorage.setItem('theme', 'light-theme');}
     }
   }
 

@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;  //set port to hold api server
 
 const app = express() // Calls the express function "express()" and puts new Express application inside the app variable
 
-// app.us
+// app.use adds middleware to the data routes
 // app.use(express.json()) // adds middleware that parses json requests and moves data into the request body (regardless of hit url)
 // app.use(express.urlencoded({ extended: false }))  // parses data using query-string library rather than qs library (regardless of hit url)
 
