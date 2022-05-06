@@ -1,0 +1,29 @@
+.planit-login{
+    padding: calc(var(--nav-size)*.25);
+}
+
+
+.planit-login-heading{
+    text-align: center;
+}
+.planit-login-heading-title{
+    font-size: calc(var(--nav-size)*.5);
+}
+.planit-login-heading-description{
+    font-size: calc(var(--nav-size)*.25);
+}
+
+.planit-login-form{
+    margin-top: calc(var(--nav-size)*.5);
+    margin-left: calc(var(--nav-size)*.5);
+}
+.planit-login-form-group{
+
+}
+.planit-login-form-control{
+
+}
+
+.planit-login-form-submit{
+
+}

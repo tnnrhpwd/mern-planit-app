@@ -101,6 +101,7 @@ a{
     border: calc(var(--nav-size)*0.01) solid var(--text-color);
     margin: calc(var(--nav-size)*0.15);
     font-size: calc(var(--nav-size)*0.3);
+    height: calc(var(--nav-size)*0.7);
     cursor: pointer;
   }
   .planit-header-plan-landscape:hover{
@@ -124,6 +125,7 @@ a{
     border: calc(var(--nav-size)*0.01) solid var(--text-color);
     margin: calc(var(--nav-size)*0.15);
     font-size: calc(var(--nav-size)*0.35);
+    height: calc(var(--nav-size)*0.7);
     cursor: pointer;
   }
   .planit-header-profile-landscape:hover{

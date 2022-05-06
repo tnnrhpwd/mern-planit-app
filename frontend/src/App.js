@@ -7,8 +7,10 @@ import Comments from './pages/Comments.jsx'         // import page
 import Dashboard from './pages/Dashboard.jsx'         // import page
 import Goals from './pages/Goals.jsx'         // import page
 import LegalTerms from './pages/LegalTerms.jsx'         // import page
+import Login from './pages/Login/Login.jsx'         // import page
 import Plans from './pages/Plans.jsx'         // import page
 import Profile from './pages/Profile.jsx'         // import page
+import Register from './pages/Register.jsx'         // import page
 import Settings from './pages/Settings.jsx'         // import page
 
 function App() {
@@ -23,8 +25,10 @@ function App() {
         <Route path='/' element={<Dashboard />} />
         <Route path='/goals' element={<Goals />} />
         <Route path='/legal' element={<LegalTerms />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/plans' element={<Plans />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/settings' element={<Settings />} />
       </Routes>
     </div>

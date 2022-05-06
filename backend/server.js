@@ -7,16 +7,16 @@ const connectDB = require('./config/db');    // connect to MongoDB using Mongooo
 const port = process.env.PORT || 5000;  //set port to hold api server
 
 
-// connectDB()// this async function connects to Mongo database using Mongoose | RAN ON SERVER INITIALIZATION
+connectDB()// this async function connects to Mongo database using Mongoose | RAN ON SERVER INITIALIZATION
 
 const app = express() // Calls the express function "express()" and puts new Express application inside the app variable
 
 // app.use adds middleware to the data routes
-// app.use(express.json()) // adds middleware that parses json requests and moves data into the request body (regardless of hit url)
-// app.use(express.urlencoded({ extended: false }))  // parses data using query-string library rather than qs library (regardless of hit url)
+app.use(express.json()) // adds middleware that parses json requests and moves data into the request body (regardless of hit url)
+app.use(express.urlencoded({ extended: false }))  // parses data using query-string library rather than qs library (regardless of hit url)
 
-// app.use('/api/goals', require('./routes/goalRoutes'))       // serve all goals all /api/goals (regardless of hit url)
-// app.use('/api/users', require('./routes/userRoutes'))       // serve all users all /api/users (regardless of hit url)
+app.use('/api/goals', require('./routes/goalRoutes'))       // serve all goals all /api/goals (regardless of hit url)
+app.use('/api/users', require('./routes/userRoutes'))       // serve all users all /api/users (regardless of hit url)
 
 
 // If production, serve frontend. Else, 
@@ -32,6 +32,6 @@ if (process.env.NODE_ENV === 'production') {                                  //
   app.get('/', (req, res) => res.send('Please set to production'))            // send production error
 }
 
-// app.use(errorHandler) // adds middleware that returns errors in json format (regardless of hit url)
+app.use(errorHandler) // adds middleware that returns errors in json format (regardless of hit url)
 
 app.listen(port, () => console.log(`Server started on port ${port}`))         // listen for incoming http requests on the PORT && print PORT in console

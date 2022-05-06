@@ -49,25 +49,35 @@ function Header() {
           Planit
         </div>
 
-        <button className="planit-header-plan-portrait">
-          +
-        </button>
-        <button className="planit-header-plan-landscape">
-          My Plans
-        </button>
-        <button className="planit-header-plan-landscape">
-          My Goals
-        </button>
-        <button className="planit-header-plan-landscape">
-          Settings
-        </button>
+        <a href='/plans'>
+          <button className="planit-header-plan-portrait">
+            +
+          </button>
+        </a>
+        <a href='/plans'>
+          <button className="planit-header-plan-landscape">
+            My Plans
+          </button>
+        </a>
+        <a href='/goals'>
+          <button className="planit-header-plan-landscape">
+            My Goals
+          </button>
+        </a>
+        <a href='/settings'>
+          <button className="planit-header-plan-landscape">
+            Settings
+          </button>
+        </a>
 
         {(colTheme==="dark-theme") && <button className='planit-header-themebutton-landscape' onClick={setLightMode}>Light</button>}
         {(colTheme==="light-theme") && <button className='planit-header-themebutton-landscape' onClick={setDarkMode}>Dark</button>}
 
-        <button className="planit-header-profile-landscape">
-          Log in
-        </button>
+        <a href='/login'>
+          <button className="planit-header-profile-landscape">
+            Log in
+          </button>
+        </a>
 
         <div className="planit-header-dropper-space">
           <input id="planit-header-dropper__toggle" type="checkbox" />
@@ -78,7 +88,7 @@ function Header() {
           <ul className="planit-header-dropper__box">
             {(colTheme==="dark-theme") && <button className='planit-header-dropper-themebutton' onClick={setLightMode}>Light Mode</button>}
             {(colTheme==="light-theme") && <button className='planit-header-dropper-themebutton' onClick={setDarkMode}>Dark Mode</button>}
-            <a className='planit-header-dropper-pagelink' href='/profile'>Profile</a>
+            <a className='planit-header-dropper-pagelink' href='/login'>Log in</a>
             <a className='planit-header-dropper-pagelink' href='/goals'>My Goals</a>
             <a className='planit-header-dropper-pagelink' href='/plans'>My Plans</a>
             <a className='planit-header-dropper-pagelink' href='/settings'>Settings</a>
