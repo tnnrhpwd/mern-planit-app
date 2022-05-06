@@ -53,14 +53,20 @@ function Header() {
           +
         </button>
         <button className="planit-header-plan-landscape">
-          + New Plan
+          My Plans
+        </button>
+        <button className="planit-header-plan-landscape">
+          My Goals
+        </button>
+        <button className="planit-header-plan-landscape">
+          Settings
         </button>
 
-        {(colTheme==="dark-theme") && <button className='planit-header-themebutton' onClick={setLightMode}>Light</button>}
-        {(colTheme==="light-theme") && <button className='planit-header-themebutton' onClick={setDarkMode}>Dark</button>}
+        {(colTheme==="dark-theme") && <button className='planit-header-themebutton-landscape' onClick={setLightMode}>Light</button>}
+        {(colTheme==="light-theme") && <button className='planit-header-themebutton-landscape' onClick={setDarkMode}>Dark</button>}
 
-        <button className="planit-header-profile">
-          Username
+        <button className="planit-header-profile-landscape">
+          Log in
         </button>
 
         <div className="planit-header-dropper-space">

@@ -106,7 +106,7 @@ a{
   .planit-header-plan-landscape:hover{
     filter: brightness(1.2);
   }
-  .planit-header-themebutton{
+  .planit-header-themebutton-landscape{
     font-size: calc(var(--nav-size)*0.35);
     background-color: var(--bg-accent);
     cursor: pointer;
@@ -115,18 +115,18 @@ a{
     margin-bottom: calc(var(--nav-size)*0.15);
     margin-top: calc(var(--nav-size)*0.15);
   }
-  .planit-header-themebutton:hover {
+  .planit-header-themebutton-landscape:hover {
     background-color: var(--bg-pagelink);
     color: var(--text-color);
   }
-  .planit-header-profile{
+  .planit-header-profile-landscape{
     padding: calc(var(--nav-size)*0.05);
     border: calc(var(--nav-size)*0.01) solid var(--text-color);
     margin: calc(var(--nav-size)*0.15);
     font-size: calc(var(--nav-size)*0.35);
     cursor: pointer;
   }
-  .planit-header-profile:hover{
+  .planit-header-profile-landscape:hover{
     filter: brightness(1.2);
   }
 }
@@ -147,10 +147,10 @@ a{
   .planit-header-plan-portrait:hover{
     transform: rotate(180deg);
   }
-  .planit-header-themebutton{
+  .planit-header-themebutton-landscape{
     display: none;
   }
-  .planit-header-profile{
+  .planit-header-profile-landscape{
     display: none;
   }
   .planit-header-dropper-themebutton{
