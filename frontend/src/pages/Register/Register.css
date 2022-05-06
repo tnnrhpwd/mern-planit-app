@@ -1,30 +1,30 @@
-.planit-login{
+.planit-register{
     padding: calc(var(--nav-size)*.25);
     font-size: calc(var(--nav-size)*.5);
     text-align: center;
 }
 
 
-.planit-login-heading{
+.planit-register-heading{
     text-align: center;
     color: var(--text-color);
 }
-.planit-login-heading-title{
+.planit-register-heading-title{
     font-size: calc(var(--nav-size)*.5);
 }
-.planit-login-heading-description{
+.planit-register-heading-description{
     font-size: calc(var(--nav-size)*.25);
 }
 
-.planit-login-form{
+.planit-register-form{
     text-align: center;
     margin-top: calc(var(--nav-size)*.5);
     /* margin-left: calc(var(--nav-size)*.6); */
 }
-.planit-login-form-group{
+.planit-register-form-group{
 
 }
-.planit-login-form-control{
+.planit-register-form-control{
     font-size: calc(var(--nav-size)*.4);
     background-color: var(--text-color);
     color: var(--text-color-inv);
@@ -32,14 +32,15 @@
     max-width: 80%;
 }
 
-.planit-login-form-submit{
+.planit-register-form-submit{
     margin: calc(var(--nav-size)*.1);
     padding: calc(var(--nav-size)*.1);
     font-size: calc(var(--nav-size)*.3);
     background-color: var(--text-color);
     color: var(--text-color-inv);
 }
-.planit-login-register{
+
+.planit-register-login{
     margin: calc(var(--nav-size)*.1);
     padding: calc(var(--nav-size)*.1);
     font-size: calc(var(--nav-size)*.3);

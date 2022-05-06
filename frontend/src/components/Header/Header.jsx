@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'    
+import { logout, reset } from './../../features/auth/authSlice.js'     
 import HeaderLogo from './../../assets/planit192.png';
+import './Header.css';
 
 
 function Header() {
-  const [ showDropper, setShowDropper ] = useState(0);
+  const navigate = useNavigate() // initialization
+  const dispatch = useDispatch() // initialization
+  const { user } = useSelector((state) => state.auth)   // select values from state
   const [ colTheme, setColTheme ] = useState(null);
 
   useEffect(() => {     // RUNS ON START -- Checks browser for color theme preference. Sets dark mode otherwise.
@@ -35,6 +40,13 @@ function Header() {
     }else{
       document.body.classList.add('light-theme');
     }
+  }
+
+  // declare method to remove user item from local storage)
+  const onLogout = () => {
+    dispatch(logout())  // dispatch connects to the store, then remove user item from local storage
+    dispatch(reset())  // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
+    navigate('/')       // send user to dashboard, which will redirect to login page
   }
 
   return (
@@ -73,11 +85,17 @@ function Header() {
         {(colTheme==="dark-theme") && <button className='planit-header-themebutton-landscape' onClick={setLightMode}>Light</button>}
         {(colTheme==="light-theme") && <button className='planit-header-themebutton-landscape' onClick={setDarkMode}>Dark</button>}
 
-        <a href='/login'>
+
           <button className="planit-header-profile-landscape">
-            Log in
+            {user ? (
+              <button className="planit-header-profile-logout" onClick={onLogout}>Log out</button>
+            ) : (
+              <a href='/login'>
+                <button className="planit-header-profile-login">Log in</button>
+              </a>
+            )}
           </button>
-        </a>
+
 
         <div className="planit-header-dropper-space">
           <input id="planit-header-dropper__toggle" type="checkbox" />
@@ -88,7 +106,14 @@ function Header() {
           <ul className="planit-header-dropper__box">
             {(colTheme==="dark-theme") && <button className='planit-header-dropper-themebutton' onClick={setLightMode}>Light Mode</button>}
             {(colTheme==="light-theme") && <button className='planit-header-dropper-themebutton' onClick={setDarkMode}>Dark Mode</button>}
-            <a className='planit-header-dropper-pagelink' href='/login'>Log in</a>
+            <a className='planit-header-dropper-pagelink' href='/login'>
+              {user ? (<>
+                <a className='planit-header-dropper-profile' href='/profile'>Profile</a>
+                <button className='planit-header-dropper-user' onClick={onLogout}>Log out</button>
+                </>) : (
+                <button className='planit-header-dropper-user' onClick={onLogout}>Log in</button>
+              )}
+            </a>
             <a className='planit-header-dropper-pagelink' href='/goals'>My Goals</a>
             <a className='planit-header-dropper-pagelink' href='/plans'>My Plans</a>
             <a className='planit-header-dropper-pagelink' href='/settings'>Settings</a>

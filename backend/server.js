@@ -2,7 +2,7 @@ const path = require('path');        // module to read file locations
 const express = require('express');   // import express to create REST API server
 const colors = require('colors');     // allows the console to print colored text
 const dotenv = require('dotenv').config();   // import env vars from .env
-// const { errorHandler } = require('./middleware/errorMiddleware');    // creates json of error
+const { errorHandler } = require('./middleware/errorMiddleware');    // creates json of error
 const connectDB = require('./config/db');    // connect to MongoDB using Mongooose
 const port = process.env.PORT || 5000;  //set port to hold api server
 
@@ -15,8 +15,8 @@ const app = express() // Calls the express function "express()" and puts new Exp
 app.use(express.json()) // adds middleware that parses json requests and moves data into the request body (regardless of hit url)
 app.use(express.urlencoded({ extended: false }))  // parses data using query-string library rather than qs library (regardless of hit url)
 
-app.use('/api/goals', require('./routes/goalRoutes'))       // serve all goals all /api/goals (regardless of hit url)
-app.use('/api/users', require('./routes/userRoutes'))       // serve all users all /api/users (regardless of hit url)
+app.use('/api/goals', require('./routes/routeGoal'))       // serve all goals all /api/goals (regardless of hit url)
+app.use('/api/users', require('./routes/routeUser'))       // serve all users all /api/users (regardless of hit url)
 
 
 // If production, serve frontend. Else, 

@@ -2,19 +2,21 @@ import { useState, useEffect }  from 'react';
 import { useSelector, useDispatch } from 'react-redux'      // useSelector-brings in user,iserror,isloading from state | useDispatch-brings in reset,register,login from state
 import { useNavigate } from 'react-router-dom'              // page redirects
 import { toast } from 'react-toastify'                        // visible error notifications
-import { login, reset } from '../../features/auth/authSlice'     // import functions from authslice
+import { register, reset } from '../../features/auth/authSlice'     // import functions from authslice
 import Spinner from '../../components/Spinner/Spinner.jsx';
-import './Login.css';
+import './Register.css';
 
-function Login() {
+function Register() {
     // useState variables of input fields
     const [formData, setFormData] = useState({
+        username: '',
         email: '',
         password: '',
+        password2: '',
     })
 
     // the state values of the input fields
-    const { email, password } = formData
+    const { username, email, password, password2 } = formData
 
     const navigate = useNavigate() // initialization
     const dispatch = useDispatch() // initialization
@@ -49,12 +51,17 @@ function Login() {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        const userData = {     // get data from input form
-        email,
-        password,
-        }
-
-        dispatch(login(userData))   // dispatch connects to the store, then calls the async register function passing userdata as input.
+        if (password !== password2) { // if passwords dont match, error. Else, 
+            toast.error('Passwords do not match')
+          } else {
+            const userData = {  // get data from input form
+              username,
+              email,
+              password,
+            }
+      
+            dispatch(register(userData))  // dispatch connects to the store, then calls the async register function passing userdata as input.
+          }
     }
 
       // if loading, show spinner. isLoading resets on state change.
@@ -63,21 +70,32 @@ function Login() {
     }
 
   return (
-    <div className='planit-login'>
-        <section className="planit-login-heading">
-            <div className="planit-login-heading-title">
-                Log in!
+    <div className='planit-register'>
+        <section className="planit-register-heading">
+            <div className="planit-register-heading-title">
+                Register Now!
             </div>
-            <div className="planit-login-heading-description">
-                Log in to save, create, and share goals and plans!
+            <div className="planit-register-heading-description">
+                Register to save, create, and share goals and plans!
             </div>
         </section>
-        <section className="planit-login-form">
+        <section className="planit-register-form">
             <form onSubmit={onSubmit}>
-                <div className="planit-login-form-group">
+                <div className='planit-register-form-group'>
+                    <input
+                    type='text'
+                    className='planit-register-form-control'
+                    id='username'
+                    name='username'
+                    value={username}
+                    placeholder='Enter your username'
+                    onChange={onChange}
+                    />
+                </div>
+                <div className="planit-register-form-group">
                     <input
                         type='email'
-                        className='planit-login-form-control'
+                        className='planit-register-form-control'
                         id='email'
                         name='email'
                         value={email}
@@ -85,10 +103,10 @@ function Login() {
                         onChange={onChange}
                     />
                 </div>
-                <div className="planit-login-form-group">
+                <div className="planit-register-form-group">
                     <input
                         type='password'
-                        className='planit-login-form-control'
+                        className='planit-register-form-control'
                         id='password'
                         name='password'
                         value={password}
@@ -96,20 +114,31 @@ function Login() {
                         onChange={onChange}
                     />
                 </div>
-                <div className='planit-login-form-group'>
-                    <button type='submit' className='planit-login-form-submit'>
+                <div className="planit-register-form-group">
+                    <input
+                        type='password'
+                        className='planit-register-form-control'
+                        id='password2'
+                        name='password2'
+                        value={password2}
+                        placeholder='Confirm password'
+                        onChange={onChange}
+                    />
+                </div>
+                <div className='planit-register-form-group'>
+                    <button type='submit' className='planit-register-form-submit'>
                         Submit
                     </button>
                 </div>
             </form>
         </section>
-        <a href='/register'>
-            <button className='planit-login-register'>
-                Register Instead
+        <a href='/login'>
+            <button className='planit-register-login'>
+                Log In Instead
             </button>
         </a>
     </div>
   )
 }
 
-export default Login
+export default Register
