@@ -86,11 +86,12 @@ code {
   .planit-header-dropper-themebutton{
     font-size: calc(var(--nav-size)*0.30);
     background-color: var(--bg-accent);
+    cursor: pointer;
   }
 }
 .planit-header-dropper-checkbox{
   margin-left: auto;
-  display: inline-block;
+  display: none;
 }
 .planit-header-dropper-space{
 
@@ -101,7 +102,13 @@ code {
   background-color: var(--bg-nav-dropper);
   columns: 1;
 }
-
+a{
+  text-decoration: none;
+}
+.planit-header-dropper-pagelink{
+  display: block;
+  color: var(--text-color);
+}
 
 
 

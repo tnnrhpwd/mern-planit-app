@@ -66,12 +66,12 @@ function Header() {
           <ul className='planit-header-dropper-space'>
             {(colTheme==="dark-theme") && <button className='planit-header-dropper-themebutton' onClick={setLightMode}>Light Mode</button>}
             {(colTheme==="light-theme") && <button className='planit-header-dropper-themebutton' onClick={setDarkMode}>Dark Mode</button>}
-            <div>Profile</div>
-            <div>My Goals</div>
-            <div>My Plans</div>
-            <div>Settings</div>
-            <div>About Planit</div>
-            <div>Legal Terms</div>
+            <a className='planit-header-dropper-pagelink' href='/profile'>Profile</a>
+            <a className='planit-header-dropper-pagelink' href='/goals'>My Goals</a>
+            <a className='planit-header-dropper-pagelink' href='/plans'>My Plans</a>
+            <a className='planit-header-dropper-pagelink' href='/settings'>Settings</a>
+            <a className='planit-header-dropper-pagelink' href='/about'>About Planit</a>
+            <a className='planit-header-dropper-pagelink' href='/legal'>Legal Terms</a>
           </ul>
           }
           
