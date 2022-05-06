@@ -57,25 +57,7 @@ function Header() {
 
         {(colTheme==="dark-theme") && <button className='planit-header-themebutton' onClick={setLightMode}>Light</button>}
         {(colTheme==="light-theme") && <button className='planit-header-themebutton' onClick={setDarkMode}>Dark</button>}
-        
 
-
-        {/* <div className='planit-header-dropper'>
-          <input id='planit-header-dropper-checkbox' type='checkbox' checked={showDropper%2===0} onChange={handleCheck}/>
-          {(showDropper%2===1) &&
-          <ul className='planit-header-dropper-space'>
-            {(colTheme==="dark-theme") && <button className='planit-header-dropper-themebutton' onClick={setLightMode}>Light Mode</button>}
-            {(colTheme==="light-theme") && <button className='planit-header-dropper-themebutton' onClick={setDarkMode}>Dark Mode</button>}
-            <a className='planit-header-dropper-pagelink' href='/profile'>Profile</a>
-            <a className='planit-header-dropper-pagelink' href='/goals'>My Goals</a>
-            <a className='planit-header-dropper-pagelink' href='/plans'>My Plans</a>
-            <a className='planit-header-dropper-pagelink' href='/settings'>Settings</a>
-            <a className='planit-header-dropper-pagelink' href='/about'>About Planit</a>
-            <a className='planit-header-dropper-pagelink' href='/legal'>Legal Terms</a>
-          </ul>
-          }
-          
-        </div> */}
 
         <div className="planit-header-dropper-space">
           <input id="planit-header-dropper__toggle" type="checkbox" />
