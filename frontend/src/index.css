@@ -13,7 +13,6 @@ code {
     monospace;
 }
 :root{
-  --nav-size: max(8vw,min(3rem,6vw));
   --dark-blue0: #101B22;
   --dark-blue0-grey: #0c141a;
   --dark-blue1: #1a2b36;
@@ -28,6 +27,17 @@ code {
   --green1: #0dff76;
   --green2: #056b32;
 }
+@media (orientation: landscape) {
+  :root{
+  --nav-size: min(5vw,5vh);
+  }
+}
+@media (orientation: portrait) {
+  :root{
+    --nav-size: min(18vw,9vh);
+  }
+}
+
 .light-theme{
   --bg-pagelink: var(--green0);
   --bg-nav1: var(--white0);
@@ -83,9 +93,64 @@ a{
   .planit-header-dropper-space{
     display: none;
   }
+  .planit-header-plan-portrait{
+    display: none;
+  }
+  .planit-header-plan-landscape{
+    padding: calc(var(--nav-size)*0.05);
+    border: calc(var(--nav-size)*0.01) solid var(--text-color);
+    margin: calc(var(--nav-size)*0.15);
+    font-size: calc(var(--nav-size)*0.3);
+    cursor: pointer;
+  }
+  .planit-header-plan-landscape:hover{
+    filter: brightness(1.2);
+  }
+  .planit-header-themebutton{
+    font-size: calc(var(--nav-size)*0.35);
+    background-color: var(--bg-accent);
+    cursor: pointer;
+    padding: calc(var(--nav-size)*0.1);
+    margin-left: calc(var(--nav-size)*0.5);
+    margin-bottom: calc(var(--nav-size)*0.15);
+    margin-top: calc(var(--nav-size)*0.15);
+  }
+  .planit-header-themebutton:hover {
+    background-color: var(--bg-pagelink);
+    color: var(--text-color);
+  }
+  .planit-header-profile{
+    padding: calc(var(--nav-size)*0.05);
+    border: calc(var(--nav-size)*0.01) solid var(--text-color);
+    margin: calc(var(--nav-size)*0.15);
+    font-size: calc(var(--nav-size)*0.35);
+    cursor: pointer;
+  }
+  .planit-header-profile:hover{
+    filter: brightness(1.2);
+  }
 }
 @media (orientation: portrait) {
+  .planit-header-plan-landscape{
+    display: none;
+  }
+  .planit-header-plan-portrait{
+    background-color: transparent;
+    border: none;
+    margin-top: calc(var(--nav-size)*0.07);
+    font-size: calc(var(--nav-size)*.8);
+    cursor: pointer;
+    margin-right: calc(var(--nav-size)*0.7);
+    color: var(--text-color);
+    transition-duration: .25s;
+  }
+  .planit-header-plan-portrait:hover{
+    transform: rotate(180deg);
+  }
   .planit-header-themebutton{
+    display: none;
+  }
+  .planit-header-profile{
     display: none;
   }
   .planit-header-dropper-themebutton{

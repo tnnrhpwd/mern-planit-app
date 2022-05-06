@@ -49,10 +49,19 @@ function Header() {
           Planit
         </div>
 
+        <button className="planit-header-plan-portrait">
+          +
+        </button>
+        <button className="planit-header-plan-landscape">
+          + New Plan
+        </button>
 
         {(colTheme==="dark-theme") && <button className='planit-header-themebutton' onClick={setLightMode}>Light</button>}
         {(colTheme==="light-theme") && <button className='planit-header-themebutton' onClick={setDarkMode}>Dark</button>}
 
+        <button className="planit-header-profile">
+          Username
+        </button>
 
         <div className="planit-header-dropper-space">
           <input id="planit-header-dropper__toggle" type="checkbox" />
