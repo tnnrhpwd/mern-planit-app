@@ -37,11 +37,6 @@ function Header() {
     }
   }
 
-
-  function handleCheck() {
-    setShowDropper(showDropper+1);
-  }
-
   return (
     <>
       <div className='planit-header'>
