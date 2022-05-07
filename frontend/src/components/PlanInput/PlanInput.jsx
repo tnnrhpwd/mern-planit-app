@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'      // useDispatch-brings in reset,register,login from state
-import { createGoal } from './../../features/goals/goalSlice'
-import './GoalInput.css';
+import { createPlan } from '../../features/plans/planSlice'
+import './PlanInput.css';
 
-function GoalInput() {
+function PlanInput() {
     const [text, setText] = useState('')
 
     const dispatch = useDispatch()  // initialization
@@ -11,26 +11,26 @@ function GoalInput() {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        dispatch(createGoal({ text }))   // dispatch connects to the store, then creates a goal with text input
+        dispatch(createPlan({ text }))   // dispatch connects to the store, then creates a plan with text input
         setText('')                      // empty text field
     }
 
     return (
-        <div className='planit-goalinput'>
+        <div className='planit-planinput'>
             <form onSubmit={onSubmit}>
-                <div className='planit-goalinput-group'>
+                <div className='planit-planinput-group'>
                 <input
                     type='text'
                     name='text'
-                    id='planit-goalinput-input'
-                    placeholder='Enter Goal'
+                    id='planit-planinput-input'
+                    placeholder='Enter Plan'
                     value={text}
                     onChange={(e) => setText(e.target.value)}   // change text field value
                 />
                 </div>
-                <div className='planit-goalinput-group'>
-                <button className='planit-goalinput-submit' type='submit'>
-                    Add Goal
+                <div className='planit-planinput-group'>
+                <button className='planit-planinput-submit' type='submit'>
+                    Add Plan
                 </button>
                 </div>
             </form>
@@ -38,4 +38,4 @@ function GoalInput() {
     )
 }
 
-export default GoalInput
+export default PlanInput

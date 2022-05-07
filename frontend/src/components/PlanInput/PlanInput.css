@@ -1,14 +1,14 @@
-.planit-goalinput{
+.planit-planinput{
     display: block;
     text-align: center;
 }
-.planit-goalinput-group{
+.planit-planinput-group{
 
 }
-#planit-goalinput-input{
+#planit-planinput-input{
     font-size: calc(var(--nav-size)*0.35);
 }
-.planit-goalinput-submit{
+.planit-planinput-submit{
     font-size: calc(var(--nav-size)*0.25);
     padding: calc(var(--nav-size)*0.05);
 }

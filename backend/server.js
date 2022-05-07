@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }))  // parses data using query-str
 
 app.use('/api/goals', require('./routes/routeGoal'))       // serve all goals all /api/goals (regardless of hit url)
 app.use('/api/users', require('./routes/routeUser'))       // serve all users all /api/users (regardless of hit url)
-
+app.use('/api/plans', require('./routes/routePlan'))       // serve all users all /api/plans (regardless of hit url)
 
 // If production, serve frontend. Else, 
 if (process.env.NODE_ENV === 'production') {                                  // IF PRODUCTION

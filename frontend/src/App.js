@@ -8,7 +8,7 @@ import Dashboard from './pages/Dashboard/Dashboard.jsx'         // import page
 import Goals from './pages/Goals/Goals.jsx'         // import page
 import LegalTerms from './pages/LegalTerms.jsx'         // import page
 import Login from './pages/Login/Login.jsx'         // import page
-import Plans from './pages/Plans.jsx'         // import page
+import Plans from './pages/Plans/Plans.jsx'         // import page
 import Profile from './pages/Profile/Profile.jsx'         // import page
 import Register from './pages/Register/Register.jsx'         // import page
 import Settings from './pages/Settings.jsx'         // import page

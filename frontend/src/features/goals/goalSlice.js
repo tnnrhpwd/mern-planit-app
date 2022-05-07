@@ -34,8 +34,9 @@ export const getGoals = createAsyncThunk(
   'goals/getAll',
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token         // get the user token  
-      return await goalService.getGoals(token)      // pass user token to get all goals from the specific user token
+      // const token = thunkAPI.getState().auth.user.token         // get the user token  
+      // return await goalService.getGoals(token)      // pass user token to get all goals from the specific user token
+      return await goalService.getGoals()      // Get all goals regardless of user logged in
     } catch (error) {
       const message =
         (error.response &&
@@ -72,7 +73,7 @@ export const goalSlice = createSlice({
   name: 'goal',
   initialState,
   reducers: { // not async  --  async functions go inside thunkfunctions   --- Without Reducers, we'd need to reload the whole page on changes.
-    reset: (state) => initialState,  // function sets all goal values back to default.
+    resetGoalSlice: (state) => initialState,  // function sets all goal values back to default.
   },
   extraReducers: (builder) => {// all possible states associated with asyncthunk get,create,delete goals functional objects. 
     builder
@@ -120,5 +121,5 @@ export const goalSlice = createSlice({
   },
 })
 
-export const { reset } = goalSlice.actions
+export const { resetGoalSlice } = goalSlice.actions
 export default goalSlice.reducer

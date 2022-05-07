@@ -56,7 +56,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: { // not async  --  async functions go inside thunkfunctions   --- Without Reducers, we'd need to reload the whole page on changes.
-    reset: (state) => {   // function sets values back to default, except the user. the user data must remain
+    resetAuthSlice: (state) => {   // function sets values back to default, except the user. the user data must remain
       state.isLoading = false
       state.isSuccess = false
       state.isError = false
@@ -99,5 +99,5 @@ export const authSlice = createSlice({
   },
 })
 
-export const { reset } = authSlice.actions  // brings reset into components where it can take action
+export const { resetAuthSlice } = authSlice.actions  // brings reset into components where it can take action
 export default authSlice.reducer; // exports reset function by default  -- EXPORTED TO store.js

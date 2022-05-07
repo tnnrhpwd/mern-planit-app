@@ -1,4 +1,4 @@
-.planit-goalresult{
+.planit-planresult{
     margin-top: calc(var(--nav-size)*0.3);
     border: calc(var(--nav-size)*0.01) solid var(--text-color) ;
     text-align: center;
@@ -6,9 +6,9 @@
     padding: calc(var(--nav-size)*0.3);
     
 }
-.planit-goalresult-plan{
+.planit-planresult-plan{
     font-size: calc(var(--nav-size)*0.3);
 }
-.planit-goalresult-delete{
+.planit-planresult-delete{
     font-size: calc(var(--nav-size)*0.3);
 }

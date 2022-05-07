@@ -3,8 +3,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '../features/auth/authSlice';
 import goalReducer from '../features/goals/goalSlice';
-import commentReducer from '../features/auth/authSlice'
-import planReducer from '../features/goals/goalSlice'
+import commentReducer from '../features/comments/commentSlice'
+import planReducer from '../features/plans/planSlice'
 
 export const store = configureStore({
   reducer: {

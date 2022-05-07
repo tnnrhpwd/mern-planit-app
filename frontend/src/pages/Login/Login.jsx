@@ -2,7 +2,7 @@ import { useState, useEffect }  from 'react';
 import { useSelector, useDispatch } from 'react-redux'      // useSelector-brings in user,iserror,isloading from state | useDispatch-brings in reset,register,login from state
 import { useNavigate } from 'react-router-dom'              // page redirects
 import { toast } from 'react-toastify'                        // visible error notifications
-import { login, reset } from '../../features/auth/authSlice'     // import functions from authslice
+import { login, resetAuthSlice } from '../../features/auth/authSlice'     // import functions from authslice
 import Spinner from '../../components/Spinner/Spinner.jsx';
 import './Login.css';
 
@@ -34,7 +34,7 @@ function Login() {
         navigate('/')           // send user to dashboard
         }
 
-        dispatch(reset())   // reset state values( message, isloading, iserror, and issuccess ) on each state change
+        dispatch(resetAuthSlice())   // reset state values( message, isloading, iserror, and issuccess ) on each state change
     }, [user, isError, isSuccess, message, navigate, dispatch])
 
     // called on each letter typed into input field

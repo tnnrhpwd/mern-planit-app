@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'      // access state vari
 import GoalInput from './../../components/GoalInput/GoalInput.jsx';
 import GoalResult from './../../components/GoalResult/GoalResult.jsx';
 import Spinner from './../../components/Spinner/Spinner.jsx'
-import { getGoals, reset } from './../../features/goals/goalSlice'
+import { getGoals, resetGoalSlice } from './../../features/goals/goalSlice'
 import './Goals.css';
 
 function Goals() {
@@ -12,27 +12,30 @@ function Goals() {
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
 
-  const { user } = useSelector((state) => state.auth)      // select user values from user state
+  // const { user } = useSelector((state) => state.auth)      // select user values from user state
   const { goals, isLoading, isError, message } = useSelector(     // select goal values from goal state
     (state) => state.goals
   )
+
 
   // called on state changes
   useEffect(() => {
     if (isError) {
       console.log(message)
     }
+    // if(user){
+      dispatch(getGoals()) // dispatch connects to the store, then retreives the goals that match the logged in user.
 
-    if (!user) {            // if no user, redirect to login
-      navigate('/login') 
-    }
+    // }
+    // if (!user) {            // if no user, redirect to login
+    //   navigate('/login') 
+    // }
 
-    dispatch(getGoals()) // dispatch connects to the store, then retreives the goals that match the logged in user.
-
+    
     return () => {    // reset the goals when state changes
-      dispatch(reset()) // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
+      dispatch(resetGoalSlice()) // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
     }
-  }, [user, navigate, isError, message, dispatch])
+  }, [navigate, isError, message, dispatch])
 
   if (isLoading) {
     return <Spinner />
@@ -47,6 +50,7 @@ function Goals() {
       <div className='planit-goals-in'>
         <GoalInput />
       </div>
+      All Goals
       <div className='planit-goals-out'>
         {goals.length > 0 ? (
           <div className='planit-goals-out-result'>

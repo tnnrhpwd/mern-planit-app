@@ -33,16 +33,28 @@
 }
 
 .planit-login-form-submit{
+    width: calc(var(--nav-size)*1.5);
     margin: calc(var(--nav-size)*.1);
     padding: calc(var(--nav-size)*.1);
     font-size: calc(var(--nav-size)*.3);
     background-color: var(--text-color);
     color: var(--text-color-inv);
+    cursor: pointer;
+}
+.planit-login-form-submit:hover{
+    filter: brightness(1.2);
+    font-weight: bold;
 }
 .planit-login-register{
+    width: calc(var(--nav-size)*2.7);
     margin: calc(var(--nav-size)*.1);
     padding: calc(var(--nav-size)*.1);
     font-size: calc(var(--nav-size)*.3);
     background-color: var(--text-color);
     color: var(--text-color-inv);
+    cursor: pointer;
+}
+.planit-login-register:hover{
+    filter: brightness(1.2);
+    font-weight: bold;
 }

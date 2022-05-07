@@ -1,4 +1,5 @@
 // The service file only makes the http request and sends the data back to user and local storage.
+// Exported to the Slice
 import axios from 'axios';  // import ability to make http request
 
 const API_URL = '/api/goals/';  // sends base http request here
