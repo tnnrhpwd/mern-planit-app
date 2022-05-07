@@ -1,0 +1,14 @@
+.planit-goalinput{
+    display: block;
+    text-align: center;
+}
+.planit-goalinput-group{
+
+}
+#planit-goalinput-input{
+    font-size: calc(var(--nav-size)*0.3);
+}
+.planit-goalinput-submit{
+    font-size: calc(var(--nav-size)*0.25);
+    padding: calc(var(--nav-size)*0.05);
+}

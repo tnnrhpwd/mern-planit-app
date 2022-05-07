@@ -1,0 +1,29 @@
+.planit-goals{
+    text-align: left;
+    padding: calc(var(--nav-size)*0.5);
+    font-size: calc(var(--nav-size)*0.5);
+}
+.planit-goals-text{
+    font-size: calc(var(--nav-size)*0.3);
+}
+.planit-goals-in{
+
+}
+.planit-goals-out{
+    
+}
+@media (orientation: landscape) {
+    .planit-goals{
+        text-align: left;
+        padding: calc(var(--nav-size)*1);
+        font-size: calc(var(--nav-size)*1);
+        padding-left: calc(var(--nav-size)*8);
+        padding-right: calc(var(--nav-size)*8);
+    }
+    .planit-goals-text{
+        font-size: calc(var(--nav-size)*0.5);
+    }
+}
+
+
+
