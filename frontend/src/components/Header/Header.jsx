@@ -67,31 +67,31 @@ function Header() {
           </button>
         </a>
         <a href='/plans'>
-          <button className="planit-header-plan-landscape">
+          <button className="planit-header-link-landscape">
             My Plans
           </button>
         </a>
         <a href='/goals'>
-          <button className="planit-header-plan-landscape">
+          <button className="planit-header-link-landscape">
             My Goals
           </button>
         </a>
         <a href='/settings'>
-          <button className="planit-header-plan-landscape">
+          <button className="planit-header-link-landscape">
             Settings
           </button>
         </a>
 
-        {(colTheme==="dark-theme") && <button className='planit-header-themebutton-landscape' onClick={setLightMode}>Light</button>}
-        {(colTheme==="light-theme") && <button className='planit-header-themebutton-landscape' onClick={setDarkMode}>Dark</button>}
+        {(colTheme==="dark-theme") && <button className='planit-header-themebutton-landscape' onClick={setLightMode}>Light Mode</button>}
+        {(colTheme==="light-theme") && <button className='planit-header-themebutton-landscape' onClick={setDarkMode}>Dark Mode</button>}
 
 
           <button className="planit-header-profile-landscape">
             {user ? (
-              <button className="planit-header-profile-logout" onClick={onLogout}>Log out</button>
+              <button className="planit-header-profile-auth" onClick={onLogout}>Log out</button>
             ) : (
               <a href='/login'>
-                <button className="planit-header-profile-login">Log in</button>
+                <button className="planit-header-profile-auth">Log in</button>
               </a>
             )}
           </button>
@@ -114,6 +114,7 @@ function Header() {
                 <button className='planit-header-dropper-user' onClick={onLogout}>Log in</button>
               )}
             </a>
+            <a className='planit-header-dropper-pagelink' href='/goals'>Popular</a>
             <a className='planit-header-dropper-pagelink' href='/goals'>My Goals</a>
             <a className='planit-header-dropper-pagelink' href='/plans'>My Plans</a>
             <a className='planit-header-dropper-pagelink' href='/settings'>Settings</a>

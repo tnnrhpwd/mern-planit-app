@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css'    // styling
 import Header from './components/Header/Header.jsx'          // header
 import About from './pages/About.jsx'         // import page
 import Comments from './pages/Comments.jsx'         // import page
-import Dashboard from './pages/Dashboard.jsx'         // import page
+import Dashboard from './pages/Dashboard/Dashboard.jsx'         // import page
 import Goals from './pages/Goals.jsx'         // import page
 import LegalTerms from './pages/LegalTerms.jsx'         // import page
 import Login from './pages/Login/Login.jsx'         // import page

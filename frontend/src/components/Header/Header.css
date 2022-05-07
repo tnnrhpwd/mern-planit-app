@@ -34,31 +34,39 @@ a{
   .planit-header-plan-portrait{
     display: none;
   }
-  .planit-header-plan-landscape{
+  .planit-header-link-landscape{
+    border-radius: 5%;
     padding: calc(var(--nav-size)*0.05);
     border: calc(var(--nav-size)*0.01) solid var(--text-color);
     margin: calc(var(--nav-size)*0.15);
     font-size: calc(var(--nav-size)*0.3);
     height: calc(var(--nav-size)*0.7);
+    width: calc(var(--nav-size)*1.7);
     cursor: pointer;
   }
-  .planit-header-plan-landscape:hover{
+  .planit-header-link-landscape:hover{
     filter: brightness(1.2);
+    font-weight: bold;
   }
   .planit-header-themebutton-landscape{
-    font-size: calc(var(--nav-size)*0.35);
+    font-size: calc(var(--nav-size)*0.3);
     background-color: var(--bg-accent);
     cursor: pointer;
-    padding: calc(var(--nav-size)*0.1);
-    margin-left: calc(var(--nav-size)*0.5);
-    margin-bottom: calc(var(--nav-size)*0.15);
+    border-radius: 5%;
+    right:0;
+    width: calc(var(--nav-size)*2.3);
+    height: calc(var(--nav-size)*0.7);
     margin-top: calc(var(--nav-size)*0.15);
+    border: calc(var(--nav-size)*0.001) solid black;
   }
   .planit-header-themebutton-landscape:hover {
+    border: calc(var(--nav-size)*0.05) solid var(--text-color);
     background-color: var(--bg-pagelink);
     color: var(--text-color);
+    font-weight: bold;
   }
   .planit-header-profile-landscape{
+    border-radius: 5%;
     padding: calc(var(--nav-size)*0.05);
     border: calc(var(--nav-size)*0.01) solid var(--text-color);
     margin: calc(var(--nav-size)*0.15);
@@ -68,17 +76,19 @@ a{
   }
   .planit-header-profile-landscape:hover{
     filter: brightness(1.2);
+    font-weight: bold;
   }
-  .planit-header-profile-login{
+  .planit-header-profile-auth{
     border: none;
-    font-size: calc(var(--nav-size)*0.35);
+    font-size: calc(var(--nav-size)*0.3);
+    width: calc(var(--nav-size)*1.7);
     cursor: pointer;
   }
-  .planit-header-profile-logout{
-    border: none;
-    font-size: calc(var(--nav-size)*0.35);
-    cursor: pointer;
+  .planit-header-profile-auth:hover{
+    filter: brightness(1.2);
+    font-weight: bold;
   }
+
 }
 
 
@@ -87,7 +97,7 @@ a{
 
 
 @media (orientation: portrait) {
-  .planit-header-plan-landscape{
+  .planit-header-link-landscape{
     display: none;
   }
   .planit-header-plan-portrait{
@@ -216,6 +226,7 @@ a{
   font-size: calc(var(--nav-size)*0.45);
   text-decoration: none;
   transition-duration: .25s;
+  width: calc(var(--nav-size)*1.3);
 }
 .planit-header-dropper-profile:hover {
   background-color: var(--bg-pagelink);
