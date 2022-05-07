@@ -61,6 +61,11 @@ function Header() {
           Planit
         </div>
 
+        <a href='/'>
+          <button className="planit-header-link-landscape">
+            Popular
+          </button>
+        </a>
         <a href='/plans'>
           <button className="planit-header-plan-portrait">
             +
@@ -85,6 +90,11 @@ function Header() {
         {(colTheme==="dark-theme") && <button className='planit-header-themebutton-landscape' onClick={setLightMode}>Light Mode</button>}
         {(colTheme==="light-theme") && <button className='planit-header-themebutton-landscape' onClick={setDarkMode}>Dark Mode</button>}
 
+        <a href='/profile'>
+          <button className="planit-header-link-landscape">
+            Profile
+          </button>
+        </a>
 
           <button className="planit-header-profile-landscape">
             {user ? (
