@@ -36,9 +36,9 @@ function MiddleDashboard() {
     }
 
     return (
-        <div className='planit-dashboard-mid'>
+        <div className='planit-dashboard-popular-mid'>
             Popular Plans
-            <div className='planit-dashboard-left-plans'>
+            <div className='planit-dashboard-popular-left-plans'>
                 {plans.length > 0 ? (
                     <div className='planit-plans-out-result'>
                     {plans.map((plan) => (

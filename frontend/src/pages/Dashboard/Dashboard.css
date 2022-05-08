@@ -1,18 +1,95 @@
 @media (orientation: landscape) {
-    .planit-dashboard{
+    .planit-dashboard-upper{
+        min-height: calc(var(--nav-size)*12);
+    }
+    .planit-dashboard-start{
+        text-align: center;
+        padding-top: calc(var(--nav-size)*5);
+    }
+    .planit-dashboard-start-find{
+        font-size: calc(var(--nav-size)*.5);
+
+    }
+    .planit-dashboard-start-find-text{
+        display: inline;
+
+    }
+    .planit-dashboard-start-find-input{
+
+        display: inline;
+        padding: calc(var(--nav-size)*.2);
+        font-size: calc(var(--nav-size)*.5);
+        background-color: transparent;
+        border: none;
+        color: var(--text-color);
+ 
+    }
+    .planit-dashboard-start-find-input:focus {
+        outline: none;
+    }
+    .planit-dashboard-popular{
+        padding: calc(var(--nav-size)*.5);
         columns: 3;
         height: calc(var(--nav-size)*15);
     }
-    .planit-dashboard-left{
+    .planit-dashboard-popular-left{
         height: 100%;
         display: block;
 
     }
-    .planit-dashboard-mid{
+    .planit-dashboard-popular-mid{
         display: block;
         height: 100%;
     }
-    .planit-dashboard-right{
+    .planit-dashboard-popular-right{
+        display: block;
+        height: 100%;
+    }
+}
+@media (orientation: portrait) {
+    .planit-dashboard-upper{
+        min-height: calc(var(--nav-size)*9);
+    }
+    .planit-dashboard-start{
+        text-align: center;
+        padding-top: calc(var(--nav-size)*2);
+    }
+    .planit-dashboard-start-find{
+        font-size: calc(var(--nav-size)*.35);
+
+    }
+    .planit-dashboard-start-find-text{
+        display: inline;
+
+    }
+    .planit-dashboard-start-find-input{
+
+        display: inline;
+        padding: calc(var(--nav-size)*.2);
+        font-size: calc(var(--nav-size)*.35);
+        background-color: transparent;
+        border: none;
+        color: var(--text-color);
+ 
+    }
+    .planit-dashboard-start-find-input:focus {
+        outline: none;
+    }
+    .planit-dashboard-popular{
+        padding: calc(var(--nav-size)*.5);
+        columns: 3;
+        height: calc(var(--nav-size)*15);
+    }
+    .planit-dashboard-popular-left{
+        height: 100%;
+        display: block;
+
+    }
+    .planit-dashboard-popular-mid{
+        display: block;
+        height: 100%;
+    }
+    .planit-dashboard-popular-right{
         display: block;
         height: 100%;
     }
