@@ -1,5 +1,6 @@
 @media (orientation: landscape) {
     .planit-dashboard-upper{
+        padding-top: calc(var(--nav-size)*1);
         min-height: calc(var(--nav-size)*12);
     }
     .planit-dashboard-start{
@@ -48,6 +49,7 @@
 }
 @media (orientation: portrait) {
     .planit-dashboard-upper{
+        padding-top: calc(var(--nav-size)*1);
         min-height: calc(var(--nav-size)*9);
     }
     .planit-dashboard-start{
@@ -60,13 +62,14 @@
     }
     .planit-dashboard-start-find-text{
         display: inline;
-
+        /* width: calc(var(--nav-size)*2); */
+        font-size: calc(var(--nav-size)*.25);
     }
     .planit-dashboard-start-find-input{
-
+        max-width: calc(var(--nav-size)*2);
         display: inline;
         padding: calc(var(--nav-size)*.2);
-        font-size: calc(var(--nav-size)*.35);
+        font-size: calc(var(--nav-size)*.25);
         background-color: transparent;
         border: none;
         color: var(--text-color);

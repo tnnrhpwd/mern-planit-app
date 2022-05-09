@@ -37,7 +37,7 @@ function Profile() {
   // }
 
   return (
-    <div>Profile</div>
+    <div className='planit-profile'>Profile</div>
   )
 }
 

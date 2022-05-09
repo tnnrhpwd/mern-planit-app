@@ -4,9 +4,10 @@
   height: var(--nav-size);
   vertical-align: top;
   font-size: calc(var(--nav-size)*0.5);
-  display:flex;
+position:fixed;
   border-bottom: calc(var(--nav-size)*0.01) solid var(--border-nav);
   text-decoration: none;
+  width: 100vw;
 }
 .planit-header-logo{
   display: inline-block;
@@ -97,10 +98,23 @@ a{
 
 
 @media (orientation: portrait) {
+  .planit-header-logo{
+    position: fixed;
+    font-size: calc(var(--nav-size)*.1);
+  }
+  .planit-header-title{
+    position: fixed;
+    margin-left: calc(var(--nav-size)*1.1);
+    top: calc(var(--nav-size)*0.001);
+    /* position: fixed; */
+    /* font-size: calc(var(--nav-size)*.1); */
+  }
   .planit-header-link-landscape{
     display: none;
   }
   .planit-header-plan-portrait{
+    position: fixed;
+    right: calc(var(--nav-size)*0.3);
     background-color: transparent;
     border: none;
     margin-top: calc(var(--nav-size)*0.07);
@@ -126,10 +140,12 @@ a{
     padding: calc(var(--nav-size)*0.1);
     margin-left: calc(var(--nav-size)*0.5);
     margin-bottom: calc(var(--nav-size)*0.4);
+    border: calc(var(--nav-size)*0.001) solid black;
   }
   .planit-header-dropper-themebutton:hover {
     background-color: var(--bg-pagelink);
     color: var(--text-color);
+    border: calc(var(--nav-size)*0.001) solid var(--text-color);
   }
   .planit-header-dropper-space{
 
@@ -240,10 +256,12 @@ a{
   cursor: pointer;
   margin-left: calc(var(--nav-size)*0.5);
   /* margin-bottom: calc(var(--nav-size)*0.4); */
+  border: calc(var(--nav-size)*0.001) solid black;
 }
 .planit-header-dropper-user:hover {
   background-color: var(--bg-pagelink);
   color: var(--text-color);
+  border: calc(var(--nav-size)*0.001) solid var(--text-color);
 }
 
 .planit-header-dropper-login{

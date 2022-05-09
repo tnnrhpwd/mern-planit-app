@@ -17,29 +17,25 @@ function Start() {
     )
 
 
-    function handleOutputGoals(){
-        if(findGoal===null){return;} // No search guard clause
-        var outputArray = [];
 
-        goals.forEach(( goal, i ) => {
-            if((findGoal!=="") && (goal.text.toUpperCase().includes(findGoal.toUpperCase()))){
-                outputArray.push(<>
-                    <h2>{goal.text}</h2>
-                </>)
-            }
-        });
-
-
-
-
-
-        setOutputGoals(outputArray);
-    }
 
     useEffect(() => {
-        console.log('test')
+        function handleOutputGoals(){
+            if(findGoal===null){return;} // No search guard clause
+            var outputArray = [];
+    
+            goals.forEach(( goal, i ) => {
+                if((findGoal!=="") && (goal.text.toUpperCase().includes(findGoal.toUpperCase()))){
+                    outputArray.push(<>
+                        <h2>{goal.text}</h2>
+                    </>)
+                }
+            });
+            setOutputGoals(outputArray);
+        }
+
         handleOutputGoals()
-    }, [findGoal])
+    }, [findGoal, goals])
 
     // called on state changes
     useEffect(() => {
