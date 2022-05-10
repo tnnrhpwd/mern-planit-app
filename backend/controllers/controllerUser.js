@@ -91,7 +91,7 @@ const generateToken = (id) => {
   })
 }
 
-module.exports = {
+module.exports = {  // exported to routes
   registerUser,
   loginUser,
   getMe,

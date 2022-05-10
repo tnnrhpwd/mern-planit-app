@@ -26,6 +26,7 @@ code {
   --green0: #a3ffcb;
   --green1: #0dff76;
   --green2: #056b32;
+  --green3: #033519;
 }
 @media (orientation: landscape) {
   :root{
@@ -48,6 +49,8 @@ code {
   --bg-accent: var(--green1);
   --border-nav: var(--grey1);
   --bg-nav-dropper: var(--grey1);
+  --bg-themebutton-land: var(--bg-accent);
+
 }
 .dark-theme{
   --bg-pagelink: var(--green2);
@@ -59,6 +62,7 @@ code {
   --bg-accent: var(--green1);
   --border-nav: var(--dark-blue1);
   --bg-nav-dropper: var(--grey4);
+  --bg-themebutton-land: var(--green3);
 }
 
 

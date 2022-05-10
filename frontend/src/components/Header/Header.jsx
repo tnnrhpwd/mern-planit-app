@@ -7,8 +7,8 @@ import './Header.css';
 
 
 function Header() {
-  const navigate = useNavigate() // initialization
-  const dispatch = useDispatch() // initialization
+  // const navigate = useNavigate() // initialization
+  // const dispatch = useDispatch() // initialization
   const { user } = useSelector((state) => state.auth)   // select values from state
   const [ colTheme, setColTheme ] = useState(null);
 
@@ -43,11 +43,11 @@ function Header() {
   }
 
   // declare method to remove user item from local storage)
-  const onLogout = () => {
-    dispatch(logout())  // dispatch connects to the store, then remove user item from local storage
-    dispatch(resetAuthSlice())  // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
-    navigate('/')       // send user to dashboard, which will redirect to login page
-  }
+  // const onLogout = () => {
+  //   dispatch(logout())  // dispatch connects to the store, then remove user item from local storage
+  //   dispatch(resetAuthSlice())  // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
+  //   navigate('/')       // send user to dashboard, which will redirect to login page
+  // }
 
   return (
     <>
@@ -57,46 +57,46 @@ function Header() {
             <img id='planit-header-logo-img' src={HeaderLogo} alt='website logo'/>
           </Link>
         </div>
-        <div className='planit-header-title'>
-          Planit
-        </div>
 
-        <a href='/'>
-          <button className="planit-header-link-landscape">
-            Popular
-          </button>
-        </a>
-        <a href='/plans'>
+
+        {/* <a href='/'>
+          <div className='planit-header-title'>
+            Planit
+          </div>
+        </a> */}
+        {/* <a href='/plans'>
           <button className="planit-header-plan-portrait">
             +
           </button>
-        </a>
+        </a> */}
         <a href='/plans'>
           <button className="planit-header-link-landscape">
-            My Plans
+            Plans
           </button>
         </a>
         <a href='/goals'>
           <button className="planit-header-link-landscape">
-            My Goals
+            Goals
           </button>
         </a>
-        <a href='/settings'>
+        {/* <a href='/settings'>
           <button className="planit-header-link-landscape">
             Settings
           </button>
-        </a>
+        </a> */}
 
-        {(colTheme==="dark-theme") && <button className='planit-header-themebutton-landscape' onClick={setLightMode}>Light Mode</button>}
-        {(colTheme==="light-theme") && <button className='planit-header-themebutton-landscape' onClick={setDarkMode}>Dark Mode</button>}
-
+        
         <a href='/profile'>
           <button className="planit-header-link-landscape">
             Profile
           </button>
         </a>
 
-          <button className="planit-header-profile-landscape">
+        {(colTheme==="dark-theme") && <button className='planit-header-themebutton-landscape' onClick={setLightMode}>Light Mode</button>}
+        {(colTheme==="light-theme") && <button className='planit-header-themebutton-landscape' onClick={setDarkMode}>Dark Mode</button>}
+
+
+          {/* <button className="planit-header-profile-landscape">
             {user ? (
               <button className="planit-header-profile-auth" onClick={onLogout}>Log out</button>
             ) : (
@@ -104,7 +104,7 @@ function Header() {
                 <button className="planit-header-profile-auth">Log in</button>
               </a>
             )}
-          </button>
+          </button> */}
 
 
         <div className="planit-header-dropper-space">
@@ -114,22 +114,31 @@ function Header() {
           </label>
 
           <ul className="planit-header-dropper__box">
+            
+            <div className='planit-header-logo-nav'>
+              <Link to='/'>
+                <img id='planit-header-logo-img' src={HeaderLogo} alt='website logo'/>
+              </Link>
+            </div>
             {(colTheme==="dark-theme") && <button className='planit-header-dropper-themebutton' onClick={setLightMode}>Light Mode</button>}
             {(colTheme==="light-theme") && <button className='planit-header-dropper-themebutton' onClick={setDarkMode}>Dark Mode</button>}
-            <a className='planit-header-dropper-pagelink' href='/login'>
+            {/* <a className='planit-header-dropper-pagelink' href='/login'>
               {user ? (<>
                 <a className='planit-header-dropper-profile' href='/profile'>Profile</a>
                 <button className='planit-header-dropper-user' onClick={onLogout}>Log out</button>
                 </>) : (
                 <button className='planit-header-dropper-user' onClick={onLogout}>Log in</button>
               )}
-            </a>
-            <a className='planit-header-dropper-pagelink' href='/goals'>Popular</a>
+            </a> */}
+            <a className='planit-header-dropper-profile' href='/profile'>Profile</a>
+            {/* <a className='planit-header-dropper-pagelink' href='/goals'>Popular</a> */}
             <a className='planit-header-dropper-pagelink' href='/goals'>My Goals</a>
             <a className='planit-header-dropper-pagelink' href='/plans'>My Plans</a>
             <a className='planit-header-dropper-pagelink' href='/settings'>Settings</a>
             <a className='planit-header-dropper-pagelink' href='/about'>About Planit</a>
             <a className='planit-header-dropper-pagelink' href='/legal'>Legal Terms</a>
+
+            
           </ul>
         </div>
         
