@@ -78,14 +78,14 @@ function Start() {
                         value={findGoal}
                         onChange={(e) => setFindGoal(e.target.value)}
                     />
-                    <div className='planit-dashboard-start-find-but'>
-                        {/* <a href="/"> */}
+                    {/* <div className='planit-dashboard-start-find-but'>
+                        <a href="/">
                             <button className='planit-dashboard-start-find-but-button'>
-                                {/* <img id='planit-dashboard-start-find-logo-but-img' src={HeaderLogo} alt='website logo'/> */}
+                                <img id='planit-dashboard-start-find-logo-but-img' src={HeaderLogo} alt='website logo'/>
                                 Search
                             </button>
-                        {/* </a> */}
-                    </div>
+                        </a>
+                    </div> */}
                 </div>
 
             </div>

@@ -36,7 +36,7 @@
     }
     .planit-dashboard-start-find-input:focus {
         outline: none;
-        filter: brightness(2);
+
     }
     .planit-dashboard-start-find-but{
         margin-top: calc(var(--nav-size)*2); 
@@ -78,6 +78,7 @@
         color: var(--text-color);
         display:flex;
         cursor: pointer;
+        font-size: calc(var(--nav-size)*.3);
     }
     .planit-dashboard-popular{
         padding: calc(var(--nav-size)*.5);
@@ -113,21 +114,55 @@
     }
     .planit-dashboard-start-find-text{
         display: inline;
-        /* width: calc(var(--nav-size)*2); */
-        font-size: calc(var(--nav-size)*.25);
+        /* margin-left: calc(var(--nav-size)*2); */
+        font-size: calc(var(--nav-size)*.5);
+        font-weight: bold;
+
+    }
+    .planit-dashboard-start-find-space{
+        text-align: center;
     }
     .planit-dashboard-start-find-input{
-        max-width: calc(var(--nav-size)*2);
-        display: inline;
-        padding: calc(var(--nav-size)*.2);
-        font-size: calc(var(--nav-size)*.25);
+        margin-top: calc(var(--nav-size)*.5); 
+        text-align: center;
+        font-weight: normal;
+        width: 80vw;
+        height: calc(var(--nav-size)*.6); 
+        font-size: calc(var(--nav-size)*.3);
         background-color: transparent;
-        border: none;
         color: var(--text-color);
- 
+        border: calc(var(--nav-size)*.001) solid var(--border-nav);
+        border-radius: calc(var(--nav-size)*1);
     }
     .planit-dashboard-start-find-input:focus {
         outline: none;
+        filter: brightness(1.2);
+    }
+    .planit-dashboard-start-find-but{
+        margin-top: calc(var(--nav-size)*1); 
+        /* display: inline; */
+        /* width: 100vw; */
+        text-align: center;
+
+    }
+    .planit-dashboard-start-find-but-button{
+        cursor: pointer;
+        /* margin-left: calc(var(--nav-size)*15); */
+        vertical-align: bottom;
+        background-image: linear-gradient(to right,var(--bg-nav1),var(--bg-nav2));
+        border: calc(var(--nav-size)*.001) solid var(--border-nav);
+        width: calc(var(--nav-size)*2); 
+        height: calc(var(--nav-size)*1); 
+        color: var(--text-color);
+        font-weight: bold;
+        font-size: calc(var(--nav-size)*.3);
+        border-radius: calc(var(--nav-size)*.2);
+    }
+    .planit-dashboard-start-find-but-button:hover{
+        border: calc(var(--nav-size)*.001) solid var(--text-color);
+        font-size: calc(var(--nav-size)*.33);
+        filter: brightness(1.2);
+        font-weight: bolder;
     }
     .planit-dashboard-popular{
         padding: calc(var(--nav-size)*.5);
