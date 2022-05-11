@@ -4,9 +4,14 @@ import { useSelector, useDispatch } from 'react-redux'      // access state vari
 import Spinner from './../../components/Spinner/Spinner.jsx'
 import { getGoals, resetGoalSlice } from './../../features/goals/goalSlice'
 
+
+
+
 function Start() {
     const [ findGoal, setFindGoal ] = useState("");
+    const [ outView, setOutView ] = useState(false);
     const [ outputGoals, setOutputGoals ] = useState(null);
+
 
     const navigate = useNavigate() // initialization
     const dispatch = useDispatch() // initialization
@@ -20,6 +25,7 @@ function Start() {
 
 
     useEffect(() => {
+
         function handleOutputGoals(){
             if(findGoal===null){return;} // No search guard clause
             var outputArray = [];
@@ -27,7 +33,7 @@ function Start() {
             goals.forEach(( goal, i ) => {
                 if((findGoal!=="") && (goal.text.toUpperCase().includes(findGoal.toUpperCase()))){
                     outputArray.push(<>
-                        <h2>{goal.text}</h2>
+                        <button className='planit-dashboard-start-goals-result' onClick={() => setFindGoal(goal.text)}>{goal.text}</button>
                     </>)
                 }
             });
@@ -43,6 +49,7 @@ function Start() {
         console.log(message)
         }
 
+
         dispatch(getGoals()) // dispatch connects to the store, then retreives the goals that match the logged in user.
         
         return () => {    // reset the goals when state changes
@@ -54,30 +61,50 @@ function Start() {
         return <Spinner />
     }
 
-  return (
-    <div className='planit-dashboard-start'>
-        <div className='planit-dashboard-start-find'>
-            <div className='planit-dashboard-start-find-text'>
-                My goal is to 
+
+    return (
+        <div className='planit-dashboard-start'>
+            <div className='planit-dashboard-start-find'>
+
+                <div className='planit-dashboard-start-find-text'>
+                    My goal is to 
+                </div>
+
+                <div className='planit-dashboard-start-find-space'>
+                    <input 
+                        type="text" 
+                        className='planit-dashboard-start-find-input'
+                        placeholder='( Enter your goal )'
+                        value={findGoal}
+                        onChange={(e) => setFindGoal(e.target.value)}
+                    />
+                    <div className='planit-dashboard-start-find-but'>
+                        {/* <a href="/"> */}
+                            <button className='planit-dashboard-start-find-but-button'>
+                                {/* <img id='planit-dashboard-start-find-logo-but-img' src={HeaderLogo} alt='website logo'/> */}
+                                Search
+                            </button>
+                        {/* </a> */}
+                    </div>
+                </div>
+
             </div>
 
-            <input 
-                type="text" 
-                className='planit-dashboard-start-find-input'
-                placeholder='( Enter your goal )'
-                value={findGoal}
-                onChange={(e) => setFindGoal(e.target.value)}
-            />
-        </div>
-        <div className='planit-dashboard-start-goals'>
-            {goals.length && (
-            <div className='planit-goals-out-result'>
-                {outputGoals}
+            <div className='planit-dashboard-start-goals'>
+                {(goals.length !== 0) ? (
+                    <div>
+                        {outputGoals}
+                    </div>
+                ):
+                    <div>
+                        Create a new goal!
+                    </div>
+                }
             </div>
-            )}
+
+
         </div>
-    </div>
-  )
+    )
 }
 
 export default Start

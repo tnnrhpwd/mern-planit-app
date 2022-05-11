@@ -4,15 +4,19 @@ import { createPlan } from '../../features/plans/planSlice'
 import './PlanInput.css';
 
 function PlanInput() {
-    const [text, setText] = useState('')
+    const [textState, setTextState] = useState({
+        textGoal: "",
+        textPlan: "",
+
+    })
 
     const dispatch = useDispatch()  // initialization
 
     const onSubmit = (e) => {
         e.preventDefault()
 
-        dispatch(createPlan({ text }))   // dispatch connects to the store, then creates a plan with text input
-        setText('')                      // empty text field
+        dispatch(createPlan({ textState }))   // dispatch connects to the store, then creates a plan with text input
+        setTextState('')                      // empty text field
     }
 
     return (
@@ -23,14 +27,22 @@ function PlanInput() {
                     type='text'
                     name='text'
                     id='planit-planinput-input'
+                    placeholder='Enter Goal'
+                    value={textState.textGoal}
+                    onChange={(e) => setTextState(e.target.value)}   // change text field value
+                />
+                <input
+                    type='text'
+                    name='text'
+                    id='planit-planinput-input'
                     placeholder='Enter Plan'
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}   // change text field value
+                    value={textState.textPlan}
+                    onChange={(e) => setTextState(e.target.value)}   // change text field value
                 />
                 </div>
                 <div className='planit-planinput-group'>
                 <button className='planit-planinput-submit' type='submit'>
-                    Add Plan
+                    Add ✔
                 </button>
                 </div>
             </form>

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'      // useSelector-brings in user,iserror,isloading from state | useDispatch-brings in reset,register,login from state
 import { useNavigate } from 'react-router-dom'              // page redirects
 import { toast } from 'react-toastify'    
-import { resetAuthSlice } from '../../features/auth/authSlice'     // import functions from authslice
+import { logout, resetAuthSlice } from './../../features/auth/authSlice.js'      // import functions from authslice
 import Spinner from '../../components/Spinner/Spinner.jsx';
 import './Profile.css';
 
@@ -37,8 +37,29 @@ function Profile() {
   //   return <Spinner />
   // }
 
+    // declare method to remove user item from local storage)
+  const onLogout = () => {
+    dispatch(logout())  // dispatch connects to the store, then remove user item from local storage
+    dispatch(resetAuthSlice())  // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
+    navigate('/')       // send user to dashboard, which will redirect to login page
+  }
+
   return (
-    <div className='planit-profile'>Profile</div>
+    <div className='planit-profile'>
+      
+      Profile
+    
+      <button className="planit-header-profile-landscape">
+            {user ? (
+              <button className="planit-header-profile-auth" onClick={onLogout}>Log out</button>
+            ) : (
+              <a href='/login'>
+                <button className="planit-header-profile-auth">Log in</button>
+              </a>
+            )}
+          </button>
+
+    </div>
   )
 }
 

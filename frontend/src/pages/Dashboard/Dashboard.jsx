@@ -14,7 +14,7 @@ function Dashboard() {
       <div className='planit-dashboard-upper'>
         <Start/>
       </div>
-      <div className='planit-dashboard-popular'>
+      {/* <div className='planit-dashboard-popular'>
         <LeftDashboard/>
 
         <MiddleDashboard/>
@@ -24,7 +24,7 @@ function Dashboard() {
           <br/>
           Turn goals(direction) into objectives(path w/ measurable criteria)
         </div>
-      </div>
+      </div> */}
     </div>
   </>)
 }

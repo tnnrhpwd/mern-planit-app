@@ -56,7 +56,7 @@ function Plans() {
         {plans.length > 0 ? (
           <div className='planit-plans-out-result'>
             {plans.map((plan) => (
-              <PlanResult key={plan._id} plan={plan} />
+              <PlanResult key={plan._id} plan={plan}/>
             ))}
           </div>
         ) : (

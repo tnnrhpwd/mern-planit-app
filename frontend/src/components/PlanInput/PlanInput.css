@@ -11,4 +11,5 @@
 .planit-planinput-submit{
     font-size: calc(var(--nav-size)*0.25);
     padding: calc(var(--nav-size)*0.05);
+    cursor: pointer;
 }
