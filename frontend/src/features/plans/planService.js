@@ -30,6 +30,19 @@ const getPlans = async (token) => {
     return response.data
 }
 
+// Update user plan
+const updatePlan = async (planId, planData, token) => {
+    const config = {
+        headers: {
+        Authorization: `Bearer ${token}`,
+        },
+    }
+
+    const response = await axios.update(API_URL + planId, planData, config)
+
+    return response.data
+}
+
 // Delete user plan
 const deletePlan = async (planId, token) => {
     const config = {
@@ -46,6 +59,7 @@ const deletePlan = async (planId, token) => {
 const planService = {
     createPlan,
     getPlans,
+    updatePlan,
     deletePlan,
 }
 

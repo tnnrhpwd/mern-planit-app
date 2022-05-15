@@ -10,7 +10,7 @@ const initialState = {  // default values for each state change
   message: '',
 }
 
-// Create new plan  -- Async functional object -- called from pages using dispatch
+// Create new plan  -- Async functional object -- called from pages using dispatch --CREATE
 export const createPlan = createAsyncThunk(
   'plans/create',
   async (planData, thunkAPI) => {
@@ -29,7 +29,7 @@ export const createPlan = createAsyncThunk(
   }
 )
 
-// Get user plans
+// Get user plans -- READ
 export const getPlans = createAsyncThunk(
   'plans/getAll',
   async (_, thunkAPI) => {
@@ -49,7 +49,26 @@ export const getPlans = createAsyncThunk(
   }
 )
 
-// Delete user plan
+// Delete user plan -- DELETE
+export const updatePlan = createAsyncThunk(
+  'plans/delete',
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await planService.deletePlan(id, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+// Delete user plan -- DELETE
 export const deletePlan = createAsyncThunk(
   'plans/delete',
   async (id, thunkAPI) => {

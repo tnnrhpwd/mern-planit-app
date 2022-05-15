@@ -35,6 +35,7 @@ function Start() {
                             <div className='planit-dashboard-start-goals-result'>
                                 <h4>{plan.goal}</h4>
                                 {plan.plan}
+                                {plan.agrusers}
                             </div>
                         </>)
                     }
