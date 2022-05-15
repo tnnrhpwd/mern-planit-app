@@ -18,15 +18,17 @@ const getPlans = asyncHandler(async (req, res) => {
 // @route   POST /api/plans
 // @access  Private
 const setPlan = asyncHandler(async (req, res) => {
-  if (!req.body.text) {
+  if (!req.body.plan) {
     res.status(400)
     throw new Error('Please add a text field')
   }
 
   const plan = await Plan.create({
-    text: req.body.text,
+    goal: req.body.goal,
+    plan: req.body.plan,
     user: req.user.id,
   })
+  
 
   res.status(200).json(plan)
 })

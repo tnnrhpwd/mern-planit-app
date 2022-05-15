@@ -15,7 +15,7 @@ function PlanResult({ plan }) {
     <div className='planit-planresult'>
       <div>{new Date(plan.createdAt).toLocaleString('en-US')}</div>
       <h2>{plan.goal}</h2>
-      <h3>{plan.text}</h3>
+      <h3>{plan.plan}</h3>
       <h5>Agrusers: {plan.agrusers}</h5>
       <h5>Disusers: {plan.disusers}</h5>
       <a href='/plans'>

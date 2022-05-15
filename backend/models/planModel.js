@@ -8,9 +8,13 @@ const planSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
-    text: {
+    plan: {
       type: String,
-      required: [true, 'Please add a text value'],
+      required: [true, 'Please add a plan value'],
+    },
+    goal: {
+      type: String,
+      required: [true, 'Please add a goal value'],
     },
   },
   {

@@ -4,31 +4,41 @@ import { createPlan } from '../../features/plans/planSlice'
 import './PlanInput.css';
 
 function PlanInput() {
-    const [text, setText] = useState('')
+    const [plan, setPlan] = useState('')
+    const [goal, setGoal] = useState('')
 
     const dispatch = useDispatch()  // initialization
 
     const onSubmit = (e) => {
         e.preventDefault()
 
-        dispatch(createPlan({ text }))   // dispatch connects to the store, then creates a plan with text input
-        setText('')                      // empty text field
+        dispatch(createPlan({ plan,goal }))   // dispatch connects to the store, then creates a plan with text input
+        setPlan('')                      // empty plan field
+        setGoal('')                      // empty goal field
     }
-    // maybe separate goal input with \n
+
     return (
         <div className='planit-planinput'>
             <form onSubmit={onSubmit}>
                 <div className='planit-planinput-group'>
                     <input
-                        type='text'
-                        name='text'
+                        type='goal'
+                        name='goal'
+                        id='planit-planinput-input'
+                        placeholder='Enter Goal'
+                        value={goal}
+                        onChange={(e) => setGoal(e.target.value)}   // change text field value
+                    />
+                    <input
+                        type='plan'
+                        name='plan'
                         id='planit-planinput-input'
                         placeholder='Enter Plan'
-                        value={text}
-                        onChange={(e) => setText(e.target.value)}   // change text field value
+                        value={plan}
+                        onChange={(e) => setPlan(e.target.value)}   // change text field value
                     />
-                    </div>
-                    <div className='planit-planinput-group'>
+                </div>
+                <div className='planit-planinput-group'>
                     <button className='planit-planinput-submit' type='submit'>
                         Add ✔
                     </button>

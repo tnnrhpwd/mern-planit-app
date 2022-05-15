@@ -10,7 +10,8 @@ function Start() {
     // const [ outView, setOutView ] = useState(false);
     const [ outputGoals, setOutputGoals ] = useState([]);
 
-    const [text, setText] = useState("");
+    const [plan, setPlan] = useState('')
+    const [goal, setGoal] = useState('')
 
     const navigate = useNavigate() // initialization
     const dispatch = useDispatch() // initialization
@@ -28,20 +29,23 @@ function Start() {
             var outputArray = [];
     
             plans.forEach(( plan, i ) => {
-                if((findPlan!=="") && (plan.goal.toUpperCase().includes(findPlan.toUpperCase()))){
-                    outputArray.push(<>
-                        <div className='planit-dashboard-start-goals-result'>
-                            <h4>{plan.goal}</h4>
-                            {plan.text}
-                        </div>
-                    </>)
+                if(plan.goal){
+                    if((findPlan!=="") && (plan.goal.toUpperCase().includes(findPlan.toUpperCase()))){
+                        outputArray.push(<>
+                            <div className='planit-dashboard-start-goals-result'>
+                                <h4>{plan.goal}</h4>
+                                {plan.plan}
+                            </div>
+                        </>)
+                    }
                 }
+
             });
             setOutputGoals(outputArray);
         }
 
         handleOutputGoals()
-        // setPlanSt(findPlan)
+        setGoal(findPlan)
     }, [findPlan, plans])
 
     // RUNS ON STATE CHANGES - Gets an updated list of all the goals
@@ -61,8 +65,9 @@ function Start() {
     // RUNS ON CREATE PLAN -- take
     const onPlanSubmit = (e) => {
         e.preventDefault()
-        dispatch(createPlan({ text }))   // dispatch connects to the store, then creates a plan with text input
-        setText('')                      // empty text field
+        dispatch(createPlan({ plan,goal }))   // dispatch connects to the store, then creates a plan with text input
+        setPlan('')                      // empty plan field
+        setGoal('')                      // empty goal field
     }
 
 
@@ -114,11 +119,12 @@ function Start() {
                             <form onSubmit={onPlanSubmit}>
                                 <h4 className='planit-dashboard-start-goals-sp'>
                                     <input
-                                        type='text'
+                                        type='plan'
+                                        name='plan'
                                         className='planit-dashboard-start-goals-plan-sp-input' 
                                         placeholder='Enter plan' 
-                                        value={text}
-                                        onChange={(e) => setText(e.target.value)}
+                                        value={plan}
+                                        onChange={(e) => setPlan(e.target.value)}
                                         /><br/>
                                     <button type='submit' >Create Plan</button>
                                 </h4>
