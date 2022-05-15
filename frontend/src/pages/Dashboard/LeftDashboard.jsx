@@ -37,7 +37,7 @@ function LeftDashboard() {
 
     return (
         <div className='planit-dashboard-popular-left'>
-            Popular Goals
+            Popular Goals 
             <div className='planit-dashboard-popular-left-goals'>
             {goals.length > 0 ? (
                 <div className='planit-goals-out-result'>

@@ -2,38 +2,38 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import Spinner from './../../components/Spinner/Spinner.jsx'
-import { getGoals, resetGoalSlice } from './../../features/goals/goalSlice'
-
-
-
+import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
+import { createPlan } from '../../features/plans/planSlice'
 
 function Start() {
-    const [ findGoal, setFindGoal ] = useState("");
-    const [ outView, setOutView ] = useState(false);
-    const [ outputGoals, setOutputGoals ] = useState(null);
+    const [ findPlan, setFindPlan ] = useState("");
+    // const [ outView, setOutView ] = useState(false);
+    const [ outputGoals, setOutputGoals ] = useState([]);
 
+    const [text, setText] = useState("");
 
     const navigate = useNavigate() // initialization
     const dispatch = useDispatch() // initialization
   
     // const { user } = useSelector((state) => state.auth)      // select user values from user state
-    const { goals, isLoading, isError, message } = useSelector(     // select goal values from goal state
-        (state) => state.goals
+    const { plans, isLoading, isError, message } = useSelector(     // select goal values from goal state
+        (state) => state.plans
     )
 
-
-
-
+    // RUNS ON INPUT FIELD CHANGE -- shows search suggestions
     useEffect(() => {
 
         function handleOutputGoals(){
-            if(findGoal===null){return;} // No search guard clause
+            if(findPlan===null){return;} // No search guard clause
             var outputArray = [];
     
-            goals.forEach(( goal, i ) => {
-                if((findGoal!=="") && (goal.text.toUpperCase().includes(findGoal.toUpperCase()))){
+            plans.forEach(( plan, i ) => {
+                if((findPlan!=="") && (plan.goal.toUpperCase().includes(findPlan.toUpperCase()))){
                     outputArray.push(<>
-                        <button className='planit-dashboard-start-goals-result' onClick={() => setFindGoal(goal.text)}>{goal.text}</button>
+                        <div className='planit-dashboard-start-goals-result'>
+                            <h4>{plan.goal}</h4>
+                            {plan.text}
+                        </div>
                     </>)
                 }
             });
@@ -41,22 +41,32 @@ function Start() {
         }
 
         handleOutputGoals()
-    }, [findGoal, goals])
+        // setPlanSt(findPlan)
+    }, [findPlan, plans])
 
-    // called on state changes
+    // RUNS ON STATE CHANGES - Gets an updated list of all the goals
     useEffect(() => {
         if (isError) {
         console.log(message)
         }
 
 
-        dispatch(getGoals()) // dispatch connects to the store, then retreives the goals that match the logged in user.
+        dispatch(getPlans()) // dispatch connects to the store, then retreives the goals that match the logged in user.
         
         return () => {    // reset the goals when state changes
-            dispatch(resetGoalSlice()) // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
+            dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
         }
     }, [navigate, isError, message, dispatch])
 
+    // RUNS ON CREATE PLAN -- take
+    const onPlanSubmit = (e) => {
+        e.preventDefault()
+        dispatch(createPlan({ text }))   // dispatch connects to the store, then creates a plan with text input
+        setText('')                      // empty text field
+    }
+
+
+    // Shows loading animation while getting goals
     if (isLoading) {
         return <Spinner />
     }
@@ -67,7 +77,7 @@ function Start() {
             <div className='planit-dashboard-start-find'>
 
                 <div className='planit-dashboard-start-find-text'>
-                    My goal is to 
+                    My goal is to...
                 </div>
 
                 <div className='planit-dashboard-start-find-space'>
@@ -75,8 +85,8 @@ function Start() {
                         type="text" 
                         className='planit-dashboard-start-find-input'
                         placeholder='( Enter your goal )'
-                        value={findGoal}
-                        onChange={(e) => setFindGoal(e.target.value)}
+                        value={findPlan}
+                        onChange={(e) => setFindPlan(e.target.value)}
                     />
                     {/* <div className='planit-dashboard-start-find-but'>
                         <a href="/">
@@ -91,18 +101,32 @@ function Start() {
             </div>
 
             <div className='planit-dashboard-start-goals'>
-                {(goals.length !== 0) ? (
-                    <div>
-                        {outputGoals}
-                    </div>
-                ):
-                    <div>
-                        Create a new goal!
-                    </div>
+                {(findPlan !== "") && 
+                    <div >{(outputGoals.length !== 0) ? (
+                        <div >
+                            {outputGoals}
+                        </div>
+                    ):
+                        <div className='planit-dashboard-start-goals-plan'>
+                            <h4>
+                                {findPlan}
+                            </h4>
+                            <form onSubmit={onPlanSubmit}>
+                                <h4 className='planit-dashboard-start-goals-sp'>
+                                    <input
+                                        type='text'
+                                        className='planit-dashboard-start-goals-plan-sp-input' 
+                                        placeholder='Enter plan' 
+                                        value={text}
+                                        onChange={(e) => setText(e.target.value)}
+                                        /><br/>
+                                    <button type='submit' >Create Plan</button>
+                                </h4>
+                            </form>
+                        </div>
+                    }</div>
                 }
             </div>
-
-
         </div>
     )
 }

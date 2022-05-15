@@ -4,46 +4,34 @@ import { createPlan } from '../../features/plans/planSlice'
 import './PlanInput.css';
 
 function PlanInput() {
-    const [textState, setTextState] = useState({
-        textGoal: "",
-        textPlan: "",
-
-    })
+    const [text, setText] = useState('')
 
     const dispatch = useDispatch()  // initialization
 
     const onSubmit = (e) => {
         e.preventDefault()
 
-        dispatch(createPlan({ textState }))   // dispatch connects to the store, then creates a plan with text input
-        setTextState('')                      // empty text field
+        dispatch(createPlan({ text }))   // dispatch connects to the store, then creates a plan with text input
+        setText('')                      // empty text field
     }
-
+    // maybe separate goal input with \n
     return (
         <div className='planit-planinput'>
             <form onSubmit={onSubmit}>
                 <div className='planit-planinput-group'>
-                <input
-                    type='text'
-                    name='text'
-                    id='planit-planinput-input'
-                    placeholder='Enter Goal'
-                    value={textState.textGoal}
-                    onChange={(e) => setTextState(e.target.value)}   // change text field value
-                />
-                <input
-                    type='text'
-                    name='text'
-                    id='planit-planinput-input'
-                    placeholder='Enter Plan'
-                    value={textState.textPlan}
-                    onChange={(e) => setTextState(e.target.value)}   // change text field value
-                />
-                </div>
-                <div className='planit-planinput-group'>
-                <button className='planit-planinput-submit' type='submit'>
-                    Add ✔
-                </button>
+                    <input
+                        type='text'
+                        name='text'
+                        id='planit-planinput-input'
+                        placeholder='Enter Plan'
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}   // change text field value
+                    />
+                    </div>
+                    <div className='planit-planinput-group'>
+                    <button className='planit-planinput-submit' type='submit'>
+                        Add ✔
+                    </button>
                 </div>
             </form>
         </div>

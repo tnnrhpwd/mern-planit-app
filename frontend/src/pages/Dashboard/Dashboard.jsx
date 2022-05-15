@@ -14,17 +14,17 @@ function Dashboard() {
       <div className='planit-dashboard-upper'>
         <Start/>
       </div>
-      {/* <div className='planit-dashboard-popular'>
-        <LeftDashboard/>
+      <div className='planit-dashboard-popular'>
+        {/* <LeftDashboard/> */}
 
-        <MiddleDashboard/>
+        {/* <MiddleDashboard/> */}
 
-        <div className='planit-dashboard-popular-right'>
+        {/* <div className='planit-dashboard-popular-right'>
           Right Panel
           <br/>
           Turn goals(direction) into objectives(path w/ measurable criteria)
-        </div>
-      </div> */}
+        </div> */}
+      </div>
     </div>
   </>)
 }
