@@ -4,6 +4,7 @@ const colors = require('colors');     // allows the console to print colored tex
 const dotenv = require('dotenv').config();   // import env vars from .env
 const { errorHandler } = require('./middleware/errorMiddleware');    // creates json of error
 const connectDB = require('./config/db');    // connect to MongoDB using Mongooose
+const { default: mongoose } = require('mongoose');
 const port = process.env.PORT || 5000;  //set port to hold api server
 
 
@@ -34,4 +35,12 @@ if (process.env.NODE_ENV === 'production') {                                  //
 
 app.use(errorHandler) // adds middleware that returns errors in json format (regardless of hit url)
 
-app.listen(port, () => console.log(`Server started on port ${port}`))         // listen for incoming http requests on the PORT && print PORT in console
+// IF MongoDB connected, 
+mongoose.connection.once('open', () => {
+  console.log('Connected to MongoDB');  // print confirmation
+  app.listen(port, () => console.log(`Server started on port ${port}`))         // listen for incoming http requests on the PORT && print PORT in console
+})
+// IF MongoDB cound not connect, 
+mongoose.connection.once('closed',() => {
+  console.log(`Unable to connect to MongoDB.`.red) // print error
+})
