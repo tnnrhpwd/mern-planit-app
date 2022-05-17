@@ -49,13 +49,13 @@ export const getPlans = createAsyncThunk(
   }
 )
 
-// Delete user plan -- DELETE
+// Update user plan -- UPDATE
 export const updatePlan = createAsyncThunk(
   'plans/delete',
-  async (id, thunkAPI) => {
+  async (id, planData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await planService.deletePlan(id, token)
+      return await planService.updatePlan(id, planData, token)
     } catch (error) {
       const message =
         (error.response &&

@@ -1,0 +1,31 @@
+.planpreview{
+    position:absolute;
+    background-color: var(--bg-page-transp);
+    z-index: 10;
+    width: 100%;
+    min-height: 100%;
+}
+.planpreview-window{
+    margin: calc(var(--std-unit)*3);
+    padding: calc(var(--std-unit)*1);
+    text-align: center;
+    vertical-align: middle;
+    background-color: var(--bg-planpreview);
+}
+.planpreview-window-goal{
+    display: inline-block;
+    font-weight: bold;
+    font-size: calc(var(--std-unit)*.3);
+}
+.planpreview-window-close{
+    position: relative;
+    left: calc(var(--std-unit)*7);
+    bottom: calc(var(--std-unit)*1);
+}
+.planpreview-window-plan{
+    font-size: calc(var(--std-unit)*.3);
+}
+
+@media (orientation: portrait) {
+
+}

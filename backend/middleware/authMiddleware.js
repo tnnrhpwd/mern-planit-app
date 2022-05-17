@@ -1,4 +1,4 @@
-// This file exports protect -- async function that confirms that the request user is the same as the response user. DOESNT CHECK PASSWORD -- only confirms same user.
+// This file exports protect -- async function that confirms that the request user is the same as the response user. DOES NOT CHECK PASSWORD or ANYTHING WITH UI -- only confirms that reponse is sent to the requester
 const jwt = require('jsonwebtoken');                   // import web token library to get user's token
 const asyncHandler = require('express-async-handler'); // sends the errors to the errorhandler
 const User = require('../models/userModel');           // import user schema
@@ -9,7 +9,7 @@ const protect = asyncHandler(async (req, res, next) => {
 
   if (
     req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')  // if HTTP request header exists and startes with Bearer -- IF USER HAS JWT
+    req.headers.authorization.startsWith('Bearer')  // if HTTP request header exists and startes with Bearer -- IF USER HAS JWT ( LOGGED IN )
   ) {
     try {
       // Get token from header
@@ -29,7 +29,8 @@ const protect = asyncHandler(async (req, res, next) => {
     }
   }
 
-  if (!token) {
+  // if NOT LOGGED IN -- throw error
+  if (!token) { 
     res.status(401)
     throw new Error('Not authorized, no token')
   }

@@ -70,20 +70,38 @@
     } */
     .planit-dashboard-start-goals{
         text-align: center;
-        margin-left: calc(var(--nav-size)*6);
+        /* margin-left: calc(var(--nav-size)*6); */
         margin-top: calc(var(--nav-size)*1);
+        display: block;
     }
     .planit-dashboard-start-goals-result{
         border: calc(var(--nav-size)*0.001) solid var(--text-color);
         margin: calc(var(--nav-size)*.1);
         background-color: transparent;
         color: var(--text-color);
-        display:block;
-        cursor: pointer;
+        display:inline-block;
         font-size: calc(var(--nav-size)*.3);
         text-align: center;
         width: 50vw;
         min-height: 10vh;
+        padding-top: calc(var(--nav-size)*.2);
+    }
+    .planit-dashboard-start-goals-result-goal{
+        display: inline-block;
+        font-weight: bold;
+    }
+    .planit-dashboard-start-goals-result-agree{
+        display: inline-block;
+        position: absolute;
+        right: calc(var(--nav-size)*9);
+    }
+    .planit-dashboard-start-goals-result-disagree{
+        display: inline-block;
+        position: absolute;
+        left: calc(var(--nav-size)*9);
+    }
+    .planit-dashboard-start-goals-result-plan{
+        margin-top: calc(var(--nav-size)*.5);
     }
     .planit-dashboard-start-goals-plan{
         border: calc(var(--nav-size)*0.001) solid var(--text-color);
@@ -95,6 +113,7 @@
         text-align: center;
         width: 50vw;
         min-height: 10vh;
+
     }
     .planit-dashboard-start-goals-sp{
 

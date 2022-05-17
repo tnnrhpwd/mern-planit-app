@@ -56,7 +56,7 @@ const updatePlan = asyncHandler(async (req, res) => {
     throw new Error('User not authorized')
   }
 
-  const updatedPlan = await Plan.findByIdAndUpdate(req.params.id, req.body, {
+  const updatedPlan = await Plan.findByIdAndUpdate(req.params.id,  { $push: req.body}, {
     new: true,
   })
 

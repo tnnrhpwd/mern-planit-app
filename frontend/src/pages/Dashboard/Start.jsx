@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import Spinner from './../../components/Spinner/Spinner.jsx'
-import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
-import { createPlan } from '../../features/plans/planSlice'
+import { getPlans, resetPlanSlice, createPlan, updatePlan } from './../../features/plans/planSlice'
+import PlanPreview from '../../components/PlanPreview/PlanPreview.jsx'
 
 function Start() {
     const [ findPlan, setFindPlan ] = useState("");
-    // const [ outView, setOutView ] = useState(false);
+    const [ outView, setOutView ] = useState(false);
     const [ outputGoals, setOutputGoals ] = useState([]);
 
     const [plan, setPlan] = useState('')
@@ -16,13 +16,33 @@ function Start() {
     const navigate = useNavigate() // initialization
     const dispatch = useDispatch() // initialization
   
-    // const { user } = useSelector((state) => state.auth)      // select user values from user state
+    const { user } = useSelector((state) => state.auth)      // select user values from user state
     const { plans, isLoading, isError, message } = useSelector(     // select goal values from goal state
         (state) => state.plans
     )
 
     // RUNS ON INPUT FIELD CHANGE -- shows search suggestions
     useEffect(() => {
+
+        function handleAgree(id){
+            dispatch(updatePlan( id, {agrusers: 69} ))
+        }
+        function handleDisagree(id){
+            dispatch(updatePlan( id, "user._id"  ))
+        }
+        function handlePreviewOpen(planObject){
+            var scrollheight = window.scrollY;
+            setOutView(
+                <PlanPreview 
+                    screenY={scrollheight} 
+                    handlePlanPreviewClose={handlePreviewClose} 
+                    planIdentity={planObject}
+                />
+            )
+        }
+        function handlePreviewClose(){
+            setOutView(null)
+        }
 
         function handleOutputGoals(){
             if(findPlan===null){return;} // No search guard clause
@@ -32,9 +52,12 @@ function Start() {
                 if(plan.goal){
                     if((findPlan!=="") && (plan.goal.toUpperCase().includes(findPlan.toUpperCase()))){
                         outputArray.push(<>
-                            <div className='planit-dashboard-start-goals-result'>
-                                <h4>{plan.goal}</h4>
-                                {plan.plan}
+                            <div key={plan._id+"0"} className='planit-dashboard-start-goals-result'>
+                                <div key={plan._id+"1"} className='planit-dashboard-start-goals-result-disagree'><button onClick={() => handleDisagree( plan._id )}>Disagree</button></div>
+                                <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
+                                <div key={plan._id+"3"} className='planit-dashboard-start-goals-result-agree'><button onClick={() => handleAgree( plan._id )}>Agree</button></div>
+                                <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'>{plan.plan}</div>
+                                
                                 {plan.agrusers}
                             </div>
                         </>)
@@ -47,7 +70,7 @@ function Start() {
 
         handleOutputGoals()
         setGoal(findPlan)
-    }, [findPlan, plans])
+    }, [dispatch, findPlan, plans, user._id])
 
     // RUNS ON STATE CHANGES - Gets an updated list of all the goals
     useEffect(() => {
@@ -63,7 +86,7 @@ function Start() {
         }
     }, [navigate, isError, message, dispatch])
 
-    // RUNS ON CREATE PLAN -- take
+    // RUNS ON CREATE PLAN -- sends the new plan and goal text to the database
     const onPlanSubmit = (e) => {
         e.preventDefault()
         dispatch(createPlan({ plan,goal }))   // dispatch connects to the store, then creates a plan with text input
@@ -72,20 +95,25 @@ function Start() {
     }
 
 
+
+
     // Shows loading animation while getting goals
     if (isLoading) {
         return <Spinner />
     }
 
 
-    return (
+
+
+    return (<>
+
+        {outView}
+
         <div className='planit-dashboard-start'>
             <div className='planit-dashboard-start-find'>
-
                 <div className='planit-dashboard-start-find-text'>
                     My goal is to...
                 </div>
-
                 <div className='planit-dashboard-start-find-space'>
                     <input 
                         type="text" 
@@ -103,9 +131,7 @@ function Start() {
                         </a>
                     </div> */}
                 </div>
-
             </div>
-
             <div className='planit-dashboard-start-goals'>
                 {(findPlan !== "") && 
                     <div >{(outputGoals.length !== 0) ? (
@@ -135,7 +161,7 @@ function Start() {
                 }
             </div>
         </div>
-    )
+    </>)
 }
 
 export default Start

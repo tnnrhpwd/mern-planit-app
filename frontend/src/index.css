@@ -17,12 +17,14 @@ code {
   --dark-blue0-grey: #0c141a;
   --dark-blue1: #1a2b36;
   --white0: #F4F7FD;
+  --white0-transp: rgb(244, 247, 253, 0.5);
   --grey0: #e0e2e8;
   --grey1: #bbbdc2;
   --grey2: #8e8f93;
   --grey3: #5d5d60;
   --grey4: #2d2d2e;
   --grey5: #151516;
+  --grey5-transp: rgb(21, 21, 22, 0.95);
   --green0: #a3ffcb;
   --green1: #0dff76;
   --green2: #056b32;
@@ -31,11 +33,13 @@ code {
 @media (orientation: landscape) {
   :root{
   --nav-size: min(5vw,5vh);
+  --std-unit: var( --nav-size );
   }
 }
 @media (orientation: portrait) {
   :root{
     --nav-size: min(18vw,9vh);
+    --std-unit: var( --nav-size );
   }
 }
 
@@ -44,25 +48,28 @@ code {
   --bg-nav1: var(--white0);
   --bg-nav2: var(--grey0);
   --bg-page: var(--white0);
+  --bg-page-transp: var(--white0);
   --text-color: var(--dark-blue0);
   --text-color-inv: var(--white0);
   --bg-accent: var(--green1);
   --border-nav: var(--grey1);
   --bg-nav-dropper: var(--grey1);
   --bg-themebutton-land: var(--bg-accent);
-
+  --bg-planpreview: var(--grey1);
 }
 .dark-theme{
   --bg-pagelink: var(--green2);
   --bg-nav1: var(--dark-blue0);
   --bg-nav2: var(--dark-blue0-grey);
   --bg-page: var(--grey5);
+  --bg-page-transp: var(--grey5-transp);
   --text-color: var(--white0);
   --text-color-inv: var(--dark-blue0);
   --bg-accent: var(--green1);
   --border-nav: var(--dark-blue1);
   --bg-nav-dropper: var(--grey4);
   --bg-themebutton-land: var(--green3);
+  --bg-planpreview: var(--grey4);
 }
 
 
