@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import PlanInput from './../../components/PlanInput/PlanInput.jsx';
 import PlanResult from './../../components/PlanResult/PlanResult.jsx';
+import { toast } from 'react-toastify'                        // visible error notifications
 import Spinner from './../../components/Spinner/Spinner.jsx'
 import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
 import './Plans.css';
@@ -21,7 +22,9 @@ function Plans() {
   // called on state changes
   useEffect(() => {
     if (isError) {
-      console.log(message)
+      // console.log(message)
+      toast.error(message) // print error to toast errors
+
     }
     // if(user){
       dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
