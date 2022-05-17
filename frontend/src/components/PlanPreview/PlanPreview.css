@@ -24,6 +24,7 @@
 }
 .planpreview-window-plan{
     font-size: calc(var(--std-unit)*.3);
+    white-space: pre-line;
 }
 
 @media (orientation: portrait) {

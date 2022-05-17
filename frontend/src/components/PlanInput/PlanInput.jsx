@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'      // useDispatch-brings in reset,register,login from state
 import { createPlan } from '../../features/plans/planSlice'
 import './PlanInput.css';
@@ -17,6 +17,15 @@ function PlanInput() {
         setGoal('')                      // empty goal field
     }
 
+    useEffect(() => {
+        document.getElementById('planit-planinput-input-plan').addEventListener('keypress', function(e) {
+            // p_standard.textContent = e.target.value;
+            // p_wrap.textContent = e.target.value;
+        })
+    }, [])
+
+
+
     return (
         <div className='planit-planinput'>
             <form onSubmit={onSubmit}>
@@ -24,23 +33,23 @@ function PlanInput() {
                     <input
                         type='goal'
                         name='goal'
-                        id='planit-planinput-input'
+                        id='planit-planinput-input-goal'
                         placeholder='Enter Goal'
                         value={goal}
                         onChange={(e) => setGoal(e.target.value)}   // change text field value
                     />
-                    <input
+                    <textarea
                         type='plan'
                         name='plan'
-                        id='planit-planinput-input'
-                        placeholder='Enter Plan'
+                        id='planit-planinput-input-plan'
+                        placeholder='Enter plan here.'
                         value={plan}
                         onChange={(e) => setPlan(e.target.value)}   // change text field value
                     />
                 </div>
                 <div className='planit-planinput-group'>
                     <button className='planit-planinput-submit' type='submit'>
-                        Add ✔
+                        Submit Plan ✔
                     </button>
                 </div>
             </form>
