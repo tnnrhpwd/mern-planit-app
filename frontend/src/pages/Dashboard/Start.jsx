@@ -18,8 +18,8 @@ function Start() {
     const navigate = useNavigate() // initialization
     const dispatch = useDispatch() // initialization
   
-    const { user } = useSelector((state) => state.auth)      // select user values from user state
-    const { plans, isLoading, isError, message } = useSelector(     // select goal values from goal state
+    // const { user } = useSelector((state) => state.auth)      // select user values from user state
+    const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select goal values from goal state
         (state) => state.plans
     )
 
@@ -74,22 +74,40 @@ function Start() {
 
         handleOutputGoals()
         setGoal(findPlan)
-    }, [dispatch, findPlan, plans, user._id])
+    }, [dispatch, findPlan, plans])
+
+
+      // called on state changes
+    useEffect(() => {
+        if (planIsError) {
+        // console.log(planMessage)
+        toast.error(planMessage) // print error to toast errors
+
+        }
+        // if(user){
+        dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
+
+        return () => {    // reset the plans when state changes
+        dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
+        }
+    }, [planIsError, planMessage, dispatch])
+
+
 
     // RUNS ON STATE CHANGES - Gets an updated list of all the goals
     useEffect(() => {
-        if (isError) {
-            // console.log(message)
-            toast.error(message) // print error to toast errors
+        if (planIsError) {
+            // console.log(planMessage)
+            toast.error(planMessage) // print error to toast errors
         }
 
 
         dispatch(getPlans()) // dispatch connects to the store, then retreives the goals that match the logged in user.
         
         return () => {    // reset the goals when state changes
-            dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
+            dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
         }
-    }, [navigate, isError, message, dispatch])
+    }, [navigate, planIsError, planMessage, dispatch])
 
     // RUNS ON CREATE PLAN -- sends the new plan and goal text to the database
     const onPlanSubmit = (e) => {
@@ -103,7 +121,7 @@ function Start() {
 
 
     // Shows loading animation while getting goals
-    if (isLoading) {
+    if (planIsLoading) {
         return <Spinner />
     }
 

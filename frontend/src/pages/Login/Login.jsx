@@ -20,13 +20,13 @@ function Login() {
     const dispatch = useDispatch() // initialization
 
     // select values from state
-    const { user, isLoading, isError, isSuccess, message } = useSelector(
+    const { user, authIsLoading, authIsError, isSuccess, message } = useSelector(
         (state) => state.auth
     )
 
     // called on state changes
     useEffect(() => {
-        if (isError) {
+        if (authIsError) {
         toast.error(message) // print error to toast errors
         }
 
@@ -35,7 +35,7 @@ function Login() {
         }
 
         dispatch(resetAuthSlice())   // reset state values( message, isloading, iserror, and issuccess ) on each state change
-    }, [user, isError, isSuccess, message, navigate, dispatch])
+    }, [user, authIsError, isSuccess, message, navigate, dispatch])
 
     // called on each letter typed into input field
     const onChange = (e) => {
@@ -57,8 +57,8 @@ function Login() {
         dispatch(login(userData))   // dispatch connects to the store, then calls the async register function passing userdata as input.
     }
 
-      // if loading, show spinner. isLoading resets on state change.
-    if (isLoading) {
+      // if loading, show spinner. authIsLoading resets on state change.
+    if (authIsLoading) {
         return <Spinner />
     }
 

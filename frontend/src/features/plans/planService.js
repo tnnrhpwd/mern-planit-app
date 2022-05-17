@@ -8,7 +8,7 @@ const API_URL = '/api/plans/';  // sends base http request here
 const createPlan = async (planData, token) => {
     const config = {
         headers: {
-        Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     }
 
@@ -17,11 +17,11 @@ const createPlan = async (planData, token) => {
     return response.data
 }
 
-// Get user plans
+// Get all plans
 const getPlans = async (token) => {
     const config = {
         headers: {
-        Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     }
 
@@ -34,24 +34,24 @@ const getPlans = async (token) => {
 const updatePlan = async (planId, planData, token) => {
     const config = {
         headers: {
-        Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     }
 
-    const response = await axios.update(API_URL + planId, planData, config)
+    const response = await axios.update( API_URL + planId, planData, config )
 
     return response.data
 }
 
 // Delete user plan
-const deletePlan = async (planId, token) => {
+const deletePlan = async ( planId, token ) => {
     const config = {
         headers: {
-        Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     }
 
-    const response = await axios.delete(API_URL + planId, config)
+    const response = await axios.delete( API_URL + planId, config )
 
     return response.data
 }
