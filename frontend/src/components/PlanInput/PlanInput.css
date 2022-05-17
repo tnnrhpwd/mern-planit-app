@@ -3,20 +3,21 @@
     text-align: center;
 }
 .planit-planinput-group{
-    font-size: calc(var(--nav-size)*0.5);
+    font-size: calc(var(--nav-size)*0.75);
 }
 #planit-planinput-input-goal{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: calc(var(--nav-size)*0.35);
-    width: calc(var(--nav-size)*9);
+    width: calc(var(--nav-size)*11);
     text-align: center;
 }
 #planit-planinput-input-plan{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: calc(var(--nav-size)*0.35);
-    width: calc(var(--nav-size)*9);
+    width: calc(var(--nav-size)*11);
     text-align: center;
-    height: auto;
+    height: calc(var(--nav-size)*2);
+    margin-top: calc(var(--nav-size)*0.3);
 
 }
 .planit-planinput-submit{

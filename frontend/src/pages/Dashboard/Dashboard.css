@@ -103,6 +103,13 @@
     .planit-dashboard-start-goals-result-plan{
         margin-top: calc(var(--nav-size)*.5);
         white-space: pre-line;
+
+    }
+    .planit-dashboard-start-goals-result-planbutton{
+        border: none;
+        background-color: transparent;
+        color: var(--text-color);
+        cursor: pointer;
     }
     .planit-dashboard-start-goals-plan{
         border: calc(var(--nav-size)*0.001) solid var(--text-color);

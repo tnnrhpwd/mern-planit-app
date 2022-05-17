@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'      // access state vari
 import Spinner from './../../components/Spinner/Spinner.jsx'
 import { getPlans, resetPlanSlice, createPlan, updatePlan } from './../../features/plans/planSlice'
 import PlanPreview from '../../components/PlanPreview/PlanPreview.jsx'
+import { toast } from 'react-toastify'                        // visible error notifications
+
 
 function Start() {
     const [ findPlan, setFindPlan ] = useState("");
@@ -25,9 +27,11 @@ function Start() {
     useEffect(() => {
 
         function handleAgree(id){
+            console.log("agree")
             dispatch(updatePlan( id, {agrusers: 69} ))
         }
         function handleDisagree(id){
+            console.log("disagree")
             dispatch(updatePlan( id, "user._id"  ))
         }
         function handlePreviewOpen(planObject){
@@ -54,9 +58,9 @@ function Start() {
                         outputArray.push(<>
                             <div key={plan._id+"0"} className='planit-dashboard-start-goals-result'>
                                 <div key={plan._id+"1"} className='planit-dashboard-start-goals-result-disagree'><button onClick={() => handleDisagree( plan._id )}>Disagree</button></div>
-                                <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
+                                <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
                                 <div key={plan._id+"3"} className='planit-dashboard-start-goals-result-agree'><button onClick={() => handleAgree( plan._id )}>Agree</button></div>
-                                <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'>{plan.plan}</div>
+                                <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><button className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.plan}</button></div>
                                 
                                 {plan.agrusers}
                             </div>
@@ -75,7 +79,8 @@ function Start() {
     // RUNS ON STATE CHANGES - Gets an updated list of all the goals
     useEffect(() => {
         if (isError) {
-        console.log(message)
+            // console.log(message)
+            toast.error(message) // print error to toast errors
         }
 
 
