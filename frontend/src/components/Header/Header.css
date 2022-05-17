@@ -9,6 +9,7 @@ position:fixed;
   text-decoration: none;
   width: 100vw;
   text-align: center;
+  z-index: 10;
 }
 .planit-header-logo{
   display: inline-block;
