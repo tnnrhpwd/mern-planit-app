@@ -17,7 +17,7 @@ code {
   --dark-blue0-grey: #0c141a;
   --dark-blue1: #1a2b36;
   --white0: #F4F7FD;
-  --white0-transp: rgb(244, 247, 253, 0.5);
+  --white0-transp: rgb(244, 247, 253, 0.9);
   --grey0: #e0e2e8;
   --grey1: #bbbdc2;
   --grey2: #8e8f93;
@@ -48,7 +48,7 @@ code {
   --bg-nav1: var(--white0);
   --bg-nav2: var(--grey0);
   --bg-page: var(--white0);
-  --bg-page-transp: var(--white0);
+  --bg-page-transp: var(--white0-transp);
   --text-color: var(--dark-blue0);
   --text-color-inv: var(--white0);
   --bg-accent: var(--green1);
