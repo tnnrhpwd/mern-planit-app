@@ -8,8 +8,8 @@ function PlanResult({ plan }) {
   const dispatch = useDispatch()  // initialization
 
   const { goals, isLoading, isError, message } = useSelector(     // select plan values from plan state
-  (state) => state.goals
-)
+    (state) => state.goals
+  )
 
   return (
     <div className='planit-planresult'>
