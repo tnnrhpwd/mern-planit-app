@@ -25,8 +25,13 @@ function Start() {
         (state) => state.plans
     )
     const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select goal values from goal state
-    (state) => state.comments
-)
+        (state) => state.comments
+    )
+
+    // Scroll to the top on render
+    useEffect(() => {
+        window.scrollTo(0,0);
+    }, [])
 
     // RUNS ON INPUT FIELD CHANGE -- shows search suggestions
     useEffect(() => {
@@ -48,7 +53,7 @@ function Start() {
                     screenY = {scrollheight} 
                     handlePlanPreviewClose = {handlePreviewClose} 
                     planIdentity = {planObject}
-                    planIDComments = ""
+                    planIDComments = {comments}
                 />
             )
         }
