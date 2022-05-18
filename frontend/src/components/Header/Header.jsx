@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'    
-import { logout, resetAuthSlice } from './../../features/auth/authSlice.js'     
+import { logout, resetAuthSlice } from './../../features/auth/authSlice.js'
 import HeaderLogo from './../../assets/planit192.png';
 import './Header.css';
 
@@ -53,9 +53,9 @@ function Header() {
     <>
       <div className='planit-header'>
         <div className='planit-header-logo'>
-          <Link to='/'>
+          <a href='/' onClick={() => {window.scrollTo(0,0)}}>
             <img id='planit-header-logo-img' src={HeaderLogo} alt='website logo'/>
-          </Link>
+          </a>
         </div>
 
 
