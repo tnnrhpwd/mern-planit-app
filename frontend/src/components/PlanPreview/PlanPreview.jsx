@@ -21,52 +21,64 @@ function PlanPreview(props) {
     const importedComments = props.planIDComments;
 
     useEffect(() => {
-        var geee = plan.updatedAt.split('T')[0].split('-')
+        var geee = plan.updatedAt.split('T')[0]//.split('-')
 
         var geee2 = plan.updatedAt.split('T')[1].split('.')
 
-        var stringsss = geee[0] + " " + geee2[0] + " GMT";
-        console.log(stringsss)
-        var dsadd = Date.parse(stringsss)
+        var stringsss = plan.updatedAt.split('T')[0].split('-')[0] + " " + plan.updatedAt.split('T')[1].split('.')[0] + " GMT";
 
-        TimeAgo.addDefaultLocale(en)
-        const timeAgo = new TimeAgo('en-US')
-        var sds = timeAgo.format( Date.now() - dsadd )
+        var dsadd = Date.parse(plan.updatedAt.split('T')[0].split('-')[0] + " " + plan.updatedAt.split('T')[1].split('.')[0] + " GMT")
 
 
 
-        var ssdss = 'Created: '+ geee[0] + " (" + geee2[0] + ") " + stringsss
-        setCommentTime(ssdss)
 
-        function getTimeSince(timeNow){
+        
 
+        function getTimeSince(timeWas){
+            TimeAgo.addDefaultLocale(en)
+            const timeAgo = new TimeAgo('en-US')
+
+            var timeSince = timeAgo.format( 
+                Date.now() 
+                - Date.parse(
+                    timeWas.split('T')[0].split('-')[0] + " " 
+                    + timeWas.split('T')[1].split('.')[0] + " GMT"
+                ) 
+                + 52 * 31536000730 + 1209600000
+            )
+            var answer = ' Created: '+ timeWas.split('T')[0] //+ " ("+timeSince+")" //+ Date.now().strftime('The date is %b %d, %Y')
+
+            return (answer)
         }
 
-
+        setCommentTime(getTimeSince(plan.createdAt))
 
 
         function handleOutputComments(){
             var outputArray = [];
             var deleteButton = "";
             importedComments.forEach(( selComment, commentIndex ) => {
-                if("selComment.user"==="selComment.user"){
-                    deleteButton = ""
-                }
-                function handleDeleteComment(){
-                    dispatch(deleteComment(selComment._id))
-                    console.log("delete "+selComment._id)
+                if(selComment.plan === plan._id){
+                    if("selComment.user"==="selComment.user"){
+                        deleteButton = ""
+                    }
+                    function handleDeleteComment(){
+                        dispatch(deleteComment(selComment._id))
+                        console.log("delete "+selComment._id)
+                    }
+    
+                    if(selComment.comment) {
+                        outputArray.push(<>
+                            <div key={comment._id} className='planpreview-window-comments-result'>
+    
+                                <div key={selComment._id+"1"} className='planpreview-window-comments-result-comment'>{selComment.comment}</div>
+                                <div key={selComment._id+"2"} className='planpreview-window-comments-result-time'>{getTimeSince(selComment.createdAt)}</div>
+                                <button onClick={handleDeleteComment} key={selComment._id+"0"} className='planpreview-window-comments-result-delete'>Delete Comment</button>
+                            </div>
+                        </>)
+                    }
                 }
 
-                if(selComment.comment) {
-                    outputArray.push(<>
-                        <div key={comment._id} className='planpreview-window-comments-result'>
-
-                            <div key={selComment._id+"1"} className='planpreview-window-comments-result-comment'>{selComment.comment}</div>
-                            <div key={selComment._id+"2"} className='planpreview-window-comments-result-time'>Created at: {selComment.updatedAt}</div>
-                            <button onClick={handleDeleteComment} key={selComment._id+"0"} className='planpreview-window-comments-result-delete'>Delete Comment</button>
-                        </div>
-                    </>)
-                }
             });
             setCommentComponentArray(outputArray)
         }
