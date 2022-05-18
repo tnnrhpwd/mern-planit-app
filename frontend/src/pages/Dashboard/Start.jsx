@@ -186,15 +186,17 @@ function Start() {
                             </h4>
                             <form onSubmit={onPlanSubmit}>
                                 <h4 className='planit-dashboard-start-goals-sp'>
-                                    <input
+                                    <textarea
                                         type='plan'
                                         name='plan'
                                         className='planit-dashboard-start-goals-plan-sp-input' 
                                         placeholder='Enter plan' 
                                         value={plan}
                                         onChange={(e) => setPlan(e.target.value)}
-                                        /><br/>
-                                    <button type='submit' >Create Plan</button>
+                                    /><br/>
+                                    <button type='submit' >
+                                        Create Plan
+                                    </button>
                                 </h4>
                             </form>
                         </div>
