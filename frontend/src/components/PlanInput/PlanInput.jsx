@@ -17,15 +17,6 @@ function PlanInput() {
         setGoal('')                      // empty goal field
     }
 
-    useEffect(() => {
-        document.getElementById('planit-planinput-input-plan').addEventListener('keypress', function(e) {
-            // p_standard.textContent = e.target.value;
-            // p_wrap.textContent = e.target.value;
-        })
-    }, [])
-
-
-
     return (
         <div className='planit-planinput'>
             <form onSubmit={onSubmit}>

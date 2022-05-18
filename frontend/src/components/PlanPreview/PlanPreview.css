@@ -26,6 +26,22 @@
     font-size: calc(var(--std-unit)*.3);
     white-space: pre-line;
 }
+.planpreview-window-comments{
+    font-size: calc(var(--std-unit)*.3);
+    white-space: pre-line;
+}
+.planpreview-window-comments-input{
+    margin-top: calc(var(--std-unit)*1);
+    font-size: calc(var(--std-unit)*.3);
+    width: 100%;
+    min-height: 100%;
+}
+.planpreview-window-comments-submit{
+    margin-top: calc(var(--std-unit)*.3);
+    font-size: calc(var(--std-unit)*.3);
+    width: 50%;
+
+}
 
 @media (orientation: portrait) {
 
