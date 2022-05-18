@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import Spinner from './../../components/Spinner/Spinner.jsx'
 import { getPlans, resetPlanSlice, createPlan, updatePlan } from './../../features/plans/planSlice'
+import { getComments, resetCommentSlice, createComment, updateComment } from './../../features/comments/commentSlice'
+
 import PlanPreview from '../../components/PlanPreview/PlanPreview.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
 
@@ -22,6 +24,9 @@ function Start() {
     const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select goal values from goal state
         (state) => state.plans
     )
+    const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select goal values from goal state
+    (state) => state.comments
+)
 
     // RUNS ON INPUT FIELD CHANGE -- shows search suggestions
     useEffect(() => {
@@ -36,11 +41,14 @@ function Start() {
         }
         function handlePreviewOpen(planObject){
             var scrollheight = window.scrollY;
+
+            
             setOutView(
                 <PlanPreview 
-                    screenY={scrollheight} 
-                    handlePlanPreviewClose={handlePreviewClose} 
-                    planIdentity={planObject}
+                    screenY = {scrollheight} 
+                    handlePlanPreviewClose = {handlePreviewClose} 
+                    planIdentity = {planObject}
+                    planIDComments = ""
                 />
             )
         }
@@ -80,17 +88,22 @@ function Start() {
       // called on state changes
     useEffect(() => {
         if (planIsError) {
-        // console.log(planMessage)
-        toast.error(planMessage) // print error to toast errors
-
+            toast.error(planMessage) // print error to toast errors
         }
-        // if(user){
+        if (commentIsError) {
+            toast.error(commentMessage) // print error to toast errors
+        }
+
+
         dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
+        dispatch(getComments()) // dispatch connects to the store, then retreives the plans that match the logged in user.
+
 
         return () => {    // reset the plans when state changes
-        dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
+            dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
+            dispatch(resetCommentSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
         }
-    }, [planIsError, planMessage, dispatch])
+    }, [planIsError, planMessage, dispatch, commentIsError, commentMessage])
 
 
 
@@ -120,8 +133,8 @@ function Start() {
 
 
 
-    // Shows loading animation while getting goals
-    if (planIsLoading) {
+    // Shows loading animation while getting plans + comments
+    if (planIsLoading || commentIsLoading) {
         return <Spinner />
     }
 

@@ -22,22 +22,22 @@ function Register() {
     const dispatch = useDispatch() // initialization
 
     // select values from state
-    const { user, isLoading, isError, isSuccess, message } = useSelector(
+    const { user, authIsLoading, authIsError, authIsSuccess, authMessage } = useSelector(
         (state) => state.auth
     )
 
     // called on state changes
     useEffect(() => {
-        if (isError) {
-        toast.error(message) // print error to toast errors
+        if (authIsError) {
+        toast.error(authMessage) // print error to toast errors
         }
 
-        if (isSuccess || user) {  // if registered or logged in, 
+        if (authIsSuccess || user) {  // if registered or logged in, 
         navigate('/')           // send user to dashboard
         }
 
-        dispatch(resetAuthSlice())   // reset state values( message, isloading, iserror, and issuccess ) on each state change
-    }, [user, isError, isSuccess, message, navigate, dispatch])
+        dispatch(resetAuthSlice())   // reset state values( authMessage, isloading, iserror, and issuccess ) on each state change
+    }, [user, authIsError, authIsSuccess, authMessage, navigate, dispatch])
 
     // called on each letter typed into input field
     const onChange = (e) => {
@@ -64,8 +64,8 @@ function Register() {
           }
     }
 
-      // if loading, show spinner. isLoading resets on state change.
-    if (isLoading) {
+      // if loading, show spinner. authIsLoading resets on state change.
+    if (authIsLoading) {
         return <Spinner />
     }
 

@@ -4,10 +4,10 @@ import goalService from './goalService';                          // import the 
 
 const initialState = {  // default values for each state change
   goals: [],
-  isError: false,
-  isSuccess: false,
-  isLoading: false,
-  message: '',
+  goalIsError: false,
+  goalIsSuccess: false,
+  goalIsLoading: false,
+  goalMessage: '',
 }
 
 // Create new goal  -- Async functional object -- called from pages using dispatch
@@ -18,13 +18,13 @@ export const createGoal = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token         // get the user token   
       return await goalService.createGoal(goalData, token)      // pass user token into create goal method to assure that each goal has a user creator
     } catch (error) {
-      const message =
+      const goalMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.message) ||
-        error.message ||
+          error.response.data.goalMessage) ||
+        error.goalMessage ||
         error.toString()
-      return thunkAPI.rejectWithValue(message)  // check for any errors associated with async creategoal function object imported from goalSlice
+      return thunkAPI.rejectWithValue(goalMessage)  // check for any errors associated with async creategoal function object imported from goalSlice
     }
   }
 )
@@ -38,13 +38,13 @@ export const getGoals = createAsyncThunk(
       // return await goalService.getGoals(token)      // pass user token to get all goals from the specific user token
       return await goalService.getGoals()      // Get all goals regardless of user logged in
     } catch (error) {
-      const message =
+      const goalMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.message) ||
-        error.message ||
+          error.response.data.goalMessage) ||
+        error.goalMessage ||
         error.toString()
-      return thunkAPI.rejectWithValue(message)  // check for any errors associated with async getgoals function object imported from goalSlice
+      return thunkAPI.rejectWithValue(goalMessage)  // check for any errors associated with async getgoals function object imported from goalSlice
     }
   }
 )
@@ -57,13 +57,13 @@ export const deleteGoal = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token
       return await goalService.deleteGoal(id, token)
     } catch (error) {
-      const message =
+      const goalMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.message) ||
-        error.message ||
+          error.response.data.goalMessage) ||
+        error.goalMessage ||
         error.toString()
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(goalMessage)
     }
   }
 )
@@ -78,45 +78,45 @@ export const goalSlice = createSlice({
   extraReducers: (builder) => {// all possible states associated with asyncthunk get,create,delete goals functional objects. 
     builder
       .addCase(createGoal.pending, (state) => {
-        state.isLoading = true
+        state.goalIsLoading = true
       })
       .addCase(createGoal.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.goalIsLoading = false
+        state.goalIsSuccess = true
         state.goals.push(action.payload)
       })
       .addCase(createGoal.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.goalIsLoading = false
+        state.goalIsError = true
+        state.goalMessage = action.payload
       })
       .addCase(getGoals.pending, (state) => {
-        state.isLoading = true
+        state.goalIsLoading = true
       })
       .addCase(getGoals.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.goalIsLoading = false
+        state.goalIsSuccess = true
         state.goals = action.payload
       })
       .addCase(getGoals.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.goalIsLoading = false
+        state.goalIsError = true
+        state.goalMessage = action.payload
       })
       .addCase(deleteGoal.pending, (state) => {
-        state.isLoading = true
+        state.goalIsLoading = true
       })
       .addCase(deleteGoal.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.goalIsLoading = false
+        state.goalIsSuccess = true
         state.goals = state.goals.filter(               // hides the deleted goal from UI when you click delete. Otherwise, It wouldnt disapear until refresh
           (goal) => goal._id !== action.payload.id
         )
       })
       .addCase(deleteGoal.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.goalIsLoading = false
+        state.goalIsError = true
+        state.goalMessage = action.payload
       })
   },
 })

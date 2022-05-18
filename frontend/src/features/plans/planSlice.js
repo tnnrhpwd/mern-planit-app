@@ -4,10 +4,10 @@ import planService from './planService';                          // import the 
 
 const initialState = {  // default values for each state change
   plans: [],
-  isError: false,
-  isSuccess: false,
-  isLoading: false,
-  message: '',
+  planIsError: false,
+  planIsSuccess: false,
+  planIsLoading: false,
+  planMessage: '',
 }
 
 // Create new plan  -- Async functional object -- called from pages using dispatch --CREATE
@@ -18,13 +18,13 @@ export const createPlan = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token         // get the user token   
       return await planService.createPlan(planData, token)      // pass user token into create plan method to assure that each plan has a user creator
     } catch (error) {
-      const message =
+      const planMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.message) ||
-        error.message ||
+          error.response.data.planMessage) ||
+        error.planMessage ||
         error.toString()
-      return thunkAPI.rejectWithValue(message)  // check for any errors associated with async createplan function object imported from planSlice
+      return thunkAPI.rejectWithValue(planMessage)  // check for any errors associated with async createplan function object imported from planSlice
     }
   }
 )
@@ -38,13 +38,13 @@ export const getPlans = createAsyncThunk(
       // return await planService.getPlans(token)      // pass user token to get all plans from the specific user token
       return await planService.getPlans()      // Get all plans regardless of user logged in
     } catch (error) {
-      const message =
+      const planMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.message) ||
-        error.message ||
+          error.response.data.planMessage) ||
+        error.planMessage ||
         error.toString()
-      return thunkAPI.rejectWithValue(message)  // check for any errors associated with async getplans function object imported from planSlice
+      return thunkAPI.rejectWithValue(planMessage)  // check for any errors associated with async getplans function object imported from planSlice
     }
   }
 )
@@ -57,13 +57,13 @@ export const updatePlan = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token
       return await planService.updatePlan(id, planData, token)
     } catch (error) {
-      const message =
+      const planMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.message) ||
-        error.message ||
+          error.response.data.planMessage) ||
+        error.planMessage ||
         error.toString()
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(planMessage)
     }
   }
 )
@@ -76,13 +76,13 @@ export const deletePlan = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token
       return await planService.deletePlan(id, token)
     } catch (error) {
-      const message =
+      const planMessage =
         (error.response &&
           error.response.data &&
-          error.response.data.message) ||
-        error.message ||
+          error.response.data.planMessage) ||
+        error.planMessage ||
         error.toString()
-      return thunkAPI.rejectWithValue(message)
+      return thunkAPI.rejectWithValue(planMessage)
     }
   }
 )
@@ -97,45 +97,45 @@ export const planSlice = createSlice({
   extraReducers: (builder) => {// all possible states associated with asyncthunk get,create,delete plans functional objects. 
     builder
       .addCase(createPlan.pending, (state) => {
-        state.isLoading = true
+        state.planIsLoading = true
       })
       .addCase(createPlan.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.planIsLoading = false
+        state.planIsSuccess = true
         state.plans.push(action.payload)
       })
       .addCase(createPlan.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.planIsLoading = false
+        state.planIsError = true
+        state.planMessage = action.payload
       })
       .addCase(getPlans.pending, (state) => {
-        state.isLoading = true
+        state.planIsLoading = true
       })
       .addCase(getPlans.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.planIsLoading = false
+        state.planIsSuccess = true
         state.plans = action.payload
       })
       .addCase(getPlans.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.planIsLoading = false
+        state.planIsError = true
+        state.planMessage = action.payload
       })
       .addCase(deletePlan.pending, (state) => {
-        state.isLoading = true
+        state.planIsLoading = true
       })
       .addCase(deletePlan.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.planIsLoading = false
+        state.planIsSuccess = true
         state.plans = state.plans.filter(               // hides the deleted plan from UI when you click delete. Otherwise, It wouldnt disapear until refresh
           (plan) => plan._id !== action.payload.id
         )
       })
       .addCase(deletePlan.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.planIsLoading = false
+        state.planIsError = true
+        state.planMessage = action.payload
       })
   },
 })

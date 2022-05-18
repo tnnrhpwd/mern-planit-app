@@ -13,15 +13,15 @@ function Goals() {
   const dispatch = useDispatch() // initialization
 
   // const { user } = useSelector((state) => state.auth)      // select user values from user state
-  const { goals, isLoading, isError, message } = useSelector(     // select goal values from goal state
+  const { goals, goalIsLoading, goalIsError, goalMessage } = useSelector(     // select goal values from goal state
     (state) => state.goals
   )
 
 
   // called on state changes
   useEffect(() => {
-    if (isError) {
-      console.log(message)
+    if (goalIsError) {
+      console.log(goalMessage)
     }
     // if(user){
       dispatch(getGoals()) // dispatch connects to the store, then retreives the goals that match the logged in user.
@@ -33,11 +33,11 @@ function Goals() {
 
     
     return () => {    // reset the goals when state changes
-      dispatch(resetGoalSlice()) // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
+      dispatch(resetGoalSlice()) // dispatch connects to the store, then reset state values( goalMessage, isloading, iserror, and issuccess )
     }
-  }, [navigate, isError, message, dispatch])
+  }, [navigate, goalIsError, goalMessage, dispatch])
 
-  if (isLoading) {
+  if (goalIsLoading) {
     return <Spinner />
   }
 

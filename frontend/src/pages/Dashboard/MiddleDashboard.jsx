@@ -10,14 +10,14 @@ function MiddleDashboard() {
     const dispatch = useDispatch() // initialization
   
     const { user } = useSelector((state) => state.auth)      // select user values from user state
-    const { plans, isLoading, isError, message } = useSelector(     // select plan values from plan state
+    const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select plan values from plan state
         (state) => state.plans
     )
   
     // called on state changes
     useEffect(() => {
-        if (isError) {
-        console.log(message)
+        if (planIsError) {
+        console.log(planMessage)
         }
     
         // if (!user) {            // if no user, redirect to login
@@ -27,11 +27,11 @@ function MiddleDashboard() {
         dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
     
         return () => {    // reset the plans when state changes
-        dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
+        dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
         }
-    }, [user, navigate, isError, message, dispatch])
+    }, [user, navigate, planIsError, planMessage, dispatch])
 
-    if (isLoading) {
+    if (planIsLoading) {
         return <Spinner />
     }
 
