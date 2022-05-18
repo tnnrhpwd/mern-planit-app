@@ -54,9 +54,10 @@
 .planpreview-window-comments-result-comment{
     font-size: calc(var(--std-unit)*.3);
     white-space: pre-line;
-
+    font-weight: bold;
 }
 .planpreview-window-comments-result-time{
+    font-weight: normal;
 
 }
 

@@ -1,15 +1,9 @@
-import { useSelector, useDispatch } from 'react-redux'      // access state variables
+import { useDispatch } from 'react-redux'      // access state variables
 import { deletePlan } from '../../features/plans/planSlice'
-import Spinner from './../../components/Spinner/Spinner.jsx'
-import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
 import './PlanResult.css';
 
 function PlanResult({ plan }) {
   const dispatch = useDispatch()  // initialization
-
-  const { goals, isLoading, isError, message } = useSelector(     // select plan values from plan state
-    (state) => state.goals
-  )
 
   return (
     <div className='planit-planresult'>
