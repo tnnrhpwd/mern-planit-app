@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'    
 import { logout, resetAuthSlice } from './../../features/auth/authSlice.js'
@@ -9,7 +9,7 @@ import './Header.css';
 function Header() {
   // const navigate = useNavigate() // initialization
   // const dispatch = useDispatch() // initialization
-  const { user } = useSelector((state) => state.auth)   // select values from state
+  // const { user } = useSelector((state) => state.auth)   // select values from state
   const [ colTheme, setColTheme ] = useState(null);
 
   useEffect(() => {     // RUNS ON START -- Checks browser for color theme preference. Sets dark mode otherwise.
@@ -49,6 +49,32 @@ function Header() {
   //   navigate('/')       // send user to dashboard, which will redirect to login page
   // }
 
+
+  var clickNum=0;
+  function useOutsideAlerter(ref){
+    useEffect(() => {
+      clickNum++
+      console.log("useEffect ran"+clickNum)
+      // This function defines the effects of outside clicks.
+      function handleOutsideClick(event){
+        if((document.getElementById("planit-header-dropper__toggle").checked && !ref.current.contains(event.target) && clickNum > 1)){
+          clickNum=0;
+          console.log("Close dropper");
+          document.getElementById("planit-header-dropper__toggle").checked = false;
+        }
+        // if(document.getElementById("planit-header-dropper__toggle").checked && clickNum>1){
+        //   clickNum=0;
+        // }
+      }
+      document.addEventListener('click', handleOutsideClick);
+      return () => document.removeEventListener('click', handleOutsideClick); 
+    }, [ref])
+  }
+
+
+  const box = useRef(null);
+  useOutsideAlerter(box);
+
   return (
     <>
       <div className='planit-header'>
@@ -57,8 +83,6 @@ function Header() {
             <img id='planit-header-logo-img' src={HeaderLogo} alt='website logo'/>
           </a>
         </div>
-
-
         {/* <a href='/'>
           <div className='planit-header-title'>
             Planit
@@ -84,18 +108,13 @@ function Header() {
             Settings
           </button>
         </a> */}
-
-        
         <a href='/profile'>
           <button className="planit-header-link-landscape">
             Profile
           </button>
         </a>
-
         {(colTheme==="dark-theme") && <button className='planit-header-themebutton-landscape' onClick={setLightMode}>Light Mode</button>}
         {(colTheme==="light-theme") && <button className='planit-header-themebutton-landscape' onClick={setDarkMode}>Dark Mode</button>}
-
-
           {/* <button className="planit-header-profile-landscape">
             {user ? (
               <button className="planit-header-profile-auth" onClick={onLogout}>Log out</button>
@@ -105,18 +124,17 @@ function Header() {
               </a>
             )}
           </button> */}
-
-
         <div className="planit-header-dropper-space">
-          <input id="planit-header-dropper__toggle" type="checkbox" />
+          <input id="planit-header-dropper__toggle" type="checkbox"  />
           <label className="planit-header-dropper__btn" for="planit-header-dropper__toggle">
             <span></span>
           </label>
 
-          <ul className="planit-header-dropper__box">
+
+          <ul ref={box} className="planit-header-dropper__box">
             
             <div className='planit-header-logo-nav'>
-              <Link to='/'>
+              <Link to='/' onClick={() => {clickNum=0; window.scrollTo(0,0); document.getElementById("planit-header-dropper__toggle").checked = false; console.log("close dropper");}}>
                 <img id='planit-header-logo-img' src={HeaderLogo} alt='website logo'/>
               </Link>
             </div>
@@ -137,7 +155,6 @@ function Header() {
             <a className='planit-header-dropper-pagelink' href='/settings'>Settings</a>
             <a className='planit-header-dropper-pagelink' href='/about'>About Planit</a>
             <a className='planit-header-dropper-pagelink' href='/legal'>Legal Terms</a>
-
             
           </ul>
         </div>

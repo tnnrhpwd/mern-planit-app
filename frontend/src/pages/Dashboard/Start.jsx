@@ -71,8 +71,8 @@ function Start() {
                         outputArray.push(<>
                             <div key={plan._id+"0"} className='planit-dashboard-start-goals-result'>
                                 <div key={plan._id+"1"} className='planit-dashboard-start-goals-result-disagree'><button onClick={() => handleDisagree( plan._id )}>Disagree</button></div>
-                                <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
                                 <div key={plan._id+"3"} className='planit-dashboard-start-goals-result-agree'><button onClick={() => handleAgree( plan._id )}>Agree</button></div>
+                                <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
                                 <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><button className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.plan}</button></div>
                                 
                                 {plan.agrusers}

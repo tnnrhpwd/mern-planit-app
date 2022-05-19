@@ -102,12 +102,14 @@ function PlanPreview(props) {
             <div className='planpreview-window'
                 style={{marginTop: yOffset}}
                 >
-                <div className='planpreview-window-goal'>
-                    {plan.goal} {commentTime}
-                </div>
                 <div className='planpreview-window-close'>
                     <button onClick={props.handlePlanPreviewClose}>Close</button>
                 </div>
+
+                <div className='planpreview-window-goal'>
+                    {plan.goal} {commentTime}
+                </div>
+
                 <div className='planpreview-window-plan'>
                     {plan.plan}
                 </div>
