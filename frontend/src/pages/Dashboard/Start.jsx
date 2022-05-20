@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'      // access state vari
 import Spinner from './../../components/Spinner/Spinner.jsx'
 import { getPlans, resetPlanSlice, createPlan, updatePlan } from './../../features/plans/planSlice'
 import { getComments, resetCommentSlice, createComment, updateComment } from './../../features/comments/commentSlice'
+import { getMyData, resetAuthSlice } from './../../features/auth/authSlice'
 
 import PlanPreview from '../../components/PlanPreview/PlanPreview.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
@@ -26,6 +27,9 @@ function Start() {
     )
     const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select goal values from goal state
         (state) => state.comments
+    )
+    const { userID, authIsLoading, authIsError, authMessage } = useSelector(
+        (state) => state.auth
     )
 
     // Scroll to the top on render
@@ -71,10 +75,11 @@ function Start() {
                         outputArray.push(<>
                             <div key={plan._id+"0"} className='planit-dashboard-start-goals-result'>
                                 <div key={plan._id+"1"} className='planit-dashboard-start-goals-result-disagree'><button onClick={() => handleDisagree( plan._id )}>Disagree</button></div>
-                                <div key={plan._id+"3"} className='planit-dashboard-start-goals-result-agree'><button onClick={() => handleAgree( plan._id )}>Agree</button></div>
+                                <div key={plan._id+"3"} className='planit-dashboard-start-goals-result-agree'><button onClick={() => handleAgree( plan._id )}>Agree </button></div>
                                 <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
+
                                 <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><button className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.plan}</button></div>
-                                
+                                {/* {userID.username} hi */}
                                 {plan.agrusers}
                             </div>
                         </>)
@@ -98,15 +103,21 @@ function Start() {
         if (commentIsError) {
             toast.error(commentMessage) // print error to toast errors
         }
+        // if (authIsError) {
+        //     toast.error(authMessage) // print error to toast errors
+        // }
 
 
         dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
         dispatch(getComments()) // dispatch connects to the store, then retreives the plans that match the logged in user.
+        dispatch(getMyData()) // dispatch connects to the store, then retreives the profile data that matches the logged in user.
 
 
         return () => {    // reset the plans when state changes
-            dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
-            dispatch(resetCommentSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
+            dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, planisloading, planiserror, and planissuccess )
+            dispatch(resetCommentSlice()) // dispatch connects to the store, then reset state values( commentMessage, commentisloading, commentiserror, and commentissuccess )
+            dispatch(resetAuthSlice()) // dispatch connects to the store, then reset state values( authMessage, authisloading, authiserror, and authissuccess )
+
         }
     }, [planIsError, planMessage, dispatch, commentIsError, commentMessage])
 
@@ -139,7 +150,7 @@ function Start() {
 
 
     // Shows loading animation while getting plans + comments
-    if (planIsLoading || commentIsLoading) {
+    if (planIsLoading || commentIsLoading ) {// || authIsLoading) {
         return <Spinner />
     }
 
