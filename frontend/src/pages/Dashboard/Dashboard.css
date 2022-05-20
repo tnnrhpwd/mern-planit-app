@@ -264,12 +264,29 @@
         display: inline-block;
         position: absolute;
         right: calc(var(--nav-size)*.15);
+        font-size: calc(var(--nav-size)*.25);
     }
     .planit-dashboard-start-goals-result-disagree{
         display: inline-block;
         position: absolute;
         left: calc(var(--nav-size)*.15);
         /* top: calc(var(--nav-size)*.1); */
+    }
+    #planit-dashboard-start-goals-result-agree{
+        color: var(--text-color-inv);
+        font-size: calc(var(--nav-size)*.25);
+        background-color: var(--text-color);
+        border: none;
+        padding: calc(var(--nav-size)*.15);
+        font-weight: bold;
+    }
+    #planit-dashboard-start-goals-result-disagree{
+        font-size: calc(var(--nav-size)*.25);
+        color: var(--text-color-inv);
+        background-color: var(--text-color);
+        border: none;
+        padding: calc(var(--nav-size)*.15);
+        font-weight: bold;
     }
     .planit-dashboard-start-goals-result-plan{
         white-space: pre-line;
