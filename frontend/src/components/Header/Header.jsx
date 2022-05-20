@@ -52,20 +52,42 @@ function Header() {
 
   var clickNum=0;
   function useOutsideAlerter(ref){
+
+
+
+
+    // RUNS TWICE ON STARTUP
     useEffect(() => {
-      clickNum++
-      console.log("useEffect ran"+clickNum)
-      // This function defines the effects of outside clicks.
+
+      // console.log("RUNS TWICE ON STARTUP"+clickNum)
+
+
+
+
+      // RUNS ON EVERY CLICK && RUNS ON EACH TOGGLE  => RUNS TWICE ON TOGGLE
       function handleOutsideClick(event){
-        if((document.getElementById("planit-header-dropper__toggle").checked && !ref.current.contains(event.target) && clickNum > 1)){
+        clickNum++;
+        if((!ref.current.contains(event.target)&&(!hamButton.current.contains(event.target))) || clickNum>2){
+          // clickNum++;
+          // console.log(document.getElementById("planit-header-dropper__toggle").checked)
+          // console.log(!ref.current.contains(event.target))
+          console.log("RUNS ON EVERY CLICK && RUNS ON EACH TOGGLE"+clickNum)
           clickNum=0;
-          console.log("Close dropper");
           document.getElementById("planit-header-dropper__toggle").checked = false;
+
+          // if((document.getElementById("planit-header-dropper__toggle").checked && !ref.current.contains(event.target) && clickNum > 2)){
+          //   clickNum=0;
+          //   // clickNum++;
+          //   console.log("Close dropper"+clickNum);
+          // }
         }
-        // if(document.getElementById("planit-header-dropper__toggle").checked && clickNum>1){
-        //   clickNum=0;
-        // }
+
       }
+
+
+
+
+
       document.addEventListener('click', handleOutsideClick);
       return () => document.removeEventListener('click', handleOutsideClick); 
     }, [ref])
@@ -74,6 +96,7 @@ function Header() {
 
   const box = useRef(null);
   useOutsideAlerter(box);
+  const hamButton = useRef(null);
 
   return (
     <>
@@ -125,7 +148,7 @@ function Header() {
             )}
           </button> */}
         <div className="planit-header-dropper-space">
-          <input id="planit-header-dropper__toggle" type="checkbox"  />
+          <input id="planit-header-dropper__toggle" type="checkbox" ref={hamButton}/>
           <label className="planit-header-dropper__btn" for="planit-header-dropper__toggle">
             <span></span>
           </label>
@@ -134,7 +157,7 @@ function Header() {
           <ul ref={box} className="planit-header-dropper__box">
             
             <div className='planit-header-logo-nav'>
-              <Link to='/' onClick={() => {clickNum=0; window.scrollTo(0,0); document.getElementById("planit-header-dropper__toggle").checked = false; console.log("close dropper");}}>
+              <Link to='/' onClick={() => {window.scrollTo(0,0); document.getElementById("planit-header-dropper__toggle").checked = false; console.log("close dropper138-");}}>
                 <img id='planit-header-logo-img' src={HeaderLogo} alt='website logo'/>
               </Link>
             </div>
