@@ -46,19 +46,22 @@ function Profile() {
 
   return (
     <div className='planit-profile'>
-      
-      Profile
-    
-      <button className="planit-header-profile-landscape">
-            {user ? (
-              <button className="planit-header-profile-auth" onClick={onLogout}>Log out</button>
-            ) : (
-              <a href='/login'>
-                <button className="planit-header-profile-auth">Log in</button>
-              </a>
-            )}
-          </button>
+      <div className='planit-profile-title'>
+        Profile
+      </div>
 
+
+      <div className="planit-profile-auth">
+
+
+        {user ? (
+          <button className="planit-profile-auth-button" onClick={onLogout}>Log out</button>
+        ) : (
+          <a href='/login'>
+            <button className="planit-profile-auth-button">Log in</button>
+          </a>
+        )}
+      </div>
     </div>
   )
 }
