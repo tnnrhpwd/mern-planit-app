@@ -140,7 +140,7 @@ function Header() {
           </button> */}
         <div className="planit-header-dropper-space">
           <input id="planit-header-dropper__toggle" type="checkbox" />
-          <label className="planit-header-dropper__btn" for="planit-header-dropper__toggle" ref={hamButton}>
+          <label className="planit-header-dropper__btn" htmlFor="planit-header-dropper__toggle" ref={hamButton}>
             <span></span>
           </label>
 
