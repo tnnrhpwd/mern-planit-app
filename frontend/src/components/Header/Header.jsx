@@ -6,6 +6,7 @@ import HeaderLogo from './../../assets/planit192.png';
 import './Header.css';
 
 
+
 function Header() {
   // const navigate = useNavigate() // initialization
   // const dispatch = useDispatch() // initialization
@@ -51,52 +52,42 @@ function Header() {
 
 
   var clickNum=0;
+  var dropperNum = 0;
   function useOutsideAlerter(ref){
-
-
-
-
     // RUNS TWICE ON STARTUP
     useEffect(() => {
-
-      // console.log("RUNS TWICE ON STARTUP"+clickNum)
-
-
-
-
       // RUNS ON EVERY CLICK && RUNS ON EACH TOGGLE  => RUNS TWICE ON TOGGLE
       function handleOutsideClick(event){
-        clickNum++;
-        if((!ref.current.contains(event.target)&&(!hamButton.current.contains(event.target))) || clickNum>2){
-          // clickNum++;
-          // console.log(document.getElementById("planit-header-dropper__toggle").checked)
-          // console.log(!ref.current.contains(event.target))
-          console.log("RUNS ON EVERY CLICK && RUNS ON EACH TOGGLE"+clickNum)
+        // if dropper button pressed && dropper was closed
+        if((hamButton.current.contains(event.target)) && !document.getElementById("planit-header-dropper__toggle").checked){
+          dropperNum=1;
           clickNum=0;
-          document.getElementById("planit-header-dropper__toggle").checked = false;
-
-          // if((document.getElementById("planit-header-dropper__toggle").checked && !ref.current.contains(event.target) && clickNum > 2)){
-          //   clickNum=0;
-          //   // clickNum++;
-          //   console.log("Close dropper"+clickNum);
-          // }
+        // else if dropper button pressed && dropper was open
+        }else if((hamButton.current.contains(event.target)) && document.getElementById("planit-header-dropper__toggle").checked){
+          dropperNum=0;
+        // else if outside space was clicked && dropper button wasnt pressed
+        }else if((!ref.current.contains(event.target)) && (!hamButton.current.contains(event.target))){
+          // if dropper is open
+          if(dropperNum===1){
+            // If (outside space was clicked && dropper button wasnt pressed) && droper was just opened
+            if(clickNum===0){
+              clickNum++;
+            // If (outside space was clicked && dropper button wasnt pressed) && droper has been open
+            }else{
+              document.getElementById("planit-header-dropper__toggle").checked = false;
+              clickNum=0;
+              dropperNum=0;
+            }
+          }
         }
-
       }
-
-
-
-
-
       document.addEventListener('click', handleOutsideClick);
       return () => document.removeEventListener('click', handleOutsideClick); 
     }, [ref])
   }
-
-
-  const box = useRef(null);
-  useOutsideAlerter(box);
-  const hamButton = useRef(null);
+  const box = useRef(null); // reference to the dropper container
+  useOutsideAlerter(box); // listen for clicks outside dropper container && handle the effects
+  const hamButton = useRef(null);  // reference to the dropper toggle button
 
   return (
     <>
@@ -148,8 +139,8 @@ function Header() {
             )}
           </button> */}
         <div className="planit-header-dropper-space">
-          <input id="planit-header-dropper__toggle" type="checkbox" ref={hamButton}/>
-          <label className="planit-header-dropper__btn" for="planit-header-dropper__toggle">
+          <input id="planit-header-dropper__toggle" type="checkbox" />
+          <label className="planit-header-dropper__btn" for="planit-header-dropper__toggle" ref={hamButton}>
             <span></span>
           </label>
 
@@ -157,7 +148,7 @@ function Header() {
           <ul ref={box} className="planit-header-dropper__box">
             
             <div className='planit-header-logo-nav'>
-              <Link to='/' onClick={() => {window.scrollTo(0,0); document.getElementById("planit-header-dropper__toggle").checked = false; console.log("close dropper138-");}}>
+              <Link to='/' onClick={() => {window.scrollTo(0,0); document.getElementById("planit-header-dropper__toggle").checked = false;}}>
                 <img id='planit-header-logo-img' src={HeaderLogo} alt='website logo'/>
               </Link>
             </div>
