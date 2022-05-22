@@ -25,8 +25,15 @@ const login = async (userData) => {
   return response.data
 }
 
-const getMyData = async () => {
-  const response = await axios.get(API_URL + 'me')
+// Get current user data
+const getMyData = async (token) => {
+  const config = {
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
+  } 
+
+  const response = await axios.get(API_URL + 'me', config)
 
   // if (response.data) {
   //   localStorage.setItem('userID', JSON.stringify(response.data))     // catches the return data from POST -- contains the JSON Web Token
