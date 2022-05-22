@@ -44,26 +44,22 @@ function Profile() {
     navigate('/')       // send user to dashboard, which will redirect to login page
   }
 
-  return (
-    <div className='planit-profile'>
+  if(user){
+    return (
+      <div className='planit-profile'>
       <div className='planit-profile-title'>
-        Profile
+        Your Profile
       </div>
-
+      <div className='planit-profile-welcome'>
+        Welcome home {user.username}!
+      </div>
 
       <div className="planit-profile-auth">
-
-
-        {user ? (
-          <button className="planit-profile-auth-button" onClick={onLogout}>Log out</button>
-        ) : (
-          <a href='/login'>
-            <button className="planit-profile-auth-button">Log in</button>
-          </a>
-        )}
+        <button className="planit-profile-auth-button" onClick={onLogout}>Log out</button>
       </div>
     </div>
-  )
+    )
+  }
 }
 
 export default Profile
