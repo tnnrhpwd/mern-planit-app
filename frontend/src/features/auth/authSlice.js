@@ -32,7 +32,9 @@ export const register = createAsyncThunk(
 )
 
 // Login user
-export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+export const login = createAsyncThunk(
+  'auth/login', 
+  async (user, thunkAPI) => {
   try {
     return await authService.login(user)
   } catch (error) {
@@ -45,13 +47,17 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 })
 
 // log out user  --- Async function that calls the authService logout function( removes user item from local storage)
-export const logout = createAsyncThunk('auth/logout', async () => {
+export const logout = createAsyncThunk(
+  'auth/logout', 
+  async () => {
   await authService.logout()   
 })
 
 
 // get user data  --- Async function that calls the authService getmydata function( gets user data from the database )
-export const getMyData = createAsyncThunk('auth/getMyData', async (thunkAPI) => {
+export const getMyData = createAsyncThunk(
+  'auth/getMyData',
+  async (thunkAPI) => {
   try{
     const token = thunkAPI.getState().auth.user.token         // get the user token  
     return await authService.getMyData(token)                 // sends user jwt token for authentication
@@ -116,7 +122,7 @@ export const authSlice = createSlice({
       .addCase(getMyData.fulfilled, (state, action) => {
         state.authIsLoading = false
         state.authIsSuccess = true
-        state.userID = action.payload
+        state.user = action.payload
       })
       .addCase(getMyData.rejected, (state, action) => {
         state.authIsLoading = false
