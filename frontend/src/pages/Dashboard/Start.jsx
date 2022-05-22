@@ -21,7 +21,7 @@ function Start() {
     const navigate = useNavigate() // initialization
     const dispatch = useDispatch() // initialization
   
-    // const { user } = useSelector((state) => state.auth)      // select user values from user state
+    const { user } = useSelector((state) => state.auth)      // select user values from user state
     const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select goal values from goal state
         (state) => state.plans
     )
@@ -80,7 +80,10 @@ function Start() {
                                 <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button key={plan._id+"2button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
 
                                 <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><button key={plan._id+"4button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.plan}</button></div>
-                                {/* {user._id} hi */}
+                                { (user) ?
+                                <>{(user._id === plan.user) &&
+                                    (<button key={plan._id+"5"}>Delete Plan</button>)
+                                }</>:null}
                                 {plan.agrusers}
                             </div>
                         )
