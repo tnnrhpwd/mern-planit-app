@@ -28,9 +28,9 @@ function Start() {
     const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select goal values from goal state
         (state) => state.comments
     )
-    const { userID, authIsLoading, authIsError, authMessage } = useSelector(
-        (state) => state.auth
-    )
+    // const { user, authIsLoading, authIsError, authMessage } = useSelector(
+    //     (state) => state.auth
+    // )
 
     // Scroll to the top on render
     useEffect(() => {
@@ -54,6 +54,7 @@ function Start() {
             
             setOutView(
                 <PlanPreview 
+                    key = "PlanPreviewKey"
                     screenY = {scrollheight} 
                     handlePlanPreviewClose = {handlePreviewClose} 
                     planIdentity = {planObject}
@@ -72,17 +73,17 @@ function Start() {
             plans.forEach(( plan, i ) => {
                 if(plan.goal){
                     if((findPlan!=="") && (plan.goal.toUpperCase().includes(findPlan.toUpperCase()))){
-                        outputArray.push(<>
+                        outputArray.push(
                             <div key={plan._id+"0"} className='planit-dashboard-start-goals-result'>
-                                <div key={plan._id+"1"} className='planit-dashboard-start-goals-result-disagree'><button id='planit-dashboard-start-goals-result-disagree' onClick={() => handleDisagree( plan._id )}>Disagree</button></div>
-                                <div key={plan._id+"3"} className='planit-dashboard-start-goals-result-agree'><button id='planit-dashboard-start-goals-result-agree' onClick={() => handleAgree( plan._id )}>Agree </button></div>
-                                <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
+                                <div key={plan._id+"1"} className='planit-dashboard-start-goals-result-disagree'><button key={plan._id+"1button"} id='planit-dashboard-start-goals-result-disagree' onClick={() => handleDisagree( plan._id )}>Disagree</button></div>
+                                <div key={plan._id+"3"} className='planit-dashboard-start-goals-result-agree'><button key={plan._id+"3button"} id='planit-dashboard-start-goals-result-agree' onClick={() => handleAgree( plan._id )}>Agree </button></div>
+                                <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button key={plan._id+"2button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
 
-                                <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><button className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.plan}</button></div>
-                                {/* {userID.username} hi */}
+                                <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><button key={plan._id+"4button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.plan}</button></div>
+                                {/* {user._id} hi */}
                                 {plan.agrusers}
                             </div>
-                        </>)
+                        )
                     }
                 }
 
@@ -92,7 +93,7 @@ function Start() {
 
         handleOutputGoals()
         setGoal(findPlan)
-    }, [dispatch, findPlan, plans])
+    }, [comments, dispatch, findPlan, plans])
 
 
       // called on state changes
@@ -150,7 +151,7 @@ function Start() {
 
 
     // Shows loading animation while getting plans + comments
-    if (planIsLoading || commentIsLoading ) {// || authIsLoading) {
+    if (planIsLoading || commentIsLoading) {// || authIsLoading) {
         return <Spinner />
     }
 
