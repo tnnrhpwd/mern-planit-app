@@ -4,6 +4,8 @@
     z-index: 10;
     width: 100%;
     min-height: 100%;
+    /* overflow: scroll;
+    white-space: nowrap; Need to fix the weird scroll location on popup*/
 }
 .planpreview-window{
     margin: calc(var(--std-unit)*3);
@@ -35,6 +37,8 @@
     font-size: calc(var(--std-unit)*.3);
     width: 100%;
     min-height: 100%;
+    background-color: var(--bg);
+    color: var(--text-color);
 }
 .planpreview-window-addcomment-submit{
     margin-top: calc(var(--std-unit)*.3);
