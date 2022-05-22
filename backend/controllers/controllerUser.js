@@ -45,7 +45,7 @@ const registerUser = asyncHandler(async (req, res) => {
   if (user) { // if user successfully created, send JSON web token back to user
     res.status(201).json({
       _id: user.id,
-      // name: user.name,
+      username: user.username,
       // email: user.email, // only need to send token back
       token: generateToken(user._id),   //uses JWT secret 
     })
@@ -67,7 +67,7 @@ const loginUser = asyncHandler(async (req, res) => {
   if (user && (await bcrypt.compare(password, user.password))) {  // if decrypted password equals user password input, send token back to user.
     res.json({
       _id: user.id,
-      // username: user.username,
+      username: user.username,
       // email: user.email,            // only need to send token back
       token: generateToken(user._id),
     })
