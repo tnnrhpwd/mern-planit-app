@@ -13,7 +13,7 @@ function Plans() {
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
 
-  // const { user } = useSelector((state) => state.auth)      // select user values from user state
+  const { user } = useSelector((state) => state.auth)      // select user values from user state
   const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select plan values from plan state
     (state) => state.plans
   )
@@ -51,15 +51,17 @@ function Plans() {
       <div className='planit-plans-text'>
         Every journey begins with a step.
       </div>
-      <div className='planit-plans-in'>
-        <PlanInput />
-      </div>
+      { ( user ) &&
+        <div className='planit-plans-in'>
+          <PlanInput />
+        </div>
+      }
       All Plans
       <div className='planit-plans-out'>
         {plans.length > 0 ? (
           <div className='planit-plans-out-result'>
             {plans.map((plan) => (
-              <PlanResult key={plan._id} plan={plan}/>
+              <PlanResult key={plan._id} user={user} plan={plan}/>
             ))}
           </div>
         ) : (
