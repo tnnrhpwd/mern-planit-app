@@ -2,8 +2,14 @@ import { useDispatch } from 'react-redux'      // access state variables
 import { deletePlan } from '../../features/plans/planSlice'
 import './PlanResult.css';
 
-function PlanResult({ plan }) {
+function PlanResult(props) {
   const dispatch = useDispatch()  // initialization
+  const plan = props.plan
+  var user = false;
+  if(props.user){
+    user = props.user
+  }
+
 
   return (
     <div className='planit-planresult'>
@@ -12,14 +18,12 @@ function PlanResult({ plan }) {
       <h3>{plan.plan}</h3>
       <h5>Agrusers: {plan.agrusers}</h5>
       <h5>Disusers: {plan.disusers}</h5>
-      <a href='/plans'>
-        <button className='planit-planresult-plan'>
-          Create Plan!
-        </button>
-      </a>
-      <button onClick={() => dispatch(deletePlan(plan._id))} className='planit-planresult-delete'>
-        Delete Plan
-      </button>
+
+      { (user._id === plan.user) &&
+            <button onClick={() => dispatch(deletePlan(plan._id))} className='planit-planresult-delete'>
+            Delete Plan
+          </button>
+      }
     </div>
   )
 }
