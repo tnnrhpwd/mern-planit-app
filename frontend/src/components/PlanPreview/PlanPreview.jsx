@@ -9,6 +9,10 @@ function PlanPreview(props) {
     const [ comment, setComment ] = useState("")
     const [ commentComponentArray, setCommentComponentArray ] = useState("")
     const [ commentTime, setCommentTime ] = useState('')
+    var user = false;
+    if (props.user){
+        user = props.user;
+    }
 
     const dispatch = useDispatch();  // initialization
 
@@ -56,12 +60,9 @@ function PlanPreview(props) {
 
         function handleOutputComments(){
             var outputArray = [];
-            var deleteButton = "";
             importedComments.forEach(( selComment, commentIndex ) => {
                 if(selComment.plan === plan._id){
-                    if("selComment.user"==="selComment.user"){
-                        deleteButton = ""
-                    }
+
                     function handleDeleteComment(){
                         dispatch(deleteComment(selComment._id))
                         console.log("delete "+selComment._id)
@@ -69,11 +70,17 @@ function PlanPreview(props) {
     
                     if(selComment.comment) {
                         outputArray.push(<>
-                            <div key={comment._id} className='planpreview-window-comments-result'>
+                            <div key={selComment._id} className='planpreview-window-comments-result'>
     
                                 <div key={selComment._id+"1"} className='planpreview-window-comments-result-comment'>{selComment.comment}</div>
                                 <div key={selComment._id+"2"} className='planpreview-window-comments-result-time'>{getTimeSince(selComment.createdAt)}</div>
-                                <button onClick={handleDeleteComment} key={selComment._id+"0"} className='planpreview-window-comments-result-delete'>Delete Comment</button>
+                                { (user) ? 
+                                    <>
+                                        { (user._id === selComment.user) &&
+                                            <button onClick={handleDeleteComment} key={selComment._id+"0"} className='planpreview-window-comments-result-delete'>Delete Comment</button>
+                                        }
+                                    </>:null
+                                }
                             </div>
                         </>)
                     }
@@ -84,7 +91,7 @@ function PlanPreview(props) {
         }
 
         handleOutputComments()
-    }, [importedComments, plan.updatedAt])
+    }, [comment._id, comment.user, dispatch, importedComments, plan._id, plan.createdAt, plan.updatedAt, user])
     
 
 
