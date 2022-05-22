@@ -54,6 +54,7 @@ function Start() {
             
             setOutView(
                 <PlanPreview 
+                    user = {user}
                     key = "PlanPreviewKey"
                     screenY = {scrollheight} 
                     handlePlanPreviewClose = {handlePreviewClose} 
