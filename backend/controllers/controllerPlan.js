@@ -49,16 +49,20 @@ const updatePlan = asyncHandler(async (req, res) => {
     res.status(401)
     throw new Error('User not found')
   }
-
+  
   // Make sure the logged in user matches the plan user
   if (plan.user.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not authorized')
   }
 
-  const updatedPlan = await Plan.findByIdAndUpdate(req.params.id,  { $push: req.body}, {
-    new: true,
-  })
+  const updatedPlan = await Plan.findByIdAndUpdate(
+    req.params.id,  
+    { agrusers: "req.user.id"}, 
+    {
+      new: true,
+    }
+  )
 
   res.status(200).json(updatedPlan)   // return json of updated plan
 })

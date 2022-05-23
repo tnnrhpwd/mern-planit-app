@@ -17,7 +17,7 @@ const planSchema = mongoose.Schema(
       required: [true, 'Please add a goal value'],
     },
     agrusers: {
-      type: mongoose.Schema.Types.Array,
+      type: String,
     },
     disusers: {
       type: mongoose.Schema.Types.Array,
