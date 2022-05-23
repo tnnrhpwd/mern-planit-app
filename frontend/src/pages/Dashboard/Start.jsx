@@ -14,6 +14,7 @@ function Start() {
     const [ findPlan, setFindPlan ] = useState("");
     const [ outView, setOutView ] = useState(false);
     const [ outputGoals, setOutputGoals ] = useState([]);
+    
 
     const [plan, setPlan] = useState('')
     const [goal, setGoal] = useState('')
@@ -42,11 +43,15 @@ function Start() {
 
         function handleAgree(id){
             console.log("agree")
-            dispatch(updatePlan( id, {agrusers: 69} ))
+            dispatch(updatePlan( id, "agree" ))
+            console.log(id, user._id)
+
         }
         function handleDisagree(id){
             console.log("disagree")
-            dispatch(updatePlan( id, "user._id"  ))
+            dispatch(updatePlan( id, "disagree"  ))
+            console.log(id, user._id)
+
         }
         function handlePreviewOpen(planObject){
             var scrollheight = window.scrollY;
@@ -97,7 +102,7 @@ function Start() {
 
         handleOutputGoals()
         setGoal(findPlan)
-    }, [comments, dispatch, findPlan, plans])
+    }, [comments, dispatch, findPlan, plans, user])
 
 
       // called on state changes
