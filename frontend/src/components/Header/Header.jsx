@@ -10,7 +10,7 @@ import './Header.css';
 function Header() {
   // const navigate = useNavigate() // initialization
   // const dispatch = useDispatch() // initialization
-  // const { user } = useSelector((state) => state.auth)   // select values from state
+  const { user } = useSelector((state) => state.auth)   // select values from state
   const [ colTheme, setColTheme ] = useState(null);
 
   useEffect(() => {     // RUNS ON START -- Checks browser for color theme preference. Sets dark mode otherwise.
@@ -122,13 +122,27 @@ function Header() {
             Settings
           </button>
         </a> */}
-        <a href='/profile'>
+        {user ? 
+                <a href='/profile'>
+                <button className="planit-header-link-landscape">
+                  Profile
+                </button>
+              </a>
+              :
+              <a href='/profile'>
+              <button className="planit-header-link-landscape">
+                Log in
+              </button>
+            </a>
+        }
+
+        {/* <a href='/about'>
           <button className="planit-header-link-landscape">
-            Profile
+            About
           </button>
-        </a>
-        {(colTheme==="dark-theme") && <button className='planit-header-themebutton-landscape' onClick={setLightMode}>Light Mode</button>}
-        {(colTheme==="light-theme") && <button className='planit-header-themebutton-landscape' onClick={setDarkMode}>Dark Mode</button>}
+        </a> */}
+        {/* {(colTheme==="dark-theme") && <button className='planit-header-themebutton-landscape' onClick={setLightMode}>Light Mode</button>}
+        {(colTheme==="light-theme") && <button className='planit-header-themebutton-landscape' onClick={setDarkMode}>Dark Mode</button>} */}
           {/* <button className="planit-header-profile-landscape">
             {user ? (
               <button className="planit-header-profile-auth" onClick={onLogout}>Log out</button>
@@ -154,21 +168,21 @@ function Header() {
             </div>
             {(colTheme==="dark-theme") && <button className='planit-header-dropper-themebutton' onClick={setLightMode}>Light Mode</button>}
             {(colTheme==="light-theme") && <button className='planit-header-dropper-themebutton' onClick={setDarkMode}>Dark Mode</button>}
-            {/* <a className='planit-header-dropper-pagelink' href='/login'>
+
               {user ? (<>
                 <a className='planit-header-dropper-profile' href='/profile'>Profile</a>
-                <button className='planit-header-dropper-user' onClick={onLogout}>Log out</button>
+                {/* <button className='planit-header-dropper-user' >Log out</button> */}
                 </>) : (
-                <button className='planit-header-dropper-user' onClick={onLogout}>Log in</button>
+                <a className='planit-header-dropper-profile' href='/login' >Log in</a>
               )}
-            </a> */}
-            <a className='planit-header-dropper-profile' href='/profile'>Profile</a>
+
+            {/* <a className='planit-header-dropper-profile' href='/profile'>Profile</a> */}
             {/* <a className='planit-header-dropper-pagelink' href='/goals'>Popular</a> */}
             <a className='planit-header-dropper-pagelink' href='/goals'>My Goals</a>
             <a className='planit-header-dropper-pagelink' href='/plans'>My Plans</a>
             <a className='planit-header-dropper-pagelink' href='/settings'>Settings</a>
             <a className='planit-header-dropper-pagelink' href='/about'>About Planit</a>
-            <a className='planit-header-dropper-pagelink' href='/legal'>Legal Terms</a>
+            {/* <a className='planit-header-dropper-pagelink' href='/legal'>Legal Terms</a> */}
             
           </ul>
         </div>
