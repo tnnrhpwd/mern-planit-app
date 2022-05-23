@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
-import Spinner from './../../components/Spinner/Spinner.jsx'
-import { getPlans, resetPlanSlice, createPlan, updatePlan } from './../../features/plans/planSlice'
-import { getComments, resetCommentSlice, createComment, updateComment } from './../../features/comments/commentSlice'
-import { getMyData, resetAuthSlice } from './../../features/auth/authSlice'
+import Spinner from '../Spinner/Spinner.jsx'
+import { getPlans, resetPlanSlice, createPlan, updatePlan } from '../../features/plans/planSlice'
+import { getComments, resetCommentSlice, createComment, updateComment } from '../../features/comments/commentSlice'
+import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
 
-import PlanPreview from '../../components/PlanPreview/PlanPreview.jsx'
+import PlanPreview from '../PlanPreview/PlanPreview.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
+import './Start.css';
 
 
 function Start() {
