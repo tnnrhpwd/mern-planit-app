@@ -51,7 +51,7 @@ export const getPlans = createAsyncThunk(
 
 // Update user plan -- UPDATE
 export const updatePlan = createAsyncThunk(
-  'plans/delete',
+  'plans/update',
   async (id, planData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
@@ -96,43 +96,58 @@ export const planSlice = createSlice({
   },
   extraReducers: (builder) => {// all possible states associated with asyncthunk get,create,delete plans functional objects. 
     builder
-      .addCase(createPlan.pending, (state) => {
+      .addCase(createPlan.pending, (state) => {             // create
         state.planIsLoading = true
       })
-      .addCase(createPlan.fulfilled, (state, action) => {
+      .addCase(createPlan.fulfilled, (state, action) => {   // create
         state.planIsLoading = false
         state.planIsSuccess = true
         state.plans.push(action.payload)
       })
-      .addCase(createPlan.rejected, (state, action) => {
+      .addCase(createPlan.rejected, (state, action) => {    // create
         state.planIsLoading = false
         state.planIsError = true
         state.planMessage = action.payload
       })
-      .addCase(getPlans.pending, (state) => {
+      .addCase(getPlans.pending, (state) => {               // get
         state.planIsLoading = true
       })
-      .addCase(getPlans.fulfilled, (state, action) => {
+      .addCase(getPlans.fulfilled, (state, action) => {     // get
         state.planIsLoading = false
         state.planIsSuccess = true
         state.plans = action.payload
       })
-      .addCase(getPlans.rejected, (state, action) => {
+      .addCase(getPlans.rejected, (state, action) => {      // get
         state.planIsLoading = false
         state.planIsError = true
         state.planMessage = action.payload
       })
-      .addCase(deletePlan.pending, (state) => {
+      .addCase(updatePlan.pending, (state) => {             // update
         state.planIsLoading = true
       })
-      .addCase(deletePlan.fulfilled, (state, action) => {
+      .addCase(updatePlan.fulfilled, (state, action) => {   // update
         state.planIsLoading = false
         state.planIsSuccess = true
         state.plans = state.plans.filter(               // hides the deleted plan from UI when you click delete. Otherwise, It wouldnt disapear until refresh
           (plan) => plan._id !== action.payload.id
         )
       })
-      .addCase(deletePlan.rejected, (state, action) => {
+      .addCase(updatePlan.rejected, (state, action) => {    // update
+        state.planIsLoading = false
+        state.planIsError = true
+        state.planMessage = action.payload
+      })
+      .addCase(deletePlan.pending, (state) => {             // delete
+        state.planIsLoading = true
+      })
+      .addCase(deletePlan.fulfilled, (state, action) => {   // delete
+        state.planIsLoading = false
+        state.planIsSuccess = true
+        state.plans = state.plans.filter(               // hides the deleted plan from UI when you click delete. Otherwise, It wouldnt disapear until refresh
+          (plan) => plan._id !== action.payload.id
+        )
+      })
+      .addCase(deletePlan.rejected, (state, action) => {    // delete
         state.planIsLoading = false
         state.planIsError = true
         state.planMessage = action.payload
