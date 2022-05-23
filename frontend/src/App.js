@@ -30,6 +30,8 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/register' element={<Register />} />
         <Route path='/settings' element={<Settings />} />
+        <Route path='/about' element={<About />} />
+
       </Routes>
     </div>
     </Router>
