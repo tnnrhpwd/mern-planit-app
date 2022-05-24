@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import Spinner from '../Spinner/Spinner.jsx'
-import { getPlans, resetPlanSlice, createPlan, updatePlan } from '../../features/plans/planSlice'
+import { getPlans, resetPlanSlice, createPlan, updatePlan, deletePlan } from '../../features/plans/planSlice'
 import { getComments, resetCommentSlice, createComment, updateComment } from '../../features/comments/commentSlice'
 import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
 
@@ -73,6 +73,11 @@ function Start() {
             setOutView(null)
         }
 
+        function handleDeletePlan(id){
+            console.log("Delete Plan: ",id)
+            dispatch(deletePlan(id));
+        }
+
         function handleOutputGoals(){
             if(findPlan===null){return;} // No search guard clause
             var outputArray = [];
@@ -89,7 +94,7 @@ function Start() {
                                 <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><button key={plan._id+"4button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.plan}</button></div>
                                 { (user) ?
                                 <>{(user._id === plan.user) &&
-                                    (<button key={plan._id+"5"}>Delete Plan</button>)
+                                    (<button onClick={() => handleDeletePlan(plan._id)} key={plan._id+"5"}>Delete Plan</button>)
                                 }</>:null}
                                 {plan.agrusers}
                             </div>
