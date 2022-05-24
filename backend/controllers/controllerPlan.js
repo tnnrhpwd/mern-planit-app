@@ -49,20 +49,105 @@ const updatePlan = asyncHandler(async (req, res) => {
     res.status(401)
     throw new Error('User not found')
   }
-  
-  // Make sure the logged in user matches the plan user
-  if (plan.user.toString() !== req.user.id) {
-    res.status(401)
-    throw new Error('User not authorized')
-  }
 
-  const updatedPlan = await Plan.findByIdAndUpdate(
+
+
+  var updatedPlan = "";
+
+  // IF USER HAS ALREADY VOTED AGREE 
+  if (plan.agrusers.includes(req.user.id)){
+    // IF JUST VOTED AGREE
+    if (new String(req.body.type).valueOf() === new String("agree").valueOf()){
+      updatedPlan = await Plan.findByIdAndUpdate(
+        req.params.id,  
+        { $pull: { agrusers : req.user.id}}, // REMOVE AGREE VOTE
+        {
+          new: true,
+        }
+      )
+    }
+    // IF JUST VOTED DISAGREE
+    if (new String(req.body.type).valueOf() === new String("disagree").valueOf()){
+      updatedPlan = await Plan.findByIdAndUpdate(
+        req.params.id,  
+        { 
+          $pull: { agrusers : req.user.id}, // REMOVE AGREE VOTE
+          $push: { disusers : req.user.id}, // ADD DISAGREE VOTE
+        },
+        {
+          new: true,
+        }
+      )
+    }
+  }
+  // IF USER HAS ALREADY VOTED DISAGREE 
+  if (plan.disusers.includes(req.user.id)){
+    // IF JUST VOTED AGREE
+    if (new String(req.body.type).valueOf() === new String("agree").valueOf()){
+      updatedPlan = await Plan.findByIdAndUpdate(
+        req.params.id,  
+        {
+          $pull: { disusers : req.user.id}, // REMOVE DISAGREE VOTE
+          $push: { agrusers : req.user.id}, // ADD AGREE VOTE
+        },
+        {
+          new: true,
+        }
+      )
+    }
+    // IF JUST VOTED DISAGREE
+    if (new String(req.body.type).valueOf() === new String("disagree").valueOf()){
+      updatedPlan = await Plan.findByIdAndUpdate(
+        req.params.id,  
+        { 
+          $pull: { disusers : req.user.id}, // REMOVE DISAGREE VOTE
+        },
+        {
+          new: true,
+        }
+      )
+    }
+  }
+  // IF USER HAS NOT ALREADY VOTED 
+  if (!plan.agrusers.includes(req.user.id) && !plan.disusers.includes(req.user.id)){
+    // IF JUST VOTED AGREE
+    if (new String(req.body.type).valueOf() === new String("agree").valueOf()){
+      updatedPlan = await Plan.findByIdAndUpdate(
+        req.params.id,  
+        { $push: { agrusers : req.user.id}}, // REMOVE AGREE VOTE
+        {
+          new: true,
+        }
+      )
+    }
+    // IF JUST VOTED DISAGREE
+    if (new String(req.body.type).valueOf() === new String("disagree").valueOf()){
+      updatedPlan = await Plan.findByIdAndUpdate(
+        req.params.id,  
+        { $push: { disusers : req.user.id}}, // REMOVE AGREE VOTE
+        {
+          new: true,
+        }
+      )
+    }
+  }
+  
+  updatedPlan = await Plan.findByIdAndUpdate(
     req.params.id,  
-    { agrusers: "req.user.id"}, 
+    { $push: { disusers : req.user.id}}, // REMOVE AGREE VOTE
     {
       new: true,
     }
   )
+
+  // If request was not a vote, Make sure the logged in user matches the plan user
+  if ( updatedPlan === "" ){
+    if (plan.user.toString() !== req.user.id) {
+      res.status(401)
+      throw new Error('User not authorized')
+    }
+  }
+
 
   res.status(200).json(updatedPlan)   // return json of updated plan
 })

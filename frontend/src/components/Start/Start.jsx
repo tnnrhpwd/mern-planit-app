@@ -16,23 +16,23 @@ function Start() {
     const [ outView, setOutView ] = useState(false);
     const [ outputGoals, setOutputGoals ] = useState([]);
     
-
+    const [ type, setType ] = useState('agree')
     const [plan, setPlan] = useState('')
     const [goal, setGoal] = useState('')
 
     const navigate = useNavigate() // initialization
     const dispatch = useDispatch() // initialization
   
-    const { user } = useSelector((state) => state.auth)      // select user values from user state
+    // const { user } = useSelector((state) => state.auth)      // select user values from user state
     const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select goal values from goal state
         (state) => state.plans
     )
     const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select goal values from goal state
         (state) => state.comments
     )
-    // const { user, authIsLoading, authIsError, authMessage } = useSelector(
-    //     (state) => state.auth
-    // )
+    const { user, authIsLoading, authIsError, authMessage } = useSelector(
+        (state) => state.auth
+    )
 
     // Scroll to the top on render
     useEffect(() => {
@@ -43,15 +43,17 @@ function Start() {
     useEffect(() => {
 
         function handleAgree(id){
+            setType("agree")
             console.log("agree")
-            dispatch(updatePlan( id, "agree" ))
-            console.log(id, user._id)
+            dispatch(updatePlan( id, type ))
+            console.log( id, type )
 
         }
         function handleDisagree(id){
+            setType("agree")
             console.log("disagree")
-            dispatch(updatePlan( id, "disagree"  ))
-            console.log(id, user._id)
+            dispatch(updatePlan( id, type ))
+            console.log(id, type )
 
         }
         function handlePreviewOpen(planObject){
@@ -119,14 +121,14 @@ function Start() {
         if (commentIsError) {
             toast.error(commentMessage) // print error to toast errors
         }
-        // if (authIsError) {
-        //     toast.error(authMessage) // print error to toast errors
-        // }
+        if (authIsError) {
+            toast.error(authMessage) // print error to toast errors
+        }
 
 
         dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
         dispatch(getComments()) // dispatch connects to the store, then retreives the plans that match the logged in user.
-        dispatch(getMyData()) // dispatch connects to the store, then retreives the profile data that matches the logged in user.
+        // dispatch(getMyData()) // dispatch connects to the store, then retreives the profile data that matches the logged in user.
 
 
         return () => {    // reset the plans when state changes
@@ -135,7 +137,7 @@ function Start() {
             dispatch(resetAuthSlice()) // dispatch connects to the store, then reset state values( authMessage, authisloading, authiserror, and authissuccess )
 
         }
-    }, [planIsError, planMessage, dispatch, commentIsError, commentMessage])
+    }, [planIsError, planMessage, dispatch, commentIsError, commentMessage, authIsError, authMessage])
 
 
 
@@ -166,7 +168,7 @@ function Start() {
 
 
     // Shows loading animation while getting plans + comments
-    if (planIsLoading || commentIsLoading) {// || authIsLoading) {
+    if (planIsLoading || commentIsLoading || authIsLoading) {
         return <Spinner />
     }
 
