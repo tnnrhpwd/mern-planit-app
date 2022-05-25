@@ -89,12 +89,25 @@
     .planit-dashboard-start-goals-result-agree{
         display: inline-block;
         position: absolute;
-        right: calc(var(--nav-size)*9);
+        right: calc(var(--nav-size)*5);
+    }
+    .planit-dashboard-start-goals-result-agreeACT{
+        display: inline-block;
+        position: absolute;
+        right: calc(var(--nav-size)*5);
+        background-color: rgb(78, 255, 47);
     }
     .planit-dashboard-start-goals-result-disagree{
         display: inline-block;
         position: absolute;
-        left: calc(var(--nav-size)*9);
+        left: calc(var(--nav-size)*5);
+    }
+    .planit-dashboard-start-goals-result-disagreeACT{
+        display: inline-block;
+        position: absolute;
+        left: calc(var(--nav-size)*5);
+        background-color: rgb(230, 38, 38);
+
     }
     .planit-dashboard-start-goals-result-plan{
         margin-top: calc(var(--nav-size)*.5);

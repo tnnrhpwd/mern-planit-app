@@ -50,6 +50,10 @@ const updatePlan = asyncHandler(async (req, res) => {
     throw new Error('User not found')
   }
 
+  if (!req.body.type){
+    res.status(401)
+    throw new Error('Vote type not found')
+  }
 
 
   var updatedPlan = "";
@@ -131,14 +135,7 @@ const updatePlan = asyncHandler(async (req, res) => {
       )
     }
   }
-  
-  updatedPlan = await Plan.findByIdAndUpdate(
-    req.params.id,  
-    { $push: { disusers : req.user.id}}, // REMOVE AGREE VOTE
-    {
-      new: true,
-    }
-  )
+
 
   // If request was not a vote, Make sure the logged in user matches the plan user
   if ( updatedPlan === "" ){
