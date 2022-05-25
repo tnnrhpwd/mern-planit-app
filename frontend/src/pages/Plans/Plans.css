@@ -14,6 +14,14 @@
 .planit-plans-out{
     
 }
+.planit-plans-my{
+    padding-top: calc(var(--nav-size)*1);
+
+    font-size: calc(var(--nav-size)*0.4);
+
+}
+
+
 @media (orientation: landscape) {
     .planit-plans{
         text-align: left;

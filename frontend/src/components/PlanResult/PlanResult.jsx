@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux'      // access state variables
 import { deletePlan } from '../../features/plans/planSlice'
+import CreatedAt from './CreatedAt';
 import './PlanResult.css';
 
 function PlanResult(props) {
@@ -13,7 +14,8 @@ function PlanResult(props) {
 
   return (
     <div className='planit-planresult'>
-      <div>{new Date(plan.createdAt).toLocaleString('en-US')}</div>
+      {/* <div>{new Date(plan.createdAt).toLocaleString('en-US')}</div> */}
+      <div>{ <CreatedAt createdAt={plan.createdAt}/> }</div>
       <h2>{plan.goal}</h2>
       <h3>{plan.plan}</h3>
       <h5>Agrusers: {plan.agrusers}</h5>

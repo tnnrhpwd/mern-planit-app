@@ -5,6 +5,7 @@ import Spinner from '../Spinner/Spinner.jsx'
 import { getPlans, resetPlanSlice, createPlan, updatePlan, deletePlan } from '../../features/plans/planSlice'
 import { getComments, resetCommentSlice, createComment, updateComment } from '../../features/comments/commentSlice'
 import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
+import CreatedAt from '../PlanResult/CreatedAt.js'
 
 import PlanPreview from '../PlanPreview/PlanPreview.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
@@ -77,49 +78,65 @@ function Start() {
                     if((findPlan!=="") && (plan.goal.toUpperCase().includes(findPlan.toUpperCase()))){
                         outputArray.push(
                             <div key={plan._id+"0"} className='planit-dashboard-start-goals-result'>
-                                <div key={plan._id+"1"} className='planit-dashboard-start-goals-result-disagree'>
-                                    {(plan.disusers.includes(user._id)) ?
-                                        <button key={plan._id+"1button"} className='planit-dashboard-start-goals-result-disagreeACT' onClick={() => handleDisagree( plan._id )}>Disagree</button>
-                                    :
-                                        <button key={plan._id+"1.5button"} className='planit-dashboard-start-goals-result-disagree' onClick={() => handleDisagree( plan._id )}>Disagree</button>
-                                    }
-                                </div>
-                                <div key={plan._id+"3"} className='planit-dashboard-start-goals-result-agree'>
-                                    {(plan.agrusers.includes(user._id)) ?
-                                        <button key={plan._id+"3button"} className='planit-dashboard-start-goals-result-agreeACT' onClick={() => handleAgree( plan._id )}>Agree </button>
-                                    :
-                                        <button key={plan._id+"3button"} className='planit-dashboard-start-goals-result-agree' onClick={() => handleAgree( plan._id )}>Agree </button>
-                                    }
-                                </div>
-                                <div className='planit-dashboard-start-goals-result-votes'>
-                                    {(plan.agrusers.length - plan.disusers.length > 0)
-                                        ? "+"+(plan.agrusers.length - plan.disusers.length)
-                                        : (plan.agrusers.length - plan.disusers.length)
-                                    }
+                                <div key={plan._id+"0.1"} className='planit-dashboard-start-goals-result-1'>
+                                    <div className='planit-dashboard-start-goals-result-date'>
+                                        <CreatedAt createdAt={plan.createdAt}/>
+                                    </div>
+                                    <div className='planit-dashboard-start-goals-result-share'>
+                                        Share
+                                    </div>
+                                    <div className='planit-dashboard-start-goals-result-manage'>
+                                        Manage
+                                        {/* { (user) ?
+                                        <>{(user._id === plan.user) &&
+                                            (<button onClick={() => handleDeletePlan(plan._id)} key={plan._id+"5"}>Delete Plan</button>)
+                                        }</>:null} */}
+                                    </div>
                                 </div>
 
-                                <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button key={plan._id+"2button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
+                                <div key={plan._id+"0.2"} className='planit-dashboard-start-goals-result-2'>
+                                    <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button key={plan._id+"2button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
+                                    <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><button key={plan._id+"4button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.plan}</button></div>
+                                </div>
 
-                                <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><button key={plan._id+"4button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.plan}</button></div>
-                                { (user) ?
-                                <>{(user._id === plan.user) &&
-                                    (<button onClick={() => handleDeletePlan(plan._id)} key={plan._id+"5"}>Delete Plan</button>)
-                                }</>:null}
-                                
+                                <div key={plan._id+"0.3"} className='planit-dashboard-start-goals-result-3'>
+                                    <div key={plan._id+"1"} className='planit-dashboard-start-goals-result-disagree'>
+                                        {(user) ?
+                                            <>{(plan.disusers.includes(user._id)) ?
+                                                <button key={plan._id+"1button"} className='planit-dashboard-start-goals-result-disagreeACT' onClick={() => handleDisagree( plan._id )}>Disagree</button>
+                                            :
+                                                <button key={plan._id+"1.5button"} className='planit-dashboard-start-goals-result-disagree' onClick={() => handleDisagree( plan._id )}>Disagree</button>
+                                        }</>:null}
+                                    </div>
+
+                                    <div key={plan._id+"3"} className='planit-dashboard-start-goals-result-agree'>
+                                        {(user) ?
+                                        <>{(plan.agrusers.includes(user._id)) ?
+                                            <button key={plan._id+"3button"} className='planit-dashboard-start-goals-result-agreeACT' onClick={() => handleAgree( plan._id )}>Agree </button>
+                                        :
+                                            <button key={plan._id+"3button"} className='planit-dashboard-start-goals-result-agree' onClick={() => handleAgree( plan._id )}>Agree </button>
+                                        }</>:null}
+                                    </div>
+
+                                    <div className='planit-dashboard-start-goals-result-votes'>
+                                        {(plan.agrusers.length - plan.disusers.length > 0)
+                                            ? "+"+(plan.agrusers.length - plan.disusers.length)
+                                            : (plan.agrusers.length - plan.disusers.length)
+                                        }
+                                    </div>
+
+
+                                </div>
                             </div>
                         )
                     }
                 }
-
             });
             setOutputGoals(outputArray);
         }
-
         handleOutputGoals()
         setGoal(findPlan)
     }, [comments, dispatch, findPlan, plans, user])
-
-
       // called on state changes
     useEffect(() => {
         if (planIsError) {

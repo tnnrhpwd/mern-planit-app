@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import PlanInput from './../../components/PlanInput/PlanInput.jsx';
@@ -9,6 +9,7 @@ import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
 import './Plans.css';
 
 function Plans() {
+  const [showNewPlan, setShowNewPlan] = useState(false);
 
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
@@ -44,6 +45,10 @@ function Plans() {
     return <Spinner />
   }
 
+  function handleCreatePlanToggle(){
+    if(showNewPlan){setShowNewPlan(false)}
+    if(!showNewPlan){setShowNewPlan(true)}
+  }
 
   return (
     <div className='planit-plans'>
@@ -51,18 +56,26 @@ function Plans() {
       <div className='planit-plans-text'>
         Every journey begins with a step.
       </div>
+      <button onClick={handleCreatePlanToggle}>{showNewPlan ? "Cancel New Plan":"Create a Plan"}</button>
       { ( user ) &&
         <div className='planit-plans-in'>
-          <PlanInput />
+          {(showNewPlan) &&
+            <PlanInput />
+          }
+
         </div>
       }
-      All Plans
+      <div className='planit-plans-my'>
+        My Plans
+      </div>
       <div className='planit-plans-out'>
         {plans.length > 0 ? (
           <div className='planit-plans-out-result'>
-            {plans.map((plan) => (
-              <PlanResult key={plan._id} user={user} plan={plan}/>
-            ))}
+            {plans.map((plan) => 
+              (plan.user === user._id)
+              ?             ( <PlanResult key={plan._id} user={user} plan={plan}/> )
+              : null
+            )}
           </div>
         ) : (
           <h3>You have not set any plans</h3>

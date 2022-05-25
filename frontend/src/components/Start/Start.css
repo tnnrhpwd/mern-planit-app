@@ -67,7 +67,7 @@
 }
 .planit-dashboard-start-goals-result{
     border: calc(var(--nav-size)*0.001) solid var(--text-color);
-    margin: calc(var(--nav-size)*.1);
+    margin-top: calc(var(--nav-size)*.1);
     background-color: transparent;
     color: var(--text-color);
     display:inline-block;
@@ -78,10 +78,27 @@
     /* padding-top: calc(var(--nav-size)*.2); */
 }
 .planit-dashboard-start-goals-result-votes{
-    position: absolute;
     text-align: center;
     width: 100%;
     z-index: -1;
+    font-size: calc(var(--nav-size)*.25);
+    padding-bottom: calc(var(--nav-size)*.1);
+}
+.planit-dashboard-start-goals-result-date{
+    font-size: calc(var(--nav-size)*.25);
+    display: inline-block;
+    width: 60vw;
+    text-align: left;
+}
+.planit-dashboard-start-goals-result-share{
+    width: 15vw;
+    font-size: calc(var(--nav-size)*.25);
+    display: inline-block;
+}
+.planit-dashboard-start-goals-result-manage{
+
+    font-size: calc(var(--nav-size)*.25);
+    display: inline-block;
 }
 .planit-dashboard-start-goals-result-goal{
     display: inline-block;
@@ -105,7 +122,7 @@
     border: none;
     width: calc(var(--nav-size)*1.5);
     height: calc(var(--nav-size)*0.4);
-    color: var(--text-color-inv);
+    color: var(--dark-blue0);
 
 }
 .planit-dashboard-start-goals-result-disagree{
