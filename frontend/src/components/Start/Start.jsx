@@ -40,25 +40,16 @@ function Start() {
 
     // RUNS ON INPUT FIELD CHANGE -- shows search suggestions
     useEffect(() => {
-
         function handleAgree(id){
             const type = ("agree");
-
-            dispatch(updatePlan(  id , { type } ))
-            console.log( id, { type } )
-
+            dispatch( updatePlan( {  id ,type } ) )
         }
         function handleDisagree(id){
             const type = ("disagree");
-
-            dispatch(updatePlan(  id , { type } ))
-            console.log(id, { type } )
-
+            dispatch( updatePlan( {  id ,type } ) )
         }
         function handlePreviewOpen(planObject){
             var scrollheight = window.scrollY;
-
-            
             setOutView(
                 <PlanPreview 
                     user = {user}
@@ -73,12 +64,10 @@ function Start() {
         function handlePreviewClose(){
             setOutView(null)
         }
-
         function handleDeletePlan(id){
             console.log("Delete Plan: ",id)
             dispatch(deletePlan(id));
         }
-
         function handleOutputGoals(){
             if(findPlan===null){return;} // No search guard clause
             var outputArray = [];

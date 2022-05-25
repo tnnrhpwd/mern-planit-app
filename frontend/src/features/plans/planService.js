@@ -31,14 +31,14 @@ const getPlans = async (token) => {
 }
 
 // Update user plan
-const updatePlan = async (planId, planData, token) => {
+const updatePlan = async ( planData, token ) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         },
     }
 
-    const response = await axios.update( API_URL + planId, planData, config )
+    const response = await axios.put( API_URL + planData.id, planData, config )
 
     return response.data
 }

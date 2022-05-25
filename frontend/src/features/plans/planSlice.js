@@ -52,10 +52,10 @@ export const getPlans = createAsyncThunk(
 // Update user plan -- UPDATE
 export const updatePlan = createAsyncThunk(
   'plans/update',
-  async (id, planData, thunkAPI) => {
+  async (planData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await planService.updatePlan(id, planData, token)
+      return await planService.updatePlan(planData, token)
     } catch (error) {
       const planMessage =
         (error.response &&
@@ -128,8 +128,11 @@ export const planSlice = createSlice({
       .addCase(updatePlan.fulfilled, (state, action) => {   // update
         state.planIsLoading = false
         state.planIsSuccess = true
-        state.plans = state.plans.filter(               // hides the deleted plan from UI when you click delete. Otherwise, It wouldnt disapear until refresh
-          (plan) => plan._id !== action.payload.id
+        state.plans = state.plans.map(
+          plan => 
+            (plan._id === action.payload._id) 
+            ? action.payload 
+            : plan 
         )
       })
       .addCase(updatePlan.rejected, (state, action) => {    // update
