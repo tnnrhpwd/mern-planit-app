@@ -107,33 +107,37 @@ function Header() {
             +
           </button>
         </a> */}
-        <a href='/plans'>
-          <button className="planit-header-link-landscape">
-            Plans
-          </button>
-        </a>
-        <a href='/goals'>
-          <button className="planit-header-link-landscape">
-            Goals
-          </button>
-        </a>
+
         {/* <a href='/settings'>
           <button className="planit-header-link-landscape">
             Settings
           </button>
         </a> */}
         {user ? 
-                <a href='/profile'>
-                <button className="planit-header-link-landscape">
-                  Profile
-                </button>
-              </a>
-              :
-              <a href='/profile'>
-              <button className="planit-header-link-landscape">
-                Log in
-              </button>
-            </a>
+        <>
+          <a href='/plans'>
+            <button className="planit-header-link-landscape">
+              Plans
+            </button>
+          </a>
+          <a href='/goals'>
+            <button className="planit-header-link-landscape">
+              Goals
+            </button>
+          </a>
+          <a href='/profile'>
+            <button className="planit-header-link-landscape">
+              Profile
+            </button>
+          </a>
+        </>
+
+          :null
+          // <a href='/profile'>
+          //   <button className="planit-header-link-landscape">
+          //     Log in
+          //   </button>
+          // </a>
         }
 
         {/* <a href='/about'>
@@ -178,9 +182,15 @@ function Header() {
 
             {/* <a className='planit-header-dropper-profile' href='/profile'>Profile</a> */}
             {/* <a className='planit-header-dropper-pagelink' href='/goals'>Popular</a> */}
-            <a className='planit-header-dropper-pagelink' href='/goals'>My Goals</a>
-            <a className='planit-header-dropper-pagelink' href='/plans'>My Plans</a>
-            <a className='planit-header-dropper-pagelink' href='/settings'>Settings</a>
+            {( user ) 
+              ?(<>   
+                <a className='planit-header-dropper-pagelink' href='/goals'>My Goals</a>
+                <a className='planit-header-dropper-pagelink' href='/plans'>My Plans</a>
+                <a className='planit-header-dropper-pagelink' href='/settings'>Settings</a>
+              </>)
+              :null
+            }
+
             <a className='planit-header-dropper-pagelink' href='/about'>About Planit</a>
             {/* <a className='planit-header-dropper-pagelink' href='/legal'>Legal Terms</a> */}
             

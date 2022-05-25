@@ -120,8 +120,8 @@ function Start() {
 
                                     <div className='planit-dashboard-start-goals-result-votes'>
                                         {(plan.agrusers.length - plan.disusers.length > 0)
-                                            ? "+"+(plan.agrusers.length - plan.disusers.length)
-                                            : (plan.agrusers.length - plan.disusers.length)
+                                            ? "+"+(plan.agrusers.length - plan.disusers.length)+" votes"
+                                            : (plan.agrusers.length - plan.disusers.length)+" votes"
                                         }
                                     </div>
 

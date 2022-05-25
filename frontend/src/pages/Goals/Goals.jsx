@@ -12,7 +12,7 @@ function Goals() {
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
 
-  // const { user } = useSelector((state) => state.auth)      // select user values from user state
+  const { user } = useSelector((state) => state.auth)      // select user values from user state
   const { goals, goalIsLoading, goalIsError, goalMessage } = useSelector(     // select goal values from goal state
     (state) => state.goals
   )
@@ -27,15 +27,15 @@ function Goals() {
       dispatch(getGoals()) // dispatch connects to the store, then retreives the goals that match the logged in user.
 
     // }
-    // if (!user) {            // if no user, redirect to login
-    //   navigate('/login') 
-    // }
+    if (!user) {            // if no user, redirect to login
+      navigate('/login') 
+    }
 
     
     return () => {    // reset the goals when state changes
       dispatch(resetGoalSlice()) // dispatch connects to the store, then reset state values( goalMessage, isloading, iserror, and issuccess )
     }
-  }, [navigate, goalIsError, goalMessage, dispatch])
+  }, [navigate, goalIsError, goalMessage, dispatch, user])
 
   if (goalIsLoading) {
     return <Spinner />

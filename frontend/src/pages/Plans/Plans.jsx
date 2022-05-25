@@ -31,15 +31,15 @@ function Plans() {
       dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
 
     // }
-    // if (!user) {            // if no user, redirect to login
-    //   navigate('/login') 
-    // }
+    if (!user) {            // if no user, redirect to login
+      navigate('/login') 
+    }
 
     
     return () => {    // reset the plans when state changes
       dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
     }
-  }, [navigate, planIsError, planMessage, dispatch])
+  }, [navigate, planIsError, planMessage, dispatch, user])
 
   if (planIsLoading) {
     return <Spinner />
