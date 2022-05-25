@@ -91,6 +91,13 @@ function Start() {
                                         <button key={plan._id+"3button"} className='planit-dashboard-start-goals-result-agree' onClick={() => handleAgree( plan._id )}>Agree </button>
                                     }
                                 </div>
+                                <div className='planit-dashboard-start-goals-result-votes'>
+                                    {(plan.agrusers.length - plan.disusers.length > 0)
+                                        ? "+"+(plan.agrusers.length - plan.disusers.length)
+                                        : (plan.agrusers.length - plan.disusers.length)
+                                    }
+                                </div>
+
                                 <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button key={plan._id+"2button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
 
                                 <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><button key={plan._id+"4button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.plan}</button></div>
@@ -98,7 +105,7 @@ function Start() {
                                 <>{(user._id === plan.user) &&
                                     (<button onClick={() => handleDeletePlan(plan._id)} key={plan._id+"5"}>Delete Plan</button>)
                                 }</>:null}
-                                {plan.agrusers}
+                                
                             </div>
                         )
                     }

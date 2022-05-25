@@ -1,150 +1,168 @@
-@media (orientation: landscape) {
-    .planit-dashboard-start{
-        text-align: center;
-        padding-top: calc(var(--nav-size)*5);
-    }
-    .planit-dashboard-start-find{
-        font-size: calc(var(--nav-size)*.5);
-
-    }
-    .planit-dashboard-start-find-text{
-        display: inline;
-        /* margin-left: calc(var(--nav-size)*2); */
-        font-size: calc(var(--nav-size)*.6);
-        font-weight: bold;
-
-    }
-    .planit-dashboard-start-find-space{
-        text-align: center;
-    }
-    .planit-dashboard-start-find-input{
-        margin-top: calc(var(--nav-size)*.5); 
-        text-align: center;
-        font-weight: normal;
-        width: 30vw;
-        margin-right: calc(var(--nav-size)*.5); 
-        height: calc(var(--nav-size)*.9); 
-        font-size: calc(var(--nav-size)*.4);
-        background-color: transparent;
-        color: var(--text-color);
-        border: calc(var(--nav-size)*.001) solid var(--border-nav);
-        border-radius: calc(var(--nav-size)*1);
-    }
-    .planit-dashboard-start-find-input:focus {
-        outline: none;
-
-    }
-    .planit-dashboard-start-find-but{
-        margin-top: calc(var(--nav-size)*2); 
-        display: inline;
-        /* width: 100vw; */
-        text-align: center;
-
-    }
-    .planit-dashboard-start-find-but-button{
-        cursor: pointer;
-        /* margin-left: calc(var(--nav-size)*15); */
-        vertical-align: bottom;
-        background-image: linear-gradient(to right,var(--bg-nav1),var(--bg-nav2));
-        border: calc(var(--nav-size)*.001) solid var(--border-nav);
-        width: calc(var(--nav-size)*2); 
-        height: calc(var(--nav-size)*1); 
-        color: var(--text-color);
-        font-weight: bold;
-        font-size: calc(var(--nav-size)*.3);
-        border-radius: calc(var(--nav-size)*.2);
-    }
-    .planit-dashboard-start-find-but-button:hover{
-        border: calc(var(--nav-size)*.001) solid var(--text-color);
-        font-size: calc(var(--nav-size)*.33);
-        filter: brightness(1.2);
-        font-weight: bolder;
-    }
-    /* #planit-dashboard-start-find-logo-but-img{
-        width: calc(var(--nav-size)*.5); 
-        display: inline-block;
-    } */
-    .planit-dashboard-start-goals{
-        text-align: center;
-        /* margin-left: calc(var(--nav-size)*6); */
-        margin-top: calc(var(--nav-size)*1);
-        display: block;
-    }
-    .planit-dashboard-start-goals-result{
-        border: calc(var(--nav-size)*0.001) solid var(--text-color);
-        margin: calc(var(--nav-size)*.1);
-        background-color: transparent;
-        color: var(--text-color);
-        display:inline-block;
-        font-size: calc(var(--nav-size)*.3);
-        text-align: center;
-        width: 50vw;
-        min-height: 10vh;
-        padding-top: calc(var(--nav-size)*.2);
-    }
-    .planit-dashboard-start-goals-result-goal{
-        display: inline-block;
-        font-weight: bold;
-    }
-    .planit-dashboard-start-goals-result-agree{
-        display: inline-block;
-        position: absolute;
-        right: calc(var(--nav-size)*5);
-    }
-    .planit-dashboard-start-goals-result-agreeACT{
-        display: inline-block;
-        position: absolute;
-        right: calc(var(--nav-size)*5);
-        background-color: rgb(78, 255, 47);
-    }
-    .planit-dashboard-start-goals-result-disagree{
-        display: inline-block;
-        position: absolute;
-        left: calc(var(--nav-size)*5);
-    }
-    .planit-dashboard-start-goals-result-disagreeACT{
-        display: inline-block;
-        position: absolute;
-        left: calc(var(--nav-size)*5);
-        background-color: rgb(230, 38, 38);
-
-    }
-    .planit-dashboard-start-goals-result-plan{
-        margin-top: calc(var(--nav-size)*.5);
-        white-space: pre-line;
-
-    }
-    .planit-dashboard-start-goals-result-planbutton{
-        border: none;
-        background-color: transparent;
-        color: var(--text-color);
-        cursor: pointer;
-    }
-    .planit-dashboard-start-goals-plan{
-        border: calc(var(--nav-size)*0.001) solid var(--text-color);
-        margin: calc(var(--nav-size)*.1);
-        background-color: transparent;
-        color: var(--text-color);
-        display:block;
-        font-size: calc(var(--nav-size)*.3);
-        text-align: center;
-        width: 50vw;
-        min-height: 10vh;
-
-    }
-    .planit-dashboard-start-goals-sp{
-
-    }
-    .planit-dashboard-start-goals-plan-sp-input{
-        display: inline-block;
-        text-align: center;
-        border: none;
-        padding: calc(var(--nav-size)*0.1);
-        margin: calc(var(--nav-size)*0.1);
-    }
-
+.planit-dashboard-start{
+    text-align: center;
+    padding-top: calc(var(--nav-size)*5);
+}
+.planit-dashboard-start-find{
+    font-size: calc(var(--nav-size)*.5);
+}
+.planit-dashboard-start-find-text{
+    display: inline;
+    /* margin-left: calc(var(--nav-size)*2); */
+    font-size: calc(var(--nav-size)*.6);
+    font-weight: bold;
+}
+.planit-dashboard-start-find-space{
+    text-align: center;
+}
+.planit-dashboard-start-find-input{
+    margin-top: calc(var(--nav-size)*.5); 
+    text-align: center;
+    font-weight: normal;
+    width: 30vw;
+    margin-right: calc(var(--nav-size)*.5); 
+    height: calc(var(--nav-size)*.9); 
+    font-size: calc(var(--nav-size)*.4);
+    background-color: transparent;
+    color: var(--text-color);
+    border: calc(var(--nav-size)*.001) solid var(--border-nav);
+    border-radius: calc(var(--nav-size)*1);
+}
+.planit-dashboard-start-find-input:focus {
+    outline: none;
+}
+.planit-dashboard-start-find-but{
+    margin-top: calc(var(--nav-size)*2); 
+    display: inline;
+    /* width: 100vw; */
+    text-align: center;
+}
+.planit-dashboard-start-find-but-button{
+    cursor: pointer;
+    /* margin-left: calc(var(--nav-size)*15); */
+    vertical-align: bottom;
+    background-image: linear-gradient(to right,var(--bg-nav1),var(--bg-nav2));
+    border: calc(var(--nav-size)*.001) solid var(--border-nav);
+    width: calc(var(--nav-size)*2); 
+    height: calc(var(--nav-size)*1); 
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: calc(var(--nav-size)*.3);
+    border-radius: calc(var(--nav-size)*.2);
+}
+.planit-dashboard-start-find-but-button:hover{
+    border: calc(var(--nav-size)*.001) solid var(--text-color);
+    font-size: calc(var(--nav-size)*.33);
+    filter: brightness(1.2);
+    font-weight: bolder;
+}
+/* #planit-dashboard-start-find-logo-but-img{
+    width: calc(var(--nav-size)*.5); 
+    display: inline-block;
+} */
+.planit-dashboard-start-goals{
+    text-align: center;
+    /* margin-left: calc(var(--nav-size)*6); */
+    margin-top: calc(var(--nav-size)*1);
+    display: block;
+}
+.planit-dashboard-start-goals-result{
+    border: calc(var(--nav-size)*0.001) solid var(--text-color);
+    margin: calc(var(--nav-size)*.1);
+    background-color: transparent;
+    color: var(--text-color);
+    display:inline-block;
+    font-size: calc(var(--nav-size)*.3);
+    text-align: center;
+    width: 50vw;
+    min-height: 10vh;
+    /* padding-top: calc(var(--nav-size)*.2); */
+}
+.planit-dashboard-start-goals-result-votes{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: -1;
+}
+.planit-dashboard-start-goals-result-goal{
+    display: inline-block;
+    font-weight: bold;
+}
+.planit-dashboard-start-goals-result-agree{
+    display: inline-block;
+    position: absolute;
+    right: calc(var(--nav-size)*5);
+    border: none;
+    width: calc(var(--nav-size)*1.5);
+    height: calc(var(--nav-size)*0.4);
+    background-color: transparent;
+    color: var(--text-color);
+}
+.planit-dashboard-start-goals-result-agreeACT{
+    display: inline-block;
+    position: absolute;
+    right: calc(var(--nav-size)*5);
+    background-color: rgb(78, 255, 47);
+    border: none;
+    width: calc(var(--nav-size)*1.5);
+    height: calc(var(--nav-size)*0.4);
+    color: var(--text-color-inv);
 
 }
+.planit-dashboard-start-goals-result-disagree{
+    display: inline-block;
+    position: absolute;
+    left: calc(var(--nav-size)*5);
+    border: none;
+    width: calc(var(--nav-size)*1.5);
+    height: calc(var(--nav-size)*0.4);
+    background-color: transparent;
+    color: var(--text-color);
+
+}
+.planit-dashboard-start-goals-result-disagreeACT{
+    display: inline-block;
+    position: absolute;
+    left: calc(var(--nav-size)*5);
+    background-color: rgb(230, 38, 38);    
+    border: none;
+    width: calc(var(--nav-size)*1.5);
+    height: calc(var(--nav-size)*0.4);
+    color: var(--text-color);
+
+}
+.planit-dashboard-start-goals-result-plan{
+    margin-top: calc(var(--nav-size)*.5);
+    white-space: pre-line;
+}
+.planit-dashboard-start-goals-result-planbutton{
+    border: none;
+    background-color: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+}
+.planit-dashboard-start-goals-plan{
+    border: calc(var(--nav-size)*0.001) solid var(--text-color);
+    margin: calc(var(--nav-size)*.1);
+    background-color: transparent;
+    color: var(--text-color);
+    display:block;
+    font-size: calc(var(--nav-size)*.3);
+    text-align: center;
+    width: 50vw;
+    min-height: 10vh;
+}
+.planit-dashboard-start-goals-sp{
+}
+.planit-dashboard-start-goals-plan-sp-input{
+    display: inline-block;
+    text-align: center;
+    border: none;
+    padding: calc(var(--nav-size)*0.1);
+    margin: calc(var(--nav-size)*0.1);
+}
+
+
+
 
 
 
@@ -239,16 +257,9 @@
         display: block;
     }
     .planit-dashboard-start-goals-result{
-        border: calc(var(--nav-size)*0.001) solid var(--text-color);
         margin: calc(var(--nav-size)*.1);
-        background-color: transparent;
-        color: var(--text-color);
-        display:inline-block;
-        font-size: calc(var(--nav-size)*.3);
-        text-align: center;
         width: 95%;
         min-height: 10vh;
-        padding-top: calc(var(--nav-size)*.2);
     }
     .planit-dashboard-start-goals-result-goal{
         display: inline-block;
@@ -256,32 +267,16 @@
         padding-top: calc(var(--nav-size)*.4);
     }
     .planit-dashboard-start-goals-result-agree{
-        display: inline-block;
-        position: absolute;
-        right: calc(var(--nav-size)*.15);
-        font-size: calc(var(--nav-size)*.25);
+        right: calc(var(--nav-size)*0.1);
+    }
+    .planit-dashboard-start-goals-result-agreeACT{
+        right: calc(var(--nav-size)*0.1);
     }
     .planit-dashboard-start-goals-result-disagree{
-        display: inline-block;
-        position: absolute;
-        left: calc(var(--nav-size)*.15);
-        /* top: calc(var(--nav-size)*.1); */
+        left: calc(var(--nav-size)*0.1);
     }
-    #planit-dashboard-start-goals-result-agree{
-        color: var(--text-color-inv);
-        font-size: calc(var(--nav-size)*.25);
-        background-color: var(--text-color);
-        border: none;
-        padding: calc(var(--nav-size)*.15);
-        font-weight: bold;
-    }
-    #planit-dashboard-start-goals-result-disagree{
-        font-size: calc(var(--nav-size)*.25);
-        color: var(--text-color-inv);
-        background-color: var(--text-color);
-        border: none;
-        padding: calc(var(--nav-size)*.15);
-        font-weight: bold;
+    .planit-dashboard-start-goals-result-disagreeACT{
+        left: calc(var(--nav-size)*0.1);
     }
     .planit-dashboard-start-goals-result-plan{
         white-space: pre-line;
