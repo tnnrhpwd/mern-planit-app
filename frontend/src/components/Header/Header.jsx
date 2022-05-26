@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'    
 import { logout, resetAuthSlice } from './../../features/auth/authSlice.js'
+import useOutsideAlerter from '../useOutsideAlerter.js';
 import HeaderLogo from './../../assets/planit192.png';
 import './Header.css';
 
@@ -51,43 +52,12 @@ function Header() {
   // }
 
 
-  var clickNum=0;
-  var dropperNum = 0;
-  function useOutsideAlerter(ref){
-    // RUNS TWICE ON STARTUP
-    useEffect(() => {
-      // RUNS ON EVERY CLICK && RUNS ON EACH TOGGLE  => RUNS TWICE ON TOGGLE
-      function handleOutsideClick(event){
-        // if dropper button pressed && dropper was closed
-        if((hamButton.current.contains(event.target)) && !document.getElementById("planit-header-dropper__toggle").checked){
-          dropperNum=1;
-          clickNum=0;
-        // else if dropper button pressed && dropper was open
-        }else if((hamButton.current.contains(event.target)) && document.getElementById("planit-header-dropper__toggle").checked){
-          dropperNum=0;
-        // else if outside space was clicked && dropper button wasnt pressed
-        }else if((!ref.current.contains(event.target)) && (!hamButton.current.contains(event.target))){
-          // if dropper is open
-          if(dropperNum===1){
-            // If (outside space was clicked && dropper button wasnt pressed) && droper was just opened
-            if(clickNum===0){
-              clickNum++;
-            // If (outside space was clicked && dropper button wasnt pressed) && droper has been open
-            }else{
-              document.getElementById("planit-header-dropper__toggle").checked = false;
-              clickNum=0;
-              dropperNum=0;
-            }
-          }
-        }
-      }
-      document.addEventListener('click', handleOutsideClick);
-      return () => document.removeEventListener('click', handleOutsideClick); 
-    }, [ref])
-  }
-  const box = useRef(null); // reference to the dropper container
-  useOutsideAlerter(box); // listen for clicks outside dropper container && handle the effects
-  const hamButton = useRef(null);  // reference to the dropper toggle button
+
+
+
+  const toggleButtonRef = useRef(null);  // reference to the dropper toggle button
+  const insideComponentRef = useRef(null); // reference to the dropper container
+  useOutsideAlerter(insideComponentRef,toggleButtonRef); // listen for clicks outside dropper container && handle the effects
 
   return (
     <>
@@ -158,12 +128,12 @@ function Header() {
           </button> */}
         <div className="planit-header-dropper-space">
           <input id="planit-header-dropper__toggle" type="checkbox" />
-          <label className="planit-header-dropper__btn" htmlFor="planit-header-dropper__toggle" ref={hamButton}>
+          <label className="planit-header-dropper__btn" htmlFor="planit-header-dropper__toggle" ref={toggleButtonRef}>
             <span></span>
           </label>
 
 
-          <ul ref={box} className="planit-header-dropper__box">
+          <ul ref={insideComponentRef} className="planit-header-dropper__box">
             
             <div className='planit-header-logo-nav'>
               <Link to='/' onClick={() => {window.scrollTo(0,0); document.getElementById("planit-header-dropper__toggle").checked = false;}}>

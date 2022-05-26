@@ -1,0 +1,17 @@
+.shareview{
+    position: fixed;
+    z-index: 10;
+    background-image: linear-gradient(var(--bg-nav1),var(--bg-nav1)) ;
+    margin: calc(var(--nav-size)*0.2);
+    margin-top: calc(var(--nav-size)*3);
+    padding: calc(var(--nav-size)*0.2);
+    padding-top: calc(var(--nav-size)*1);
+    padding-bottom: calc(var(--nav-size)*1);
+    text-decoration: none;
+    color: var(--text-color);
+    border: calc(var(--nav-size)*0.001) solid var(--text-color)
+}
+.shareview-link{
+    color: var(--text-color);
+
+}

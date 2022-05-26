@@ -16,8 +16,8 @@ function PlanResult(props) {
     <div className='planit-planresult'>
       {/* <div>{new Date(plan.createdAt).toLocaleString('en-US')}</div> */}
       <div>{ <CreatedAt createdAt={plan.createdAt}/> }</div>
-      <a href={'plan/'+plan._id}><h2>{plan.goal}</h2></a>
-      <a href={'plan/'+plan._id}><h3>{plan.plan}</h3></a>
+      <a href={'plan/'+plan._id}><h2 className='planit-planresult-goal'>{plan.goal}</h2></a>
+      <a href={'plan/'+plan._id}><h3 className='planit-planresult-plan'>{plan.plan}</h3></a>
       <h5>Agrusers: {plan.agrusers}</h5>
       <h5>Disusers: {plan.disusers}</h5>
 

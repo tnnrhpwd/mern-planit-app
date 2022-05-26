@@ -1,20 +1,23 @@
-@media (orientation: landscape) {
-    .planit-planresult{
-        margin-top: calc(var(--nav-size)*0.3);
-        border: calc(var(--nav-size)*0.01) solid var(--text-color) ;
-        text-align: center;
-        font-size: calc(var(--nav-size)*0.3);
-        padding: calc(var(--nav-size)*0.3);
-        white-space: pre-line;
-
-    }
-    .planit-planresult-plan{
-        font-size: calc(var(--nav-size)*0.3);
-    }
-    .planit-planresult-delete{
-        font-size: calc(var(--nav-size)*0.3);
-    }
+.planit-planresult{
+    margin-top: calc(var(--nav-size)*0.3);
+    border: calc(var(--nav-size)*0.01) solid var(--text-color) ;
+    text-align: center;
+    font-size: calc(var(--nav-size)*0.3);
+    padding: calc(var(--nav-size)*0.3);
+    white-space: pre-line;
 }
+.planit-planresult-goal{
+    color: var(--text-color);
+    font-size: calc(var(--nav-size)*0.3);
+}
+.planit-planresult-plan{
+    color: var(--text-color);
+    font-size: calc(var(--nav-size)*0.3);
+}
+.planit-planresult-delete{
+    font-size: calc(var(--nav-size)*0.3);
+}
+
 @media (orientation: portrait) {
     .planit-planresult{
         margin-top: calc(var(--nav-size)*0.3);
