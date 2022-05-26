@@ -49,26 +49,27 @@ function Start() {
             const type = ("disagree");
             dispatch( updatePlan( {  id ,type } ) )
         }
-        function handlePreviewOpen(planObject){
-            var scrollheight = window.scrollY;
-            setOutView(
-                <PlanPreview 
-                    user = {user}
-                    key = "PlanPreviewKey"
-                    screenY = {scrollheight} 
-                    handlePlanPreviewClose = {handlePreviewClose} 
-                    planIdentity = {planObject}
-                    planIDComments = {comments}
-                />
-            )
-        }
-        function handlePreviewClose(){
-            setOutView(null)
-        }
-        function handleDeletePlan(id){
-            console.log("Delete Plan: ",id)
-            dispatch(deletePlan(id));
-        }
+        // function handlePreviewOpen(planObject){
+        //     var scrollheight = window.scrollY;
+        //     setOutView(
+        //         <PlanPreview 
+        //             user = {user}
+        //             key = "PlanPreviewKey"
+        //             screenY = {scrollheight} 
+        //             handlePlanPreviewClose = {handlePreviewClose} 
+        //             planIdentity = {planObject}
+        //             planIDComments = {comments}
+        //         />
+        //     )
+        // }
+        // function handlePreviewClose(){
+        //     setOutView(null)
+        // }
+        // function handleDeletePlan(id){
+        //     console.log("Delete Plan: ",id)
+        //     dispatch(deletePlan(id));
+        // }
+
         function handleOutputGoals(){
             if(findPlan===null){return;} // No search guard clause
             var outputArray = [];
@@ -95,8 +96,8 @@ function Start() {
                                 </div>
 
                                 <div key={plan._id+"0.2"} className='planit-dashboard-start-goals-result-2'>
-                                    <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><button key={plan._id+"2button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.goal}</button></div>
-                                    <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><button key={plan._id+"4button"} className='planit-dashboard-start-goals-result-planbutton' onClick={() => handlePreviewOpen( plan )}>{plan.plan}</button></div>
+                                    <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><a href={'plan/'+plan._id}><button key={plan._id+"2button"} className='planit-dashboard-start-goals-result-planbutton'>{plan.goal}</button></a></div>
+                                    <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><a href={'plan/'+plan._id}><button key={plan._id+"4button"} className='planit-dashboard-start-goals-result-planbutton'>{plan.plan}</button></a></div>
                                 </div>
 
                                 <div key={plan._id+"0.3"} className='planit-dashboard-start-goals-result-3'>
@@ -178,7 +179,7 @@ function Start() {
         return () => {    // reset the goals when state changes
             dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
         }
-    }, [navigate, planIsError, planMessage, dispatch])
+    }, [planIsError, planMessage, dispatch])
 
     // RUNS ON CREATE PLAN -- sends the new plan and goal text to the database
     const onPlanSubmit = (e) => {

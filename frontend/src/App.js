@@ -12,6 +12,7 @@ import Plans from './pages/Plans/Plans.jsx'         // import page
 import Profile from './pages/Profile/Profile.jsx'         // import page
 import Register from './pages/Register/Register.jsx'         // import page
 import Settings from './pages/Settings.jsx'         // import page
+import InfoPlan from './pages/InfoPlan/InfoPlan.jsx';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/about' element={<About />} />
-
+        <Route path='/plan/:id/' element={<InfoPlan />} />
       </Routes>
     </div>
     </Router>

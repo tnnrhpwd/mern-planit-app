@@ -1,6 +1,7 @@
 @media (orientation: landscape) {
     .planit-dashboard-upper{
         padding-top: calc(var(--nav-size)*1);
+        min-height: 100vh;
         min-height: calc(var(--nav-size)*12);
     }
     .planit-dashboard-popular{
