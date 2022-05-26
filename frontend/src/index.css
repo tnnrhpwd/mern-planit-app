@@ -38,7 +38,7 @@ code {
 }
 @media (orientation: portrait) {
   :root{
-    --nav-size: min(18vw,9vh);
+    --nav-size: calc( min( 18vw, 9vh ) * 0.775 );
     --std-unit: var( --nav-size );
   }
 }
