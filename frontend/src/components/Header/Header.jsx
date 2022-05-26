@@ -51,13 +51,13 @@ function Header() {
   //   navigate('/')       // send user to dashboard, which will redirect to login page
   // }
 
+  
 
-
-
-
+  const hideComponentVisibility = () => {document.getElementById("planit-header-dropper__toggle").checked = false;}
+  const ComponentVisibility = () => {return document.getElementById("planit-header-dropper__toggle").checked}
   const toggleButtonRef = useRef(null);  // reference to the dropper toggle button
   const insideComponentRef = useRef(null); // reference to the dropper container
-  useOutsideAlerter(insideComponentRef,toggleButtonRef); // listen for clicks outside dropper container && handle the effects
+  useOutsideAlerter( insideComponentRef, toggleButtonRef, ComponentVisibility, hideComponentVisibility ); // listen for clicks outside dropper container && handle the effects
 
   return (
     <>
