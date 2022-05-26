@@ -6,7 +6,6 @@ import { getPlans, resetPlanSlice, createPlan, updatePlan, deletePlan } from '..
 import { getComments, resetCommentSlice, createComment, updateComment } from '../../features/comments/commentSlice'
 import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
 import CreatedAt from '../PlanResult/CreatedAt.js'
-import useOutsideAlerter from '../useOutsideAlerter.js'
 import ShareView from '../ShareView/ShareView.jsx'
 import ThumbsUp from './../../assets/thumbs-up.svg';
 import ThumbsDown from './../../assets/thumbs-down.svg';
@@ -39,10 +38,7 @@ function Start() {
         (state) => state.auth
     )
 
-    const toggleButtonRef = useRef(null);  // reference to the dropper toggle button
-    const insideComponentRef = useRef(null); // reference to the dropper container
-    useOutsideAlerter(insideComponentRef,toggleButtonRef); // listen for clicks outside dropper container && handle the effects
-
+    
     // Scroll to the top on render
     useEffect(() => {
         window.scrollTo(0,0);
@@ -82,7 +78,7 @@ function Start() {
         function handleShareView(type, id){
 
             if( ( shareView === null ) ){
-                const shareViewComponent = <ShareView ref={insideComponentRef} type={type} id={id}/>;
+                const shareViewComponent = <ShareView view={shareView} click={setShareView} type={type} id={id}/>;
                 setShareView(shareViewComponent);
 
             }else if( !( shareView === null ) ){
@@ -105,7 +101,7 @@ function Start() {
                                         <CreatedAt createdAt={plan.createdAt}/>
                                     </div>
                                     <div className='planit-dashboard-start-goals-result-share'>
-                                        <button ref={toggleButtonRef} onClick={() => handleShareView("plan",plan._id)}>Share</button>
+                                        <button onClick={() => handleShareView("plan",plan._id)}>Share</button>
                                     </div>
                                     <div className='planit-dashboard-start-goals-result-manage'>
                                         Manage
