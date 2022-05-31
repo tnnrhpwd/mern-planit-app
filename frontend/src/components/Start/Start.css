@@ -97,7 +97,7 @@
 .planit-dashboard-start-goals-result-date{
     font-size: calc(var(--nav-size)*.25);
     display: inline-block;
-    width: 60vw;
+    width: 55vw;
     text-align: left;
 }
 .planit-dashboard-start-goals-result-share{
@@ -105,11 +105,22 @@
     font-size: calc(var(--nav-size)*.25);
     display: inline-block;
 }
+.planit-dashboard-start-goals-result-share-btn{
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+}
 .planit-dashboard-start-goals-result-manage{
 
     font-size: calc(var(--nav-size)*.25);
     display: inline-block;
 }
+.planit-dashboard-start-goals-result-manage-btn{
+    background-color: transparent;
+    border: none;
+    color: var(--text-color);
+}
+
 .planit-dashboard-start-goals-result-goal{
     display: inline-block;
     font-weight: bold;

@@ -54,6 +54,7 @@ function Start() {
             const type = ("disagree");
             dispatch( updatePlan( {  id ,type } ) )
         }
+
         // function handlePreviewOpen(planObject){
         //     var scrollheight = window.scrollY;
         //     setOutView(
@@ -80,13 +81,23 @@ function Start() {
             if( ( shareView === null ) ){
                 const shareViewComponent = <ShareView view={true} click={setShareView} type={type} id={id}/>;
                 setShareView(shareViewComponent);
-                console.log(true)
 
             }else if( !( shareView === null ) ){
                 setShareView(null);
             } 
         }
 
+        function handleFavorite(id){
+            const type = ("favorite");
+            dispatch( updatePlan( {  id ,type } ) )
+            toast.success("Plan added to your favorites!")
+
+        }
+        function handleUnfavorite(id){
+            const type = ("unfavorite");
+            dispatch( updatePlan( {  id ,type } ) )
+            toast.success("Plan removed from your favorites!")
+        }
 
         function handleOutputGoals(){
             if(findPlan===null){return;} // No search guard clause
@@ -102,14 +113,20 @@ function Start() {
                                         <CreatedAt createdAt={plan.createdAt}/>
                                     </div>
                                     <div className='planit-dashboard-start-goals-result-share'>
-                                        <button onClick={() => handleShareView("plan",plan._id)}>Share</button>
+                                        <button className='planit-dashboard-start-goals-result-share-btn' onClick={() => handleShareView("plan",plan._id)}>Share</button>
                                     </div>
                                     <div className='planit-dashboard-start-goals-result-manage'>
-                                        Manage
-                                        {/* { (user) ?
-                                        <>{(user._id === plan.user) &&
-                                            (<button onClick={() => handleDeletePlan(plan._id)} key={plan._id+"5"}>Delete Plan</button>)
-                                        }</>:null} */}
+                                    
+                                        { (user) ? <>{
+                                            <>{ (plan.followers.includes(user._id)) ?
+                                                <>
+                                                    <button className='planit-dashboard-start-goals-result-manage-btn' onClick={() => handleUnfavorite( plan._id )} key={plan._id+"5.1"}>❤</button>
+                                                </>
+                                                :<>
+                                                    <button className='planit-dashboard-start-goals-result-manage-btn' onClick={() => handleFavorite( plan._id )} key={plan._id+"5.2"}>🖤</button>
+                                                </>
+                                            }</>
+                                        }</>:null}
                                     </div>
                                 </div>
 
