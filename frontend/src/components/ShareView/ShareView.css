@@ -3,7 +3,7 @@
     text-align: center;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: 5;
 
 }
 .shareview{
@@ -22,7 +22,8 @@
 .shareview-link{
     /* margin-top: calc(var(--nav-size)*1); */
     color: var(--text-color);
-    border: calc(var(--nav-size)*0.001) solid var(--text-color)
+    border: calc(var(--nav-size)*0.001) solid var(--text-color);
+
 
 }.shareview-interact{
     color: var(--text-color);
@@ -40,6 +41,7 @@
     border-radius: calc(var(--nav-size)*0.05);
     font-size: calc(var(--nav-size)*0.2);
     padding: calc(var(--nav-size)*0.2);
+    background-color: var(--text-color);
 
 
 }.shareview-interact-close{
@@ -53,6 +55,7 @@
     border: none;
     border-radius: calc(var(--nav-size)*0.05);
     font-size: calc(var(--nav-size)*0.2);
+    background-color: var(--text-color);
 
 }.shareview-textarea{
     width: 90%;
