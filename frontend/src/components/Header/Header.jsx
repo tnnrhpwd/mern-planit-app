@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'    
 import { logout, resetAuthSlice } from './../../features/auth/authSlice.js'
-import useOutsideAlerter from '../useOutsideAlerter.js';
+import HeaderDropper from '../HeaderDropper/HeaderDropper.jsx';
 import HeaderLogo from './../../assets/planit192.png';
 import './Header.css';
 
@@ -53,12 +53,7 @@ function Header() {
 
   
 
-  const hideComponentVisibility = () => {document.getElementById("planit-header-dropper__toggle").checked = false;}
-  const ComponentVisibility = () => {return document.getElementById("planit-header-dropper__toggle").checked}
-  const toggleButtonRef = useRef(null);  // reference to the dropper toggle button
-  const insideComponentRef = useRef(null); // reference to the dropper container
-  useOutsideAlerter( "nav", insideComponentRef, toggleButtonRef, ComponentVisibility, hideComponentVisibility ); // listen for clicks outside dropper container && handle the effects
-
+  
   return (
     <>
       <div className='planit-header'>
@@ -126,46 +121,7 @@ function Header() {
               </a>
             )}
           </button> */}
-        <div className="planit-header-dropper-space">
-          <input id="planit-header-dropper__toggle" type="checkbox" />
-          <label className="planit-header-dropper__btn" htmlFor="planit-header-dropper__toggle" ref={toggleButtonRef}>
-            <span></span>
-          </label>
-
-
-          <ul ref={insideComponentRef} className="planit-header-dropper__box">
-            
-            <div className='planit-header-logo-nav'>
-              <Link to='/' onClick={() => {window.scrollTo(0,0); document.getElementById("planit-header-dropper__toggle").checked = false;}}>
-                <img id='planit-header-logo-img' src={HeaderLogo} alt='website logo'/>
-              </Link>
-            </div>
-            {(colTheme==="dark-theme") && <button className='planit-header-dropper-themebutton' onClick={setLightMode}>Light Mode</button>}
-            {(colTheme==="light-theme") && <button className='planit-header-dropper-themebutton' onClick={setDarkMode}>Dark Mode</button>}
-
-              {user ? (<>
-                <a className='planit-header-dropper-profile' href='/profile'>Profile</a>
-                {/* <button className='planit-header-dropper-user' >Log out</button> */}
-                </>) : (
-                <a className='planit-header-dropper-profile' href='/login' >Log in</a>
-              )}
-
-            {/* <a className='planit-header-dropper-profile' href='/profile'>Profile</a> */}
-            {/* <a className='planit-header-dropper-pagelink' href='/goals'>Popular</a> */}
-            {( user ) 
-              ?(<>   
-                <a className='planit-header-dropper-pagelink' href='/goals'>My Goals</a>
-                <a className='planit-header-dropper-pagelink' href='/plans'>My Plans</a>
-                <a className='planit-header-dropper-pagelink' href='/settings'>Settings</a>
-              </>)
-              :null
-            }
-
-            <a className='planit-header-dropper-pagelink' href='/about'>About Planit</a>
-            {/* <a className='planit-header-dropper-pagelink' href='/legal'>Legal Terms</a> */}
-            
-          </ul>
-        </div>
+        <HeaderDropper colTheme={colTheme} setLightMode={setLightMode} setDarkMode={setDarkMode} />
         
       </div>
     </>
