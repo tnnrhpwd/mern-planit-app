@@ -35,8 +35,21 @@ function useOutsideAlerter( alertType, insideComponentRef, toggleButtonRef, Comp
           }
         }
       }
+      function handleScroll(event){
+        if(dropperNum === 1){
+          dropperNum=0;
+          setComponentVisibility();
+          console.log("scroll")
+          console.log(alertType)
+        }
+
+      }
+      document.addEventListener('scroll', handleScroll);
       document.addEventListener('click', handleOutsideClick);
-      return () => document.removeEventListener('click', handleOutsideClick); 
+      return () => {
+        document.removeEventListener('scroll', handleScroll);
+        document.removeEventListener('click', handleOutsideClick); 
+      }
     }, [insideComponentRef])
 }
 
