@@ -58,83 +58,122 @@ const updatePlan = asyncHandler(async (req, res) => {
 
   var updatedPlan = "";
 
-  // IF USER HAS ALREADY VOTED AGREE 
-  if (plan.agrusers.includes(req.user.id)){
-    // IF JUST VOTED AGREE
-    if (new String(req.body.type).valueOf() === new String("agree").valueOf()){
-      updatedPlan = await Plan.findByIdAndUpdate(
-        req.params.id,  
-        { $pull: { agrusers : req.user.id}}, // REMOVE AGREE VOTE
-        {
-          new: true,
+  switch (new String(req.body.type).valueOf()) {
+    case new String("agree").valueOf():
+    case new String("disagree").valueOf():
+      // IF USER HAS ALREADY VOTED AGREE 
+      if (plan.agrusers.includes(req.user.id)){
+        // IF JUST VOTED AGREE
+        if (new String(req.body.type).valueOf() === new String("agree").valueOf()){
+          updatedPlan = await Plan.findByIdAndUpdate(
+            req.params.id,  
+            { $pull: { agrusers : req.user.id}}, // REMOVE AGREE VOTE
+            {
+              new: true,
+            }
+          )
         }
-      )
-    }
-    // IF JUST VOTED DISAGREE
-    if (new String(req.body.type).valueOf() === new String("disagree").valueOf()){
-      updatedPlan = await Plan.findByIdAndUpdate(
-        req.params.id,  
-        { 
-          $pull: { agrusers : req.user.id}, // REMOVE AGREE VOTE
-          $push: { disusers : req.user.id}, // ADD DISAGREE VOTE
-        },
-        {
-          new: true,
+        // IF JUST VOTED DISAGREE
+        if (new String(req.body.type).valueOf() === new String("disagree").valueOf()){
+          updatedPlan = await Plan.findByIdAndUpdate(
+            req.params.id,  
+            { 
+              $pull: { agrusers : req.user.id}, // REMOVE AGREE VOTE
+              $push: { disusers : req.user.id}, // ADD DISAGREE VOTE
+            },
+            {
+              new: true,
+            }
+          )
         }
-      )
-    }
+      }
+      // IF USER HAS ALREADY VOTED DISAGREE 
+      if (plan.disusers.includes(req.user.id)){
+        // IF JUST VOTED AGREE
+        if (new String(req.body.type).valueOf() === new String("agree").valueOf()){
+          updatedPlan = await Plan.findByIdAndUpdate(
+            req.params.id,  
+            {
+              $pull: { disusers : req.user.id}, // REMOVE DISAGREE VOTE
+              $push: { agrusers : req.user.id}, // ADD AGREE VOTE
+            },
+            {
+              new: true,
+            }
+          )
+        }
+        // IF JUST VOTED DISAGREE
+        if (new String(req.body.type).valueOf() === new String("disagree").valueOf()){
+          updatedPlan = await Plan.findByIdAndUpdate(
+            req.params.id,  
+            { 
+              $pull: { disusers : req.user.id}, // REMOVE DISAGREE VOTE
+            },
+            {
+              new: true,
+            }
+          )
+        }
+      }
+      // IF USER HAS NOT ALREADY VOTED 
+      if (!plan.agrusers.includes(req.user.id) && !plan.disusers.includes(req.user.id)){
+        // IF JUST VOTED AGREE
+        if (new String(req.body.type).valueOf() === new String("agree").valueOf()){
+          updatedPlan = await Plan.findByIdAndUpdate(
+            req.params.id,  
+            { $push: { agrusers : req.user.id}}, // ADD AGREE VOTE
+            {
+              new: true,
+            }
+          )
+        }
+        // IF JUST VOTED DISAGREE
+        if (new String(req.body.type).valueOf() === new String("disagree").valueOf()){
+          updatedPlan = await Plan.findByIdAndUpdate(
+            req.params.id,  
+            { $push: { disusers : req.user.id}}, // ADD AGREE VOTE
+            {
+              new: true,
+            }
+          )
+        }
+      }  
+
+      break;
+      
+    case new String("favorite").valueOf():
+      // IF USER HAS NOT FAVORITED && JUST FAVORITED
+      if (( !plan.followers.includes(req.user.id) )){
+        updatedPlan = await Plan.findByIdAndUpdate(
+          req.params.id,  
+          { $push: { followers : req.user.id}}, // ADD FAVORITE
+          {
+            new: true,
+          }
+        )
+      }  
+      break;
+
+    case new String("unfavorite").valueOf():
+      // IF USER HAS ALREADY FAVORITED && JUST UNFAVORITED
+      if (( plan.followers.includes(req.user.id) )){
+        updatedPlan = await Plan.findByIdAndUpdate(
+          req.params.id,  
+          { $pull: { followers : req.user.id}}, // REMOVE FAVORITE
+          {
+            new: true,
+          }
+        )  
+      }  
+      break;
+
+    default:
+      break;
   }
-  // IF USER HAS ALREADY VOTED DISAGREE 
-  if (plan.disusers.includes(req.user.id)){
-    // IF JUST VOTED AGREE
-    if (new String(req.body.type).valueOf() === new String("agree").valueOf()){
-      updatedPlan = await Plan.findByIdAndUpdate(
-        req.params.id,  
-        {
-          $pull: { disusers : req.user.id}, // REMOVE DISAGREE VOTE
-          $push: { agrusers : req.user.id}, // ADD AGREE VOTE
-        },
-        {
-          new: true,
-        }
-      )
-    }
-    // IF JUST VOTED DISAGREE
-    if (new String(req.body.type).valueOf() === new String("disagree").valueOf()){
-      updatedPlan = await Plan.findByIdAndUpdate(
-        req.params.id,  
-        { 
-          $pull: { disusers : req.user.id}, // REMOVE DISAGREE VOTE
-        },
-        {
-          new: true,
-        }
-      )
-    }
-  }
-  // IF USER HAS NOT ALREADY VOTED 
-  if (!plan.agrusers.includes(req.user.id) && !plan.disusers.includes(req.user.id)){
-    // IF JUST VOTED AGREE
-    if (new String(req.body.type).valueOf() === new String("agree").valueOf()){
-      updatedPlan = await Plan.findByIdAndUpdate(
-        req.params.id,  
-        { $push: { agrusers : req.user.id}}, // REMOVE AGREE VOTE
-        {
-          new: true,
-        }
-      )
-    }
-    // IF JUST VOTED DISAGREE
-    if (new String(req.body.type).valueOf() === new String("disagree").valueOf()){
-      updatedPlan = await Plan.findByIdAndUpdate(
-        req.params.id,  
-        { $push: { disusers : req.user.id}}, // REMOVE AGREE VOTE
-        {
-          new: true,
-        }
-      )
-    }
-  }
+
+
+
+
 
 
   // If request was not a vote, Make sure the logged in user matches the plan user

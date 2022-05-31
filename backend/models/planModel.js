@@ -21,6 +21,9 @@ const planSchema = mongoose.Schema(
     },
     disusers: {
       type: mongoose.Schema.Types.Array,
+    },    
+    followers: {
+      type: mongoose.Schema.Types.Array,
     },
   },
   {
