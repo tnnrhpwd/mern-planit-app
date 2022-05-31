@@ -10,10 +10,10 @@ function ShareView(props) {
 
 
     const hideComponentVisibility = () => {props.click(null);}
-    const ComponentVisibility = () => { return( ( props.view !== null ) ?  true :  false ) }  
+    const ComponentVisibility = () => { return( true ) }  
     const toggleButtonRef = useRef(null);  // reference to the dropper toggle button
     const insideComponentRef = useRef(null); // reference to the dropper container
-    useOutsideAlerter( insideComponentRef, toggleButtonRef, ComponentVisibility, hideComponentVisibility ); // listen for clicks outside dropper container && handle the effects
+    useOutsideAlerter( "share", insideComponentRef, toggleButtonRef, ComponentVisibility, hideComponentVisibility ); // listen for clicks outside dropper container && handle the effects
 
 
   return (
@@ -23,11 +23,11 @@ function ShareView(props) {
 
             <div className='shareview-interact'>
 
-                <button ref={toggleButtonRef} onClick={() => props.click(null)} className='shareview-interact-close'>
+                <button ref={toggleButtonRef} onClick={hideComponentVisibility} className='shareview-interact-close'>
                     Close
                 </button>
             </div>
-            This is a shareable link to the {type}.
+                This is a shareable link to the {type}.
             <br/>
             <textarea readOnly className='shareview-textarea' value={link}/>
             <button className='shareview-copy' onClick={() => {navigator.clipboard.writeText(link);toast.success("Link Copied!")}}>

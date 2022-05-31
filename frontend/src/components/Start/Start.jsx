@@ -78,8 +78,9 @@ function Start() {
         function handleShareView(type, id){
 
             if( ( shareView === null ) ){
-                const shareViewComponent = <ShareView view={shareView} click={setShareView} type={type} id={id}/>;
+                const shareViewComponent = <ShareView view={true} click={setShareView} type={type} id={id}/>;
                 setShareView(shareViewComponent);
+                console.log(true)
 
             }else if( !( shareView === null ) ){
                 setShareView(null);
