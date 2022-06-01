@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
+import { createComment, deleteComment } from '../../features/comments/commentSlice'
 import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify'                        // visible error notifications
 import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
 import { getComments, resetCommentSlice } from './../../features/comments/commentSlice'
 import Spinner from '../../components/Spinner/Spinner';
-import './InfoPlan.css';
 import CommentResult from '../../components/CommentResult/CommentResult'
+import './InfoPlan.css';
 
 function InfoPlan() {
     const { id } = useParams();
     const dispatch = useDispatch();
     const [ chosenPlan, setChosenPlan ] = useState(null);
     const [ importedComments, setImportedComments ] = useState(null);
+    const [ newComment, setNewComment ] = useState("")
 
     const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select goal values from goal state
         (state) => state.plans
@@ -71,6 +73,19 @@ function InfoPlan() {
         return(<Spinner/>)
     }
 
+    const handleSubmitNewComment = (e) =>{
+        e.preventDefault()
+
+        const plan = chosenPlan;
+        const comment = newComment   
+
+        console.log({ plan , comment })            
+        dispatch(createComment({ plan , comment }))
+
+        toast.success("Comment Submitted!") // print error to toast errors
+        setNewComment('')
+    }
+
     if(chosenPlan){
         return (
             <div className="infoplan">
@@ -84,8 +99,20 @@ function InfoPlan() {
                         { chosenPlan.plan }
                     </div>
                 </div> 
+                <div className='infoplan-newcomment'>
+                    <textarea 
+                        value={newComment}
+                        name='plan'
+                        placeholder='Enter comment here.'
+                        onChange={(e) => setNewComment(e.target.value)}   // change text field value
+                        className='infoplan-newcomment-textarea'
+                    />
+                    <button className='infoplan-newcomment-submit' onClick={handleSubmitNewComment}>
+                        Submit
+                    </button>
+                </div>
                 <div className='infoplan-comments'>
-                    {importedComments} 
+                    { importedComments } 
                 </div>
             </div>
         )
