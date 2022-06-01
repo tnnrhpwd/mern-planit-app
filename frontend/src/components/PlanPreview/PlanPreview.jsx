@@ -25,14 +25,7 @@ function PlanPreview(props) {
     const importedComments = props.planIDComments;
 
     useEffect(() => {
-        var geee = plan.updatedAt.split('T')[0]//.split('-')
-
-        var geee2 = plan.updatedAt.split('T')[1].split('.')
-
-        var stringsss = plan.updatedAt.split('T')[0].split('-')[0] + " " + plan.updatedAt.split('T')[1].split('.')[0] + " GMT";
-
-        var dsadd = Date.parse(plan.updatedAt.split('T')[0].split('-')[0] + " " + plan.updatedAt.split('T')[1].split('.')[0] + " GMT")
-
+ 
 
 
 
