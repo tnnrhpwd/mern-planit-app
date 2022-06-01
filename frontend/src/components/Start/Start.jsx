@@ -115,15 +115,15 @@ function Start() {
                                     <div className='planit-dashboard-start-goals-result-share'>
                                         <button className='planit-dashboard-start-goals-result-share-btn' onClick={() => handleShareView("plan",plan._id)}>Share</button>
                                     </div>
-                                    <div className='planit-dashboard-start-goals-result-manage'>
+                                    <div className='planit-dashboard-start-goals-result-fav'>
                                     
                                         { (user) ? <>{
                                             <>{ (plan.followers.includes(user._id)) ?
                                                 <>
-                                                    <button className='planit-dashboard-start-goals-result-manage-btn' onClick={() => handleUnfavorite( plan._id )} key={plan._id+"5.1"}>❤</button>
+                                                    <button className='planit-dashboard-start-goals-result-fav-btn' onClick={() => handleUnfavorite( plan._id )} key={plan._id+"5.1"}>❤</button>
                                                 </>
                                                 :<>
-                                                    <button className='planit-dashboard-start-goals-result-manage-btn' onClick={() => handleFavorite( plan._id )} key={plan._id+"5.2"}>🖤</button>
+                                                    <button className='planit-dashboard-start-goals-result-unfav-btn' onClick={() => handleFavorite( plan._id )} key={plan._id+"5.2"}>❤</button>
                                                 </>
                                             }</>
                                         }</>:null}
@@ -131,7 +131,7 @@ function Start() {
                                 </div>
 
                                 <div key={plan._id+"0.2"} className='planit-dashboard-start-goals-result-2'>
-                                    <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><a href={'plan/'+plan._id}><button key={plan._id+"2button"} className='planit-dashboard-start-goals-result-planbutton'>{plan.goal}</button></a></div>
+                                    <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><a href={'plan/'+plan._id}><button key={plan._id+"2button"} className='planit-dashboard-start-goals-result-goalbutton'>{plan.goal}</button></a></div>
                                     <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><a href={'plan/'+plan._id}><button key={plan._id+"4button"} className='planit-dashboard-start-goals-result-planbutton'>{plan.plan}</button></a></div>
                                 </div>
 
@@ -228,7 +228,7 @@ function Start() {
 
 
     // Shows loading animation while getting plans + comments
-    if (planIsLoading || commentIsLoading || authIsLoading) {
+    if (authIsLoading) {
         return <Spinner />
     }
 

@@ -18,6 +18,8 @@ code {
   --dark-blue1: #1a2b36;
   --white0: #F4F7FD;
   --white0-transp: rgb(244, 247, 253, 0.9);
+  --white1-transp: rgb(244, 247, 253, 0.2);
+  
   --grey0: #e0e2e8;
   --grey1: #bbbdc2;
   --grey2: #8e8f93;
@@ -29,6 +31,11 @@ code {
   --green1: #0dff76;
   --green2: #056b32;
   --green3: #033519;
+  --red0: #dc0000;
+  --red1: #b78c8c;
+  --red2: #962525;
+  --red3: #5d0d0d;
+
 }
 @media (orientation: landscape) {
   :root{

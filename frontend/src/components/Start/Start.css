@@ -110,15 +110,21 @@
     color: var(--text-color);
     border: none;
 }
-.planit-dashboard-start-goals-result-manage{
+.planit-dashboard-start-goals-result-fav{
+    /* background-image: radial-gradient( var(--text-color) , transparent 50%); */
 
     font-size: calc(var(--nav-size)*.25);
     display: inline-block;
 }
-.planit-dashboard-start-goals-result-manage-btn{
+.planit-dashboard-start-goals-result-fav-btn{
     background-color: transparent;
     border: none;
-    color: var(--text-color);
+    color: var(--green0);
+}
+.planit-dashboard-start-goals-result-unfav-btn{
+    background-color: transparent;
+    border: none;
+    color: var(--white1-transp);
 }
 
 .planit-dashboard-start-goals-result-goal{
@@ -139,7 +145,8 @@
     border: none;
     width: calc(var(--nav-size)*0.6);
     height: calc(var(--nav-size)*0.6);
-    background-color: rgb(255,255,255,0.4);
+    background-color: var(--white1-transp);
+
     border-radius: 50%;
     color: var(--text-color);
     cursor: pointer;
@@ -148,7 +155,7 @@
     display: inline-block;
     /* position: absolute; */
     /* right: calc(var(--nav-size)*5); */
-    background-color: rgb(78, 255, 47);
+    background-color: var(--green0);
     border: calc(var(--nav-size)*0.001) solid var(--text-color);
     width: calc(var(--nav-size)*0.6);
     height: calc(var(--nav-size)*0.6);
@@ -164,7 +171,7 @@
 
     width: calc(var(--nav-size)*0.6);
     height: calc(var(--nav-size)*0.6);
-    background-color: rgb(255,255,255,0.4);
+    background-color: var(--white1-transp);
     color: var(--text-color);
     cursor: pointer;
     border-radius: 50%;
@@ -174,7 +181,7 @@
     display: inline-block;
     /* position: absolute; */
     /* left: calc(var(--nav-size)*5); */
-    background-color: rgb(230, 38, 38);    
+    background-color: var(--red1);    
     border: calc(var(--nav-size)*0.001) solid var(--text-color);
 
     width: calc(var(--nav-size)*0.6);
@@ -192,6 +199,13 @@
 .planit-dashboard-start-goals-result-plan{
     margin-top: calc(var(--nav-size)*.5);
     white-space: pre-line;
+}
+.planit-dashboard-start-goals-result-goalbutton{
+    border: none;
+    background-color: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    font-weight: bold;
 }
 .planit-dashboard-start-goals-result-planbutton{
     border: none;
