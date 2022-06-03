@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
-import { createComment, deleteComment } from '../../features/comments/commentSlice'
 import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify'                        // visible error notifications
-import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
-import { getComments, resetCommentSlice } from './../../features/comments/commentSlice'
+import { deletePlan, getPlans, resetPlanSlice } from './../../features/plans/planSlice'
+import { createComment, deleteComment, getComments, resetCommentSlice } from './../../features/comments/commentSlice'
 import Spinner from '../../components/Spinner/Spinner';
 import CommentResult from '../../components/CommentResult/CommentResult'
 import './InfoPlan.css';
@@ -15,7 +14,8 @@ function InfoPlan() {
     const dispatch = useDispatch();
     const [ chosenPlan, setChosenPlan ] = useState(null);
     const [ importedComments, setImportedComments ] = useState(null);
-    const [ newComment, setNewComment ] = useState("")
+    const [ newComment, setNewComment ] = useState("");
+    const [ userCreatedPlan, setUserCreatedPlan ] = useState(false)
 
     const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select goal values from goal state
         (state) => state.plans
@@ -23,7 +23,7 @@ function InfoPlan() {
     const { user, authIsLoading, authIsError, authMessage } = useSelector(
         (state) => state.auth
     )
-    const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select goal values from goal state
+    const { comments, commentIsLoading, commentIsError, commentIsSuccess, commentMessage } = useSelector(     // select goal values from goal state
     (state) => state.comments
     )
 
@@ -35,12 +35,11 @@ function InfoPlan() {
             toast.error(planMessage) // print error to toast errors
             toast.error(authMessage) // print error to toast errors
             toast.error(commentMessage) // print error to toast errors
-
         }
+
 
         dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
         dispatch(getComments()) // dispatch connects to the store, then retreives the plans that match the logged in user.
-
   
         
         return () => {    // reset the plans when state changes
@@ -50,10 +49,12 @@ function InfoPlan() {
     }, [planIsError, planMessage, dispatch, authIsError, commentIsError, authMessage, commentMessage])
 
     useEffect(() => {
-        if(!chosenPlan){
             plans.forEach( elementPlan => {
                 if( elementPlan._id === id ){
                     setChosenPlan( elementPlan )
+                    if(user){
+                        if( elementPlan.user === user._id ){ setUserCreatedPlan(true) }
+                    }
                     var outputArray = [];
                     comments.forEach( elementComment => {
                         if( elementComment.plan === elementPlan._id ){
@@ -65,16 +66,18 @@ function InfoPlan() {
                     setImportedComments(outputArray)
                 }
             });
-        }
-    }, [chosenPlan, comments, id, plans])
+    }, [comments, id, plans, user])
 
 
     if(authIsLoading){
         return(<Spinner/>)
     }
 
-    const handleSubmitNewComment = (e) =>{
+    const handleSubmitNewComment = (e) => {
         e.preventDefault()
+
+        if( newComment === "" ){ toast.error("Please enter your comment first."); return; } // No input text guard clause
+        if( newComment.length > 280 ){ toast.error("Please shorten your comment to 280 characters."); return; } // Too long input text guard clause
 
         const plan = chosenPlan;
         const comment = newComment   
@@ -82,13 +85,29 @@ function InfoPlan() {
         console.log({ plan , comment })            
         dispatch(createComment({ plan , comment }))
 
-        toast.success("Comment Submitted!") // print error to toast errors
         setNewComment('')
+        
+        toast.success("Comment Submitted!") // print error to toast errors
+    }
+
+    const handleDeletePlan = (e) => {
+        e.preventDefault()
+        console.log("delete plan")
+        // dispatch(deletePlan( chosenPlan._id ))
     }
 
     if(chosenPlan){
         return (
             <div className="infoplan">
+                <div className='infoplan-delete'>
+                    <button 
+                        type='button'
+                        className = 'infoplan-delete-button'
+                        onClick = {handleDeletePlan}
+                        >
+                        Delete Plan
+                    </button>
+                </div> 
                 <div className='infoplan-goal'>
                     <div className='infoplan-goal-text'>
                         { chosenPlan.goal }

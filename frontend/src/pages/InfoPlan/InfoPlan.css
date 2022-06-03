@@ -7,6 +7,15 @@
     padding-top: calc(var(--nav-size)*1.2);
     word-wrap: break-word;
 }
+.infoplan-delete{    
+    display: block;
+
+}
+.infoplan-delete-button{    
+    font-size: calc(var(--nav-size)*0.3);
+
+    
+}
 .infoplan-goal{    
     width: 100%;
     white-space: pre-line;
@@ -34,26 +43,29 @@
 }
 .infoplan-newcomment-textarea{
     height: calc(var(--nav-size)*0.6);
-    vertical-align: middle;
+    vertical-align: top;
     width: 60%;    
     margin-right: 5%;
 
 }
 .infoplan-newcomment-textarea:focus{
-    height: calc(var(--nav-size)*2);
-    width: 100%;
-    margin: 0;
-    display: block;
+    height: calc(var(--nav-size)*3);
+    /* width: 100%; */
+    /* margin: 0; */
+    /* display: block; */
 }
 .infoplan-newcomment-submit{
     font-size: calc(var(--nav-size)*0.3);
     width: 20%;
     height: calc(var(--nav-size)*0.5);
-    vertical-align: middle;
+    vertical-align: top;
     color: var(--text-color-inv);
     background-color: var(--text-color);
     border: none;
     border-radius: calc(var(--nav-size)*0.05);
+}
+.infoplan-newcomment-submit:hover {
+    background-color: brown;
 }
 .infoplan-comments{
 
