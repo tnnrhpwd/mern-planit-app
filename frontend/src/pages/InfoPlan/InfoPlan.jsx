@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'              // page redirects
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify'                        // visible error notifications
@@ -26,6 +26,8 @@ function InfoPlan() {
     const { comments, commentIsLoading, commentIsError, commentIsSuccess, commentMessage } = useSelector(     // select goal values from goal state
     (state) => state.comments
     )
+
+    const navigate = useNavigate() // initialization
 
 
     // called on state changes
@@ -93,7 +95,10 @@ function InfoPlan() {
     const handleDeletePlan = (e) => {
         e.preventDefault()
         console.log("delete plan")
-        // dispatch(deletePlan( chosenPlan._id ))
+        dispatch(deletePlan( chosenPlan._id ))
+        toast.info("Your plan has been deleted.") // print error to toast errors
+        navigate('/')           // send user to dashboard
+
     }
 
     if(chosenPlan){
@@ -101,7 +106,6 @@ function InfoPlan() {
             <div className="infoplan">
                 <div className='infoplan-delete'>
                     <button 
-                        type='button'
                         className = 'infoplan-delete-button'
                         onClick = {handleDeletePlan}
                         >

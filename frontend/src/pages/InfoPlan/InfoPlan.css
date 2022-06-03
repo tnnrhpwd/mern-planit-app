@@ -8,6 +8,7 @@
     word-wrap: break-word;
 }
 .infoplan-delete{    
+    padding-top: calc(var(--nav-size)*0.2);
     display: block;
 
 }
