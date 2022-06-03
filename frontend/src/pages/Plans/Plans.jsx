@@ -66,17 +66,26 @@ function Plans() {
       <div className='planit-plans-text'>
         Every journey begins with a step.
       </div>
-      <button onClick={handleCreatePlanToggle}>{showNewPlan ? "Cancel New Plan":"Create a Plan"}</button>
-      { ( user ) &&
-        <div className='planit-plans-in'>
-          {(showNewPlan) &&
-            <PlanInput />
+      <div  className='planit-plans-create' >
+        
+        <div onClick={handleCreatePlanToggle} className='planit-plans-create-text'>
+          {
+            showNewPlan ? "Cancel New Plan":"Create a Plan"
           }
-
+        
         </div>
-      }
-      <div className='planit-plans-my' onClick={handleMyPlansToggle}>
-        <div  className="planit-plans-my-text">
+        { ( user ) &&
+          <div className='planit-plans-in'>
+            {(showNewPlan) &&
+              <PlanInput />
+            }
+
+          </div>
+        }
+      </div>
+
+      <div className='planit-plans-my'>
+        <div onClick={handleMyPlansToggle} className="planit-plans-my-text">
           My Plans
         </div>
       
@@ -96,8 +105,8 @@ function Plans() {
           </div>
         }
       </div>
-      <div className='planit-plans-saved' onClick={handleSavedPlansToggle}>
-        <div  className="planit-plans-saved-text">
+      <div className='planit-plans-saved'>
+        <div onClick={handleSavedPlansToggle} className="planit-plans-saved-text">
           Saved Plans
         </div>
         { showSavedPlans &&
@@ -106,7 +115,7 @@ function Plans() {
               <div className='planit-plans-saved-out-result'>
                 {plans.map((plan) => 
                   ( plan.followers.includes( user._id ) )
-                  ?             ( <PlanResult key={plan._id} user={user} plan={plan}/> )
+                  ? ( <PlanResult key={plan._id} user={user} plan={plan}/> )
                   : null
                 )}
               </div>
