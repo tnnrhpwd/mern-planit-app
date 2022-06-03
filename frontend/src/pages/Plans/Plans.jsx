@@ -9,7 +9,9 @@ import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
 import './Plans.css';
 
 function Plans() {
-  const [showNewPlan, setShowNewPlan] = useState(false);
+  const [ showNewPlan, setShowNewPlan] = useState(false);
+  const [ showMyPlans, setShowMyPlans ] = useState(false)
+  const [ showSavedPlans, setShowSavedPlans ] = useState(false)
 
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
@@ -47,7 +49,15 @@ function Plans() {
 
   function handleCreatePlanToggle(){
     if(showNewPlan){setShowNewPlan(false)}
-    if(!showNewPlan){setShowNewPlan(true)}
+    else if(!showNewPlan){setShowNewPlan(true)}
+  }
+  function handleMyPlansToggle(){
+    if(showMyPlans){setShowMyPlans(false)}
+    else if(!showMyPlans){setShowMyPlans(true)}
+  }
+  function handleSavedPlansToggle(){
+    if(showSavedPlans){setShowSavedPlans(false)}
+    else if(!showSavedPlans){setShowSavedPlans(true)}
   }
 
   return (
@@ -65,21 +75,46 @@ function Plans() {
 
         </div>
       }
-      <div className='planit-plans-my'>
-        My Plans
-      </div>
-      <div className='planit-plans-out'>
-        {plans.length > 0 ? (
-          <div className='planit-plans-out-result'>
-            {plans.map((plan) => 
-              (plan.user === user._id)
-              ?             ( <PlanResult key={plan._id} user={user} plan={plan}/> )
-              : null
+      <div className='planit-plans-my' onClick={handleMyPlansToggle}>
+        <div  className="planit-plans-my-text">
+          My Plans
+        </div>
+      
+        { showMyPlans &&
+          <div className='planit-plans-my-out'>
+            {plans.length > 0 ? (
+              <div className='planit-plans-my-out-result'>
+                {plans.map((plan) => 
+                  (plan.user === user._id)
+                  ?             ( <PlanResult key={plan._id} user={user} plan={plan}/> )
+                  : null
+                )}
+              </div>
+            ) : (
+              <h3>You have not set any plans</h3>
             )}
           </div>
-        ) : (
-          <h3>You have not set any plans</h3>
-        )}
+        }
+      </div>
+      <div className='planit-plans-saved' onClick={handleSavedPlansToggle}>
+        <div  className="planit-plans-saved-text">
+          Saved Plans
+        </div>
+        { showSavedPlans &&
+          <div className='planit-plans-saved-out'>
+            {plans.length > 0 ? (
+              <div className='planit-plans-saved-out-result'>
+                {plans.map((plan) => 
+                  ( plan.followers.includes( user._id ) )
+                  ?             ( <PlanResult key={plan._id} user={user} plan={plan}/> )
+                  : null
+                )}
+              </div>
+            ) : (
+              <h3>You have not set any plans</h3>
+            )}
+          </div>
+        }
       </div>
     </div>
   )

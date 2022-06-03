@@ -24,6 +24,7 @@ code {
   --grey1: #bbbdc2;
   --grey2: #8e8f93;
   --grey3: #5d5d60;
+  --grey3-transp: rgb(93, 93, 96, 0.15);
   --grey4: #2d2d2e;
   --grey5: #151516;
   --grey5-transp: rgb(21, 21, 22, 0.95);
@@ -63,6 +64,8 @@ code {
   --bg-nav-dropper: var(--grey1);
   --bg-themebutton-land: var(--bg-accent);
   --bg-planpreview: var(--grey1);
+  --color-favorite: var(--green2);
+  --color-unfavorite: var(--grey2);
 }
 .dark-theme{
   --bg-pagelink: var(--green2);
@@ -77,6 +80,8 @@ code {
   --bg-nav-dropper: var(--grey4);
   --bg-themebutton-land: var(--green3);
   --bg-planpreview: var(--grey4);
+  --color-favorite: var(--green0);
+  --color-unfavorite: var(--white1-transp);
 }
 
 

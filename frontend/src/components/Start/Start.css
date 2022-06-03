@@ -119,12 +119,12 @@
 .planit-dashboard-start-goals-result-fav-btn{
     background-color: transparent;
     border: none;
-    color: var(--green0);
+    color: var(--color-favorite);
 }
 .planit-dashboard-start-goals-result-unfav-btn{
     background-color: transparent;
     border: none;
-    color: var(--white1-transp);
+    color: var(--color-unfavorite);
 }
 
 .planit-dashboard-start-goals-result-goal{
