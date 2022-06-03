@@ -105,12 +105,16 @@ function InfoPlan() {
         return (
             <div className="infoplan">
                 <div className='infoplan-delete'>
-                    <button 
-                        className = 'infoplan-delete-button'
-                        onClick = {handleDeletePlan}
-                        >
-                        Delete Plan
-                    </button>
+                    { (user) &&
+                        <>{ ( user._id === chosenPlan.user) &&
+                            <button 
+                                className = 'infoplan-delete-button'
+                                onClick = {handleDeletePlan}
+                                >
+                                Delete Plan
+                            </button>
+                        }</>
+                    }
                 </div> 
                 <div className='infoplan-goal'>
                     <div className='infoplan-goal-text'>
