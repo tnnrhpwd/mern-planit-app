@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'      // useDispatch-brings in reset,register,login from state
 import { createPlan } from '../../features/plans/planSlice'
 import './PlanInput.css';
@@ -25,7 +25,7 @@ function PlanInput() {
                         type='goal'
                         name='goal'
                         id='planit-planinput-input-goal'
-                        placeholder='Enter Goal'
+                        placeholder='Enter goal here.'
                         value={goal}
                         onChange={(e) => setGoal(e.target.value)}   // change text field value
                     />
