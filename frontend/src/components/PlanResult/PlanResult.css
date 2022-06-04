@@ -1,14 +1,15 @@
 
 .planit-planresult{
-    border: calc(var(--nav-size)*0.001) solid var(--grey3-transp);
+    border: calc(var(--nav-size)*0.0001) groove var(--border-nav);
     margin-top: calc(var(--nav-size)*.1);
-    background-color: transparent;
+    background-color: var(--text-color-inv);
     color: var(--text-color);
     display:inline-block;
     font-size: calc(var(--nav-size)*.3);
     text-align: center;
     width: 100%;
     min-height: 10vh;
+    border-radius: calc(var(--nav-size)*.15);
     /* padding-top: calc(var(--nav-size)*.2); */
 }
 .planit-planresult-1{

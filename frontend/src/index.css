@@ -19,7 +19,7 @@ code {
   --white0: #F4F7FD;
   --white0-transp: rgb(244, 247, 253, 0.9);
   --white1-transp: rgb(244, 247, 253, 0.2);
-  
+  --white1: #faf7fb;
   --grey0: #e0e2e8;
   --grey1: #bbbdc2;
   --grey2: #8e8f93;
@@ -57,10 +57,12 @@ code {
   --bg-nav2: var(--grey0);
   --bg-page: var(--white0);
   --bg-page-transp: var(--white0-transp);
+  --bg-plan: var(--white1);
   --text-color: var(--dark-blue0);
   --text-color-inv: var(--white0);
   --bg-accent: var(--green1);
   --border-nav: var(--grey1);
+  --border-plan: var(--grey5-transp);
   --bg-nav-dropper: var(--grey1);
   --bg-themebutton-land: var(--bg-accent);
   --bg-planpreview: var(--grey1);
@@ -73,10 +75,12 @@ code {
   --bg-nav2: var(--dark-blue0-grey);
   --bg-page: var(--grey5);
   --bg-page-transp: var(--grey5-transp);
+  --bg-plan: var(--grey3-transp);
   --text-color: var(--white0);
   --text-color-inv: var(--dark-blue0);
   --bg-accent: var(--green1);
   --border-nav: var(--dark-blue1);
+  --border-plan: var(--grey3-transp);
   --bg-nav-dropper: var(--grey4);
   --bg-themebutton-land: var(--green3);
   --bg-planpreview: var(--grey4);

@@ -12,7 +12,8 @@
     text-align: center;
     background-color: transparent;
     color: var(--text-color);
-    border: none;
+    border: calc(var(--nav-size)*0.001) solid var(--grey3-transp);
+
 
 }
 #planit-planinput-input-plan{
@@ -24,7 +25,8 @@
     margin-top: calc(var(--nav-size)*0.3);
     background-color: transparent;
     color: var(--text-color);
-    border: none;
+    border: calc(var(--nav-size)*0.001) solid var(--grey3-transp);
+
 }
 .planit-planinput-submit{
     font-size: calc(var(--nav-size)*0.25);
