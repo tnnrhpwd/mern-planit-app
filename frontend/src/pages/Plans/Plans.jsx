@@ -70,7 +70,7 @@ function Plans() {
         
         <div onClick={handleCreatePlanToggle} className='planit-plans-create-text'>
           {
-            showNewPlan ? "Cancel New Plan":"Create a Plan"
+            showNewPlan ? "Cancel Plan":"Create Plan"
           }
         
         </div>

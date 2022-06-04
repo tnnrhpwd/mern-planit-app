@@ -21,7 +21,7 @@
 @media (orientation: portrait) {
     .planit-planresult{
         margin-top: calc(var(--nav-size)*0.3);
-        border: calc(var(--nav-size)*0.01) solid var(--text-color) ;
+        border: calc(var(--nav-size)*0.01) solid var(--grey3-transp);
         text-align: center;
         font-size: calc(var(--nav-size)*0.2);
         padding: calc(var(--nav-size)*0.1);
