@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'                        // visible error n
 import Spinner from './../../components/Spinner/Spinner.jsx'
 import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
 import './Plans.css';
+import { getComments, resetCommentSlice } from '../../features/comments/commentSlice.js';
 
 function Plans() {
   const [ showNewPlan, setShowNewPlan] = useState(false);
@@ -20,17 +21,21 @@ function Plans() {
   const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select plan values from plan state
     (state) => state.plans
   )
-
+  const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select plan values from plan state
+    (state) => state.comments
+  )
 
   // called on state changes
   useEffect(() => {
-    if (planIsError) {
+    if (planIsError || commentIsError) {
       // console.log(planMessage)
       toast.error(planMessage) // print error to toast errors
+      toast.error(commentMessage) // print error to toast errors
 
     }
     // if(user){
       dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
+      dispatch(getComments()) // dispatch connects to the store, then retreives the plans that match the logged in user.
 
     // }
     if (!user) {            // if no user, redirect to login
@@ -40,10 +45,11 @@ function Plans() {
     
     return () => {    // reset the plans when state changes
       dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
+      dispatch(resetCommentSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
     }
-  }, [navigate, planIsError, planMessage, dispatch, user])
+  }, [navigate, planIsError, planMessage, dispatch, user, commentIsError, commentMessage])
 
-  if (planIsLoading) {
+  if ( planIsLoading || commentIsLoading ) {
     return <Spinner />
   }
 
@@ -95,7 +101,7 @@ function Plans() {
               <div className='planit-plans-my-out-result'>
                 {plans.map((plan) => 
                   (plan.user === user._id)
-                  ?             ( <PlanResult key={plan._id} user={user} plan={plan}/> )
+                  ? ( <PlanResult key={plan._id} user={user} plan={plan} comments={comments}/> )
                   : null
                 )}
               </div>
@@ -115,7 +121,7 @@ function Plans() {
               <div className='planit-plans-saved-out-result'>
                 {plans.map((plan) => 
                   ( plan.followers.includes( user._id ) )
-                  ? ( <PlanResult key={plan._id} user={user} plan={plan}/> )
+                  ? ( <PlanResult key={plan._id} user={user} plan={plan} comments={comments}/> )
                   : null
                 )}
               </div>

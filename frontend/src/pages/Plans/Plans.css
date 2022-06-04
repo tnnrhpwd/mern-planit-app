@@ -40,6 +40,7 @@
     border-radius: calc(var(--nav-size)*.15);
 }
 .planit-plans-my-text{
+    padding-bottom: calc(var(--nav-size)*.3);
     border: none;
     background-color: transparent;
     color: var(--text-color);
@@ -55,6 +56,7 @@
     border-radius: calc(var(--nav-size)*.15);
 }
 .planit-plans-saved-text{
+    padding-bottom: calc(var(--nav-size)*.3);
     border: none;
     background-color: transparent;
     color: var(--text-color);
