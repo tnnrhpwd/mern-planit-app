@@ -1,31 +1,131 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux'      // access state variables
-import { deletePlan } from '../../features/plans/planSlice'
+import { updatePlan } from '../../features/plans/planSlice'
+import ShareView from '../ShareView/ShareView.jsx'
+import { toast } from 'react-toastify'                        // visible error notifications
 import CreatedAt from './CreatedAt';
+import ThumbsUp from './../../assets/thumbs-up.svg';
+import ThumbsDown from './../../assets/thumbs-down.svg';
 import './PlanResult.css';
 
 function PlanResult(props) {
+  const [ shareView, setShareView ] = useState(null);
+
   const dispatch = useDispatch()  // initialization
   const plan = props.plan
+  const comments = props.comments
+
   var user = false;
-  if(props.user){
-    user = props.user
+  if( props.user ){ user = props.user }
+
+  function handleAgree(id){
+    const type = ("agree");
+    dispatch( updatePlan( {  id ,type } ) )
   }
 
+  function handleDisagree(id){
+    const type = ("disagree");
+    dispatch( updatePlan( {  id ,type } ) )
+  }
+
+  function handleFavorite(id){
+    const type = ("favorite");
+    dispatch( updatePlan( {  id ,type } ) )
+    toast.success("Plan added to your favorites!")
+
+  }
+
+  function handleUnfavorite(id){
+    const type = ("unfavorite");
+    dispatch( updatePlan( {  id ,type } ) )
+    toast.success("Plan removed from your favorites!")
+  }
+
+  function handleShareView(type, id){
+
+    if( ( shareView === null ) ){
+        const shareViewComponent = <ShareView view={true} click={setShareView} type={type} id={id}/>;
+        setShareView(shareViewComponent);
+
+    }else if( !( shareView === null ) ){
+        setShareView(null);
+    } 
+  }
+
+  function getCommentCount( planID ){
+    if ( !planID ){ return ; }   // GUARD CLAUSE - no plan input
+    if ( !comments ){ return ; }   // GUARD CLAUSE - no comments
+    var outputArray=[]
+    
+    comments.forEach(( comment, i ) => {
+        if( comment.plan === planID ){
+            outputArray.push(
+                {comment}
+            )
+        }
+    });
+    return ( outputArray.length )
+  }
 
   return (
-    <div className='planit-planresult'>
-      {/* <div>{new Date(plan.createdAt).toLocaleString('en-US')}</div> */}
-      <div>{ <CreatedAt createdAt={plan.createdAt}/> }</div>
-      <a href={'plan/'+plan._id}><h2 className='planit-planresult-goal'>{plan.goal}</h2></a>
-      <a href={'plan/'+plan._id}><h3 className='planit-planresult-plan'>{plan.plan}</h3></a>
-      <h5>Agrusers: {plan.agrusers}</h5>
-      <h5>Disusers: {plan.disusers}</h5>
-
-      { (user._id === plan.user) &&
-            <button onClick={() => dispatch(deletePlan(plan._id))} className='planit-planresult-delete'>
-            Delete Plan
-          </button>
-      }
+    <div key={plan._id+"0"} className='planit-planresult'>
+        <div key={plan._id+"0.1"} className='planit-planresult-1'>
+            <div className='planit-planresult-date'>
+                <CreatedAt createdAt={plan.createdAt}/>
+            </div>
+            <div className='planit-planresult-share'>
+                <button className='planit-planresult-share-btn' onClick={() => handleShareView("plan",plan._id)}>Share</button>
+            </div>
+            <div className='planit-planresult-fav'>
+                { (user) ? <>{
+                    <>{ (plan.followers.includes(user._id)) ?
+                        <>
+                            <button className='planit-planresult-fav-btn' onClick={() => handleUnfavorite( plan._id )} key={plan._id+"5.1"}>❤</button>
+                        </>
+                        :<>
+                            <button className='planit-planresult-unfav-btn' onClick={() => handleFavorite( plan._id )} key={plan._id+"5.2"}>❤</button>
+                        </>
+                    }</>
+                }</>:null}
+            </div>
+        </div>
+        <div key={plan._id+"0.2"} className='planit-planresult-2'>
+            <div key={plan._id+"2"} className='planit-planresult-goal'><a href={'plan/'+plan._id}><button key={plan._id+"2button"} className='planit-planresult-goalbutton'>{plan.goal}</button></a></div>
+            <div key={plan._id+"4"} className='planit-planresult-plan'><a href={'plan/'+plan._id}><button key={plan._id+"4button"} className='planit-planresult-planbutton'>{plan.plan}</button></a></div>
+        </div>
+        <div key={plan._id+"0.3"} className='planit-planresult-3'>
+            <div key={plan._id+"1"} className="planit-planresult-disagree-div">
+                {(user) ?
+                    <>{(plan.disusers.includes(user._id)) ?
+                        <button key={plan._id+"1button"} className='planit-planresult-disagreeACT' onClick={() => handleDisagree( plan._id )}><img className='planit-planresult-thumb' src={ThumbsDown} alt='thumbs down logo'/></button>
+                    :
+                        <button key={plan._id+"1.5button"} className='planit-planresult-disagree' onClick={() => handleDisagree( plan._id )}><img className='planit-planresult-thumb' src={ThumbsDown} alt='thumbs down logo'/></button>
+                }</>:null}
+            </div>
+            <div key={plan._id+"3"} className="planit-planresult-agree-div">
+                {(user) ?
+                <>{(plan.agrusers.includes(user._id)) ?
+                    <button key={plan._id+"3button"} className='planit-planresult-agreeACT' onClick={() => handleAgree( plan._id )}><img className='planit-planresult-thumb' src={ThumbsUp} alt='thumbs up logo'/></button>
+                :
+                    <button key={plan._id+"3button"} className='planit-planresult-agree' onClick={() => handleAgree( plan._id )}><img className='planit-planresult-thumb' src={ThumbsUp} alt='thumbs up logo'/></button>
+                }</>:null}
+            </div>
+            <div className='planit-planresult-votecomment-holder' >
+                <a href={'plan/'+plan._id} className='planit-planresult-votecomment-link'>
+                    <div className='planit-planresult-votecomment' >
+                        {/* Needed to add this if statement to add "+" before positive */}
+                        {(plan.agrusers.length - plan.disusers.length > 0)
+                            ? "+"+(plan.agrusers.length - plan.disusers.length)+" votes "
+                            : (plan.agrusers.length - plan.disusers.length)+" votes "
+                        }
+                        |
+                        {
+                            " "+getCommentCount( plan._id )+" comments"
+                        }
+                    </div>
+                </a>
+            </div>           
+        </div>
     </div>
   )
 }

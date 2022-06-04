@@ -13,13 +13,14 @@ import ThumbsDown from './../../assets/thumbs-down.svg';
 import PlanPreview from '../PlanPreview/PlanPreview.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
 import './Start.css';
+import PlanResult from '../PlanResult/PlanResult.jsx'
 
 
 function Start() {
     const [ findPlan, setFindPlan ] = useState("");
     const [ shareView, setShareView ] = useState(null);
     
-    const [ outputGoals, setOutputGoals ] = useState([]);
+    const [ outputPlans, setOutputPlans ] = useState([]);
     
     const [plan, setPlan] = useState('')
     const [goal, setGoal] = useState('')
@@ -46,14 +47,6 @@ function Start() {
 
     // RUNS ON INPUT FIELD CHANGE -- shows search suggestions
     useEffect(() => {
-        function handleAgree(id){
-            const type = ("agree");
-            dispatch( updatePlan( {  id ,type } ) )
-        }
-        function handleDisagree(id){
-            const type = ("disagree");
-            dispatch( updatePlan( {  id ,type } ) )
-        }
 
         // function handlePreviewOpen(planObject){
         //     var scrollheight = window.scrollY;
@@ -76,104 +69,33 @@ function Start() {
         //     dispatch(deletePlan(id));
         // }
         
-        function handleShareView(type, id){
 
-            if( ( shareView === null ) ){
-                const shareViewComponent = <ShareView view={true} click={setShareView} type={type} id={id}/>;
-                setShareView(shareViewComponent);
 
-            }else if( !( shareView === null ) ){
-                setShareView(null);
-            } 
-        }
-
-        function handleFavorite(id){
-            const type = ("favorite");
-            dispatch( updatePlan( {  id ,type } ) )
-            toast.success("Plan added to your favorites!")
-
-        }
-        function handleUnfavorite(id){
-            const type = ("unfavorite");
-            dispatch( updatePlan( {  id ,type } ) )
-            toast.success("Plan removed from your favorites!")
-        }
-
-        function handleOutputGoals(){
+        function handleOutputPlans(){
             if(findPlan===null){return;} // No search guard clause
             var outputArray = [];
     
             plans.forEach(( plan, i ) => {
-                if(plan.goal){
-                    if((findPlan!=="") && (plan.goal.toUpperCase().includes(findPlan.toUpperCase()))){
-                        outputArray.push(
-                            <div key={plan._id+"0"} className='planit-dashboard-start-goals-result'>
-                                <div key={plan._id+"0.1"} className='planit-dashboard-start-goals-result-1'>
-                                    <div className='planit-dashboard-start-goals-result-date'>
-                                        <CreatedAt createdAt={plan.createdAt}/>
-                                    </div>
-                                    <div className='planit-dashboard-start-goals-result-share'>
-                                        <button className='planit-dashboard-start-goals-result-share-btn' onClick={() => handleShareView("plan",plan._id)}>Share</button>
-                                    </div>
-                                    <div className='planit-dashboard-start-goals-result-fav'>
-                                    
-                                        { (user) ? <>{
-                                            <>{ (plan.followers.includes(user._id)) ?
-                                                <>
-                                                    <button className='planit-dashboard-start-goals-result-fav-btn' onClick={() => handleUnfavorite( plan._id )} key={plan._id+"5.1"}>❤</button>
-                                                </>
-                                                :<>
-                                                    <button className='planit-dashboard-start-goals-result-unfav-btn' onClick={() => handleFavorite( plan._id )} key={plan._id+"5.2"}>❤</button>
-                                                </>
-                                            }</>
-                                        }</>:null}
-                                    </div>
-                                </div>
 
-                                <div key={plan._id+"0.2"} className='planit-dashboard-start-goals-result-2'>
-                                    <div key={plan._id+"2"} className='planit-dashboard-start-goals-result-goal'><a href={'plan/'+plan._id}><button key={plan._id+"2button"} className='planit-dashboard-start-goals-result-goalbutton'>{plan.goal}</button></a></div>
-                                    <div key={plan._id+"4"} className='planit-dashboard-start-goals-result-plan'><a href={'plan/'+plan._id}><button key={plan._id+"4button"} className='planit-dashboard-start-goals-result-planbutton'>{plan.plan}</button></a></div>
-                                </div>
-
-                                <div key={plan._id+"0.3"} className='planit-dashboard-start-goals-result-3'>
-                                    <div key={plan._id+"1"} className="planit-dashboard-start-goals-result-disagree-div">
-                                        {(user) ?
-                                            <>{(plan.disusers.includes(user._id)) ?
-                                                <button key={plan._id+"1button"} className='planit-dashboard-start-goals-result-disagreeACT' onClick={() => handleDisagree( plan._id )}><img className='planit-dashboard-start-goals-result-thumb' src={ThumbsDown} alt='thumbs down logo'/></button>
-                                            :
-                                                <button key={plan._id+"1.5button"} className='planit-dashboard-start-goals-result-disagree' onClick={() => handleDisagree( plan._id )}><img className='planit-dashboard-start-goals-result-thumb' src={ThumbsDown} alt='thumbs down logo'/></button>
-                                        }</>:null}
-                                    </div>
-
-                                    <div key={plan._id+"3"} className="planit-dashboard-start-goals-result-agree-div">
-                                        {(user) ?
-                                        <>{(plan.agrusers.includes(user._id)) ?
-                                            <button key={plan._id+"3button"} className='planit-dashboard-start-goals-result-agreeACT' onClick={() => handleAgree( plan._id )}><img className='planit-dashboard-start-goals-result-thumb' src={ThumbsUp} alt='thumbs up logo'/></button>
-                                        :
-                                            <button key={plan._id+"3button"} className='planit-dashboard-start-goals-result-agree' onClick={() => handleAgree( plan._id )}><img className='planit-dashboard-start-goals-result-thumb' src={ThumbsUp} alt='thumbs up logo'/></button>
-                                        }</>:null}
-                                    </div>
-
-                                    <div className='planit-dashboard-start-goals-result-votes'>
-                                        {(plan.agrusers.length - plan.disusers.length > 0)
-                                            ? "+"+(plan.agrusers.length - plan.disusers.length)+" votes"
-                                            : (plan.agrusers.length - plan.disusers.length)+" votes"
-                                        }
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        )
-                    }
+                if((findPlan!=="") && (plan.goal.toUpperCase().includes(findPlan.toUpperCase()))){
+                    outputArray.push(
+                        <PlanResult key={plan._id} user={user} plan={plan} comments={comments}/>
+                    )
                 }
             });
-            setOutputGoals(outputArray);
+            setOutputPlans(outputArray);
         }
-        handleOutputGoals()
+
+
+
+
+        handleOutputPlans()
+
         setGoal(findPlan)
     }, [comments, dispatch, findPlan, plans, shareView, user])
-      // called on state changes
+
+
+    // called on state changes
     useEffect(() => {
         if (planIsError) {
             toast.error(planMessage) // print error to toast errors
@@ -199,22 +121,6 @@ function Start() {
         }
     }, [planIsError, planMessage, dispatch, commentIsError, commentMessage, authIsError, authMessage])
 
-
-
-    // RUNS ON STATE CHANGES - Gets an updated list of all the goals
-    useEffect(() => {
-        if (planIsError) {
-            // console.log(planMessage)
-            toast.error(planMessage) // print error to toast errors
-        }
-
-
-        dispatch(getPlans()) // dispatch connects to the store, then retreives the goals that match the logged in user.
-        
-        return () => {    // reset the goals when state changes
-            dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
-        }
-    }, [planIsError, planMessage, dispatch])
 
     // RUNS ON CREATE PLAN -- sends the new plan and goal text to the database
     const onPlanSubmit = (e) => {
@@ -263,9 +169,9 @@ function Start() {
             </div>
             <div className='planit-dashboard-start-goals'>
                 {(findPlan !== "") && 
-                    <div >{(outputGoals.length !== 0) ? (
+                    <div >{(outputPlans.length !== 0) ? (
                         <div >
-                            {outputGoals}
+                            {outputPlans}
                         </div>
                     ):
                         <div className='planit-dashboard-start-goals-plan'>

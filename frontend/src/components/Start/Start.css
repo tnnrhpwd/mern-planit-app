@@ -85,9 +85,22 @@
 }.planit-dashboard-start-goals-result-3{
     text-align: right;
 }
-.planit-dashboard-start-goals-result-votes{
-    text-align: center;
+.planit-dashboard-start-goals-result-votecomment-holder{
     width: 100%;
+    text-align: center;
+
+}
+.planit-dashboard-start-goals-result-votecomment-link{
+    width: 2%;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+
+}
+.planit-dashboard-start-goals-result-votecomment{
+    display: inline-block;
+    text-align: center;
+    width: 50%;
     /* display: inline-block; */
     z-index: -1;
     font-size: calc(var(--nav-size)*.25);
