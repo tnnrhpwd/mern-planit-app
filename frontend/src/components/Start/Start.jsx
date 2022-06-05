@@ -76,7 +76,7 @@ function Start() {
     
             plans.forEach(( plan, i ) => {
 
-                if((findPlan!=="") && (plan.goal.toUpperCase().includes(findPlan.toUpperCase()))){
+                if((findPlan!=="") && (plan.plan.toUpperCase().includes(findPlan.toUpperCase()) || plan.goal.toUpperCase().includes(findPlan.toUpperCase()))){
                     outputArray.push(
                         <PlanResult key={plan._id} user={user} plan={plan} comments={comments}/>
                     )
