@@ -48,8 +48,19 @@ code {
   :root{
     --nav-size: calc( min( 18vw, 9vh ) * 0.775 );
     --std-unit: var( --nav-size );
+    --toastify-toast-width: 100% !important;
+    --toastify-toast-max-height: calc(var(--nav-size)*10) !important;
+  }
+  .Toastify__toast-container{
+    font-size: calc(var(--nav-size)*.3) !important;
+    padding: calc(var(--nav-size)*.3) !important;
+  }
+  .Toastify__progress-bar{
+    height: calc(var(--nav-size)*.3) !important;
   }
 }
+
+
 
 .light-theme{
   --bg-pagelink: var(--green0);
@@ -66,8 +77,8 @@ code {
   --bg-nav-dropper: var(--grey1);
   --bg-themebutton-land: var(--bg-accent);
   --bg-planpreview: var(--grey1);
-  --color-favorite: var(--green2);
-  --color-unfavorite: var(--grey2);
+  --color-favorite: var(--text-color);
+  --color-unfavorite: var(--text-color);
 }
 .dark-theme{
   --bg-pagelink: var(--green2);
@@ -84,8 +95,8 @@ code {
   --bg-nav-dropper: var(--grey4);
   --bg-themebutton-land: var(--green3);
   --bg-planpreview: var(--grey4);
-  --color-favorite: var(--green0);
-  --color-unfavorite: var(--white1-transp);
+  --color-favorite: var(--text-color);
+  --color-unfavorite: var(--text-color);
 }
 
 
