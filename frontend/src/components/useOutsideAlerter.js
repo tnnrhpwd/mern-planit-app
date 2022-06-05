@@ -39,8 +39,6 @@ function useOutsideAlerter( alertType, insideComponentRef, toggleButtonRef, Comp
         if(dropperNum === 1){
           dropperNum=0;
           setComponentVisibility();
-          console.log("scroll")
-          console.log(alertType)
         }
 
       }
