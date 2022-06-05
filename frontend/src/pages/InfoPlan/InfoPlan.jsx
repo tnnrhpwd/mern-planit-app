@@ -77,24 +77,22 @@ function InfoPlan() {
     const handleSubmitNewComment = (e) => {
         e.preventDefault()
 
-        if( newComment === "" ){ toast.error("Please enter your comment first."); return; } // No input text guard clause
-        if( newComment.length > 280 ){ toast.error("Please shorten your comment to 280 characters."); return; } // Too long input text guard clause
+        if( newComment === "" ){ toast.error("Please enter your comment first.", { autoClose: 1000 }); return; } // No input text guard clause
+        if( newComment.length > 280 ){ toast.error("Please shorten your comment to 280 characters.", { autoClose: 1000 }); return; } // Too long input text guard clause
 
         const plan = chosenPlan;
         const comment = newComment   
 
-        console.log({ plan , comment })            
         dispatch(createComment({ plan , comment }))
 
         setNewComment('')
         
-        toast.success("Comment Submitted!") // print error to toast errors
+        toast.success("Comment Submitted!", { autoClose: 1000 }) // print error to toast errors
     }
 
     const handleDeletePlan = () => {
-        console.log("delete plan")
         dispatch(deletePlan( chosenPlan._id ))
-        toast.info("Your plan has been deleted.") // print error to toast errors
+        toast.info("Your plan has been deleted.", { autoClose: 2000 }) // print error to toast errors
         navigate('/')           // send user to dashboard
 
     }
