@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify'                        // visible error notifications
 import { deletePlan, getPlans, resetPlanSlice } from './../../features/plans/planSlice'
 import { createComment, deleteComment, getComments, resetCommentSlice } from './../../features/comments/commentSlice'
+import DeleteView from '../../components/DeleteView/DeleteView'
 import Spinner from '../../components/Spinner/Spinner';
 import CommentResult from '../../components/CommentResult/CommentResult'
 import './InfoPlan.css';
@@ -15,7 +16,7 @@ function InfoPlan() {
     const [ chosenPlan, setChosenPlan ] = useState(null);
     const [ importedComments, setImportedComments ] = useState(null);
     const [ newComment, setNewComment ] = useState("");
-    const [ userCreatedPlan, setUserCreatedPlan ] = useState(false)
+    const [ showDeletePlanConfirmation, setShowDeletePlanConfirmation ] = useState(false);
 
     const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select goal values from goal state
         (state) => state.plans
@@ -23,7 +24,7 @@ function InfoPlan() {
     const { user, authIsLoading, authIsError, authMessage } = useSelector(
         (state) => state.auth
     )
-    const { comments, commentIsLoading, commentIsError, commentIsSuccess, commentMessage } = useSelector(     // select goal values from goal state
+    const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select goal values from goal state
     (state) => state.comments
     )
 
@@ -54,9 +55,7 @@ function InfoPlan() {
             plans.forEach( elementPlan => {
                 if( elementPlan._id === id ){
                     setChosenPlan( elementPlan )
-                    if(user){
-                        if( elementPlan.user === user._id ){ setUserCreatedPlan(true) }
-                    }
+
                     var outputArray = [];
                     comments.forEach( elementComment => {
                         if( elementComment.plan === elementPlan._id ){
@@ -92,13 +91,17 @@ function InfoPlan() {
         toast.success("Comment Submitted!") // print error to toast errors
     }
 
-    const handleDeletePlan = (e) => {
-        e.preventDefault()
+    const handleDeletePlan = () => {
         console.log("delete plan")
         dispatch(deletePlan( chosenPlan._id ))
         toast.info("Your plan has been deleted.") // print error to toast errors
         navigate('/')           // send user to dashboard
 
+    }
+    const handleShowDeletePlan = (e) => {
+        e.preventDefault()
+        if(showDeletePlanConfirmation){setShowDeletePlanConfirmation(false)}
+        else if(!showDeletePlanConfirmation){setShowDeletePlanConfirmation(true)}
     }
 
     if(chosenPlan){
@@ -109,13 +112,16 @@ function InfoPlan() {
                         <>{ ( user._id === chosenPlan.user) &&
                             <button 
                                 className = 'infoplan-delete-button'
-                                onClick = {handleDeletePlan}
+                                onClick = {handleShowDeletePlan}
                                 >
                                 Delete Plan
                             </button>
                         }</>
                     }
                 </div> 
+                {   ( showDeletePlanConfirmation ) &&
+                    < DeleteView view={true} delFunction={handleDeletePlan} click={setShowDeletePlanConfirmation} type="plan" id={chosenPlan._id}/>
+                }
                 <div className='infoplan-goal'>
                     <div className='infoplan-goal-text'>
                         { chosenPlan.goal }

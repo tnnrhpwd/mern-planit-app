@@ -42,7 +42,7 @@ function PlanResult(props) {
   }
 
   function handleShareView(type, id){
-
+    console.log(shareView)
     if( ( shareView === null ) ){
         const shareViewComponent = <ShareView view={true} click={setShareView} type={type} id={id}/>;
         setShareView(shareViewComponent);
@@ -67,67 +67,69 @@ function PlanResult(props) {
     return ( outputArray.length )
   }
 
-  return (
-    <div key={plan._id+"0"} className='planit-planresult'>
-        <div key={plan._id+"0.1"} className='planit-planresult-1'>
-            <div className='planit-planresult-date'>
-                <CreatedAt createdAt={plan.createdAt}/>
+    return (<>
+        { shareView }
+
+        <div key={plan._id+"0"} className='planit-planresult'>
+            <div key={plan._id+"0.1"} className='planit-planresult-1'>
+                <div className='planit-planresult-date'>
+                    <CreatedAt createdAt={plan.createdAt}/>
+                </div>
+                <div className='planit-planresult-share'>
+                    <button className='planit-planresult-share-btn' onClick={() => handleShareView("plan",plan._id)}>Share</button>
+                </div>
+                <div className='planit-planresult-fav'>
+                    { (user) ? <>{
+                        <>{ (plan.followers.includes(user._id)) ?
+                            <>
+                                <button className='planit-planresult-fav-btn' onClick={() => handleUnfavorite( plan._id )} key={plan._id+"5.1"}>❤</button>
+                            </>
+                            :<>
+                                <button className='planit-planresult-unfav-btn' onClick={() => handleFavorite( plan._id )} key={plan._id+"5.2"}>❤</button>
+                            </>
+                        }</>
+                    }</>:null}
+                </div>
             </div>
-            <div className='planit-planresult-share'>
-                <button className='planit-planresult-share-btn' onClick={() => handleShareView("plan",plan._id)}>Share</button>
+            <div key={plan._id+"0.2"} className='planit-planresult-2'>
+                <div key={plan._id+"2"} className='planit-planresult-goal'><a href={'plan/'+plan._id}><button key={plan._id+"2button"} className='planit-planresult-goalbutton'>{plan.goal}</button></a></div>
+                <div key={plan._id+"4"} className='planit-planresult-plan'><a href={'plan/'+plan._id}><button key={plan._id+"4button"} className='planit-planresult-planbutton'>{plan.plan}</button></a></div>
             </div>
-            <div className='planit-planresult-fav'>
-                { (user) ? <>{
-                    <>{ (plan.followers.includes(user._id)) ?
-                        <>
-                            <button className='planit-planresult-fav-btn' onClick={() => handleUnfavorite( plan._id )} key={plan._id+"5.1"}>❤</button>
-                        </>
-                        :<>
-                            <button className='planit-planresult-unfav-btn' onClick={() => handleFavorite( plan._id )} key={plan._id+"5.2"}>❤</button>
-                        </>
-                    }</>
-                }</>:null}
-            </div>
-        </div>
-        <div key={plan._id+"0.2"} className='planit-planresult-2'>
-            <div key={plan._id+"2"} className='planit-planresult-goal'><a href={'plan/'+plan._id}><button key={plan._id+"2button"} className='planit-planresult-goalbutton'>{plan.goal}</button></a></div>
-            <div key={plan._id+"4"} className='planit-planresult-plan'><a href={'plan/'+plan._id}><button key={plan._id+"4button"} className='planit-planresult-planbutton'>{plan.plan}</button></a></div>
-        </div>
-        <div key={plan._id+"0.3"} className='planit-planresult-3'>
-            <div key={plan._id+"1"} className="planit-planresult-disagree-div">
-                {(user) ?
-                    <>{(plan.disusers.includes(user._id)) ?
-                        <button key={plan._id+"1button"} className='planit-planresult-disagreeACT' onClick={() => handleDisagree( plan._id )}><img className='planit-planresult-thumb' src={ThumbsDown} alt='thumbs down logo'/></button>
+            <div key={plan._id+"0.3"} className='planit-planresult-3'>
+                <div key={plan._id+"1"} className="planit-planresult-disagree-div">
+                    {(user) ?
+                        <>{(plan.disusers.includes(user._id)) ?
+                            <button key={plan._id+"1button"} className='planit-planresult-disagreeACT' onClick={() => handleDisagree( plan._id )}><img className='planit-planresult-thumb' src={ThumbsDown} alt='thumbs down logo'/></button>
+                        :
+                            <button key={plan._id+"1.5button"} className='planit-planresult-disagree' onClick={() => handleDisagree( plan._id )}><img className='planit-planresult-thumb' src={ThumbsDown} alt='thumbs down logo'/></button>
+                    }</>:null}
+                </div>
+                <div key={plan._id+"3"} className="planit-planresult-agree-div">
+                    {(user) ?
+                    <>{(plan.agrusers.includes(user._id)) ?
+                        <button key={plan._id+"3button"} className='planit-planresult-agreeACT' onClick={() => handleAgree( plan._id )}><img className='planit-planresult-thumb' src={ThumbsUp} alt='thumbs up logo'/></button>
                     :
-                        <button key={plan._id+"1.5button"} className='planit-planresult-disagree' onClick={() => handleDisagree( plan._id )}><img className='planit-planresult-thumb' src={ThumbsDown} alt='thumbs down logo'/></button>
-                }</>:null}
+                        <button key={plan._id+"3button"} className='planit-planresult-agree' onClick={() => handleAgree( plan._id )}><img className='planit-planresult-thumb' src={ThumbsUp} alt='thumbs up logo'/></button>
+                    }</>:null}
+                </div>
+                <div className='planit-planresult-votecomment-holder' >
+                    <a href={'plan/'+plan._id} className='planit-planresult-votecomment-link'>
+                        <div className='planit-planresult-votecomment' >
+                            {/* Needed to add this if statement to add "+" before positive */}
+                            {(plan.agrusers.length - plan.disusers.length > 0)
+                                ? "+"+(plan.agrusers.length - plan.disusers.length)+" votes "
+                                : (plan.agrusers.length - plan.disusers.length)+" votes "
+                            }
+                            |
+                            {
+                                " "+getCommentCount( plan._id )+" comments"
+                            }
+                        </div>
+                    </a>
+                </div>           
             </div>
-            <div key={plan._id+"3"} className="planit-planresult-agree-div">
-                {(user) ?
-                <>{(plan.agrusers.includes(user._id)) ?
-                    <button key={plan._id+"3button"} className='planit-planresult-agreeACT' onClick={() => handleAgree( plan._id )}><img className='planit-planresult-thumb' src={ThumbsUp} alt='thumbs up logo'/></button>
-                :
-                    <button key={plan._id+"3button"} className='planit-planresult-agree' onClick={() => handleAgree( plan._id )}><img className='planit-planresult-thumb' src={ThumbsUp} alt='thumbs up logo'/></button>
-                }</>:null}
-            </div>
-            <div className='planit-planresult-votecomment-holder' >
-                <a href={'plan/'+plan._id} className='planit-planresult-votecomment-link'>
-                    <div className='planit-planresult-votecomment' >
-                        {/* Needed to add this if statement to add "+" before positive */}
-                        {(plan.agrusers.length - plan.disusers.length > 0)
-                            ? "+"+(plan.agrusers.length - plan.disusers.length)+" votes "
-                            : (plan.agrusers.length - plan.disusers.length)+" votes "
-                        }
-                        |
-                        {
-                            " "+getCommentCount( plan._id )+" comments"
-                        }
-                    </div>
-                </a>
-            </div>           
         </div>
-    </div>
-  )
+    </>)
 }
 
 export default PlanResult

@@ -14,9 +14,12 @@
 }
 .infoplan-delete-button{    
     font-size: calc(var(--nav-size)*0.3);
-
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
     
 }
+
 .infoplan-goal{    
     width: 100%;
     white-space: pre-line;
