@@ -49,9 +49,9 @@ function Plans() {
     }
   }, [navigate, planIsError, planMessage, dispatch, user, commentIsError, commentMessage])
 
-  if ( planIsLoading || commentIsLoading ) {
-    return <Spinner />
-  }
+  // if ( planIsLoading || commentIsLoading ) {
+  //   return <Spinner />
+  // }
 
   function handleCreatePlanToggle(){
     if(showNewPlan){setShowNewPlan(false)}
