@@ -5,11 +5,13 @@ import ShareView from '../ShareView/ShareView.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
 import CreatedAt from './CreatedAt';
 import ThumbsUp from './../../assets/thumbs-up.svg';
+import AddView from '../AddView/AddView';
 import ThumbsDown from './../../assets/thumbs-down.svg';
 import './PlanResult.css';
 
 function PlanResult(props) {
   const [ shareView, setShareView ] = useState(null);
+  const [ addView, setAddView ] = useState(null);
 
   const dispatch = useDispatch()  // initialization
   const plan = props.plan
@@ -31,25 +33,35 @@ function PlanResult(props) {
   function handleFavorite(id){
     const type = ("favorite");
     dispatch( updatePlan( {  id ,type } ) )
-    toast.success("Plan added to your favorites!")
+    toast.success("Plan added to your favorites!", { autoClose: 100000 })
 
   }
 
   function handleUnfavorite(id){
     const type = ("unfavorite");
     dispatch( updatePlan( {  id ,type } ) )
-    toast.success("Plan removed from your favorites!")
+    toast.success("Plan removed from your favorites!", { autoClose: 100000 })
   }
 
-  function handleShareView(type, id){
-    console.log(shareView)
-    if( ( shareView === null ) ){
-        const shareViewComponent = <ShareView view={true} click={setShareView} type={type} id={id}/>;
-        setShareView(shareViewComponent);
+    function handleShareView(type, id){
 
-    }else if( !( shareView === null ) ){
-        setShareView(null);
-    } 
+        if( ( shareView === null ) ){
+            const shareViewComponent = <ShareView view={true} click={setShareView} type={type} id={id}/>;
+            setShareView(shareViewComponent);
+        }else if( !( shareView === null ) ){
+            setShareView(null);
+        } 
+    }
+
+  function handleAddView(type, id){
+
+        if( ( addView === null ) ){
+            const addViewComponent = <AddView view={true} click={setAddView} type={type} id={id}/>;
+            setAddView(addViewComponent);
+
+        }else if( !( addView === null ) ){
+            setAddView(null);
+        } 
   }
 
   function getCommentCount( planID ){
@@ -69,6 +81,7 @@ function PlanResult(props) {
 
     return (<>
         { shareView }
+        { addView }
 
         <div key={plan._id+"0"} className='planit-planresult'>
             <div key={plan._id+"0.1"} className='planit-planresult-1'>
@@ -85,9 +98,14 @@ function PlanResult(props) {
                                 <button className='planit-planresult-fav-btn' onClick={() => handleUnfavorite( plan._id )} key={plan._id+"5.1"}>❤</button>
                             </>
                             :<>
-                                <button className='planit-planresult-unfav-btn' onClick={() => handleFavorite( plan._id )} key={plan._id+"5.2"}>❤</button>
+                                <button className='planit-planresult-unfav-btn' onClick={() => handleFavorite( plan._id )} key={plan._id+"5.2"}>♡</button>
                             </>
                         }</>
+                    }</>:null}
+                </div>
+                <div className='planit-planresult-addplan'>
+                    { (user) ? <>{
+                        <button className='planit-planresult-addplan-btn' onClick={() => handleAddView("plan",plan._id)} >+</button>
                     }</>:null}
                 </div>
             </div>
