@@ -14,10 +14,11 @@
 }
 .infoplan-delete-button{    
     font-size: calc(var(--nav-size)*0.3);
+    padding: calc(var(--nav-size)*0.1);
     background-color: transparent;
     color: var(--text-color);
-    border: none;
-    
+    border: calc(var(--nav-size)*0.001) solid var(--text-color);
+    border-radius: calc(var(--nav-size)*0.05);
 }
 
 .infoplan-goal{    
@@ -59,17 +60,18 @@
     /* display: block; */
 }
 .infoplan-newcomment-submit{
-    font-size: calc(var(--nav-size)*0.3);
-    width: 20%;
-    height: calc(var(--nav-size)*0.5);
+
+
+
     vertical-align: top;
     color: var(--text-color-inv);
-    background-color: var(--text-color);
-    border: none;
+    background-color: transparent;
+    font-size: calc(var(--nav-size)*0.3);
+    padding: calc(var(--nav-size)*0.15);
+    background-color: transparent;
+    color: var(--text-color);
+    border: calc(var(--nav-size)*0.001) solid var(--text-color);
     border-radius: calc(var(--nav-size)*0.05);
-}
-.infoplan-newcomment-submit:hover {
-    background-color: brown;
 }
 .infoplan-comments{
 
