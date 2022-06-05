@@ -1,7 +1,7 @@
 .shareview-spc{
-    position: fixed;
+    position: absolute;
     text-align: center;
-    width: 100%;
+    width: 85%;
     height: 100%;
     z-index: 5;
 
@@ -11,13 +11,13 @@
     z-index: 10;
     background-image: linear-gradient(var(--bg-nav1),var(--bg-nav1)) ;
     /* margin: calc(var(--nav-size)*0.2); */
-    margin-top: calc(var(--nav-size)*3);
-    padding: calc(var(--nav-size)*0.2);
+    /* margin-bottom: calc(var(--nav-size)*1); */
+    /* padding: calc(var(--nav-size)*0.2); */
     padding-bottom: calc(var(--nav-size)*1);
     text-decoration: none;
     color: var(--text-color);
     border: calc(var(--nav-size)*0.001) solid var(--text-color);
-    width: 85%;
+    width: 100%;
 }
 .shareview-link{
     /* margin-top: calc(var(--nav-size)*1); */

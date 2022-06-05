@@ -18,7 +18,6 @@ import PlanResult from '../PlanResult/PlanResult.jsx'
 
 function Start() {
     const [ findPlan, setFindPlan ] = useState("");
-    const [ shareView, setShareView ] = useState(null);
     
     const [ outputPlans, setOutputPlans ] = useState([]);
     
@@ -92,7 +91,7 @@ function Start() {
         handleOutputPlans()
 
         setGoal(findPlan)
-    }, [comments, dispatch, findPlan, plans, shareView, user])
+    }, [comments, dispatch, findPlan, plans, user])
 
 
     // called on state changes
@@ -142,8 +141,6 @@ function Start() {
 
 
     return (<>
-        { shareView }
-
         <div className='planit-dashboard-start'>
             <div className='planit-dashboard-start-find'>
                 <div className='planit-dashboard-start-find-text'>

@@ -8,7 +8,6 @@ function ShareView(props) {
     const id = props.id;
     const link = "https://mern-planit-app.herokuapp.com/"+type+"/"+id;
 
-
     const hideComponentVisibility = () => {props.click(null);}
     const ComponentVisibility = () => { return( true ) }  
     const toggleButtonRef = useRef(null);  // reference to the dropper toggle button
