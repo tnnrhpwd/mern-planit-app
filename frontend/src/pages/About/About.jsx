@@ -17,6 +17,13 @@ function About() {
           <br/> Decide upon a plan to meet your measurable success criteria. 
           <br/> Follow your plan, learning more for future plans.
 
+          <br/><br/> State = system observed understanding of environment
+
+          <br/><br/> Goal = non-current system-envisioned state
+
+          <br/><br/> Plan = Group of goals
+
+
 
           <div className='about-portfolio'>
           To see more of my projects, <br/>
