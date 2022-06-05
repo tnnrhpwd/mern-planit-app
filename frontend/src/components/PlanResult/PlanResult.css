@@ -55,29 +55,55 @@
 }
 .planit-planresult-share-btn{
     background-color: transparent;
+    font-size: calc(var(--nav-size)*.275);
     color: var(--text-color);
     border: none;
 }
 .planit-planresult-fav{
-    /* background-image: radial-gradient( var(--text-color) , transparent 50%); */
-
     font-size: calc(var(--nav-size)*.25);
     display: inline-block;
 }
 .planit-planresult-fav-btn{
     background-color: transparent;
     border: none;
+    font-size: calc(var(--nav-size)*.3);
     color: var(--color-favorite);
 }
 .planit-planresult-unfav-btn{
+    font-size: calc(var(--nav-size)*.45);
     background-color: transparent;
     border: none;
     color: var(--color-unfavorite);
-}
-
-.planit-planresult-goal{
+} 
+.planit-planresult-addplan{
     display: inline-block;
+    padding-left: calc(var(--nav-size)*.3);
+}
+.planit-planresult-addplan-btn{
+    font-size: calc(var(--nav-size)*.45);    
     font-weight: bold;
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+}
+.planit-planresult-goal{
+
+    display: block;
+
+}
+.planit-planresult-goalbutton{
+    font-size: calc(var(--nav-size)*.3);    
+    font-weight: bold;
+    
+}
+.planit-planresult-plan{
+
+    display: block;
+}
+.planit-planresult-planbutton{
+    font-size: calc(var(--nav-size)*.25);    
+    font-weight: normal;
+    
 }
 .planit-planresult-disagree-div{
     position: absolute;
