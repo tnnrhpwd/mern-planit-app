@@ -13,15 +13,16 @@
     background-color: transparent;
     color: var(--text-color);
     border: calc(var(--nav-size)*0.001) solid var(--grey3-transp);
+    height: calc(var(--nav-size)*0.5);
 
 
 }
-#planit-planinput-input-plan{
+.planit-planinput-input-plan{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: calc(var(--nav-size)*0.35);
+    font-size: calc(var(--nav-size)*0.3);
     width: 95%;
     text-align: center;
-    height: calc(var(--nav-size)*2);
+    height: calc(var(--nav-size)*0.75);
     margin-top: calc(var(--nav-size)*0.3);
     background-color: transparent;
     color: var(--text-color);
@@ -29,6 +30,7 @@
 
 }
 .planit-planinput-submit{
+    display: inline-block;
     font-size: calc(var(--nav-size)*0.25);
     padding: calc(var(--nav-size)*0.3);
     margin: calc(var(--nav-size)*0.15);
