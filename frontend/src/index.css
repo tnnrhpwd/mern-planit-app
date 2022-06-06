@@ -48,15 +48,20 @@ code {
   :root{
     --nav-size: calc( min( 18vw, 9vh ) * 0.775 );
     --std-unit: var( --nav-size );
-    --toastify-toast-width: 100% !important;
+    --toastify-toast-width: 99% !important;
     --toastify-toast-max-height: calc(var(--nav-size)*10) !important;
+    --toastify-toast-min-height: calc(var(--nav-size)*1) !important;
   }
   .Toastify__toast-container{
     font-size: calc(var(--nav-size)*.3) !important;
-    padding: calc(var(--nav-size)*.3) !important;
+    padding: 1% !important;
   }
   .Toastify__progress-bar{
-    height: calc(var(--nav-size)*.3) !important;
+    height: calc(var(--nav-size)*.1) !important;
+  }
+  .Toastify__toast-container--top-right{
+    top: 0;
+    right: 0;
   }
 }
 

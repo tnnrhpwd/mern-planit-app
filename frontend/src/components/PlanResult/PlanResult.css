@@ -77,7 +77,7 @@
 } 
 .planit-planresult-addplan{
     display: inline-block;
-    padding-left: calc(var(--nav-size)*.3);
+    padding-left: calc(var(--nav-size)*.1);
 }
 .planit-planresult-addplan-btn{
     font-size: calc(var(--nav-size)*.45);    

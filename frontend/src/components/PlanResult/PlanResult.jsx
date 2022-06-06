@@ -33,14 +33,14 @@ function PlanResult(props) {
   function handleFavorite(id){
     const type = ("favorite");
     dispatch( updatePlan( {  id ,type } ) )
-    toast.success("Plan added to your favorites!", { autoClose: 100000 })
+    toast.success("Plan added to your favorites!", { autoClose: 1000 })
 
   }
 
   function handleUnfavorite(id){
     const type = ("unfavorite");
     dispatch( updatePlan( {  id ,type } ) )
-    toast.success("Plan removed from your favorites!", { autoClose: 100000 })
+    toast.success("Plan removed from your favorites!", { autoClose: 1000 })
   }
 
     function handleShareView(type, id){
