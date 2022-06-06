@@ -78,7 +78,7 @@ function Login() {
                     <input
                         type='email'
                         className='planit-login-form-control'
-                        id='email'
+                        id='planit-email'
                         name='email'
                         value={email}
                         placeholder='Enter your email'
@@ -89,7 +89,7 @@ function Login() {
                     <input
                         type='password'
                         className='planit-login-form-control'
-                        id='password'
+                        id='planit-password'
                         name='password'
                         value={password}
                         placeholder='Enter password'

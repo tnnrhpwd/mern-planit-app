@@ -33,6 +33,15 @@
     max-width: 80%;
 }
 
+#planit-password{
+    font-size: calc(var(--nav-size)*.4);
+    
+}
+#planit-email{
+    font-size: calc(var(--nav-size)*.4);
+    
+}
+
 .planit-login-form-submit{
     width: calc(var(--nav-size)*1.5);
     margin: calc(var(--nav-size)*.1);
