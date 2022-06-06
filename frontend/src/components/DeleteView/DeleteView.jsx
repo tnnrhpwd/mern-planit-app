@@ -17,12 +17,14 @@ function DeleteView(props) {
         <div className='planit-deleteview'>
             <div className='planit-deleteview-spc' ref={insideComponentRef}>
                 Are you sure you want to delete this { type }?
-                <button className='planit-deleteview-spc-btn' onClick={handleDelete}>
-                    Yes, delete.
-                </button>
-                <button className='planit-deleteview-spc-btn' ref={toggleButtonRef} onClick={hideComponentVisibility} >
-                    No.
-                </button>
+                <div>
+                    <button className='planit-deleteview-spc-btn' onClick={handleDelete}>
+                        Yes, delete.
+                    </button>
+                    <button className='planit-deleteview-spc-btn' ref={toggleButtonRef} onClick={hideComponentVisibility} >
+                        No.
+                    </button>
+                </div>
             </div>
         </div>
     )

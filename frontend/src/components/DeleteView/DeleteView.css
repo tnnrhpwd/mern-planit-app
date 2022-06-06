@@ -1,9 +1,10 @@
 .planit-deleteview{
-    position: fixed;
+    position: absolute;
     /* top: calc(var(--nav-size)*0.3); */
     /* left: calc(var(--nav-size)*0.3); */
     width: 90%;
     text-align: center;
+    z-index: 10;
 }
 .planit-deleteview-spc{
     display: inline-block;
@@ -17,6 +18,7 @@
     width: 80%;
 }
 .planit-deleteview-spc-btn{
+    font-size: calc(var(--nav-size)*0.25);
     padding: calc(var(--nav-size)*0.1);
     margin: calc(var(--nav-size)*0.15);
     margin-top: calc(var(--nav-size)*0.8);
