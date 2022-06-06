@@ -93,7 +93,7 @@ function InfoPlan() {
     const handleDeletePlan = () => {
         dispatch(deletePlan( chosenPlan._id ))
         toast.info("Your plan has been deleted.", { autoClose: 2000 }) // print error to toast errors
-        navigate('/')           // send user to dashboard
+        navigate('/plans')           // send user to dashboard
 
     }
     const handleShowDeletePlan = (e) => {
@@ -127,7 +127,11 @@ function InfoPlan() {
                 </div>                 
                 <div className='infoplan-plan'>
                     <div className='infoplan-plan-text'>
-                        { chosenPlan.plan }
+                        { chosenPlan.plan.map(( element, eleIndex ) => {
+                            return (<div key={"plan-text-"+eleIndex}>
+                                {element}
+                            </div>)
+                        }) }
                     </div>
                 </div> 
                 <div className='infoplan-newcomment'>
