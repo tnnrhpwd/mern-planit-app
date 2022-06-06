@@ -49,6 +49,7 @@
 .infoplan-newcomment-textarea{
     height: calc(var(--nav-size)*0.6);
     vertical-align: top;
+    font-size: calc(var(--nav-size)*0.3);
     width: 60%;    
     margin-right: 5%;
 
