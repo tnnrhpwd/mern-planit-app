@@ -38,6 +38,17 @@ code {
   --red3: #5d0d0d;
 
 }
+.Toastify__toast-container{
+  font-size: calc(var(--nav-size)*.3) !important;
+  padding: 1% !important;
+}
+.Toastify__progress-bar{
+  height: calc(var(--nav-size)*.1) !important;
+}
+.Toastify__toast-container--top-right{
+  top: 0;
+  right: 0;
+}
 @media (orientation: landscape) {
   :root{
   --nav-size: min(5vw,5vh);
@@ -52,17 +63,7 @@ code {
     --toastify-toast-max-height: calc(var(--nav-size)*10) !important;
     --toastify-toast-min-height: calc(var(--nav-size)*1) !important;
   }
-  .Toastify__toast-container{
-    font-size: calc(var(--nav-size)*.3) !important;
-    padding: 1% !important;
-  }
-  .Toastify__progress-bar{
-    height: calc(var(--nav-size)*.1) !important;
-  }
-  .Toastify__toast-container--top-right{
-    top: 0;
-    right: 0;
-  }
+
 }
 
 
