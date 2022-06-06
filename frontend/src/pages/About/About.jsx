@@ -20,8 +20,10 @@ function About() {
           <br/><br/> State = system observed understanding of environment
 
           <br/><br/> Goal = non-current system-envisioned state
+          <br/> Examples: Get job, food, or ability.
+          
 
-          <br/><br/> Plan = Group of goals
+          <br/><br/> Plan = a path of smaller goals to a larger goal.
 
 
 
