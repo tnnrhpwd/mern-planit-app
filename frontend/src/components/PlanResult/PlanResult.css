@@ -57,16 +57,19 @@
     background-color: transparent;
     font-size: calc(var(--nav-size)*.275);
     color: var(--text-color);
+    vertical-align: middle;
     border: none;
 }
 .planit-planresult-fav{
     font-size: calc(var(--nav-size)*.25);
+    vertical-align: middle;
     display: inline-block;
 }
 .planit-planresult-fav-btn{
     background-color: transparent;
     border: none;
     font-size: calc(var(--nav-size)*.3);
+    vertical-align: middle;
     color: var(--color-favorite);
 }
 .planit-planresult-unfav-btn{
@@ -74,13 +77,15 @@
     background-color: transparent;
     border: none;
     color: var(--color-unfavorite);
+    vertical-align: middle;
 } 
-.planit-planresult-addplan{
+.planit-planresult-manageplan{
     display: inline-block;
     padding-left: calc(var(--nav-size)*.1);
 }
-.planit-planresult-addplan-btn{
-    font-size: calc(var(--nav-size)*.45);    
+.planit-planresult-manageplan-btn{
+    font-size: calc(var(--nav-size)*.35);    
+    vertical-align: middle;
     font-weight: bold;
     background-color: transparent;
     color: var(--text-color);

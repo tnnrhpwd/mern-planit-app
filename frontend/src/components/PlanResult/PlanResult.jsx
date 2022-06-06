@@ -4,14 +4,16 @@ import { updatePlan } from '../../features/plans/planSlice'
 import ShareView from '../ShareView/ShareView.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
 import CreatedAt from './CreatedAt';
+import { useNavigate } from 'react-router-dom';
 import ThumbsUp from './../../assets/thumbs-up.svg';
-import AddView from '../AddView/AddView';
+import ManageView from '../ManageView/ManageView';
 import ThumbsDown from './../../assets/thumbs-down.svg';
 import './PlanResult.css';
 
 function PlanResult(props) {
+  const navigate = useNavigate();
   const [ shareView, setShareView ] = useState(null);
-  const [ addView, setAddView ] = useState(null);
+  const [ manageView, setManageView ] = useState(null);
 
   const dispatch = useDispatch()  // initialization
   const plan = props.plan
@@ -53,14 +55,15 @@ function PlanResult(props) {
         } 
     }
 
-  function handleAddView(type, id){
+  function handleManageView(type, id){
+        if(!user){ navigate('/login') } // GUARD CLAUSE -- Nonusers go to login.
 
-        if( ( addView === null ) ){
-            const addViewComponent = <AddView view={true} click={setAddView} type={type} id={id}/>;
-            setAddView(addViewComponent);
+        if( ( manageView === null ) ){
+            const manageViewComponent = <ManageView plan={props.plan} user={user} view={true} click={setManageView} type={type} id={id}/>;
+            setManageView(manageViewComponent);
 
-        }else if( !( addView === null ) ){
-            setAddView(null);
+        }else if( !( manageView === null ) ){
+            setManageView(null);
         } 
   }
 
@@ -81,7 +84,7 @@ function PlanResult(props) {
 
     return (<>
         { shareView }
-        { addView }
+        { manageView }
 
         <div key={plan._id+"0"} className='planit-planresult'>
             <div key={plan._id+"0.1"} className='planit-planresult-1'>
@@ -103,9 +106,9 @@ function PlanResult(props) {
                         }</>
                     }</>:null}
                 </div>
-                <div className='planit-planresult-addplan'>
+                <div className='planit-planresult-manageplan'>
                     { (user) ? <>{
-                        <button className='planit-planresult-addplan-btn' onClick={() => handleAddView("plan",plan._id)} >+</button>
+                        <button className='planit-planresult-manageplan-btn' onClick={() => handleManageView("plan",plan._id)} >☸</button>
                     }</>:null}
                 </div>
             </div>
