@@ -75,8 +75,14 @@ function Start() {
             var outputArray = [];
     
             plans.forEach(( plan, i ) => {
+                var includedInPlan = false;
+                plan.plan.forEach(element => {
+                    if(element.toUpperCase().includes(findPlan.toUpperCase())){
+                        includedInPlan = true;
+                    }
+                })
 
-                if((findPlan!=="") && (plan.plan.toUpperCase().includes(findPlan.toUpperCase()) || plan.goal.toUpperCase().includes(findPlan.toUpperCase()))){
+                if((findPlan!=="") && ( (includedInPlan) || plan.goal.toUpperCase().includes(findPlan.toUpperCase()) )){
                     outputArray.push(
                         <PlanResult key={plan._id} user={user} plan={plan} comments={comments}/>
                     )

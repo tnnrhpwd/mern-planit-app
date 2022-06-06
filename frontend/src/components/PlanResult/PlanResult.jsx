@@ -114,7 +114,7 @@ function PlanResult(props) {
             </div>
             <div key={plan._id+"0.2"} className='planit-planresult-2'>
                 <div key={plan._id+"2"} className='planit-planresult-goal'><a href={'plan/'+plan._id}><button key={plan._id+"2button"} className='planit-planresult-goalbutton'>{plan.goal}</button></a></div>
-                <div key={plan._id+"4"} className='planit-planresult-plan'><a href={'plan/'+plan._id}><button key={plan._id+"4button"} className='planit-planresult-planbutton'>{plan.plan}</button></a></div>
+                <div key={plan._id+"4"} className='planit-planresult-plan'><a href={'plan/'+plan._id}><button key={plan._id+"4button"} className='planit-planresult-planbutton'>{plan.plan.map(( planElement, planElementIndex ) => (<div key={plan._id+"element"+planElementIndex}>{planElement}</div>))}</button></a></div>
             </div>
             <div key={plan._id+"0.3"} className='planit-planresult-3'>
                 <div key={plan._id+"1"} className="planit-planresult-disagree-div">
