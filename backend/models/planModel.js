@@ -9,7 +9,7 @@ const planSchema = mongoose.Schema(
       ref: 'User',
     },
     plan: {
-      type: String,
+      type: mongoose.Schema.Types.Array,
       required: [true, 'Please add a plan value'],
     },
     goal: {

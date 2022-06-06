@@ -23,9 +23,11 @@ const setPlan = asyncHandler(async (req, res) => {
     throw new Error('Please add a text field')
   }
 
+  const planArray = req.body.plan.split("|planit-item|")
+
   const plan = await Plan.create({
     goal: req.body.goal,
-    plan: req.body.plan,
+    plan: planArray,
     user: req.user.id,
   })
   
