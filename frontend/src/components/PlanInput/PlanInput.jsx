@@ -18,7 +18,7 @@ function PlanInput() {
 
     const addPlanInput = () => {
         setPlanInputArray(stringArray => {
-            const lastId = stringArray[stringArray.length - 1].id;
+            // const lastId = stringArray[stringArray.length - 1].id;
             return [...stringArray, {
                 type: "text",
                 value: "",
