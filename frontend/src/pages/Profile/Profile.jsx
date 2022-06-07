@@ -24,7 +24,6 @@ function Profile() {
     if (!user) {            // if no user, redirect to login
       navigate('/login') 
     }
-    console.log(user)
 
     // dispatch(getGoals()) // dispatch connects to the store, then retreives the goals that match the logged in user.
 
