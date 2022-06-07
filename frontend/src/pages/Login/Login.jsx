@@ -57,7 +57,19 @@ function Login() {
         dispatch(login(userData))   // dispatch connects to the store, then calls the async register function passing userdata as input.
     }
 
-      // if loading, show spinner. authIsLoading resets on state change.
+      // called on each guest login form submit
+    const handleGuestLogin = (e) => {
+        e.preventDefault()
+
+        const userData = {     // get data from input form
+            email: "Guest@gmail.com",
+            password: "Guest",
+        }
+
+        dispatch(login(userData))   // dispatch connects to the store, then calls the async register function passing userdata as input. 
+    }
+
+    // if loading, show spinner. authIsLoading resets on state change.
     if (authIsLoading) {
         return <Spinner />
     }
@@ -105,9 +117,14 @@ function Login() {
         </section>
         <a href='/register'>
             <button className='planit-login-register'>
-                Register Instead
+                Register
             </button>
         </a>
+        
+        <button onClick={handleGuestLogin} className='planit-login-guest'>
+            Use Guest Account
+        </button>
+        
     </div>
   )
 }
