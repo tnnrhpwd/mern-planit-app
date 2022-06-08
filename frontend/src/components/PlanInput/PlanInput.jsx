@@ -18,7 +18,7 @@ function PlanInput() {
 
     const addPlanInput = () => {
         setPlanInputArray(stringArray => {
-            // const lastId = stringArray[stringArray.length - 1].id;
+
             return [...stringArray, {
                 type: "text",
                 value: "",
@@ -40,9 +40,9 @@ function PlanInput() {
 
     useEffect(() => {
         if(!planInputArray){ return; } // GUARD CLAUSE - no planarray
-        //get convert array to string to send to redux
+        //get convert array to string -- prepare to send to redux
         var outputString = [];
-        planInputArray.map((item, itemIndex) => {
+        planInputArray.forEach((item, itemIndex) => {
             if( itemIndex === 0 ){
                 outputString = item.value
             } else { 
