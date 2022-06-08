@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'      // useDispatch-brings in reset,register,login from state
+import { toast } from 'react-toastify'                        // visible error notifications
 import { createGoal } from './../../features/goals/goalSlice'
 import './GoalInput.css';
 
@@ -12,7 +13,8 @@ function GoalInput() {
         e.preventDefault()
 
         dispatch(createGoal({ text }))   // dispatch connects to the store, then creates a goal with text input
-        setText('')                      // empty text field
+        setText('')                      // empty text field 
+        toast.success("Goal successfully created!", { autoClose: 1000 })
     }
 
     return (
