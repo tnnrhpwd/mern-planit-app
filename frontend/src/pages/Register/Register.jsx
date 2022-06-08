@@ -53,15 +53,16 @@ function Register() {
 
         if (password !== password2) { // if passwords dont match, error. Else, 
             toast.error('Passwords do not match')
-          } else {
+        } else {
             const userData = {  // get data from input form
-              username,
-              email,
-              password,
+            username,
+            email,
+            password,
             }
-      
+    
             dispatch(register(userData))  // dispatch connects to the store, then calls the async register function passing userdata as input.
-          }
+            toast.success("Successfully registered!", { autoClose: 2000 }) // print error to toast errors
+        }
     }
 
       // if loading, show spinner. authIsLoading resets on state change.

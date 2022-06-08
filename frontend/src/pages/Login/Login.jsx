@@ -55,9 +55,12 @@ function Login() {
         }
 
         dispatch(login(userData))   // dispatch connects to the store, then calls the async register function passing userdata as input.
+        toast.success("Successfully logged in!", { autoClose: 2000 }) // print error to toast errors
+
+
     }
 
-      // called on each guest login form submit
+    // called on each guest login form submit
     const handleGuestLogin = (e) => {
         e.preventDefault()
 
@@ -67,6 +70,7 @@ function Login() {
         }
 
         dispatch(login(userData))   // dispatch connects to the store, then calls the async register function passing userdata as input. 
+        toast.success("Logged in as Guest", { autoClose: 2000 }) // print error to toast errors
     }
 
     // if loading, show spinner. authIsLoading resets on state change.
@@ -122,7 +126,7 @@ function Login() {
         </a>
         
         <button onClick={handleGuestLogin} className='planit-login-guest'>
-            Use Guest Account
+            Login as Guest
         </button>
         
     </div>
