@@ -7,8 +7,16 @@
 }
 #planit-goalinput-input{
     font-size: calc(var(--nav-size)*0.35);
+    width: 90%;
+    text-align: center;
+    padding: calc(var(--nav-size)*0.1);
+    margin: calc(var(--nav-size)*0.1);
+
 }
 .planit-goalinput-submit{
     font-size: calc(var(--nav-size)*0.25);
-    padding: calc(var(--nav-size)*0.05);
+    padding: calc(var(--nav-size)*0.2);
+    background-color: transparent;
+    color: var(--text-color);
+    border: calc(var(--nav-size)*0.001) solid var(--text-color)
 }

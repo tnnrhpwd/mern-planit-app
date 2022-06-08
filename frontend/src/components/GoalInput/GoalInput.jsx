@@ -23,14 +23,14 @@ function GoalInput() {
                     type='text'
                     name='text'
                     id='planit-goalinput-input'
-                    placeholder='Enter Goal'
+                    placeholder='Enter goal for others to solve.'
                     value={text}
                     onChange={(e) => setText(e.target.value)}   // change text field value
                 />
                 </div>
                 <div className='planit-goalinput-group'>
                 <button className='planit-goalinput-submit' type='submit'>
-                    Add Goal
+                    Create Goal
                 </button>
                 </div>
             </form>
