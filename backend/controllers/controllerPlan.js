@@ -1,6 +1,7 @@
 // This file contains the functions that deal with the Plan objects( schema imported from Models) => Exported to Routes
 const asyncHandler = require('express-async-handler')// sends the errors to the errorhandler
 
+const Goal = require('../models/goalModel')
 const Plan = require('../models/planModel')
 
 // @desc    Get plans
@@ -25,9 +26,22 @@ const setPlan = asyncHandler(async (req, res) => {
 
   const planArray = req.body.plan.split("|planit-item|")
 
+  async function handleGoalCreation(stringOfGoal){
+    return await Goal.create({
+      goal: req.body.stringOfGoal,
+      user: req.user.id,
+    })
+  }
+
+  var outputArray;
+  planArray.forEach( goalString => {
+    outputArray.push(handleGoalCreation(goalString))
+  });
+
+
   const plan = await Plan.create({
-    goal: req.body.goal,
-    plan: planArray,
+    goal: handleGoalCreation(req.body.goal),
+    plan: outputArray,
     user: req.user.id,
   })
   
