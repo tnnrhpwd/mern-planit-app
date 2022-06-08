@@ -5,6 +5,7 @@ import GoalInput from './../../components/GoalInput/GoalInput.jsx';
 import GoalResult from './../../components/GoalResult/GoalResult.jsx';
 import Spinner from './../../components/Spinner/Spinner.jsx'
 import { getGoals, resetGoalSlice } from './../../features/goals/goalSlice'
+import { toast } from 'react-toastify'                        // visible error notifications
 import './Goals.css';
 
 function Goals() {
@@ -22,6 +23,7 @@ function Goals() {
   useEffect(() => {
     if (goalIsError) {
       console.log(goalMessage)
+      toast.error(goalMessage, { autoClose: 1000 });
     }
     // if(user){
       dispatch(getGoals()) // dispatch connects to the store, then retreives the goals that match the logged in user.
@@ -46,6 +48,8 @@ function Goals() {
       Goals
       <div className='planit-goals-text'>
         Every journey begins with a step.
+        <br/><br/> Create plans for other peoples' goals, or get their input on your goals.
+        <br/> 
       </div>
       <div className='planit-goals-in'>
         <GoalInput />
