@@ -5,10 +5,7 @@ import Spinner from '../Spinner/Spinner.jsx'
 import { getPlans, resetPlanSlice, createPlan, updatePlan, deletePlan } from '../../features/plans/planSlice'
 import { getComments, resetCommentSlice, createComment, updateComment } from '../../features/comments/commentSlice'
 import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
-import CreatedAt from '../PlanResult/CreatedAt.js'
-import ShareView from '../ShareView/ShareView.jsx'
-import ThumbsUp from './../../assets/thumbs-up.svg';
-import ThumbsDown from './../../assets/thumbs-down.svg';
+
 
 import PlanPreview from '../PlanPreview/PlanPreview.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
@@ -176,7 +173,8 @@ function Start() {
                         <div >
                             {outputPlans}
                         </div>
-                    ):
+                    ):<>
+                    {(user) ? 
                         <div className='planit-dashboard-start-goals-plan'>
                             <h4>
                                 {findPlan}
@@ -197,6 +195,10 @@ function Start() {
                                 </h4>
                             </form>
                         </div>
+                        :null
+                    }
+                    </>
+
                     }</div>
                 }
             </div>
