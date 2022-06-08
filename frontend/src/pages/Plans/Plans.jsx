@@ -6,8 +6,8 @@ import PlanResult from './../../components/PlanResult/PlanResult.jsx';
 import { toast } from 'react-toastify'                        // visible error notifications
 import Spinner from './../../components/Spinner/Spinner.jsx'
 import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
-import './Plans.css';
 import { getComments, resetCommentSlice } from '../../features/comments/commentSlice.js';
+import './Plans.css';
 
 function Plans() {
   const [ showNewPlan, setShowNewPlan] = useState(false);
@@ -31,13 +31,12 @@ function Plans() {
       // console.log(planMessage)
       toast.error(planMessage) // print error to toast errors
       toast.error(commentMessage) // print error to toast errors
-
     }
-    // if(user){
-      dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
-      dispatch(getComments()) // dispatch connects to the store, then retreives the plans that match the logged in user.
 
-    // }
+    dispatch(getPlans()) // dispatch connects to the store, then retreives the plans.
+    dispatch(getComments()) // dispatch connects to the store, then retreives the comments.
+
+  
     if (!user) {            // if no user, redirect to login
       navigate('/login') 
     }
