@@ -11,11 +11,12 @@ import ThumbsDown from './../../assets/thumbs-down.svg';
 import './PlanResult.css';
 
 function PlanResult(props) {
+  const dispatch = useDispatch()  // initialization
   const navigate = useNavigate();
+  
   const [ shareView, setShareView ] = useState(null);
   const [ manageView, setManageView ] = useState(null);
 
-  const dispatch = useDispatch()  // initialization
   const plan = props.plan
   const comments = props.comments
 
