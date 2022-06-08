@@ -5,21 +5,24 @@ import Spinner from '../Spinner/Spinner.jsx'
 import { getPlans, resetPlanSlice, createPlan, updatePlan, deletePlan } from '../../features/plans/planSlice'
 import { getComments, resetCommentSlice, createComment, updateComment } from '../../features/comments/commentSlice'
 import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
-
+import PlanResult from '../PlanResult/PlanResult.jsx'
+import LoginView from '../LoginView/LoginView.jsx'
 
 import PlanPreview from '../PlanPreview/PlanPreview.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
 import './Start.css';
-import PlanResult from '../PlanResult/PlanResult.jsx'
 
 
 function Start() {
     const [ findPlan, setFindPlan ] = useState("");
-    
+    const [ loginView, setLoginView ] = useState(false);
     const [ outputPlans, setOutputPlans ] = useState([]);
+    const [ renders, setRenders ] = useState(0);
     
     const [plan, setPlan] = useState('')
     const [goal, setGoal] = useState('')
+
+
 
     // const navigate = useNavigate() // initialization
     const dispatch = useDispatch() // initialization
@@ -35,7 +38,7 @@ function Start() {
         (state) => state.auth
     )
 
-    
+
     // Scroll to the top on render
     useEffect(() => {
         window.scrollTo(0,0);
@@ -109,6 +112,11 @@ function Start() {
             toast.error(authMessage) // print error to toast errors
         }
 
+        if( ( !user ) && ( renders === 0 ) ){
+            if(loginView === false){setLoginView( true )}
+            setRenders( renders + 1 )
+        }
+
 
         dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
         dispatch(getComments()) // dispatch connects to the store, then retreives the plans that match the logged in user.
@@ -121,7 +129,7 @@ function Start() {
             dispatch(resetAuthSlice()) // dispatch connects to the store, then reset state values( authMessage, authisloading, authiserror, and authissuccess )
 
         }
-    }, [planIsError, planMessage, dispatch, commentIsError, commentMessage, authIsError, authMessage])
+    }, [planIsError, planMessage, dispatch, commentIsError, commentMessage, authIsError, authMessage, user, renders, loginView])
 
 
     // RUNS ON CREATE PLAN -- sends the new plan and goal text to the database
@@ -141,9 +149,14 @@ function Start() {
     }
 
 
+    
+
 
 
     return (<>
+        { loginView &&
+            < LoginView click={setLoginView} />
+        }
         <div className='planit-dashboard-start'>
             <div className='planit-dashboard-start-find'>
                 <div className='planit-dashboard-start-find-text'>
