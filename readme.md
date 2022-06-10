@@ -2,6 +2,10 @@
 ### Where goals meet actions
 By Steven Tanner Hopwood
 
+Planit -- The place where goals become plans and actions.
+
+Planit is an online application where users can post their goals and plans to do anything. Users goals and plans are public, so that users can get feedback on their plans, give feedback on other peoples' plans, and learn how to do anything.
+
 ___
 
 
