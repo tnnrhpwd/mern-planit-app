@@ -21,30 +21,35 @@ const getPlans = asyncHandler(async (req, res) => {
 const setPlan = asyncHandler(async (req, res) => {
   if (!req.body.plan) {
     res.status(400)
-    throw new Error('Please add a text field')
+    throw new Error('Please add a plan.')
+  }
+  if (!req.body.goal) {
+    res.status(400)
+    throw new Error('Please add a goal.')
   }
 
-  const planArray = req.body.plan.split("|planit-item|")
+  const planStringArray = req.body.plan.split("|planit-item|")
 
-  async function handleGoalCreation(stringOfGoal){
-    return await Goal.create({
-      goal: req.body.stringOfGoal,
+  const handleGoalBuild = async (stringOfGoal) => {
+    const bigFloops =  await Goal.create({
+      goal: stringOfGoal,
       user: req.user.id,
     })
+    return await bigFloops._id
   }
 
-  var outputArray;
-  planArray.forEach( goalString => {
-    outputArray.push(handleGoalCreation(goalString))
+  const newGoal = await handleGoalBuild(req.body.goal)
+  const planArrayLoops = await planStringArray.map( goalString => {
+    return handleGoalBuild(goalString)
   });
 
-
   const plan = await Plan.create({
-    goal: handleGoalCreation(req.body.goal),
-    plan: outputArray,
+    goal: newGoal,
+    plan: planArrayLoops,
     user: req.user.id,
   })
-  
+
+  // const floops = await handleGoalBuild();
 
   res.status(200).json(plan)
 })
