@@ -13,7 +13,7 @@ const planSchema = mongoose.Schema(
       required: [true, 'Please add a plan value'],
     },
     goal: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: [true, 'Please add a goal value'],
     },
     agrusers: {
