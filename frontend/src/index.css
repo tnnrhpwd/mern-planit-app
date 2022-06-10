@@ -49,6 +49,16 @@ code {
   top: 0;
   right: 0;
 }
+.Toastify__close-button > svg {
+  height: calc(var(--nav-size)*0.5);
+  width: calc(var(--nav-size)*0.5);
+  fill: var(--toastify-icon-color-success);
+}
+.Toastify__toast-icon {
+
+  width: calc(var(--nav-size)*0.5);
+
+}
 @media (orientation: landscape) {
   :root{
   --nav-size: min(5vw,5vh);
