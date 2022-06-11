@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import Spinner from '../Spinner/Spinner.jsx'
 import { getPlans, resetPlanSlice, createPlan, updatePlan, deletePlan } from '../../features/plans/planSlice'
+import { getGoals, resetGoalSlice, createGoal, updateGoal, deleteGoal } from '../../features/goals/goalSlice'
 import { getComments, resetCommentSlice, createComment, updateComment } from '../../features/comments/commentSlice'
 import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
 import PlanResult from '../PlanResult/PlanResult.jsx'
@@ -16,6 +17,7 @@ import './Start.css';
 function Start() {
     const [ findPlan, setFindPlan ] = useState("");
     const [ loginView, setLoginView ] = useState(false);
+    const [ planObjectArray, setPlanObjectArray ] = useState(null)
     const [ outputPlans, setOutputPlans ] = useState([]);
     const [ renders, setRenders ] = useState(0);
     
@@ -30,6 +32,9 @@ function Start() {
     // const { user } = useSelector((state) => state.auth)      // select user values from user state
     const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select goal values from goal state
         (state) => state.plans
+    )
+    const { goals, goalIsLoading, goalIsError, goalMessage } = useSelector(     // select goal values from goal state
+        (state) => state.goals
     )
     const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select goal values from goal state
         (state) => state.comments
@@ -69,25 +74,45 @@ function Start() {
         // }
         
 
+        const buildPlanObjectArray = () => {
+            console.log(plans)
+            var outputPlanObjectArray = [];
+            plans.forEach( ( indPlan, indPlanIndex ) => {                         // for each plan inported from database
+                console.log(indPlan)
+                outputPlanObjectArray.push(indPlan)                     // add to object output array
+                delete outputPlanObjectArray[indPlanIndex].__V;
+                indPlan.plan.forEach( ( goalIDString, goalIndex ) => {
+                    console.log(outputPlanObjectArray[ indPlanIndex ].plan[ goalIndex ])
+                    console.log(goalIDString)
+                    console.log(goals.find( x => x._id === goalIDString ))
+                    // outputPlanObjectArray[ indPlanIndex ].plan[ goalIndex ] = goals.find( x => x._id === goalIDString ) //( plan.plan[ goalIndex ] ) ) // get goal object from goal ID string
+                })
+            })
+            console.log(outputPlanObjectArray)
+            setPlanObjectArray(outputPlanObjectArray)
+        }
+
+        if( ( planObjectArray === null ) && ( plans.length > 10 ) && ( goals.length > 10 ) ) { buildPlanObjectArray() }
+
 
         function handleOutputPlans(){
             if(findPlan===null){return;} // No search guard clause
             var outputArray = [];
     
-            plans.forEach(( plan, i ) => {
-                var includedInPlan = false;
-                plan.plan.forEach(element => {
-                    if(element.toUpperCase().includes(findPlan.toUpperCase())){
-                        includedInPlan = true;
-                    }
-                })
+            // plans.forEach(( plan, i ) => {
+            //     var includedInPlan = false;
+            //     plan.plan.forEach(element => {
+            //         if(element.toUpperCase().includes(findPlan.toUpperCase())){
+            //             includedInPlan = true;
+            //         }
+            //     })
 
-                if((findPlan!=="") && ( (includedInPlan) || plan.goal.toUpperCase().includes(findPlan.toUpperCase()) )){
-                    outputArray.push(
-                        <PlanResult key={plan._id} user={user} plan={plan} comments={comments}/>
-                    )
-                }
-            });
+            //     if((findPlan!=="") && ( (includedInPlan) || plan.goal.toUpperCase().includes(findPlan.toUpperCase()) )){
+            //         outputArray.push(
+            //             <PlanResult key={plan._id} user={user} plan={plan} comments={comments}/>
+            //         )
+            //     }
+            // });
             setOutputPlans(outputArray);
         }
 
@@ -97,7 +122,7 @@ function Start() {
         handleOutputPlans()
 
         setGoal(findPlan)
-    }, [comments, dispatch, findPlan, plans, user])
+    }, [comments, dispatch, findPlan, goals, plan.plan, planObjectArray, plans, user])
 
 
     // called on state changes
@@ -111,6 +136,9 @@ function Start() {
         if (authIsError) {
             toast.error(authMessage) // print error to toast errors
         }
+        if (goalIsError) {
+            toast.error(goalMessage) // print error to toast errors
+        }
 
         if( ( !user ) && ( renders === 0 ) ){
             if(loginView === false){setLoginView( true )}
@@ -119,17 +147,22 @@ function Start() {
 
 
         dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
+        dispatch(getGoals()) // dispatch connects to the store, then retreives the plans that match the logged in user.
         dispatch(getComments()) // dispatch connects to the store, then retreives the plans that match the logged in user.
         // dispatch(getMyData()) // dispatch connects to the store, then retreives the profile data that matches the logged in user.
+
+
+
 
 
         return () => {    // reset the plans when state changes
             dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, planisloading, planiserror, and planissuccess )
             dispatch(resetCommentSlice()) // dispatch connects to the store, then reset state values( commentMessage, commentisloading, commentiserror, and commentissuccess )
+            dispatch(resetGoalSlice()) // dispatch connects to the store, then reset state values( commentMessage, commentisloading, commentiserror, and commentissuccess )
             dispatch(resetAuthSlice()) // dispatch connects to the store, then reset state values( authMessage, authisloading, authiserror, and authissuccess )
 
         }
-    }, [planIsError, planMessage, dispatch, commentIsError, commentMessage, authIsError, authMessage, user, renders, loginView])
+    }, [planIsError, planMessage, dispatch, commentIsError, commentMessage, authIsError, authMessage, user, renders, loginView, goalIsError, goalMessage])
 
 
     // RUNS ON CREATE PLAN -- sends the new plan and goal text to the database
