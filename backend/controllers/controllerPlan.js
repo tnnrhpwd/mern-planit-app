@@ -1,5 +1,6 @@
 // This file contains the functions that deal with the Plan objects( schema imported from Models) => Exported to Routes
 const asyncHandler = require('express-async-handler')// sends the errors to the errorhandler
+var mongoose = require('mongoose');
 
 const Goal = require('../models/goalModel')
 const Plan = require('../models/planModel')
@@ -19,18 +20,20 @@ const getPlans = asyncHandler(async (req, res) => {
 // @route   POST /api/plans
 // @access  Private
 const setPlan = asyncHandler(async (req, res) => {
-  if (!req.body.plan) {
+  if (!req.body.plan) {   // GUARD CLAUSE - no plan
     res.status(400)
     throw new Error('Please add a plan.')
   }
-  if (!req.body.goal) {
+  if (!req.body.goal) {   // GUARD CLAUSE - no goal
     res.status(400)
     throw new Error('Please add a goal.')
   }
-
+  
+  // build string array of plans
   const planStringArray = req.body.plan.split("|planit-item|")
 
-  const handleGoalBuild = async (stringOfGoal) => {
+  // ASYNC function - sends new goal to database, and returns the ID string
+  const buildGoalReturnID = async (stringOfGoal) => {
     const bigFloops =  await Goal.create({
       goal: stringOfGoal,
       user: req.user.id,
@@ -38,20 +41,28 @@ const setPlan = asyncHandler(async (req, res) => {
     return await bigFloops._id
   }
 
-  const newGoal = await handleGoalBuild(req.body.goal)
-  const planArrayLoops = await planStringArray.map( goalString => {
-    return handleGoalBuild(goalString)
-  });
+  // ASYNC function - sends each string goal of an array to database. Fills output string with return IDs
+  const getPlanArray = async (stringArray) => {
+    var planObjectArray = [];
+    await Promise.all(stringArray.map(async (indString) => {
+      planObjectArray.push( await buildGoalReturnID(indString) )
+    }));
+    return planObjectArray
+  }
 
+  // build goal and array variables.
+  const newGoal = await buildGoalReturnID(req.body.goal)
+  const newPlan = await getPlanArray(planStringArray)
+
+  // send new plan to database
   const plan = await Plan.create({
     goal: newGoal,
-    plan: planArrayLoops,
+    plan: newPlan,
     user: req.user.id,
   })
 
-  // const floops = await handleGoalBuild();
-
-  res.status(200).json(plan)
+  // send the plan return json back to sender.
+  res.status(200).json( plan )
 })
 
 // @desc    Update plan
