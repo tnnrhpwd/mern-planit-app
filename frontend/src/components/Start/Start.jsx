@@ -65,53 +65,8 @@ function Start() {
         //         />
         //     )
         // }
-        // function handlePreviewClose(){
-        //     setOutView(null)
-        // }
-        // function handleDeletePlan(id){
-        //     console.log("Delete Plan: ",id)
-        //     dispatch(deletePlan(id));
-        // }
-        
 
-        // const buildPlanObjectArray = () => {
-        //     var outputPlanObjectArray = [];
-        //     plans.forEach( ( indPlan, indPlanIndex ) => {                         // for each plan inported from database
-        //         // turn string of goalID to array of goal attributes
-        //         const groopPlan = indPlan.plan.map( ( goalIDString, goalIndex ) => {
-        //             const zrupGoal = goals.find( x => x._id === goalIDString )
-        //             const zrupArray = [
-        //                 zrupGoal._id,
-        //                 zrupGoal.goal,
-        //                 zrupGoal.user,
-        //                 zrupGoal.createdAt,
-        //                 zrupGoal.updatedAt,
-        //             ]
-        //             return zrupArray
-        //         })
-        //         const grypGoal =  goals.find( x => x._id === indPlan.goal )
-        //         const groopGoal = [
-        //             grypGoal._id,
-        //             grypGoal.goal,
-        //             grypGoal.user,
-        //             grypGoal.createdAt,
-        //             grypGoal.updatedAt,
-        //         ]
-        //         const groops = [
-        //             indPlan._id,
-        //             indPlan.user,
-        //             groopGoal,
-        //             groopPlan,
-        //             indPlan.agrusers,
-        //             indPlan.disusers,
-        //             indPlan.followers,
-        //             indPlan.createdAt,
-        //             indPlan.updatedAt,
-        //         ]
-        //         outputPlanObjectArray.push(groops)                     // add to object output array
-        //     })
-        //     setPlanObjectArray(outputPlanObjectArray); console.log(outputPlanObjectArray)
-        // }
+        
 
         function getGoalObjectFromObjectID(goalObjectIDString){
             return goals.find( x => x._id === goalObjectIDString )
