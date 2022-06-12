@@ -74,56 +74,89 @@ function Start() {
         // }
         
 
-        const buildPlanObjectArray = () => {
-            console.log(plans)
-            var outputPlanObjectArray = [];
-            plans.forEach( ( indPlan, indPlanIndex ) => {                         // for each plan inported from database
-                console.log(indPlan)
-                outputPlanObjectArray.push(indPlan)                     // add to object output array
-                delete outputPlanObjectArray[indPlanIndex].__V;
-                indPlan.plan.forEach( ( goalIDString, goalIndex ) => {
-                    console.log(outputPlanObjectArray[ indPlanIndex ].plan[ goalIndex ])
-                    console.log(goalIDString)
-                    console.log(goals.find( x => x._id === goalIDString ))
-                    // outputPlanObjectArray[ indPlanIndex ].plan[ goalIndex ] = goals.find( x => x._id === goalIDString ) //( plan.plan[ goalIndex ] ) ) // get goal object from goal ID string
-                })
-            })
-            console.log(outputPlanObjectArray)
-            setPlanObjectArray(outputPlanObjectArray)
+        // const buildPlanObjectArray = () => {
+        //     var outputPlanObjectArray = [];
+        //     plans.forEach( ( indPlan, indPlanIndex ) => {                         // for each plan inported from database
+        //         // turn string of goalID to array of goal attributes
+        //         const groopPlan = indPlan.plan.map( ( goalIDString, goalIndex ) => {
+        //             const zrupGoal = goals.find( x => x._id === goalIDString )
+        //             const zrupArray = [
+        //                 zrupGoal._id,
+        //                 zrupGoal.goal,
+        //                 zrupGoal.user,
+        //                 zrupGoal.createdAt,
+        //                 zrupGoal.updatedAt,
+        //             ]
+        //             return zrupArray
+        //         })
+        //         const grypGoal =  goals.find( x => x._id === indPlan.goal )
+        //         const groopGoal = [
+        //             grypGoal._id,
+        //             grypGoal.goal,
+        //             grypGoal.user,
+        //             grypGoal.createdAt,
+        //             grypGoal.updatedAt,
+        //         ]
+        //         const groops = [
+        //             indPlan._id,
+        //             indPlan.user,
+        //             groopGoal,
+        //             groopPlan,
+        //             indPlan.agrusers,
+        //             indPlan.disusers,
+        //             indPlan.followers,
+        //             indPlan.createdAt,
+        //             indPlan.updatedAt,
+        //         ]
+        //         outputPlanObjectArray.push(groops)                     // add to object output array
+        //     })
+        //     setPlanObjectArray(outputPlanObjectArray); console.log(outputPlanObjectArray)
+        // }
+
+        function getGoalObjectFromObjectID(goalObjectIDString){
+            return goals.find( x => x._id === goalObjectIDString )
         }
 
-        if( ( planObjectArray === null ) && ( plans.length > 10 ) && ( goals.length > 10 ) ) { buildPlanObjectArray() }
-
-
         function handleOutputPlans(){
-            if(findPlan===null){return;} // No search guard clause
+            if(findPlan===''){return;} // No search guard clause
+            // if(planObjectArray===null){return;} // no plans guard clause
             var outputArray = [];
-    
-            // plans.forEach(( plan, i ) => {
-            //     var includedInPlan = false;
-            //     plan.plan.forEach(element => {
-            //         if(element.toUpperCase().includes(findPlan.toUpperCase())){
-            //             includedInPlan = true;
-            //         }
-            //     })
+            // console.log(planObjectArray)
+            console.log(plans)
+            plans.forEach(( plan, i ) => {
+                var includedInPlan = false;
+                plan.plan.forEach(stringOfGoalID => {
+                    if(getGoalObjectFromObjectID(stringOfGoalID).goal.toUpperCase().includes(findPlan.toUpperCase())){
+                        includedInPlan = true;
+                    }
+                })
 
-            //     if((findPlan!=="") && ( (includedInPlan) || plan.goal.toUpperCase().includes(findPlan.toUpperCase()) )){
-            //         outputArray.push(
-            //             <PlanResult key={plan._id} user={user} plan={plan} comments={comments}/>
-            //         )
-            //     }
-            // });
+                if((findPlan!=="") && ( (includedInPlan) || plan.goal.goal.toUpperCase().includes(findPlan.toUpperCase()) )){
+                    outputArray.push(
+                        <PlanResult 
+                            key={plan._id} 
+                            plan={plan._id} 
+                        />
+                    )
+                }
+            });
             setOutputPlans(outputArray);
         }
 
 
-
-
+        // if( ( planObjectArray === null ) && ( plans.length > 10 ) && ( goals.length > 10 ) ) { 
+        //     buildPlanObjectArray(); 
+        
+        // }
+        // if (planObjectArray){
         handleOutputPlans()
 
-        setGoal(findPlan)
-    }, [comments, dispatch, findPlan, goals, plan.plan, planObjectArray, plans, user])
+        // }
 
+        setGoal(findPlan)
+    }, [comments, dispatch, findPlan, goals, plans, user])
+
+    
 
     // called on state changes
     useEffect(() => {
