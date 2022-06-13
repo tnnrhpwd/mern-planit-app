@@ -58,12 +58,7 @@ useEffect(() => {
     dispatch(getComments()) // dispatch connects to the store, then retreives the plans that match the logged in user.
     // dispatch(getMyData()) // dispatch connects to the store, then retreives the profile data that matches the logged in user.
 
-    function getPlanObjectFromObjectID(planObjectIDString){
-        return plans.find( x => x._id === planObjectIDString )
-    }
 
-    setPlan(getPlanObjectFromObjectID(props.plan))
-    console.log(getPlanObjectFromObjectID(props.plan))
     
     return () => {    // reset the plans when state changes
         dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, planisloading, planiserror, and planissuccess )
@@ -72,8 +67,19 @@ useEffect(() => {
         dispatch(resetAuthSlice()) // dispatch connects to the store, then reset state values( authMessage, authisloading, authiserror, and authissuccess )
 
     }
-}, [authIsError, authMessage, commentIsError, commentMessage, dispatch, goalIsError, goalMessage, planIsError, planMessage, plans, props.plan])
+}, [authIsError, authMessage, commentIsError, commentMessage, dispatch, goalIsError, goalMessage, planIsError, planMessage])
 
+    useEffect(() => {
+        function getPlanObjectFromObjectID(planObjectIDString){
+            return plans.find( x => x._id === planObjectIDString )
+        }
+    
+        if (plans){
+            setPlan(getPlanObjectFromObjectID(props.plan))
+            console.log(getPlanObjectFromObjectID(props.plan))
+        }
+    }, [plans, props.plan])
+    
 
   function getGoalObjectFromObjectID(goalObjectIDString){
     return goals.find( x => x._id === goalObjectIDString )
@@ -105,7 +111,8 @@ useEffect(() => {
     function handleShareView(type, id){
 
         if( ( shareView === null ) ){
-            const shareViewComponent = <ShareView view={true} click={setShareView} type={type} id={id}/>;
+            // const shareViewComponent = <ShareView view={true} click={setShareView} type={type} id={id}/>;
+            const shareViewComponent = 5;
             setShareView(shareViewComponent);
         }else if( !( shareView === null ) ){
             setShareView(null);
@@ -116,7 +123,8 @@ useEffect(() => {
         if(!user){ navigate('/login') } // GUARD CLAUSE -- Nonusers go to login.
 
         if( ( manageView === null ) ){
-            const manageViewComponent = <ManageView plan={props.plan} user={user} view={true} click={setManageView} type={type} id={id}/>;
+            // const manageViewComponent = <ManageView plan={props.plan} user={user} view={true} click={setManageView} type={type} id={id}/>;
+            const manageViewComponent = 5;
             setManageView(manageViewComponent);
 
         }else if( !( manageView === null ) ){
@@ -138,6 +146,9 @@ useEffect(() => {
     });
     return ( outputArray.length )
   }
+  function getPlanObjectFromObjectID(planObjectIDString){
+    return plans.find( x => x._id === planObjectIDString )
+}
 
   if(plan){
     return (<>
