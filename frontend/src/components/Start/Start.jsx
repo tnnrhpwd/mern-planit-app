@@ -17,7 +17,6 @@ import './Start.css';
 function Start() {
     const [ findPlan, setFindPlan ] = useState("");
     const [ loginView, setLoginView ] = useState(false);
-    const [ planObjectArray, setPlanObjectArray ] = useState(null)
     const [ outputPlans, setOutputPlans ] = useState([]);
     const [ renders, setRenders ] = useState(0);
     
@@ -65,28 +64,32 @@ function Start() {
         //         />
         //     )
         // }
-
         
+        // if (!findPlan){return}   // guard clause - no search
 
-        function getGoalObjectFromObjectID(goalObjectIDString){
-            return goals.find( x => x._id === goalObjectIDString )
-        }
+
 
         function handleOutputPlans(){
             if(findPlan===''){return;} // No search guard clause
-            // if(planObjectArray===null){return;} // no plans guard clause
+
+            function getGoalObjectFromObjectID(goalObjectIDString){
+                return goals.find( x => x._id === goalObjectIDString )
+            }
+
             var outputArray = [];
-            // console.log(planObjectArray)
-            console.log(plans)
             plans.forEach(( plan, i ) => {
                 var includedInPlan = false;
-                plan.plan.forEach(stringOfGoalID => {
-                    if(getGoalObjectFromObjectID(stringOfGoalID).goal.toUpperCase().includes(findPlan.toUpperCase())){
+                const planObject = getGoalObjectFromObjectID(plan.goal) // get the name of the plan
+                plan.plan.forEach(stringOfGoalID => {   // for each plan of a plan
+                    const goalObject = getGoalObjectFromObjectID(stringOfGoalID) // get the name of each plan of the plan
+                    if (!goalObject) {return} // guard clause
+                    if(goalObject.goal.toUpperCase().includes(findPlan.toUpperCase())){ // check if the search input is in the plan goal
                         includedInPlan = true;
                     }
                 })
-
-                if((findPlan!=="") && ( (includedInPlan) || plan.goal.goal.toUpperCase().includes(findPlan.toUpperCase()) )){
+                
+                if (!planObject) {return} // guard clause
+                if((findPlan!=="") && ( (includedInPlan) || planObject.goal.toUpperCase().includes(findPlan.toUpperCase()) )){ // check if the search input is in the plan plan
                     outputArray.push(
                         <PlanResult 
                             key={plan._id} 
@@ -95,23 +98,19 @@ function Start() {
                     )
                 }
             });
+            // console.log(outputPlans)
             setOutputPlans(outputArray);
         }
-
-
-        // if( ( planObjectArray === null ) && ( plans.length > 10 ) && ( goals.length > 10 ) ) { 
-        //     buildPlanObjectArray(); 
         
-        // }
-        // if (planObjectArray){
+        // console.log(outputPlans)
+        console.log('findPlan'+findPlan)
+
+        // if (!(outputPlans.length>0)){
         handleOutputPlans()
 
         // }
 
-        setGoal(findPlan)
-    }, [comments, dispatch, findPlan, goals, plans, user])
-
-    
+    }, [plans, goals, findPlan])
 
     // called on state changes
     useEffect(() => {
@@ -188,7 +187,7 @@ function Start() {
                         type="text" 
                         className='planit-dashboard-start-find-input'
                         placeholder='( Enter your goal )'
-                        value={findPlan}
+                        // value={findPlan}
                         onChange={(e) => setFindPlan(e.target.value)}
                     />
                     {/* <div className='planit-dashboard-start-find-but'>
