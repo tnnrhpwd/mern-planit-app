@@ -8,6 +8,7 @@ import { getComments, resetCommentSlice, createComment, updateComment } from '..
 import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
 import PlanResult from '../PlanResult/PlanResult.jsx'
 import LoginView from '../LoginView/LoginView.jsx'
+import BuildPlanObjectArray from '../BuildPlanObjectArray.js'
 
 import PlanPreview from '../PlanPreview/PlanPreview.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
@@ -20,6 +21,8 @@ function Start() {
     const [ outputPlans, setOutputPlans ] = useState([]);
     const [ renders, setRenders ] = useState(0);
     
+    const [ planObjectArray, setPlanObjectArray ] = useState([]);
+
     const [plan, setPlan] = useState('')
     const [goal, setGoal] = useState('')
 
@@ -48,70 +51,6 @@ function Start() {
         window.scrollTo(0,0);
     }, [])
 
-    // RUNS ON INPUT FIELD CHANGE -- shows search suggestions
-    useEffect(() => {
-
-        // function handlePreviewOpen(planObject){
-        //     var scrollheight = window.scrollY;
-        //     setOutView(
-        //         <PlanPreview 
-        //             user = {user}
-        //             key = "PlanPreviewKey"
-        //             screenY = {scrollheight} 
-        //             handlePlanPreviewClose = {handlePreviewClose} 
-        //             planIdentity = {planObject}
-        //             planIDComments = {comments}
-        //         />
-        //     )
-        // }
-        
-        // if (!findPlan){return}   // guard clause - no search
-
-
-
-        function handleOutputPlans(){
-            if(findPlan===''){return;} // No search guard clause
-
-            function getGoalObjectFromObjectID(goalObjectIDString){
-                return goals.find( x => x._id === goalObjectIDString )
-            }
-
-            var outputArray = [];
-            plans.forEach(( plan, i ) => {
-                var includedInPlan = false;
-                const planObject = getGoalObjectFromObjectID(plan.goal) // get the name of the plan
-                plan.plan.forEach(stringOfGoalID => {   // for each plan of a plan
-                    const goalObject = getGoalObjectFromObjectID(stringOfGoalID) // get the name of each plan of the plan
-                    if (!goalObject) {return} // guard clause
-                    if(goalObject.goal.toUpperCase().includes(findPlan.toUpperCase())){ // check if the search input is in the plan goal
-                        includedInPlan = true;
-                    }
-                })
-                
-                if (!planObject) {return} // guard clause
-                if((findPlan!=="") && ( (includedInPlan) || planObject.goal.toUpperCase().includes(findPlan.toUpperCase()) )){ // check if the search input is in the plan plan
-                    outputArray.push(
-                        <PlanResult 
-                            key={plan._id} 
-                            plan={plan._id} 
-                        />
-                    )
-                }
-            });
-            // console.log(outputPlans)
-            setOutputPlans(outputArray);
-        }
-        
-        // console.log(outputPlans)
-        console.log('findPlan'+findPlan)
-
-        // if (!(outputPlans.length>0)){
-        handleOutputPlans()
-
-        // }
-
-    }, [plans, goals, findPlan])
-
     // called on state changes
     useEffect(() => {
         if (planIsError) {
@@ -127,10 +66,10 @@ function Start() {
             toast.error(goalMessage) // print error to toast errors
         }
 
-        if( ( !user ) && ( renders === 0 ) ){
-            if(loginView === false){setLoginView( true )}
-            setRenders( renders + 1 )
-        }
+        // if( ( !user ) && ( renders === 0 ) ){
+        //     if(loginView === false){setLoginView( true )}
+        //     setRenders( renders + 1 )
+        // }
 
 
         dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
@@ -149,8 +88,41 @@ function Start() {
             dispatch(resetAuthSlice()) // dispatch connects to the store, then reset state values( authMessage, authisloading, authiserror, and authissuccess )
 
         }
-    }, [planIsError, planMessage, dispatch, commentIsError, commentMessage, authIsError, authMessage, user, renders, loginView, goalIsError, goalMessage])
+    }, [authIsError, authMessage, commentIsError, commentMessage, dispatch, goalIsError, goalMessage, planIsError, planMessage])
 
+    useEffect(() => {
+        setPlanObjectArray( BuildPlanObjectArray( goals, plans, comments ) )
+    }, [comments, goals, plans])
+
+    useEffect(() => {
+        function handleOutputPlans(planObjectArray){
+            if(findPlan===''){return;} // No search guard clause
+            if (!planObjectArray || planObjectArray.length===[]) {return;} // guard clause
+
+
+            var outputArray = [];
+            planObjectArray.forEach(( plan, planIndex ) => {
+                var includedInPlan = false;
+                plan[3].forEach(arrayOfPlanStepProperties => {   // for each plan of a plan
+                    if(arrayOfPlanStepProperties[1].toUpperCase().includes(findPlan.toUpperCase())){ // check if the search input is in the plan goal
+                        includedInPlan = true;
+                    }
+                })
+                if((findPlan!=="") && ( (includedInPlan) || planObjectArray[2][1].toUpperCase().includes(findPlan.toUpperCase()) )){ // check if the search input is in the plan plan
+                    console.log(planObjectArray[planIndex])
+                    const outputElement = <PlanResult 
+                        key = {"planresult"+plan[0]} 
+                        importPlanArray = {plan}
+                    />
+                    outputArray.push( outputElement )
+                }
+            });
+            // console.log(outputPlans)
+            setOutputPlans(outputArray);
+        }
+        handleOutputPlans(planObjectArray)
+
+    }, [findPlan, planObjectArray, plans])
 
     // RUNS ON CREATE PLAN -- sends the new plan and goal text to the database
     const onPlanSubmit = (e) => {
