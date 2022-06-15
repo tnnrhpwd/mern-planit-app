@@ -16,7 +16,6 @@ import './PlanResult.css';
 
 function PlanResult(props) {
     const planObjectArray = props.importPlanArray;
-    console.log( planObjectArray );
 
     const dispatch = useDispatch()  // initialization
     const navigate = useNavigate();
@@ -60,14 +59,13 @@ function PlanResult(props) {
     }
 
     function handleManageView(type, id){
-            if(!user){ navigate('/login') } // GUARD CLAUSE -- Nonusers go to login.
-
-            if( ( manageView === null ) ){
-                const manageViewComponent = <ManageView plan={planObjectArray[0]} user={user} view={true} click={setManageView} type={type} id={id}/>;
-                setManageView(manageViewComponent);
-            }else if( !( manageView === null ) ){
-                setManageView(null);
-            } 
+        if(!user){ navigate('/login') } // GUARD CLAUSE -- Nonusers go to login.
+        if( ( manageView === null ) ){
+            const manageViewComponent = <ManageView plan={planObjectArray[0]} owner={planObjectArray[1]} user={user} view={true} click={setManageView} type={type} />;
+            setManageView(manageViewComponent);
+        }else if( !( manageView === null ) ){
+            setManageView(null);
+        } 
     }
 
     if(planObjectArray){
