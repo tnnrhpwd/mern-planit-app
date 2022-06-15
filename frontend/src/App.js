@@ -13,6 +13,7 @@ import Profile from './pages/Profile/Profile.jsx'         // import page
 import Register from './pages/Register/Register.jsx'         // import page
 import Settings from './pages/Settings.jsx'         // import page
 import InfoPlan from './pages/InfoPlan/InfoPlan.jsx';
+import InfoGoal from './pages/InfoGoal/InfoGoal.jsx';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path='/settings' element={<Settings />} />
         <Route path='/about' element={<About />} />
         <Route path='/plan/:id/' element={<InfoPlan />} />
+        <Route path='/goal/:id/' element={<InfoGoal />} />
       </Routes>
     </div>
     </Router>
