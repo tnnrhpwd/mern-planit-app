@@ -24,7 +24,7 @@ const setComment = asyncHandler(async (req, res) => {
   }
 
   const comment = await Comment.create({
-    plan: req.body.plan,
+    topic: req.body.topic,
     comment: req.body.comment,
     user: req.user.id,
   })
