@@ -8,7 +8,7 @@ import { getComments, resetCommentSlice, createComment, updateComment } from '..
 import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
 import PlanResult from '../PlanResult/PlanResult.jsx'
 import LoginView from '../LoginView/LoginView.jsx'
-import BuildPlanObjectArray from '../BuildPlanObjectArray.js'
+import BuildPlanObjectArray from '../BuildPlanitObjectArray.js'
 
 import PlanPreview from '../PlanPreview/PlanPreview.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
@@ -91,7 +91,7 @@ function Start() {
     }, [authIsError, authMessage, commentIsError, commentMessage, dispatch, goalIsError, goalMessage, planIsError, planMessage])
 
     useEffect(() => {
-        setPlanObjectArray( BuildPlanObjectArray( goals, plans, comments ) )
+        setPlanObjectArray( BuildPlanObjectArray( goals, plans, comments )[1] )
     }, [comments, goals, plans])
 
     useEffect(() => {
