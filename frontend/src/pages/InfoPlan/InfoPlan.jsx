@@ -4,10 +4,12 @@ import { useSelector, useDispatch } from 'react-redux'      // access state vari
 import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify'                        // visible error notifications
 import { deletePlan, getPlans, resetPlanSlice } from './../../features/plans/planSlice'
+import { deleteGoal, getGoals, resetGoalSlice } from './../../features/goals/goalSlice'
 import { createComment, deleteComment, getComments, resetCommentSlice } from './../../features/comments/commentSlice'
 import DeleteView from '../../components/DeleteView/DeleteView'
 import Spinner from '../../components/Spinner/Spinner';
 import CommentResult from '../../components/CommentResult/CommentResult'
+import BuildPlanObjectArray from '../../components/BuildPlanObjectArray';
 import './InfoPlan.css';
 
 function InfoPlan() {
@@ -16,15 +18,19 @@ function InfoPlan() {
     const [ chosenPlan, setChosenPlan ] = useState(null);
     const [ importedComments, setImportedComments ] = useState(null);
     const [ newComment, setNewComment ] = useState("");
+    const [ planObjectArray, setPlanObjectArray ] = useState([]);
     const [ showDeletePlanConfirmation, setShowDeletePlanConfirmation ] = useState(false);
 
-    const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select goal values from goal state
-        (state) => state.plans
+    const { goals, goalIsLoading, goalIsError, goalMessage } = useSelector(     // select goal values from goal state
+        (state) => state.goals
     )
+    const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select plan values from plan state
+    (state) => state.plans
+)
     const { user, authIsLoading, authIsError, authMessage } = useSelector(
         (state) => state.auth
     )
-    const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select goal values from goal state
+    const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select comments values from comments state
     (state) => state.comments
     )
 
@@ -33,46 +39,50 @@ function InfoPlan() {
 
     // called on state changes
     useEffect(() => {
-        if ( planIsError || authIsError || commentIsError ) {
-            // console.log(planMessage)
+        if ( planIsError || authIsError || commentIsError || goalIsError ) {
             toast.error(planMessage) // print error to toast errors
+            toast.error(goalMessage) // print error to toast errors
             toast.error(authMessage) // print error to toast errors
             toast.error(commentMessage) // print error to toast errors
         }
 
 
+        dispatch(getGoals()) // dispatch connects to the store, then retreives the plans that match the logged in user.
         dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
         dispatch(getComments()) // dispatch connects to the store, then retreives the plans that match the logged in user.
   
         
         return () => {    // reset the plans when state changes
+        dispatch(resetGoalSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
         dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
         dispatch(resetCommentSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
         }
-    }, [planIsError, planMessage, dispatch, authIsError, commentIsError, authMessage, commentMessage])
+    }, [authIsError, authMessage, commentIsError, commentMessage, dispatch, goalIsError, goalMessage, planIsError, planMessage])
 
     useEffect(() => {
-            plans.forEach( elementPlan => {
-                if( elementPlan._id === id ){
-                    setChosenPlan( elementPlan )
+        setPlanObjectArray( BuildPlanObjectArray( goals, plans, comments ) )
+    }, [comments, goals, plans])
 
-                    var outputArray = [];
-                    comments.forEach( elementComment => {
-                        if( elementComment.plan === elementPlan._id ){
-                            outputArray.push(
-                                <CommentResult key={elementComment._id} comment={elementComment}/>
-                            )
-                        }
-                    });
-                    setImportedComments(outputArray)
-                }
-            });
-    }, [comments, id, plans, user])
+    useEffect(() => {
+        function handleOutputComments( IDString, planObjectArray ){
+            var outputCommentComponentArray = [];
+            const selectedPlan = planObjectArray.find( x => x[0] === IDString )
+            console.log(selectedPlan)
+            setChosenPlan(selectedPlan)
+            if( ( selectedPlan ) ){
+                selectedPlan[4].forEach(( selComment ) => {
+                    outputCommentComponentArray.push(<CommentResult key={"CommentResult"+IDString} comment={selComment}/>)
+                })
+            }
+            setImportedComments( outputCommentComponentArray );
+        }
+        handleOutputComments( id, planObjectArray )
+    }, [id, planObjectArray])
 
 
-    if(authIsLoading){
-        return(<Spinner/>)
-    }
+    // if(authIsLoading){
+    //     return(<Spinner/>)
+    // }
 
     const handleSubmitNewComment = (e) => {
         e.preventDefault()
@@ -91,7 +101,7 @@ function InfoPlan() {
     }
 
     const handleDeletePlan = () => {
-        dispatch(deletePlan( chosenPlan._id ))
+        dispatch(deletePlan( chosenPlan[0] ))
         toast.info("Your plan has been deleted.", { autoClose: 2000 }) // print error to toast errors
         navigate('/plans')           // send user to dashboard
 
@@ -107,7 +117,7 @@ function InfoPlan() {
             <div className="infoplan">
                 <div className='infoplan-delete'>
                     { (user) &&
-                        <>{ ( user._id === chosenPlan.user) &&
+                        <>{ ( user._id === chosenPlan[1]) &&
                             <button 
                                 className = 'infoplan-delete-button'
                                 onClick = {handleShowDeletePlan}
@@ -118,18 +128,18 @@ function InfoPlan() {
                     }
                 </div> 
                 {   ( showDeletePlanConfirmation ) &&
-                    < DeleteView view={true} delFunction={handleDeletePlan} click={setShowDeletePlanConfirmation} type="plan" id={chosenPlan._id}/>
+                    < DeleteView view={true} delFunction={handleDeletePlan} click={setShowDeletePlanConfirmation} type="plan" id={chosenPlan[0]}/>
                 }
                 <div className='infoplan-goal'>
                     <div className='infoplan-goal-text'>
-                        { chosenPlan.goal }
+                        { chosenPlan[2][1] }
                     </div>
                 </div>                 
                 <div className='infoplan-plan'>
                     <div className='infoplan-plan-text'>
-                        { chosenPlan.plan.map(( element, eleIndex ) => {
+                        { chosenPlan[3].map(( element, eleIndex ) => {
                             return (<div key={"plan-text-"+eleIndex}>
-                                {element}
+                                { element[1] }
                             </div>)
                         }) }
                     </div>
