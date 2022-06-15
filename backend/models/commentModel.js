@@ -12,7 +12,7 @@ const commentSchema = mongoose.Schema(
             type: String,
             required: [true, 'Please add a plan value'],
         },
-        plan: {
+        topic: {
             type: mongoose.Schema.Types.ObjectId,
             required: [true, 'No plan was referenced'],
         },
