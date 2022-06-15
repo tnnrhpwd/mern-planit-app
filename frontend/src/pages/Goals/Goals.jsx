@@ -8,10 +8,17 @@ import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
 import { getGoals, resetGoalSlice } from './../../features/goals/goalSlice'
 import { getComments, resetCommentSlice } from '../../features/comments/commentSlice.js';
 import { toast } from 'react-toastify'                        // visible error notifications
+import BuildPlanObjectArray from '../../components/BuildPlanitObjectArray.js';
 import './Goals.css';
 
 function Goals() {
-  // const [ outputGoals, setOutputGoals ] = useState(null)
+  const [ showNewGoal, setShowNewGoal] = useState(false);
+  const [ showMyGoals, setShowMyGoals ] = useState(false);
+  const [ planitObjectArray, setPlanitObjectArray ] = useState([])
+  const [ myGoals, setMyGoals ] = useState([])
+  const [ showSavedGoals, setShowSavedGoals ] = useState(false)
+  const [ savedGoals, setSavedGoals ] = useState([])
+  const [ goalObjectArray, setGoalObjectArray ] = useState([]);
 
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
@@ -43,23 +50,57 @@ function Goals() {
       navigate('/login') 
     }
 
-    // if(goals && plans){
-    //   var outputGoalsArray = [];
-    //   goals.forEach( selectGoal => {
-    //     outputGoalsArray.push(selectGoal)
-    //   });
-    //   plans.forEach( selectGoal => {
-    //     outputGoalsArray.push(selectGoal)
-    //   });
-    //   setOutputGoals(outputGoalsArray)
-    // }
-
-    
     return () => {    // reset the goals when state changes
       dispatch(resetGoalSlice()) // dispatch connects to the store, then reset state values( goalMessage, isloading, iserror, and issuccess )
       dispatch(resetCommentSlice()) // dispatch connects to the store, then reset state values( goalMessage, isloading, iserror, and issuccess )
     }
-  }, [navigate, goalIsError, goalMessage, dispatch, user, commentIsError, commentMessage, goals, plans, planIsError])
+  }, [commentIsError, commentMessage, dispatch, goalIsError, goalMessage, navigate, planIsError, user])
+  
+  useEffect(() => {
+    setGoalObjectArray( BuildPlanObjectArray( goals, plans, comments )[0] )
+    setPlanitObjectArray( BuildPlanObjectArray( goals, plans, comments ) )
+  }, [comments, goals, plans])
+
+  useEffect(() => {
+    function handleAllOutputPlans(ObjectArray){ 
+      var outputMyGoalsArray = []; // var outputSavedGoalsArray = [];
+
+      ObjectArray.forEach( goal => {
+        let freqNumPlanGoals = 0; // stores number of plans that include the action
+        let freqNumGoalPlans = 0; // stores number of plans on how to complete this goal.
+
+        planitObjectArray[1].forEach(( plan ) => {
+          plan[3].forEach(( innerPlan ) => {
+            if(innerPlan[0]===goal){
+              freqNumPlanGoals++;
+            }
+          })
+        })
+
+        const numPlanIncluded = freqNumPlanGoals + freqNumGoalPlans
+        if( ( goal[2] === user._id  ) ){
+        outputMyGoalsArray.push(<GoalResult 
+            key={"MyGoalResult"+goal[0]}
+            numPlanIncluded = {numPlanIncluded}
+            importGoalArray = {goal}
+          />)
+        }
+        // if( ( goal[7].includes(user._id) ) ){
+          //   outputSavedPlansArray.push(<GoalResult 
+          //     key={"SavedGoalResult"+goal[0]}
+          //     importPlanArray = {goal}
+          //   />)
+        // }
+      });
+      console.log(outputMyGoalsArray)
+
+      setMyGoals(outputMyGoalsArray);// setSavedGoals(outputSavedPlansArray); 
+    }
+    console.log(goalObjectArray)
+    handleAllOutputPlans(goalObjectArray);
+  }, [goalObjectArray, user._id])
+
+
 
 
   return (
@@ -75,15 +116,13 @@ function Goals() {
       </div>
       All Goals
       <div className='planit-goals-out'>
-        {goals.length > 0 ? (
-          <div className='planit-goals-out-result'>
-            {goals.map((goal) => {
-              return (<GoalResult key={goal._id} goal={goal} user={user} comments={comments} />)
-            })}
-          </div>
-        ) : (
-          <h3>You have not set any goals</h3>
-        )}
+      { (myGoals) &&
+        <>{myGoals.length > 0 ? (
+            myGoals
+          ) : (
+            <h3>You have not set any goals</h3>
+        )}</>
+        }
       </div>
     </div>
   )
