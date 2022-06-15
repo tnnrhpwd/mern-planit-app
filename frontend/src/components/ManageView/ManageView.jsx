@@ -4,20 +4,21 @@ import { useDispatch } from 'react-redux';
 import useOutsideAlerter from '../useOutsideAlerter.js'
 import { toast } from 'react-toastify'                        // visible error notifications
 import { deletePlan } from '../../features/plans/planSlice.js';
+import { deleteGoal } from '../../features/goals/goalSlice.js';
 import DeleteView from '../DeleteView/DeleteView.jsx';
 import './ManageView.css';
 
 
 function ManageView(props) {
-    const [ showDeletePlanConfirmation, setShowDeletePlanConfirmation ] = useState(false);
+    const [ showDeleteConfirmation, setShowDeleteConfirmation ] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const type = props.type.toLowerCase();
-    const id = props.id;
     const user = props.user
-    const plan = props.plan
+    const owner = props.owner
+    const topicID = props.topicID
 
     const hideComponentVisibility = () => { props.click( null ); }
     const ComponentVisibility = () => { return( true ) }  
@@ -25,21 +26,32 @@ function ManageView(props) {
     const insideComponentRef = useRef(null); // reference to the dropper container
     useOutsideAlerter( "share", insideComponentRef, toggleButtonRef, ComponentVisibility, hideComponentVisibility ); // listen for clicks outside dropper container && handle the effects
 
-    const handleDeletePlan = () => {
-        dispatch(deletePlan( plan._id ))
-        toast.info("Your plan has been deleted.", { autoClose: 2000 }) // print error to toast errors
+    const handleTopicDelete = () => {
+        switch(type) {
+            case 'goal':
+                dispatch(deleteGoal( topicID ))
+                toast.info("Your plan has been deleted.", { autoClose: 2000 }) // print error to toast errors
+                break;
+            case 'plan':
+                dispatch(deletePlan( topicID ))
+                toast.info("Your plan has been deleted.", { autoClose: 2000 }) // print error to toast errors
+                break;
+            default:
+                toast.error("Delete type is not defined.", { autoClose: 2000 }) // print error to toast errors
+        }
+
 
     }
-    const handleShowDeletePlan = (e) => {
+    const handleShowDelete = (e) => {
         e.preventDefault()
-        if(showDeletePlanConfirmation){setShowDeletePlanConfirmation(false)}
-        else if(!showDeletePlanConfirmation){setShowDeletePlanConfirmation(true)}
+        if(showDeleteConfirmation){setShowDeleteConfirmation(false)}
+        else if(!showDeleteConfirmation){setShowDeleteConfirmation(true)}
         
     }
 
     return (<>
-        {   ( showDeletePlanConfirmation ) &&
-            < DeleteView view={true} delFunction={handleDeletePlan} click={setShowDeletePlanConfirmation} type="plan" id={plan._id}/>
+        {   ( showDeleteConfirmation ) &&
+            < DeleteView topicID={topicID} view={true} delFunction={handleTopicDelete} click={setShowDeleteConfirmation} type={type} />
         }
 
         <div className='planit-manageview'>
@@ -50,10 +62,10 @@ function ManageView(props) {
                 <div className='planit-manageview-spc-title'>
                     ManageView
                 </div>
-                { (user._id === plan.user) &&
+                { (user._id === owner) &&
                     <div className='planit-manageview-spc-delete'>
-                        <button onClick={handleShowDeletePlan} className='planit-manageview-spc-delete-btn'>
-                            Delete Plan
+                        <button onClick={handleShowDelete} className='planit-manageview-spc-delete-btn'>
+                            Delete {type}
                         </button>
                     </div>
                 }
