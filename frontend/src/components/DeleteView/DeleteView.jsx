@@ -4,9 +4,9 @@ import './DeleteView.css'
 
 function DeleteView(props) {
     const type = props.type.toLowerCase();
-    const id = props.id;
+    const topicID = props.topicID;
 
-    const handleDelete = () => { props.delFunction( id ); }
+    const handleDelete = () => { props.delFunction( topicID ); }
     const hideComponentVisibility = () => { props.click( null ); }
     const ComponentVisibility = () => { return( true ) }  
     const toggleButtonRef = useRef(null);  // reference to the dropper toggle button
