@@ -6,9 +6,3 @@
     padding: calc(var(--nav-size)*0.3);
     
 }
-.planit-goalresult-plan{
-    font-size: calc(var(--nav-size)*0.3);
-}
-.planit-goalresult-delete{
-    font-size: calc(var(--nav-size)*0.3);
-}

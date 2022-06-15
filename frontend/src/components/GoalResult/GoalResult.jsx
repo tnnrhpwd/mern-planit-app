@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux'                         // useDispatch-brings in methods from state wihtout prop drilling
+import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import { updateGoal } from './../../features/goals/goalSlice'
 import ShareView from '../ShareView/ShareView.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
@@ -11,29 +11,62 @@ import ManageView from '../ManageView/ManageView';
 import './GoalResult.css';
 
 function GoalResult( props ) {
+  const goalObjectArray = props.importGoalArray;
+
   const dispatch = useDispatch()  // initialization
   const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth)      // select user values from user state
 
   const [ shareView, setShareView ] = useState(null);
   const [ manageView, setManageView ] = useState(null);
 
-  const goal = props.goal
-  const comments = props.comments
+  function handleShareView(type, id){
 
-  var user = false;
-  if( props.user ){ user = props.user }
+    if( ( shareView === null ) ){
+      const shareViewComponent = <ShareView view={true} click={setShareView} type={type} id={id}/>;
+      setShareView(shareViewComponent);
+    }else if( !( shareView === null ) ){
+      setShareView(null);
+    } 
+  }
 
-  return (
+  function handleManageView(type, id){
+    if(!user){ navigate('/login') } // GUARD CLAUSE -- Nonusers go to login.
+    if( ( manageView === null ) ){
+      const manageViewComponent = <ManageView topicID={goalObjectArray[0]} owner={goalObjectArray[2]} user={user} view={true} click={setManageView} type={type} id={id}/>;
+      setManageView(manageViewComponent);
+    }else if( !( manageView === null ) ){
+      setManageView(null);
+    } 
+  }
+
+  return (<>
+    { shareView }
+    { manageView }
+
     <div className='planit-goalresult'>
-      <div>{new Date(goal.createdAt).toLocaleString('en-US')}</div>
-      <h2>{goal.text}</h2>
-      <a href='/plans'>
-        <button className='planit-goalresult-plan'>
-          Create Plan!
-        </button>
-      </a>
+      <div key={goalObjectArray[0]+"0.1"} className='planit-planresult-1'>
+        <div key={goalObjectArray[0]+"0.11"} className='planit-planresult-date'>
+            <CreatedAt key={goalObjectArray[0]+"0.12"} createdAt={goalObjectArray[3]}/>
+        </div>
+        <div key={goalObjectArray[0]+"0.13"} className='planit-planresult-share'>
+            <button key={goalObjectArray[0]+"0.14"} className='planit-planresult-share-btn' onClick={() => handleShareView("goal",goalObjectArray[0])}>Share</button>
+        </div>
+        <div className='planit-planresult-manageplan' key={goalObjectArray[0]+"0.16"}>
+            { (user) ? <>{
+              <button key={goalObjectArray[0]+"0.17"} className='planit-planresult-manageplan-btn' onClick={() => handleManageView("goal",goalObjectArray[0])} >☸</button>
+            }</>:null}
+        </div>
+      </div>
+      <div key={goalObjectArray[0]+"0.2"} className='planit-planresult-2'>
+        <div key={goalObjectArray[0]+"2"} className='planit-planresult-goal'><a href={'goal/'+goalObjectArray[0]}><button key={goalObjectArray[0]+"2button"} className='planit-planresult-goalbutton'>{goalObjectArray[1]}</button></a></div>
+      </div>
+      <div key={goalObjectArray[0]+"0.3"} className='planit-planresult-3'>
+        { ( props.numPlanIncluded ) }
+      </div>
     </div>
-  )
+  </>)
 }
 
 export default GoalResult
