@@ -27,9 +27,22 @@
     text-align: center;
 }
 .infoplan-goal-text{    
+    
+}
+.infoplan-goal-text-goal{    
+    background-color: transparent;
+    border: none;
+    display: block;
     font-weight: bold;
     font-size: calc(var(--nav-size)*0.4);
-    
+    cursor: pointer;
+    width: 100%;
+    color: var(--text-color);
+    margin: calc(var(--nav-size)*0.15) 0;
+}
+.infoplan-goal-text-goal:active {    
+    font-size: calc(var(--nav-size)*0.39);
+
 }
 .infoplan-plan{    
     padding-top: calc(var(--nav-size)*0.2);
@@ -42,6 +55,19 @@
     font-size: calc(var(--nav-size)*0.3);
     padding-bottom: calc(var(--nav-size)*0.4);
     
+}
+.infoplan-plan-text-goal{    
+    background-color: transparent;
+    border: none;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    color: var(--text-color);
+    margin: calc(var(--nav-size)*0.15) 0;
+}
+.infoplan-plan-text-goal:active {    
+    font-size: calc(var(--nav-size)*0.29);
+
 }
 .infoplan-newcomment{
     text-align: center;

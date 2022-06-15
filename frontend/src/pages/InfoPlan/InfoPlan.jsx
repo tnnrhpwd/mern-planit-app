@@ -9,7 +9,7 @@ import { createComment, deleteComment, getComments, resetCommentSlice } from './
 import DeleteView from '../../components/DeleteView/DeleteView'
 import Spinner from '../../components/Spinner/Spinner';
 import CommentResult from '../../components/CommentResult/CommentResult'
-import BuildPlanObjectArray from '../../components/BuildPlanObjectArray';
+import BuildPlanObjectArray from '../../components/BuildPlanitObjectArray';
 import './InfoPlan.css';
 
 function InfoPlan() {
@@ -60,23 +60,23 @@ function InfoPlan() {
     }, [authIsError, authMessage, commentIsError, commentMessage, dispatch, goalIsError, goalMessage, planIsError, planMessage])
 
     useEffect(() => {
-        setPlanObjectArray( BuildPlanObjectArray( goals, plans, comments ) )
+        setPlanObjectArray( BuildPlanObjectArray( goals, plans, comments )[1] )
     }, [comments, goals, plans])
 
     useEffect(() => {
-        function handleOutputComments( IDString, planObjectArray ){
+        function handleSelectGoal( IDString, planObjectArray ){
             var outputCommentComponentArray = [];
             const selectedPlan = planObjectArray.find( x => x[0] === IDString )
             console.log(selectedPlan)
             setChosenPlan(selectedPlan)
             if( ( selectedPlan ) ){
-                selectedPlan[4].forEach(( selComment ) => {
-                    outputCommentComponentArray.push(<CommentResult key={"CommentResult"+IDString} comment={selComment}/>)
+                selectedPlan[4].forEach(( selComment, selCommentIndex ) => {
+                    outputCommentComponentArray.push(<CommentResult key={"CommentResult"+IDString+" "+selCommentIndex} comment={selComment}/>)
                 })
             }
             setImportedComments( outputCommentComponentArray );
         }
-        handleOutputComments( id, planObjectArray )
+        handleSelectGoal( id, planObjectArray )
     }, [id, planObjectArray])
 
 
@@ -90,10 +90,10 @@ function InfoPlan() {
         if( newComment === "" ){ toast.error("Please enter your comment first.", { autoClose: 1000 }); return; } // No input text guard clause
         if( newComment.length > 280 ){ toast.error("Please shorten your comment to 280 characters.", { autoClose: 1000 }); return; } // Too long input text guard clause
 
-        const plan = chosenPlan;
+        const topic = chosenPlan[0];
         const comment = newComment   
 
-        dispatch(createComment({ plan , comment }))
+        dispatch(createComment({ topic , comment }))
 
         setNewComment('')
         
@@ -132,15 +132,32 @@ function InfoPlan() {
                 }
                 <div className='infoplan-goal'>
                     <div className='infoplan-goal-text'>
-                        { chosenPlan[2][1] }
+                        <a href = { '/goal/' + chosenPlan[2][0] }>
+                            <button 
+                                key = { "goal-text-" + chosenPlan[2][0] } 
+                                className = 'infoplan-goal-text-goal'
+                                >
+                                { chosenPlan[2][1] }
+                            </button>
+                        </a> 
+
+
+
                     </div>
                 </div>                 
                 <div className='infoplan-plan'>
                     <div className='infoplan-plan-text'>
-                        { chosenPlan[3].map(( element, eleIndex ) => {
-                            return (<div key={"plan-text-"+eleIndex}>
-                                { element[1] }
-                            </div>)
+                        { chosenPlan[3].map(( goal, goalIndex ) => {
+                            return (
+                            <a href = { '/goal/' + goal[0] } key = { "plan-text-"+goal[0]+ " " + goalIndex } >
+                                <button 
+                                    key = { "plan-text-" + goalIndex } 
+                                    className = 'infoplan-plan-text-goal'
+                                    >
+                                    { goal[1] }
+                                </button>
+                            </a>
+                            )
                         }) }
                     </div>
                 </div> 
