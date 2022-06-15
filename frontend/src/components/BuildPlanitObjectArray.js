@@ -1,6 +1,17 @@
 function BuildPlanObjectArray( goals, plans, comments ) {
+    var outputGoalObjectArray = [];
+    goals.forEach( ( indGoal ) => {
+        outputGoalObjectArray.push([
+            indGoal._id,
+            indGoal.goal,
+            indGoal.user,
+            indGoal.createdAt,
+            indGoal.updatedAt,
+        ])
+    })
+    
     var outputPlanObjectArray = [];
-    plans.forEach( ( indPlan, indPlanIndex ) => {                         // for each plan inported from database
+    plans.forEach( ( indPlan ) => {                         // for each plan inported from database
         // get array of plan arrays
         const groopPlan = indPlan.plan.map( ( goalIDString, goalIndex ) => {
             const zrupGoal = goals.find( x => x._id === goalIDString )
@@ -28,7 +39,7 @@ function BuildPlanObjectArray( goals, plans, comments ) {
 
         var groopComment = []
         comments.forEach( ( indComment, indCommentIndex ) => {
-            if(indComment.plan === indPlan._id){ 
+            if(indComment.topic === indPlan._id){ 
                 groopComment.push([
                     indComment._id,
                     indComment.comment,
@@ -53,8 +64,27 @@ function BuildPlanObjectArray( goals, plans, comments ) {
         ]
         outputPlanObjectArray.push(groops)                     // add to object output array
     })
-    console.log(outputPlanObjectArray);
-    return ( outputPlanObjectArray )
+
+    var outputCommentObjectArray = [];
+    comments.forEach( ( indComment ) => {
+        outputCommentObjectArray.push([
+            indComment._id,
+            indComment.user,
+            indComment.topic,
+            indComment.comment,
+            indComment.createdAt,
+            indComment.updatedAt,
+
+        ])
+    })
+
+    const outputArray = [ 
+        outputGoalObjectArray,
+        outputPlanObjectArray,
+        outputCommentObjectArray,
+    ]
+    console.log(outputArray);
+    return ( outputArray )
 }
 
 export default BuildPlanObjectArray
