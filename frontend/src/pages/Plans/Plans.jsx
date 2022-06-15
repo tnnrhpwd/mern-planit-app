@@ -8,7 +8,7 @@ import Spinner from './../../components/Spinner/Spinner.jsx'
 import { getGoals, resetGoalSlice } from './../../features/goals/goalSlice'
 import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
 import { getComments, resetCommentSlice } from '../../features/comments/commentSlice.js';
-import BuildPlanObjectArray from '../../components/BuildPlanObjectArray.js';
+import BuildPlanObjectArray from '../../components/BuildPlanitObjectArray.js';
 import './Plans.css';
 
 function Plans() {
@@ -58,7 +58,7 @@ function Plans() {
   }, [commentIsError, commentMessage, dispatch, goalIsError, goalMessage, navigate, planIsError, planMessage, user])
 
   useEffect(() => {
-    setPlanObjectArray( BuildPlanObjectArray( goals, plans, comments ) )
+    setPlanObjectArray( BuildPlanObjectArray( goals, plans, comments )[1] )
   }, [comments, goals, plans])
 
   useEffect(() => {
