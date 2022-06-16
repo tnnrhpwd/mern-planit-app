@@ -71,17 +71,24 @@ function Goals() {
 
         planitObjectArray[1].forEach(( plan ) => {
           plan[3].forEach(( innerPlan ) => {
-            if(innerPlan[0]===goal){
+            if( innerPlan[0] === goal[0] ){
               freqNumPlanGoals++;
             }
           })
         })
+        planitObjectArray[1].forEach(( plan ) => {
+          if( plan[2][0] === goal[0] ){
+            freqNumGoalPlans++;
+          }
+        })
+
 
         const numPlanIncluded = freqNumPlanGoals + freqNumGoalPlans
         if( ( goal[2] === user._id  ) ){
         outputMyGoalsArray.push(<GoalResult 
             key={"MyGoalResult"+goal[0]}
-            numPlanIncluded = {numPlanIncluded}
+            freqNumPlanGoals = {freqNumPlanGoals}
+            freqNumGoalPlans = {freqNumGoalPlans}
             importGoalArray = {goal}
           />)
         }
@@ -92,15 +99,21 @@ function Goals() {
           //   />)
         // }
       });
-      console.log(outputMyGoalsArray)
 
       setMyGoals(outputMyGoalsArray);// setSavedGoals(outputSavedPlansArray); 
     }
     console.log(goalObjectArray)
     handleAllOutputPlans(goalObjectArray);
-  }, [goalObjectArray, user._id])
+  }, [goalObjectArray, planitObjectArray, user._id])
 
-
+  function handleCreateGoalToggle(){
+    if(showNewGoal){setShowNewGoal(false)}
+    else if(!showNewGoal){setShowNewGoal(true)}
+  }
+  function handleMyGoalsToggle(){
+    if(showMyGoals){setShowMyGoals(false)}
+    else if(!showMyGoals){setShowMyGoals(true)}
+  }
 
 
   return (
@@ -111,18 +124,42 @@ function Goals() {
         <br/><br/> Create plans for other peoples' goals, or get their input on your goals.
         <br/> 
       </div>
-      <div className='planit-goals-in'>
-        <GoalInput />
+      <div className='planit-plans-create'>
+        <div onClick={handleCreateGoalToggle} className='planit-plans-create-text' >
+          {
+            showNewGoal ? "Cancel Goal":"Create Goal"
+          }
+          { ( user ) &&
+            <div className='planit-plans-in'>
+              {(showNewGoal) &&
+                <GoalInput />
+              }
+            </div>
+          }
+        </div>
       </div>
+
+      <div className='planit-plans-my'>
+          <div onClick={handleMyGoalsToggle} className="planit-plans-my-text">
+            My Goals
+          </div>
+        
+          { showMyGoals &&
+            <div className='planit-plans-my-out'>
+              { ( myGoals.length > 0 ) ? (
+                <div className='planit-plans-my-out-result'>
+                  { myGoals }
+                </div>
+               ) : ( 
+                <h3>You have not set any goals</h3>
+              )} 
+            </div>
+          }
+        </div>
+
       All Goals
       <div className='planit-goals-out'>
-      { (myGoals) &&
-        <>{myGoals.length > 0 ? (
-            myGoals
-          ) : (
-            <h3>You have not set any goals</h3>
-        )}</>
-        }
+
       </div>
     </div>
   )
