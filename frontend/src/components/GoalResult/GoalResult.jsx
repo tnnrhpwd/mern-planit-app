@@ -63,7 +63,8 @@ function GoalResult( props ) {
         <div key={goalObjectArray[0]+"2"} className='planit-planresult-goal'><a href={'goal/'+goalObjectArray[0]}><button key={goalObjectArray[0]+"2button"} className='planit-planresult-goalbutton'>{goalObjectArray[1]}</button></a></div>
       </div>
       <div key={goalObjectArray[0]+"0.3"} className='planit-planresult-3'>
-        { ( props.numPlanIncluded ) }
+        { ( props.freqNumGoalPlans ) } plans | 
+        {" " + ( props.freqNumPlanGoals ) } actions
       </div>
     </div>
   </>)
