@@ -93,8 +93,6 @@ function Plans() {
   function handleMyPlansToggle(){
     if(showMyPlans){setShowMyPlans(false)}
     else if(!showMyPlans){setShowMyPlans(true)}
-    console.log(showMyPlans)
-    console.log(planObjectArray)
   }
   function handleSavedPlansToggle(){
     if(showSavedPlans){setShowSavedPlans(false)}
