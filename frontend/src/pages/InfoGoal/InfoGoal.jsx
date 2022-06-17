@@ -72,16 +72,87 @@ function InfoGoal() {
         handleSelectGoal( id )
     }, [goalObjectArray, id])
 
+    const handleSubmitNewComment = (e) => {
+        e.preventDefault()
 
+        if( newComment === "" ){ toast.error("Please enter your comment first.", { autoClose: 1000 }); return; } // No input text guard clause
+        if( newComment.length > 280 ){ toast.error("Please shorten your comment to 280 characters.", { autoClose: 1000 }); return; } // Too long input text guard clause
+
+        const topic = chosenGoal[0];
+        const comment = newComment   
+
+        dispatch(createComment({ topic , comment }))
+
+        setNewComment('')
+        
+        toast.success("Comment Submitted!", { autoClose: 1000 }) // print error to toast errors
+    }
+
+    const handleDeleteGoal = () => {
+        dispatch(deletePlan( chosenGoal[0] ))
+        toast.info("Your goal has been deleted.", { autoClose: 2000 }) // print error to toast errors
+        navigate('/goals')           // send user to dashboard
+
+    }
+    const handleShowDeleteGoal = (e) => {
+        e.preventDefault()
+        if(showDeleteGoalConfirmation){setShowDeleteGoalConfirmation(false)}
+        else if(!showDeleteGoalConfirmation){setShowDeleteGoalConfirmation(true)}
+    }
 
     if(chosenGoal){
-        return (<div className="infogoal">
-            InfoGoal
-            {chosenGoal[0]}
-            {chosenGoal[1]}
-            {chosenGoal[2]}
-        </div>)
-    }else{ return <Spinner/> }
+        return (<div className="infoplan">
+            <div className='infoplan-delete'>
+                { (user) &&
+                    <>{ ( user._id === chosenGoal[2]) &&
+                        <button 
+                            className = 'infoplan-delete-button'
+                            onClick = {handleShowDeleteGoal}
+                            >
+                            Delete Plan
+                        </button>
+                    }</>
+                }
+            </div> 
+            {   ( showDeleteGoalConfirmation ) &&
+                < DeleteView view={true} delFunction={handleDeleteGoal} click={setShowDeleteGoalConfirmation} type="goal" id={chosenGoal[0]}/>
+            }
+            <div className='infoplan-goal'>
+                <div className='infoplan-goal-text'>
+                    <a href = { '/goal/' + chosenGoal[0] }>
+                        <button 
+                            key = { "goal-text-" + chosenGoal[0] } 
+                            className = 'infoplan-goal-text-goal'
+                            >
+                            { chosenGoal[1] }
+                        </button>
+                    </a> 
+                </div>
+            </div>                 
+            <div className='infoplan-newcomment'>
+                <textarea 
+                    value={newComment}
+                    name='plan'
+                    placeholder='Enter comment here.'
+                    onChange={(e) => setNewComment(e.target.value)}   // change text field value
+                    className='infoplan-newcomment-textarea'
+                />
+                <button className='infoplan-newcomment-submit' onClick={handleSubmitNewComment}>
+                    Submit
+                </button>
+            </div>
+            potential plans
+            <br/>
+            other plans it is included in
+            <br/>
+            <div className='infoplan-comments'>
+                { ( importedComments ) 
+                ?   ( importedComments ) 
+                : "No Comments"                  
+                } 
+            </div>
+        </div>
+    )}else{ return <Spinner/> }
 }
 
 export default InfoGoal
