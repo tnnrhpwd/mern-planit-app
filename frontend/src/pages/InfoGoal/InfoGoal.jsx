@@ -141,10 +141,14 @@ function InfoGoal() {
                     Submit
                 </button>
             </div>
-            potential plans
-            <br/>
-            other plans it is included in
-            <br/>
+            <div className='infogoal-potentialplans'>
+                potential plans
+
+            </div>
+            <div className='infogoal-potentialplans'>
+                other plans it is included in
+
+            </div>
             <div className='infoplan-comments'>
                 { ( importedComments ) 
                 ?   ( importedComments ) 
