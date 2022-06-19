@@ -69,6 +69,7 @@ function InfoGoal() {
             console.log(selectedGoal)
             setChosenGoal(selectedGoal)
         }
+        console.log(goalObjectArray)
         handleSelectGoal( id )
     }, [goalObjectArray, id])
 
@@ -129,6 +130,45 @@ function InfoGoal() {
                     </a> 
                 </div>
             </div>                 
+
+            <button>Create a new plan for this goal</button>
+
+            <br/>
+            <br/>
+
+
+            <div className='infogoal-potentialplans'>
+                potential plans
+                <br/>
+                { ( chosenGoal[5].length > 0 ) 
+                    ? chosenGoal[5].map( specificPlan => {
+                        return <button>
+                            {specificPlan[3].map( insidePlan => {
+                                return insidePlan[1]
+                            })}
+                        </button>
+                    })
+                    : "There are no plans for this goal."
+                }
+            </div>
+            <br/>
+
+            <div className='infogoal-potentialgoals'>
+                other plans it is included in
+                <br/>
+                { ( chosenGoal[6].length > 0 ) 
+                    ? chosenGoal[6].map( specificPlan => {
+                        return <button>
+                            {specificPlan[3].map( insidePlan => {
+                                return insidePlan[1]
+                            })}
+                        </button>
+                    })
+                    : "There are no goals for this goal."
+                }
+            </div>
+            <br/>
+
             <div className='infoplan-newcomment'>
                 <textarea 
                     value={newComment}
@@ -141,14 +181,7 @@ function InfoGoal() {
                     Submit
                 </button>
             </div>
-            <div className='infogoal-potentialplans'>
-                potential plans
 
-            </div>
-            <div className='infogoal-potentialplans'>
-                other plans it is included in
-
-            </div>
             <div className='infoplan-comments'>
                 { ( importedComments ) 
                 ?   ( importedComments ) 
