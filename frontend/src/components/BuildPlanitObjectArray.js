@@ -1,15 +1,4 @@
 function BuildPlanObjectArray( goals, plans, comments ) {
-    var outputGoalObjectArray = [];
-    goals.forEach( ( indGoal ) => {
-        outputGoalObjectArray.push([
-            indGoal._id,
-            indGoal.goal,
-            indGoal.user,
-            indGoal.createdAt,
-            indGoal.updatedAt,
-        ])
-    })
-    
     var outputPlanObjectArray = [];
     plans.forEach( ( indPlan ) => {                         // for each plan inported from database
         // get array of plan arrays
@@ -63,6 +52,37 @@ function BuildPlanObjectArray( goals, plans, comments ) {
             indPlan.updatedAt,
         ]
         outputPlanObjectArray.push(groops)                     // add to object output array
+    })
+
+    var goalsForThisSpecificGoal = [];
+    var outputGoalObjectArray = [];
+    goals.forEach( ( indGoal ) => {
+        var plansForThisSpecificGoal = []
+        outputPlanObjectArray.forEach( ( specificPlan ) => {
+            if( specificPlan[2][0] === indGoal._id ){
+                plansForThisSpecificGoal.push(specificPlan)
+
+            }
+            specificPlan[3].forEach( ( stepOfGoalPlan ) => {
+                if( stepOfGoalPlan[0] === indGoal._id ){
+                    goalsForThisSpecificGoal.push(specificPlan)
+                    
+                }
+
+            })
+
+
+        })
+
+        outputGoalObjectArray.push([
+            indGoal._id,
+            indGoal.goal,
+            indGoal.user,
+            indGoal.createdAt,
+            indGoal.updatedAt,
+            plansForThisSpecificGoal,
+            goalsForThisSpecificGoal,
+        ])
     })
 
     var outputCommentObjectArray = [];
