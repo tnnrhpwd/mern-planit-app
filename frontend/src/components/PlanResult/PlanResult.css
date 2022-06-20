@@ -45,7 +45,7 @@
 .planit-planresult-date{
     font-size: calc(var(--nav-size)*.25);
     display: inline-block;
-    width: 55vw;
+    width: 35vw;
     text-align: left;
 }
 .planit-planresult-share{
@@ -61,6 +61,7 @@
     border: none;
 }
 .planit-planresult-fav{
+    width: 10vw;
     font-size: calc(var(--nav-size)*.25);
     vertical-align: middle;
     display: inline-block;
@@ -80,8 +81,9 @@
     vertical-align: middle;
 } 
 .planit-planresult-manageplan{
+    width: 10vw;
     display: inline-block;
-    padding-left: calc(var(--nav-size)*.1);
+    /* padding-left: calc(var(--nav-size)*.05); */
 }
 .planit-planresult-manageplan-btn{
     font-size: calc(var(--nav-size)*.35);    
