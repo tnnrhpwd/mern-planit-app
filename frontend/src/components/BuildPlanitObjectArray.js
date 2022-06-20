@@ -54,17 +54,17 @@ function BuildPlanObjectArray( goals, plans, comments ) {
         outputPlanObjectArray.push(groops)                     // add to object output array
     })
 
-    var goalsForThisSpecificGoal = [];
     var outputGoalObjectArray = [];
     goals.forEach( ( indGoal ) => {
+        var goalsForThisSpecificGoal = [];
         var plansForThisSpecificGoal = []
         outputPlanObjectArray.forEach( ( specificPlan ) => {
-            if( specificPlan[2][0] === indGoal._id ){
+            if( specificPlan[2][0] === indGoal._id ){ // if indGoal is head goal of plan
                 plansForThisSpecificGoal.push(specificPlan)
 
             }
             specificPlan[3].forEach( ( stepOfGoalPlan ) => {
-                if( stepOfGoalPlan[0] === indGoal._id ){
+                if( stepOfGoalPlan[0] === indGoal._id ){  // if indGoal is a step of plan
                     goalsForThisSpecificGoal.push(specificPlan)
                     
                 }
