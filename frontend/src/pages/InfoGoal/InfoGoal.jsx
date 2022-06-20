@@ -158,10 +158,10 @@ function InfoGoal() {
                 <br/>
                 { ( chosenGoal[6].length > 0 ) 
                     ? chosenGoal[6].map( specificPlan => {
-                        return <button>
-                            {specificPlan[3].map( insidePlan => {
+                        return <button>{specificPlan[2][1]}
+                            {/* {specificPlan[3].map( insidePlan => {
                                 return insidePlan[1]
-                            })}
+                            })} */}
                         </button>
                     })
                     : "There are no goals for this goal."
