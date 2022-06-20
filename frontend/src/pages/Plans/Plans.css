@@ -32,11 +32,11 @@
     background-color: transparent;
     color: var(--text-color);
 }
-.planit-plans-create:hover {
+/* .planit-plans-create:hover {
     border: calc(var(--nav-size)*0.001) solid var(--text-color);
     filter: brightness(1.2);
     font-weight: bold;
-}
+} */
 .planit-plans-my{
     margin-top: calc(var(--nav-size)*0.5);
     padding-top: calc(var(--nav-size)*.3);
@@ -56,10 +56,10 @@
     background-color: transparent;
     color: var(--text-color);
 }
-.planit-plans-my:active {
+/* .planit-plans-my:active {
     border: calc(var(--nav-size)*0.001) solid var(--text-color);
     filter: brightness(1.2);
-}
+} */
 .planit-plans-saved{
     margin-top: calc(var(--nav-size)*0.5);
     padding-top: calc(var(--nav-size)*.3);
@@ -78,10 +78,10 @@
     background-color: transparent;
     color: var(--text-color);
 }
-.planit-plans-saved:active {
+/* .planit-plans-saved:active {
     border: calc(var(--nav-size)*0.001) solid var(--text-color);
     filter: brightness(1.2);
-}
+} */
 @media (orientation: landscape) {
     .planit-plans{
         text-align: left;
