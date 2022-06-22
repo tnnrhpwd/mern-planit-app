@@ -14,6 +14,7 @@ import Register from './pages/Register/Register.jsx'         // import page
 import Settings from './pages/Settings.jsx'         // import page
 import InfoPlan from './pages/InfoPlan/InfoPlan.jsx';
 import InfoGoal from './pages/InfoGoal/InfoGoal.jsx';
+import Agenda from './pages/Agenda/Agenda.jsx';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/about' element={<About />} />
+        <Route path='/agenda' element={<Agenda />} />
         <Route path='/comments' element={<Comments />} />
         <Route path='/' element={<Dashboard />} />
         <Route path='/goals' element={<Goals />} />
