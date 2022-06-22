@@ -44,8 +44,9 @@ const hideComponentVisibility = () => {document.getElementById("planit-header-dr
         {/* <a className='planit-header-dropper-pagelink' href='/goals'>Popular</a> */}
         {( user ) 
           ?(<>   
-            <a className='planit-header-dropper-pagelink' href='/goals'>My Goals</a>
-            <a className='planit-header-dropper-pagelink' href='/plans'>My Plans</a>
+            <a className='planit-header-dropper-pagelink' href='/agenda'>Agenda</a>
+            <a className='planit-header-dropper-pagelink' href='/goals'>Goals</a>
+            <a className='planit-header-dropper-pagelink' href='/plans'>Plans</a>
             <a className='planit-header-dropper-pagelink' href='/settings'>Settings</a>
           </>)
           :null
