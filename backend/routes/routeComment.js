@@ -1,4 +1,4 @@
-// This file imports the User object schema + functions | Routers listen for requests then execute callback functions 
+// This file imports the Comment object schema + functions | Routers listen for requests then execute callback functions 
 const express = require('express')
 const router = express.Router()
 const {
