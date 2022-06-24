@@ -8,16 +8,9 @@ const actionSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
-    topic: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: [true, 'Please add a topic'],
-    },    
-    progress: {
+    data: {
       type: mongoose.Schema.Types.Array,
-    },
-    criteria: {
-      type: mongoose.Schema.Types.Array,
-    },
+    }, 
   },
   {
     timestamps: true,
