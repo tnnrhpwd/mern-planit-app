@@ -19,9 +19,9 @@ const getActions = asyncHandler(async (req, res) => {
 // @route   POST /api/actions
 // @access  Private
 const setAction = asyncHandler(async (req, res) => {
-  if (!req.body.topic) {   // GUARD CLAUSE - no topic
+  if (!req.body.goal) {   // GUARD CLAUSE - no goal
     res.status(400)
-    throw new Error('Please add a topic.')
+    throw new Error('Please add a goal.')
   }
   if (!req.body.progress) {   // GUARD CLAUSE - no progress
     res.status(400)
@@ -31,16 +31,23 @@ const setAction = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('Please add a criteria.')
   }
+  
+  var actionPlan = ""
+  if(req.body.plan){
+    actionPlan = req.body.plan;
+  }
 
-  let actionProgress = req.body.progress.split("|planit-item|");
-  let actionCriteria = req.body.criteria.split("|planit-item|");
+  let actionData = [ ]
+
+  actionData.push(req.body.goal)
+  actionData.push(actionPlan)
+  actionData.push(req.body.progress)
+  actionData.push(req.body.criteria)
 
   // send new action to database
   const action = await Action.create({
     user: req.user.id,
-    topic: req.body.topic,
-    progress: actionProgress,
-    criteria: actionCriteria,
+    data: [ actionData ],
   })
 
   // send the action return json back to sender.
