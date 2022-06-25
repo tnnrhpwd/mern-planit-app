@@ -1,4 +1,4 @@
-function BuildPlanObjectArray( goals, plans, comments ) {
+function BuildObjectArray( goals, plans, comments, actions ) {
     var outputPlanObjectArray = [];
     plans.forEach( ( indPlan ) => {                         // for each plan inported from database
         // get array of plan arrays
@@ -107,4 +107,4 @@ function BuildPlanObjectArray( goals, plans, comments ) {
     return ( outputArray )
 }
 
-export default BuildPlanObjectArray
+export default BuildObjectArray
