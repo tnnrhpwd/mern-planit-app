@@ -11,7 +11,7 @@ const {
 // Declare authentication variable
 const { protect } = require('../middleware/authMiddleware')
 
-// listens for HTTP requests on /api/comments/
+// listens for HTTP requests on /api/actions/
 router.route('/').get(getActions).post(protect, setAction) // GET + POST -- The protect middleware here prevents access from users without JWT
 router.route('/:id').delete(protect, updateAction).put(protect, deleteAction) // DELETE + UPDATE -- The protect middleware here prevents access from users without JWT
 
