@@ -80,14 +80,19 @@ function Header() {
         </a> */}
         {user ? 
         <>
+          <a href='/goals'>
+            <button className="planit-header-link-landscape">
+              Goals
+            </button>
+          </a>
           <a href='/plans'>
             <button className="planit-header-link-landscape">
               Plans
             </button>
           </a>
-          <a href='/goals'>
+          <a href='/agenda'>
             <button className="planit-header-link-landscape">
-              Goals
+              Agenda
             </button>
           </a>
           <a href='/profile'>
