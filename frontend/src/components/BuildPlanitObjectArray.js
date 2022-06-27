@@ -25,7 +25,6 @@ function BuildObjectArray( goals, plans, comments, actions ) {
             grypGoal.updatedAt,
         ]
         // get array of plan comment arrays
-
         var groopComment = []
         comments.forEach( ( indComment, indCommentIndex ) => {
             if(indComment.topic === indPlan._id){ 
@@ -61,19 +60,13 @@ function BuildObjectArray( goals, plans, comments, actions ) {
         outputPlanObjectArray.forEach( ( specificPlan ) => {
             if( specificPlan[2][0] === indGoal._id ){ // if indGoal is head goal of plan
                 plansForThisSpecificGoal.push(specificPlan)
-
             }
             specificPlan[3].forEach( ( stepOfGoalPlan ) => {
                 if( stepOfGoalPlan[0] === indGoal._id ){  // if indGoal is a step of plan
                     goalsForThisSpecificGoal.push(specificPlan)
-                    
                 }
-
             })
-
-
         })
-
         outputGoalObjectArray.push([
             indGoal._id,
             indGoal.goal,
@@ -84,6 +77,8 @@ function BuildObjectArray( goals, plans, comments, actions ) {
             goalsForThisSpecificGoal,
         ])
     })
+
+
 
     var outputCommentObjectArray = [];
     comments.forEach( ( indComment ) => {
@@ -98,10 +93,43 @@ function BuildObjectArray( goals, plans, comments, actions ) {
         ])
     })
 
+    var outputActionObjectArray = [];
+    if(actions){
+        actions.forEach( ( indAction ) => {
+            const actionData = indAction.data.map( ( insideAction ) => {
+                const actionGoal = goals.find( x => x._id === insideAction[0] )
+    
+                return [
+                    [
+                        actionGoal._id,
+                        actionGoal.goal,
+                        actionGoal.user,
+                        actionGoal.createdAt,
+                        actionGoal.updatedAt,
+                    ],
+                    insideAction[1],
+                    insideAction[2],
+                    insideAction[3],
+                ]
+            })
+    
+            outputActionObjectArray.push([
+                indAction._id,
+                indAction.user,
+                actionData,
+                indAction.createdAt,
+                indAction.updatedAt,
+            ])
+        })
+    } 
+
+    
+
     const outputArray = [ 
         outputGoalObjectArray,
         outputPlanObjectArray,
         outputCommentObjectArray,
+        outputActionObjectArray,
     ]
     console.log(outputArray);
     return ( outputArray )
