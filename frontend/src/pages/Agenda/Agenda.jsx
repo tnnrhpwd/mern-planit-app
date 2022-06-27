@@ -16,7 +16,7 @@ function Agenda() {
   const [ showCreateAction, setShowCreateAction ] = useState(false)
   const [ showMyActions, setShowMyActions ] = useState(false)
   const [ showCalendar, setShowCalendar ] = useState(false)
-  const [ planObjectArray, setPlanObjectArray ] = useState([]);
+  const [ planitObjectArray, setPlanitObjectArray ] = useState([]);
 
   const [ myActions, setMyActions ] = useState(false)
 
@@ -60,26 +60,28 @@ function Agenda() {
     return () => {    // reset the plans when state changes
       dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
       dispatch(resetCommentSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
+      dispatch(resetActionSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
     }
   }, [actionIsError, actionMessage, commentIsError, commentMessage, dispatch, goalIsError, goalMessage, navigate, planIsError, planMessage, user])
 
   useEffect(() => {
-    setPlanObjectArray( BuildPlanObjectArray( goals, plans, comments, actions ) )
+    setPlanitObjectArray( BuildPlanObjectArray( goals, plans, comments, actions ) )
   }, [actions, comments, goals, plans])
 
   useEffect(() => {
-    function handleAllOutputActions(planObjectArray){ 
+    function handleAllOutputActions(planitObjectArray){ 
       var outputMyActionsArray = [];
 
-      planObjectArray.forEach( selAction => {
-        outputMyActionsArray.push(<ActionResult/>)
+      planitObjectArray[3].forEach( selAction => {
+        outputMyActionsArray.push(<ActionResult selAction={selAction}/>)
       });
 
       setMyActions(outputMyActionsArray)
     }
-
-    handleAllOutputActions(planObjectArray);
-  }, [planObjectArray, user._id])
+    if(planitObjectArray.length > 0){
+      handleAllOutputActions(planitObjectArray);
+    }
+  }, [planitObjectArray, user._id])
 
 
 
