@@ -5,6 +5,7 @@ import authReducer from '../features/auth/authSlice';
 import goalReducer from '../features/goals/goalSlice';
 import commentReducer from '../features/comments/commentSlice'
 import planReducer from '../features/plans/planSlice'
+import actionReducer from '../features/actions/actionSlice'
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     goals: goalReducer,
     comments: commentReducer,
     plans: planReducer,
+    actions: actionReducer,
   },
 });
