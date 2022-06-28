@@ -132,7 +132,65 @@ function BuildObjectArray( goals, plans, comments, actions ) {
         outputActionObjectArray,
     ]
     console.log(outputArray);
-    return ( outputArray )
+    // return ( outputArray )
+
+    if( goals && plans && actions && comments ){
+        const planitObjectArray = goals.map( ( eachGoal ) => {
+            var plansForThisSpecificGoal = [];
+            var goalsForThisSpecificGoal = [];
+            var goalComments = [];
+            var goalActions = [];
+
+            plansForThisSpecificGoal = plans.map( ( eachPlan ) => {
+                return eachPlan
+            })
+            goalsForThisSpecificGoal = goals.map( ( eachInnerGoal ) => {
+                
+            })
+            comments.forEach( ( eachComment ) => {
+                if( eachComment.topic === eachGoal._id ){
+                    goalComments.push([
+                        eachComment._id,
+                        eachComment.user,
+                        eachComment.topic,
+                        eachComment.comment,
+                        eachComment.agrusers,
+                        eachComment.disusers,
+                        eachComment.createdAt,
+                        eachComment.updatedAt,
+                    ])
+                }
+            })
+            actions.forEach( ( eachAction ) => {
+                if( eachAction.data[0][0] === eachGoal._id ){
+                    goalActions.push([
+                        eachAction._id,
+                        eachAction.user,
+                        eachAction.data, // need to assign plans and goals for each interior goal
+                        eachAction.createdAt,
+                        eachAction.updatedAt,
+                    ])
+                }
+            })
+    
+            return [
+                eachGoal._id,
+                eachGoal.goal,
+                eachGoal.user,
+                eachGoal.createdAt,
+                eachGoal.updatedAt,
+                plansForThisSpecificGoal,
+                goalsForThisSpecificGoal,
+                goalComments,
+                goalActions,
+    
+            ]
+        })
+        console.log(planitObjectArray);
+        return planitObjectArray;
+    }
+
+
 }
 
 export default BuildObjectArray
