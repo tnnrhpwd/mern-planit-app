@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: false }))  // parses data using query-str
 
 app.use('/api/goals', require('./routes/routeGoal'))       // serve all goals at /api/goals (regardless of hit url)
 app.use('/api/users', require('./routes/routeUser'))       // serve all users at /api/users (regardless of hit url)
+app.use('/api/user_to_user', require('./routes/routeUser'))       // serve all users at /api/users (regardless of hit url)
 app.use('/api/plans', require('./routes/routePlan'))       // serve all plans at /api/plans (regardless of hit url)
 app.use('/api/actions', require('./routes/routeAction')) // serve all actions at /api/actions (regardless of hit url)
 app.use('/api/comments', require('./routes/routeComment')) // serve all comments at /api/comments (regardless of hit url)

@@ -13,9 +13,10 @@ function About() {
         <div className='about-description'>
           The goal of this website is to help users build and decide upon plans to achieve their goals. 
           <br/>
-          <br/> Create a goal or direction. 
-          <br/> Decide upon a plan to meet your measurable success criteria. 
-          <br/> Follow your plan, learning more for future plans.
+          <br/> Orient to the current state. 
+          <br/> Envision a future goal state. 
+          <br/> Make a plan to meet your measurable success criteria. 
+          <br/> Follow your plan, correcting for abnormalities along the way.
 
           <br/><br/> State = system observed understanding of environment
 

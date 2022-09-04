@@ -12,7 +12,7 @@ function Dashboard() {
   return (<>
     <div className='planit-dashboard'>
       <div className='planit-dashboard-upper'>
-        <Start/>
+        {/* <Start/> */}
       </div>
       {/* <div className='planit-dashboard-popular'> */}
         {/* <LeftDashboard/> */}
