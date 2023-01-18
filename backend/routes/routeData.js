@@ -1,0 +1,18 @@
+// This file imports the data object schema + functions | Routers listen for requests then execute callback functions 
+const express = require('express')
+const router = express.Router()
+const {
+  getData,
+  setData,
+  updateData,
+  deleteData,
+} = require('../controllers/controllerData')
+
+// Declare authentication variable
+const { protect } = require('../middleware/authMiddleware')
+
+// listens for HTTP requests on /api/user_to_user/
+router.route('/').get(getData).post(protect, setData) // GET + POST -- The protect middleware here prevents access from users without JWT
+router.route('/:id').delete(protect, updateData).put(protect, deleteData) // DELETE + UPDATE -- The protect middleware here prevents access from users without JWT
+
+module.exports = router

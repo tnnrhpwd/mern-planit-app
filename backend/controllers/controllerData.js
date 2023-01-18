@@ -1,29 +1,29 @@
-// This file contains the functions that deal with the Plan objects( schema imported from Models) => Exported to Routes
+// This file contains the functions that deal with the Data objects( schema imported from Models) => Exported to Routes
 const asyncHandler = require('express-async-handler')// sends the errors to the errorhandler
 
-const Comment = require('../models/commentModel')
+const User_to_User = require('../models/user_to_userModel')
 
-// @desc    Get comments
-// @route   GET /api/comments
+// @desc    Get Data
+// @route   GET /api/Data
 // @access  Private
-const getComments = asyncHandler(async (req, res) => {
-  // const comments = await Comment.find({ user: req.user.id }) //  where the request user matches the comment user
-  const comments = await Comment.find() //  Get all users' comments
+const getData = asyncHandler(async (req, res) => {
+  // const data = await data.find({ data: req.user.id }) //  where the request user matches the user_to_user user
+  const data = await data.find() //  Get all data
 
 
-  res.status(200).json(comments) // returns json of comments
+  res.status(200).json(data) // returns json of comments
 })
 
-// @desc    Set comment
-// @route   POST /api/comments
+// @desc    Set data
+// @route   POST /api/data
 // @access  Private
-const setComment = asyncHandler(async (req, res) => {
-  if (!req.body.comment) {
+const setdata = asyncHandler(async (req, res) => {
+  if (!req.body.data) {
     res.status(400)
     throw new Error('Please add a text field')
   }
 
-  const comment = await Comment.create({
+  const data = await data.create({
     topic: req.body.topic,
     comment: req.body.comment,
     user: req.user.id,
@@ -33,13 +33,13 @@ const setComment = asyncHandler(async (req, res) => {
   res.status(200).json(comment)
 })
 
-// @desc    Update comment
-// @route   PUT /api/comments/:id
+// @desc    Update Data
+// @route   PUT /api/Data/:id
 // @access  Private
-const updateComment = asyncHandler(async (req, res) => {
-  const comment = await Comment.findById(req.params.id)
+const updateData = asyncHandler(async (req, res) => {
+  const comment = await Data.findById(req.params.id)
 
-  if (!comment) {
+  if (!data) {
     res.status(400)
     throw new Error('Comment not found')
   }
@@ -56,7 +56,7 @@ const updateComment = asyncHandler(async (req, res) => {
     throw new Error('User not authorized')
   }
 
-  const updatedComment = await Comment.findByIdAndUpdate(req.params.id,  { $push: req.body}, {
+  const updatedComment = await User_to_User.findByIdAndUpdate(req.params.id,  { $push: req.body}, {
     new: true,
   })
 
@@ -66,8 +66,8 @@ const updateComment = asyncHandler(async (req, res) => {
 // @desc    Delete comment
 // @route   DELETE /api/comment/:id
 // @access  Private
-const deleteComment = asyncHandler(async (req, res) => {
-  const comment = await Comment.findById(req.params.id)
+const deleteData = asyncHandler(async (req, res) => {
+  const comment = await Data.findById(req.params.id)
 
   if (!comment) {
     res.status(400)
@@ -92,8 +92,8 @@ const deleteComment = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
-  getComments,
-  setComment,
-  updateComment,
-  deleteComment,
+  getData,
+  setdata,
+  updateData,
+  deleteData,
 }
