@@ -1,7 +1,7 @@
 const mongoose = require('mongoose') // MVC library - used to communicate with MongoDB
 
 // Schema of each data entry ( object attributes ) => exported to dataController ( object methods/functions )  => exported to dataRoutes
-const goalSchema = mongoose.Schema(
+const dataSchema = mongoose.Schema(
   {
     data: {
       type: String,

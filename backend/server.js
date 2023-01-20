@@ -16,13 +16,7 @@ const app = express() // Calls the express function "express()" and puts new Exp
 app.use(express.json()) // adds middleware that parses json requests and moves data into the request body (regardless of hit url)
 app.use(express.urlencoded({ extended: false }))  // parses data using query-string library rather than qs library (regardless of hit url)
 
-app.use('/api/goals', require('./routes/routeGoal'))       // serve all goals at /api/goals (regardless of hit url)
-app.use('/api/users', require('./routes/routeUser'))       // serve all users at /api/users (regardless of hit url)
-app.use('/api/user_to_user', require('./routes/routeUser'))       // serve all users at /api/users (regardless of hit url)
-app.use('/api/plans', require('./routes/routePlan'))       // serve all plans at /api/plans (regardless of hit url)
-app.use('/api/actions', require('./routes/routeAction')) // serve all actions at /api/actions (regardless of hit url)
-app.use('/api/comments', require('./routes/routeComment')) // serve all comments at /api/comments (regardless of hit url)
-
+app.use('/api/data', require('./routes/routeData'))       // serve all data at /api/data (regardless of hit url)
 
 // If production, serve frontend. Else, 
 if (process.env.NODE_ENV === 'production') {                                  // IF PRODUCTION

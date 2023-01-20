@@ -1,7 +1,7 @@
 // This file exports protect -- async function that confirms that the request user is the same as the response user. DOES NOT CHECK PASSWORD or ANYTHING WITH UI -- only confirms that reponse is sent to the requester
 const jwt = require('jsonwebtoken');                   // import web token library to get user's token
 const asyncHandler = require('express-async-handler'); // sends the errors to the errorhandler
-const User = require('../models/userModel');           // import user schema
+const Data = require('../models/dataModel');           // import data schema
 
 // This middleware async function is called anytime a user requests user information
 const protect = asyncHandler(async (req, res, next) => {

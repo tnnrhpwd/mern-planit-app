@@ -1,13 +1,13 @@
 // This file contains the functions that deal with the Data objects( schema imported from Models) => Exported to Routes
 const asyncHandler = require('express-async-handler')// sends the errors to the errorhandler
 
-const User_to_User = require('../models/user_to_userModel')
+const data = require('../models/dataModel')
 
 // @desc    Get Data
 // @route   GET /api/Data
 // @access  Private
 const getData = asyncHandler(async (req, res) => {
-  // const data = await data.find({ data: req.user.id }) //  where the request user matches the user_to_user user
+  // const data = await data.find({ data: req.user.id }) //  where the request user matches the data user
   const data = await data.find() //  Get all data
 
 
@@ -17,20 +17,18 @@ const getData = asyncHandler(async (req, res) => {
 // @desc    Set data
 // @route   POST /api/data
 // @access  Private
-const setdata = asyncHandler(async (req, res) => {
+const setData = asyncHandler(async (req, res) => {
   if (!req.body.data) {
     res.status(400)
     throw new Error('Please add a text field')
   }
 
   const data = await data.create({
-    topic: req.body.topic,
-    comment: req.body.comment,
-    user: req.user.id,
+    data: req.body.data,
   })
   
 
-  res.status(200).json(comment)
+  res.status(200).json(data)
 })
 
 // @desc    Update Data
@@ -93,7 +91,7 @@ const deleteData = asyncHandler(async (req, res) => {
 
 module.exports = {
   getData,
-  setdata,
+  setData,
   updateData,
   deleteData,
 }
