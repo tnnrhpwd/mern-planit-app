@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useOutsideAlerter from '../useOutsideAlerter.js'
 import { toast } from 'react-toastify'                        // visible error notifications
-import { deletePlan } from '../../features/plans/planSlice.js';
-import { deleteGoal } from '../../features/goals/goalSlice.js';
+import { deleteData } from '../../features/datas/dataSlice.js';
 import DeleteView from '../DeleteView/DeleteView.jsx';
 import './ManageView.css';
 
@@ -13,7 +12,7 @@ function ManageView(props) {
     const [ showDeleteConfirmation, setShowDeleteConfirmation ] = useState(false);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const type = props.type.toLowerCase();
     const user = props.user
@@ -29,11 +28,7 @@ function ManageView(props) {
     const handleTopicDelete = () => {
         switch(type) {
             case 'goal':
-                dispatch(deleteGoal( topicID ))
-                toast.info("Your plan has been deleted.", { autoClose: 2000 }) // print error to toast errors
-                break;
-            case 'plan':
-                dispatch(deletePlan( topicID ))
+                dispatch(deleteData( topicID ))
                 toast.info("Your plan has been deleted.", { autoClose: 2000 }) // print error to toast errors
                 break;
             default:

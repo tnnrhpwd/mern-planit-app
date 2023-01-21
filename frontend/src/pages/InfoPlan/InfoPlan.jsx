@@ -3,35 +3,26 @@ import { useNavigate } from 'react-router-dom'              // page redirects
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify'                        // visible error notifications
-import { deletePlan, getPlans, resetPlanSlice } from './../../features/plans/planSlice'
-import { deleteGoal, getGoals, resetGoalSlice } from './../../features/goals/goalSlice'
-import { createComment, deleteComment, getComments, resetCommentSlice } from './../../features/comments/commentSlice'
+import { createData, deleteData, getDatas, resetDataSlice } from './../../features/datas/dataSlice'
 import DeleteView from '../../components/DeleteView/DeleteView'
 import Spinner from '../../components/Spinner/Spinner';
-import CommentResult from '../../components/CommentResult/CommentResult'
-import BuildPlanObjectArray from '../../components/BuildPlanitObjectArray';
+import PlanResult from '../../components/PlanResult/PlanResult'
 import './InfoPlan.css';
 
-function InfoPlan() {
+function InfoData() {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const [ chosenPlan, setChosenPlan ] = useState(null);
-    const [ importedComments, setImportedComments ] = useState(null);
-    const [ newComment, setNewComment ] = useState("");
-    const [ planObjectArray, setPlanObjectArray ] = useState([]);
-    const [ showDeletePlanConfirmation, setShowDeletePlanConfirmation ] = useState(false);
+    const [ chosenData, setChosenData ] = useState(null);
+    const [ importedDatas, setImportedDatas ] = useState(null);
+    const [ newData, setNewData ] = useState("");
+    const [ dataObjectArray, setDataObjectArray ] = useState([]);
+    const [ showDeleteDataConfirmation, setShowDeleteDataConfirmation ] = useState(false);
 
-    const { goals, goalIsLoading, goalIsError, goalMessage } = useSelector(     // select goal values from goal state
-        (state) => state.goals
+    const { datas, dataIsLoading, dataIsError, dataMessage } = useSelector(     // select data values from data state
+        (state) => state.datas
     )
-    const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select plan values from plan state
-    (state) => state.plans
-)
     const { user, authIsLoading, authIsError, authMessage } = useSelector(
         (state) => state.auth
-    )
-    const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select comments values from comments state
-    (state) => state.comments
     )
 
     const navigate = useNavigate() // initialization
@@ -39,105 +30,95 @@ function InfoPlan() {
 
     // called on state changes
     useEffect(() => {
-        if ( planIsError || authIsError || commentIsError || goalIsError ) {
-            toast.error(planMessage) // print error to toast errors
-            toast.error(goalMessage) // print error to toast errors
-            toast.error(authMessage) // print error to toast errors
-            toast.error(commentMessage) // print error to toast errors
+        if ( dataIsError ) {
+
+            toast.error(dataMessage) // print error to toast errors
         }
 
-
-        dispatch(getGoals()) // dispatch connects to the store, then retreives the plans that match the logged in user.
-        dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
-        dispatch(getComments()) // dispatch connects to the store, then retreives the plans that match the logged in user.
+        dispatch(getDatas()) // dispatch connects to the store, then retreives the datas that match the logged in user.
   
         
-        return () => {    // reset the plans when state changes
-        dispatch(resetGoalSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
-        dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
-        dispatch(resetCommentSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
+        return () => {    // reset the datas when state changes
+        dispatch(resetDataSlice()) // dispatch connects to the store, then reset state values( dataMessage, isloading, iserror, and issuccess )
         }
-    }, [authIsError, authMessage, commentIsError, commentMessage, dispatch, goalIsError, goalMessage, planIsError, planMessage])
+    }, [authIsError, authMessage, dataIsError, dataMessage, dispatch, dataIsError, dataMessage, dataIsError, dataMessage])
+
 
     useEffect(() => {
-        setPlanObjectArray( BuildPlanObjectArray( goals, plans, comments )[1] )
-    }, [comments, goals, plans])
-
-    useEffect(() => {
-        function handleSelectGoal( IDString, planObjectArray ){
-            var outputCommentComponentArray = [];
-            const selectedPlan = planObjectArray.find( x => x[0] === IDString )
-            console.log(selectedPlan)
-            setChosenPlan(selectedPlan)
-            if( ( selectedPlan ) ){
-                selectedPlan[4].forEach(( selComment, selCommentIndex ) => {
-                    outputCommentComponentArray.push(<CommentResult key={"CommentResult"+IDString+" "+selCommentIndex} comment={selComment}/>)
+        function handleSelectData( IDString, dataObjectArray ){
+            var outputDataComponentArray = [];
+            const selectedData = dataObjectArray.find( x => x[0] === IDString )
+            console.log(selectedData)
+            setChosenData(selectedData)
+            if( ( selectedData ) ){
+                selectedData[4].forEach(( selData, selDataIndex ) => {
+                    outputDataComponentArray.push(<PlanResult key={"PlanResult"+IDString+" "+selDataIndex} data={selData}/>)
                 })
             }
-            setImportedComments( outputCommentComponentArray );
+            setImportedDatas( outputDataComponentArray );
         }
-        handleSelectGoal( id, planObjectArray )
-    }, [id, planObjectArray])
+        handleSelectData( id, dataObjectArray )
+    }, [id, dataObjectArray])
 
 
     // if(authIsLoading){
     //     return(<Spinner/>)
     // }
 
-    const handleSubmitNewComment = (e) => {
+    const handleSubmitNewData = (e) => {
         e.preventDefault()
 
-        if( newComment === "" ){ toast.error("Please enter your comment first.", { autoClose: 1000 }); return; } // No input text guard clause
-        if( newComment.length > 280 ){ toast.error("Please shorten your comment to 280 characters.", { autoClose: 1000 }); return; } // Too long input text guard clause
+        if( newData === "" ){ toast.error("Please enter your data first.", { autoClose: 1000 }); return; } // No input text guard clause
+        if( newData.length > 280 ){ toast.error("Please shorten your data to 280 characters.", { autoClose: 1000 }); return; } // Too long input text guard clause
 
-        const topic = chosenPlan[0];
-        const comment = newComment   
+        const topic = chosenData[0];
+        const data = newData   
 
-        dispatch(createComment({ topic , comment }))
+        dispatch(createData({ topic , data }))
 
-        setNewComment('')
+        setNewData('')
         
-        toast.success("Comment Submitted!", { autoClose: 1000 }) // print error to toast errors
+        toast.success("Data Submitted!", { autoClose: 1000 }) // print error to toast errors
     }
 
-    const handleDeletePlan = () => {
-        dispatch(deletePlan( chosenPlan[0] ))
-        toast.info("Your plan has been deleted.", { autoClose: 2000 }) // print error to toast errors
-        navigate('/plans')           // send user to dashboard
+    const handleDeleteData = () => {
+        dispatch(deleteData( chosenData[0] ))
+        toast.info("Your data has been deleted.", { autoClose: 2000 }) // print error to toast errors
+        navigate('/datas')           // send user to dashboard
 
     }
-    const handleShowDeletePlan = (e) => {
+    const handleShowDeleteData = (e) => {
         e.preventDefault()
-        if(showDeletePlanConfirmation){setShowDeletePlanConfirmation(false)}
-        else if(!showDeletePlanConfirmation){setShowDeletePlanConfirmation(true)}
+        if(showDeleteDataConfirmation){setShowDeleteDataConfirmation(false)}
+        else if(!showDeleteDataConfirmation){setShowDeleteDataConfirmation(true)}
     }
 
-    if(chosenPlan){
+    if(chosenData){
         return (
-            <div className="infoplan">
-                <div className='infoplan-delete'>
+            <div className="infodata">
+                <div className='infodata-delete'>
                     { (user) &&
-                        <>{ ( user._id === chosenPlan[1]) &&
+                        <>{ ( user._id === chosenData[1]) &&
                             <button 
-                                className = 'infoplan-delete-button'
-                                onClick = {handleShowDeletePlan}
+                                className = 'infodata-delete-button'
+                                onClick = {handleShowDeleteData}
                                 >
-                                Delete Plan
+                                Delete Data
                             </button>
                         }</>
                     }
                 </div> 
-                {   ( showDeletePlanConfirmation ) &&
-                    < DeleteView view={true} delFunction={handleDeletePlan} click={setShowDeletePlanConfirmation} type="plan" id={chosenPlan[0]}/>
+                {   ( showDeleteDataConfirmation ) &&
+                    < DeleteView view={true} delFunction={handleDeleteData} click={setShowDeleteDataConfirmation} type="data" id={chosenData[0]}/>
                 }
-                <div className='infoplan-goal'>
-                    <div className='infoplan-goal-text'>
-                        <a href = { '/goal/' + chosenPlan[2][0] }>
+                <div className='infodata-data'>
+                    <div className='infodata-data-text'>
+                        <a href = { '/data/' + chosenData[2][0] }>
                             <button 
-                                key = { "goal-text-" + chosenPlan[2][0] } 
-                                className = 'infoplan-goal-text-goal'
+                                key = { "data-text-" + chosenData[2][0] } 
+                                className = 'infodata-data-text-data'
                                 >
-                                { chosenPlan[2][1] }
+                                { chosenData[2][1] }
                             </button>
                         </a> 
 
@@ -145,36 +126,36 @@ function InfoPlan() {
 
                     </div>
                 </div>                 
-                <div className='infoplan-plan'>
-                    <div className='infoplan-plan-text'>
-                        { chosenPlan[3].map(( goal, goalIndex ) => {
+                <div className='infodata-data'>
+                    <div className='infodata-data-text'>
+                        { chosenData[3].map(( data, dataIndex ) => {
                             return (
-                            <a href = { '/goal/' + goal[0] } key = { "plan-text-"+goal[0]+ " " + goalIndex } >
+                            <a href = { '/data/' + data[0] } key = { "data-text-"+data[0]+ " " + dataIndex } >
                                 <button 
-                                    key = { "plan-text-" + goalIndex } 
-                                    className = 'infoplan-plan-text-goal'
+                                    key = { "data-text-" + dataIndex } 
+                                    className = 'infodata-data-text-data'
                                     >
-                                    { goal[1] }
+                                    { data[1] }
                                 </button>
                             </a>
                             )
                         }) }
                     </div>
                 </div> 
-                <div className='infoplan-newcomment'>
+                <div className='infodata-newdata'>
                     <textarea 
-                        value={newComment}
-                        name='plan'
-                        placeholder='Enter comment here.'
-                        onChange={(e) => setNewComment(e.target.value)}   // change text field value
-                        className='infoplan-newcomment-textarea'
+                        value={newData}
+                        name='data'
+                        placeholder='Enter data here.'
+                        onChange={(e) => setNewData(e.target.value)}   // change text field value
+                        className='infodata-newdata-textarea'
                     />
-                    <button className='infoplan-newcomment-submit' onClick={handleSubmitNewComment}>
+                    <button className='infodata-newdata-submit' onClick={handleSubmitNewData}>
                         Submit
                     </button>
                 </div>
-                <div className='infoplan-comments'>
-                    { importedComments } 
+                <div className='infodata-datas'>
+                    { importedDatas } 
                 </div>
             </div>
         )
@@ -184,4 +165,4 @@ function InfoPlan() {
 
 }
 
-export default InfoPlan
+export default InfoData

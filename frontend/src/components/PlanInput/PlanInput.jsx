@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'      // useDispatch-brings in reset,register,login from state
 import { toast } from 'react-toastify'                        // visible error notifications
-import { createPlan } from '../../features/plans/planSlice'
+import { createData } from '../../features/datas/dataSlice'
 import './PlanInput.css';
 
 function PlanInput() {
@@ -60,7 +60,7 @@ function PlanInput() {
         if( plan === '' ) { toast.error("Please enter a plan first.", { autoClose: 1000 }); return; }
         e.preventDefault()
 
-        dispatch(createPlan({ plan,goal }))   // dispatch connects to the store, then creates a plan with text input
+        dispatch(createData({ plan,goal }))   // dispatch connects to the store, then creates a plan with text input
         setPlan('')                      // empty planstring field
         setPlanInputArray(initialPlanInputArray)            // reset planarray field
         setGoal('')                      // empty goal field

@@ -3,13 +3,12 @@ import { useNavigate } from 'react-router-dom'              // page redirects
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify'                        // visible error notifications
-import { deletePlan, getPlans, resetPlanSlice } from './../../features/plans/planSlice'
-import { deleteGoal, getGoals, resetGoalSlice } from './../../features/goals/goalSlice'
-import { createComment, deleteComment, getComments, resetCommentSlice } from './../../features/comments/commentSlice'
+// import { deletePlan, getPlans, resetPlanSlice } from './../../features/plans/planSlice'
+// import { deleteGoal, getGoals, resetGoalSlice } from './../../features/goals/goalSlice'
+import { createData, deleteData, getDatas, resetDataSlice } from './../../features/datas/dataSlice'
 import DeleteView from '../../components/DeleteView/DeleteView'
 import Spinner from '../../components/Spinner/Spinner';
-import CommentResult from '../../components/CommentResult/CommentResult'
-import BuildPlanitObjectArray from '../../components/BuildPlanitObjectArray';
+// import CommentResult from '../../components/CommentResult/CommentResult'
 import './InfoGoal.css';
 
 function InfoGoal() {
@@ -21,17 +20,8 @@ function InfoGoal() {
     const [ goalObjectArray, setGoalObjectArray ] = useState([]);
     const [ showDeleteGoalConfirmation, setShowDeleteGoalConfirmation ] = useState(false);
 
-    const { goals, goalIsLoading, goalIsError, goalMessage } = useSelector(     // select goal values from goal state
-        (state) => state.goals
-    )
-    const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select plan values from plan state
-    (state) => state.plans
-    )
-    const { user, authIsLoading, authIsError, authMessage } = useSelector(
-        (state) => state.auth
-    )
-    const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select comments values from comments state
-    (state) => state.comments
+    const { datas, dataIsLoading, dataIsError, dataMessage } = useSelector(     // select goal values from goal state
+        (state) => state.data
     )
 
     const navigate = useNavigate() // initialization
@@ -39,29 +29,19 @@ function InfoGoal() {
 
     // called on state changes
     useEffect(() => {
-        if ( planIsError || authIsError || commentIsError || goalIsError ) {
-            toast.error(planMessage) // print error to toast errors
-            toast.error(goalMessage) // print error to toast errors
-            toast.error(authMessage) // print error to toast errors
-            toast.error(commentMessage) // print error to toast errors
+        if ( dataIsError ) {
+            toast.error(dataMessage) // print error to toast errors
+
         }
 
 
-        dispatch(getGoals()) // dispatch connects to the store, then retreives the plans that match the logged in user.
-        dispatch(getPlans()) // dispatch connects to the store, then retreives the plans that match the logged in user.
-        dispatch(getComments()) // dispatch connects to the store, then retreives the plans that match the logged in user.
+        dispatch(getDatas()) // dispatch connects to the store, then retreives the plans that match the logged in user.
   
         
         return () => {    // reset the plans when state changes
-        dispatch(resetGoalSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
-        dispatch(resetPlanSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
-        dispatch(resetCommentSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
+        dispatch(resetDataSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
         }
-    }, [authIsError, authMessage, commentIsError, commentMessage, dispatch, goalIsError, goalMessage, planIsError, planMessage])
-    
-    useEffect(() => {
-        setGoalObjectArray( BuildPlanitObjectArray( goals, plans, comments )[0] )
-    }, [comments, goals, plans])
+    }, [dataIsError, dispatch, dataMessage,])
 
     useEffect(() => {
         function handleSelectGoal( IDString ){
@@ -82,7 +62,7 @@ function InfoGoal() {
         const topic = chosenGoal[0];
         const comment = newComment   
 
-        dispatch(createComment({ topic , comment }))
+        dispatch(createData({ topic , comment }))
 
         setNewComment('')
         
@@ -90,21 +70,21 @@ function InfoGoal() {
     }
 
     const handleDeleteGoal = () => {
-        dispatch(deletePlan( chosenGoal[0] ))
+        dispatch(deleteData( chosenGoal[0] ))
         toast.info("Your goal has been deleted.", { autoClose: 2000 }) // print error to toast errors
         navigate('/goals')           // send user to dashboard
 
     }
-    const handleShowDeleteGoal = (e) => {
-        e.preventDefault()
-        if(showDeleteGoalConfirmation){setShowDeleteGoalConfirmation(false)}
-        else if(!showDeleteGoalConfirmation){setShowDeleteGoalConfirmation(true)}
-    }
+    // const handleShowDeleteGoal = (e) => {
+    //     e.preventDefault()
+    //     if(showDeleteGoalConfirmation){setShowDeleteGoalConfirmation(false)}
+    //     else if(!showDeleteGoalConfirmation){setShowDeleteGoalConfirmation(true)}
+    // }
 
     if(chosenGoal){
         return (<div className="infoplan">
             <div className='infoplan-delete'>
-                { (user) &&
+                {/* { (user) &&
                     <>{ ( user._id === chosenGoal[2]) &&
                         <button 
                             className = 'infoplan-delete-button'
@@ -113,7 +93,7 @@ function InfoGoal() {
                             Delete Plan
                         </button>
                     }</>
-                }
+                } */}
             </div> 
             {   ( showDeleteGoalConfirmation ) &&
                 < DeleteView view={true} delFunction={handleDeleteGoal} click={setShowDeleteGoalConfirmation} type="goal" id={chosenGoal[0]}/>

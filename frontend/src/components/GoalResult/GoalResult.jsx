@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
-import { updateGoal } from './../../features/goals/goalSlice'
+// import { updateData } from './../../features/goals/goalSlice'
 import ShareView from '../ShareView/ShareView.jsx'
-import { toast } from 'react-toastify'                        // visible error notifications
+// import { toast } from 'react-toastify'                        // visible error notifications
 import CreatedAt from '../PlanResult/CreatedAt';
 import { useNavigate } from 'react-router-dom';
-import ThumbsUp from './../../assets/thumbs-up.svg';
-import ThumbsDown from './../../assets/thumbs-down.svg';
+// import ThumbsUp from './../../assets/thumbs-up.svg';
+// import ThumbsDown from './../../assets/thumbs-down.svg';
 import ManageView from '../ManageView/ManageView';
 import './GoalResult.css';
 

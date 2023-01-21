@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'      // useDispatch-brings in reset,register,login from state
 import { toast } from 'react-toastify'                        // visible error notifications
-import { createGoal } from './../../features/goals/goalSlice'
+import { createData } from './../../features/datas/dataSlice'
 import './GoalInput.css';
 
 function GoalInput() {
@@ -12,7 +12,7 @@ function GoalInput() {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        dispatch(createGoal({ text }))   // dispatch connects to the store, then creates a goal with text input
+        dispatch(createData({ text }))   // dispatch connects to the store, then creates a goal with text input
         setText('')                      // empty text field 
         toast.success("Goal successfully created!", { autoClose: 1000 })
     }

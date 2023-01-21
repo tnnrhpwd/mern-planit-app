@@ -4,18 +4,18 @@ import ShareView from '../ShareView/ShareView.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
 import CreatedAt from './CreatedAt';
 import { useNavigate } from 'react-router-dom';
-import { getPlans, resetPlanSlice, createPlan, updatePlan, deletePlan } from '../../features/plans/planSlice'
-import { getGoals, resetGoalSlice, createGoal, updateGoal, deleteGoal } from '../../features/goals/goalSlice'
-import { getComments, resetCommentSlice, createComment, updateComment } from '../../features/comments/commentSlice'
-import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
+import { updateData } from '../../features/datas/dataSlice'
+// import { getGoals, resetGoalSlice, createGoal, updateGoal, deleteGoal } from '../../features/goals/goalSlice'
+// import { getComments, resetCommentSlice, createComment, updateComment } from '../../features/comments/commentSlice'
+// import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
 
 import ThumbsUp from './../../assets/thumbs-up.svg';
 import ManageView from '../ManageView/ManageView';
 import ThumbsDown from './../../assets/thumbs-down.svg';
 import './PlanResult.css';
 
-function PlanResult(props) {
-    const planObjectArray = props.importPlanArray;
+function DataResult(props) {
+    const planObjectArray = props.importDataArray;
 
     const dispatch = useDispatch()  // initialization
     const navigate = useNavigate();
@@ -27,25 +27,25 @@ function PlanResult(props) {
 
     function handleAgree(id){
         const type = ("agree");
-        dispatch( updatePlan( {  id ,type } ) )
+        dispatch( updateData( {  id ,type } ) )
     }
 
     function handleDisagree(id){
         const type = ("disagree");
-        dispatch( updatePlan( {  id ,type } ) )
+        dispatch( updateData( {  id ,type } ) )
     }
 
     function handleFavorite(id){
         const type = ("favorite");
-        dispatch( updatePlan( {  id ,type } ) )
-        toast.success("Plan added to your favorites!", { autoClose: 1000 })
+        dispatch( updateData( {  id ,type } ) )
+        toast.success("Data added to your favorites!", { autoClose: 1000 })
 
     }
 
     function handleUnfavorite(id){
         const type = ("unfavorite");
-        dispatch( updatePlan( {  id ,type } ) )
-        toast.success("Plan removed from your favorites!", { autoClose: 1000 })
+        dispatch( updateData( {  id ,type } ) )
+        toast.success("Data removed from your favorites!", { autoClose: 1000 })
     }
 
     function handleShareView(type, id){
@@ -141,4 +141,4 @@ function PlanResult(props) {
     }
 }
 
-export default PlanResult
+export default DataResult

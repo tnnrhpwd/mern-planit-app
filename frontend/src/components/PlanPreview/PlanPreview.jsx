@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'      // useDispatch-brings in reset,register,login from state
-import { createComment, deleteComment } from '../../features/comments/commentSlice'
+import { createData, deleteData } from '../../features/datas/dataSlice'
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json'
 import './PlanPreview.css';
@@ -33,16 +33,16 @@ function PlanPreview(props) {
 
         function getTimeSince(timeWas){
             TimeAgo.addDefaultLocale(en)
-            const timeAgo = new TimeAgo('en-US')
+            // const timeAgo = new TimeAgo('en-US')
 
-            var timeSince = timeAgo.format( 
-                Date.now() 
-                - Date.parse(
-                    timeWas.split('T')[0].split('-')[0] + " " 
-                    + timeWas.split('T')[1].split('.')[0] + " GMT"
-                ) 
-                + 52 * 31536000730 + 1209600000
-            )
+            // var timeSince = timeAgo.format( 
+            //     Date.now() 
+            //     - Date.parse(
+            //         timeWas.split('T')[0].split('-')[0] + " " 
+            //         + timeWas.split('T')[1].split('.')[0] + " GMT"
+            //     ) 
+            //     + 52 * 31536000730 + 1209600000
+            // )
             var answer = ' Created: '+ timeWas.split('T')[0] //+ " ("+timeSince+")" //+ Date.now().strftime('The date is %b %d, %Y')
 
             return (answer)
@@ -57,7 +57,7 @@ function PlanPreview(props) {
                 if(selComment.plan === plan._id){
 
                     function handleDeleteComment(){
-                        dispatch(deleteComment(selComment._id))
+                        dispatch(deleteData(selComment._id))
                         console.log("delete "+selComment._id)
                     }
     
@@ -93,7 +93,7 @@ function PlanPreview(props) {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        dispatch(createComment({ plan, comment }))
+        dispatch(createData({ plan, comment }))
         setComment('')                      // empty comment field
     }
 
