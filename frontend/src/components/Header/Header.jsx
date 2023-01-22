@@ -9,9 +9,9 @@ import './Header.css';
 
 
 function Header() {
-  // const navigate = useNavigate() // initialization
-  // const dispatch = useDispatch() // initialization
-  const { user } = useSelector((state) => state.auth)   // select values from state
+  const navigate = useNavigate() // initialization
+  const dispatch = useDispatch() // initialization
+  const { user } = useSelector((state) => state.datas)   // select values from state
   const [ colTheme, setColTheme ] = useState(null);
 
   useEffect(() => {     // RUNS ON START -- Checks browser for color theme preference. Sets dark mode otherwise.
@@ -45,24 +45,33 @@ function Header() {
   }
 
   // declare method to remove user item from local storage)
-  // const onLogout = () => {
-  //   dispatch(logout())  // dispatch connects to the store, then remove user item from local storage
-  //   dispatch(resetAuthSlice())  // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
-  //   navigate('/')       // send user to dashboard, which will redirect to login page
-  // }
+  const onLogout = () => {
+    dispatch(logout())  // dispatch connects to the store, then remove user item from local storage
+    dispatch(resetAuthSlice())  // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
+    navigate('/')       // send user to dashboard, which will redirect to login page
+  }
 
   
 
   
   return (
     <>
-      <div className='planit-header'>
-        <div className='planit-header-logo'>
-          <a href='/' onClick={() => {window.scrollTo(0,0)}}>
-            <img id='planit-header-logo-img' src={HeaderLogo} alt='website logo'/>
+      <div className="planit-header">
+        <div className="planit-header-logo">
+          <a
+            href="/"
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+          >
+            <img
+              id="planit-header-logo-img"
+              src={HeaderLogo}
+              alt="website logo"
+            />
           </a>
         </div>
-        {/* <a href='/'>
+        {/* <a href='/'> // deleted for now
           <div className='planit-header-title'>
             Planit
           </div>
@@ -73,64 +82,73 @@ function Header() {
           </button>
         </a> */}
 
-        {/* <a href='/settings'>
-          <button className="planit-header-link-landscape">
-            Settings
-          </button>
-        </a> */}
-        {user ? 
-        <>
-          <a href='/goals'>
-            <button className="planit-header-link-landscape">
-              Goals
-            </button>
-          </a>
-          <a href='/plans'>
-            <button className="planit-header-link-landscape">
-              Plans
-            </button>
-          </a>
-          <a href='/agenda'>
-            <button className="planit-header-link-landscape">
-              Agenda
-            </button>
-          </a>
-          <a href='/profile'>
-            <button className="planit-header-link-landscape">
-              Profile
-            </button>
-          </a>
-        </>
-
-          :null
-          // <a href='/profile'>
+        <a href="/settings">
+          <button className="planit-header-link-landscape">Settings</button>
+        </a>
+        {
+          user ? (
+            <>
+              <a href="/goals">
+                <button className="planit-header-link-landscape">Goals</button>
+              </a>
+              <a href="/plans">
+                <button className="planit-header-link-landscape">Plans</button>
+              </a>
+              <a href="/agenda">
+                <button className="planit-header-link-landscape">Agenda</button>
+              </a>
+              <a href="/profile">
+                <button className="planit-header-link-landscape">
+                  Profile
+                </button>
+              </a>
+            </>
+          ) : null
+          // <a href='/profile'> // deleted for now
           //   <button className="planit-header-link-landscape">
           //     Log in
           //   </button>
           // </a>
         }
 
-        {/* <a href='/about'>
-          <button className="planit-header-link-landscape">
-            About
+        <a href="/about">
+          <button className="planit-header-link-landscape">About</button>
+        </a>
+        {colTheme === "dark-theme" && (
+          <button
+            className="planit-header-themebutton-landscape"
+            onClick={setLightMode}
+          >
+            Light Mode
           </button>
-        </a> */}
-        {/* {(colTheme==="dark-theme") && <button className='planit-header-themebutton-landscape' onClick={setLightMode}>Light Mode</button>}
-        {(colTheme==="light-theme") && <button className='planit-header-themebutton-landscape' onClick={setDarkMode}>Dark Mode</button>} */}
-          {/* <button className="planit-header-profile-landscape">
-            {user ? (
-              <button className="planit-header-profile-auth" onClick={onLogout}>Log out</button>
-            ) : (
-              <a href='/login'>
-                <button className="planit-header-profile-auth">Log in</button>
-              </a>
-            )}
-          </button> */}
-        <HeaderDropper colTheme={colTheme} setLightMode={setLightMode} setDarkMode={setDarkMode} />
-        
+        )}
+        {colTheme === "light-theme" && (
+          <button
+            className="planit-header-themebutton-landscape"
+            onClick={setDarkMode}
+          >
+            Dark Mode
+          </button>
+        )}
+        <button className="planit-header-profile-landscape">
+          {user ? (
+            <button className="planit-header-profile-auth" onClick={onLogout}>
+              Log out
+            </button>
+          ) : (
+            <a href="/login">
+              <button className="planit-header-profile-auth">Log in</button>
+            </a>
+          )}
+        </button>
+        <HeaderDropper
+          colTheme={colTheme}
+          setLightMode={setLightMode}
+          setDarkMode={setDarkMode}
+        />
       </div>
     </>
-  )
+  );
 }
 
 export default Header
