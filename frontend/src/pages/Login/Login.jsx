@@ -21,7 +21,7 @@ function Login() {
 
     // select values from state
     const { user, authIsLoading, authIsError, authIsSuccess, authMessage } = useSelector(
-        (state) => state.datas
+        (state) => state.data
     )
 
     // called on state changes
