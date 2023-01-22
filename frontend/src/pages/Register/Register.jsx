@@ -2,42 +2,43 @@ import { useState, useEffect }  from 'react';
 import { useSelector, useDispatch } from 'react-redux'      // useSelector-brings in user,iserror,isloading from state | useDispatch-brings in reset,register,login from state
 import { useNavigate } from 'react-router-dom'              // page redirects
 import { toast } from 'react-toastify'                        // visible error notifications
-import { register, resetAuthSlice } from '../../features/auth/authSlice'     // import functions from authslice
+import { register, resetDataSlice } from '../../features/data/dataSlice'     // import functions from authslice
 import Spinner from '../../components/Spinner/Spinner.jsx';
 import './Register.css';
 
 function Register() {
     // useState variables of input fields
     const [formData, setFormData] = useState({
-        username: '',
         email: '',
         password: '',
         password2: '',
     })
 
     // the state values of the input fields
-    const { username, email, password, password2 } = formData
+    const { email, password, password2 } = formData
 
     const navigate = useNavigate() // initialization
     const dispatch = useDispatch() // initialization
 
     // select values from state
-    const { user, authIsLoading, authIsError, authIsSuccess, authMessage } = useSelector(
+    const { user, dataIsLoading, dataIsError, dataIsSuccess, dataMessage } = useSelector(
         (state) => state.data
     )
 
     // called on state changes
     useEffect(() => {
-        if (authIsError) {
-        toast.error(authMessage) // print error to toast errors
+        if (dataIsError) {
+        toast.error(dataMessage, { autoClose: 2000 }) // print error to toast errors
         }
 
-        if (authIsSuccess || user) {  // if registered or logged in, 
-        navigate('/')           // send user to dashboard
+        if (dataIsSuccess || user) {
+          // if registered or logged in,
+          toast.success("Successfully Registered", { autoClose: 2000 }); // print success to toast
+          navigate("/"); // send user to dashboard
         }
 
-        dispatch(resetAuthSlice())   // reset state values( authMessage, isloading, iserror, and issuccess ) on each state change
-    }, [user, authIsError, authIsSuccess, authMessage, navigate, dispatch])
+        dispatch(resetDataSlice())   // reset state values( authMessage, isloading, iserror, and issuccess ) on each state change
+    }, [user, dataIsError, dataIsSuccess, dataMessage, navigate, dispatch])
 
     // called on each letter typed into input field
     const onChange = (e) => {
@@ -52,21 +53,19 @@ function Register() {
         e.preventDefault()
 
         if (password !== password2) { // if passwords dont match, error. Else, 
-            toast.error('Passwords do not match')
+            toast.error('Passwords do not match', { autoClose: 2000 })
         } else {
             const userData = {  // get data from input form
-            username,
             email,
             password,
             }
     
             dispatch(register(userData))  // dispatch connects to the store, then calls the async register function passing userdata as input.
-            toast.success("Successfully registered!", { autoClose: 2000 }) // print error to toast errors
         }
     }
 
       // if loading, show spinner. authIsLoading resets on state change.
-    if (authIsLoading) {
+    if (dataIsLoading) {
         return <Spinner />
     }
 
@@ -82,17 +81,6 @@ function Register() {
         </section>
         <section className="planit-register-form">
             <form onSubmit={onSubmit}>
-                <div className='planit-register-form-group'>
-                    <input
-                    type='text'
-                    className='planit-register-form-control'
-                    id='username'
-                    name='username'
-                    value={username}
-                    placeholder='Enter your username'
-                    onChange={onChange}
-                    />
-                </div>
                 <div className="planit-register-form-group">
                     <input
                         type='email'

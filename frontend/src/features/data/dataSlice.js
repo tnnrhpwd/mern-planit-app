@@ -2,7 +2,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import dataService from './dataService';                          // import the async functional objects from dataService
 
+// Get user from localStorage
+const user = JSON.parse(localStorage.getItem('user'))
+
 const initialState = {  // default values for each state change
+  user: user ? user : null,
   data: [],
   dataIsError: false,
   dataIsSuccess: false,
@@ -15,7 +19,7 @@ export const createData = createAsyncThunk(
   'data/create',
   async (dataData, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token         // get the user token   
+      const token = thunkAPI.getState().data.user.token         // get the user token   
       return await dataService.createData(dataData, token)      // pass user token into create data method to assure that each data has a user creator
     } catch (error) {
       const dataMessage =
@@ -54,7 +58,7 @@ export const updateData = createAsyncThunk(
   'data/update',
   async (dataData, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token
+      const token = thunkAPI.getState().data.user.token
       return await dataService.updateData(dataData, token)
     } catch (error) {
       const dataMessage =
@@ -73,7 +77,7 @@ export const deleteData = createAsyncThunk(
   'data/delete',
   async (id, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token
+      const token = thunkAPI.getState().data.user.token
       return await dataService.deleteData(id, token)
     } catch (error) {
       const dataMessage =
@@ -86,6 +90,46 @@ export const deleteData = createAsyncThunk(
     }
   }
 )
+
+// Register user  -- Async functional object -- called from pages using dispatch
+export const register = createAsyncThunk(
+  'data/register',
+  async (user, thunkAPI) => {
+    try {
+      return await dataService.register(user)
+    } catch (error) {
+      const dataMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.dataMessage) ||
+        error.dataMessage ||
+        error.toString()
+      return thunkAPI.rejectWithValue(dataMessage) // check for any errors associated with async register function object imported from authSlice
+    }
+  }
+)
+
+// Login user
+export const login = createAsyncThunk(
+  'data/login', 
+  async (user, thunkAPI) => {
+  try {
+    return await dataService.login(user)
+  } catch (error) {
+    const dataMessage =
+      (error.response && error.response.data && error.response.data.dataMessage) ||
+      error.dataMessage ||
+      error.toString()
+    return thunkAPI.rejectWithValue(dataMessage) // check for any errors associated with async login function object imported from authSlice
+  }
+})
+
+// log out user  --- Async function that calls the authService logout function( removes user item from local storage)
+export const logout = createAsyncThunk(
+  'data/logout', 
+  async () => {
+  await dataService.logout()   
+})
 
 // slice exported inside an object
 export const dataSlice = createSlice({
@@ -154,6 +198,37 @@ export const dataSlice = createSlice({
         state.dataIsLoading = false
         state.dataIsError = true
         state.dataMessage = action.payload
+      })
+      .addCase(register.pending, (state) => {
+        state.dataIsLoading = true
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.dataIsLoading = false
+        state.dataIsSuccess = true
+        state.user = action.payload
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.dataIsLoading = false
+        state.dataIsError = true
+        state.dataMessage = action.payload        // deals with thunkAPI.rejectWithValue(dataMessage)
+        state.user = null
+      })
+      .addCase(login.pending, (state) => {
+        state.dataIsLoading = true
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.dataIsLoading = false
+        state.dataIsSuccess = true
+        state.user = action.payload
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.dataIsLoading = false
+        state.dataIsError = true
+        state.dataMessage = action.payload          // deals with thunkAPI.rejectWithValue(dataMessage)
+        state.user = null
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null
       })
   },
 })

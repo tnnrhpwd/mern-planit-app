@@ -34,9 +34,9 @@ const setData = asyncHandler(async (req, res) => {
 // @route   PUT /api/Data/:id
 // @access  Private
 const updateData = asyncHandler(async (req, res) => {
-  const datas = await data.findById(req.params.id)
+  const dataHolder = await data.findById(req.params.id)
 
-  if (!datas) {
+  if (!dataHolder) {
     res.status(400)
     throw new Error('Comment not found')
   }
@@ -48,7 +48,7 @@ const updateData = asyncHandler(async (req, res) => {
   }
 
   // Make sure the logged in user matches the comment user
-  if (datas.user.toString() !== req.user.id) {
+  if (dataHolder.user.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not authorized')
   }
@@ -60,13 +60,13 @@ const updateData = asyncHandler(async (req, res) => {
   res.status(200).json(updatedComment)   // return json of updated comment
 })
 
-// @desc    Delete comment
+// @desc    Delete data
 // @route   DELETE /api/comment/:id
 // @access  Private
 const deleteData = asyncHandler(async (req, res) => {
-  const datas = await data.findById(req.params.id)
+  const dataHolder = await data.findById(req.params.id)
 
-  if (!datas) {
+  if (!dataHolder) {
     res.status(400)
     throw new Error('Comment not found')
   }
@@ -78,12 +78,12 @@ const deleteData = asyncHandler(async (req, res) => {
   }
 
   // Make sure the logged in user matches the comment user
-  if (datas.user.toString() !== req.user.id) {
+  if (dataHolder.user.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not authorized')
   }
 
-  await datas.remove()
+  await data.remove()
 
   res.status(200).json({ id: req.params.id })
 })

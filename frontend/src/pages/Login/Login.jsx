@@ -2,7 +2,7 @@ import { useState, useEffect }  from 'react';
 import { useSelector, useDispatch } from 'react-redux'      // useSelector-brings in user,iserror,isloading from state | useDispatch-brings in reset,register,login from state
 import { useNavigate } from 'react-router-dom'              // page redirects
 import { toast } from 'react-toastify'                        // visible error notifications
-import { login, resetAuthSlice } from '../../features/auth/authSlice'     // import functions from authslice
+import { login, resetDataSlice } from '../../features/data/dataSlice'     // import functions from authslice
 import Spinner from '../../components/Spinner/Spinner.jsx';
 import './Login.css';
 
@@ -20,20 +20,21 @@ function Login() {
     const dispatch = useDispatch() // initialization
 
     // select values from state
-    const { user, authIsLoading, authIsError, authIsSuccess, authMessage } = useSelector(
+    const { user, dataIsLoading, dataIsError, dataIsSuccess, dataMessage } = useSelector(
         (state) => state.data
     )
 
     // called on state changes
     useEffect(() => {
-        if (authIsError) {
-        toast.error(authMessage) // print error to toast errors
+        if (dataIsError) {
+        toast.error(dataMessage) // print error to toast errors
         }
-        if (authIsSuccess || user) {  // if registered or logged in, 
-        navigate('/')           // send user to dashboard
+        if (dataIsSuccess || user) {  // if registered or logged in, 
+            toast.success("Successfully logged in as "+user, { autoClose: 2000 }) // print error to toast errors
+            navigate('/')           // send user to dashboard
         }
-        dispatch(resetAuthSlice())   // reset state values( authMessage, isloading, iserror, and issuccess ) on each state change
-    }, [user, authIsError, authIsSuccess, authMessage, navigate, dispatch])
+        dispatch(resetDataSlice())   // reset state values( authMessage, isloading, iserror, and issuccess ) on each state change
+    }, [user, dataIsError, dataIsSuccess, dataMessage, navigate, dispatch])
 
     // called on each letter typed into input field
     const onChange = (e) => {
@@ -51,7 +52,6 @@ function Login() {
         password,
         }
         dispatch(login(userData))   // dispatch connects to the store, then calls the async register function passing userdata as input.
-        toast.success("Successfully logged in!", { autoClose: 2000 }) // print error to toast errors
     }
 
     // called on each guest login form submit
@@ -64,11 +64,10 @@ function Login() {
           password: "Guest",
         };
         dispatch(login(userData))   // dispatch connects to the store, then calls the async register function passing userdata as input. 
-        toast.success("Logged in as Guest", { autoClose: 2000 }) // print error to toast errors
     }
 
     // if loading, show spinner. authIsLoading resets on state change.
-    if (authIsLoading) {
+    if (dataIsLoading) {
         return <Spinner />
     }
 

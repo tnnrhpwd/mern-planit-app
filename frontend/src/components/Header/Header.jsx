@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'    
-import { logout, resetAuthSlice } from './../../features/auth/authSlice.js'
+import { logout, resetDataSlice } from './../../features/data/dataSlice.js'
 import HeaderDropper from '../HeaderDropper/HeaderDropper.jsx';
 import HeaderLogo from './../../assets/planit192.png';
 import './Header.css';
@@ -47,7 +47,7 @@ function Header() {
   // declare method to remove user item from local storage)
   const onLogout = () => {
     dispatch(logout())  // dispatch connects to the store, then remove user item from local storage
-    dispatch(resetAuthSlice())  // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
+    dispatch(resetDataSlice())  // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
     navigate('/')       // send user to dashboard, which will redirect to login page
   }
 

@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'              // page redirects
 import { useSelector, useDispatch } from 'react-redux'      // useSelector-brings in user,iserror,isloading from state | useDispatch-brings in reset,register,login from state
 import useOutsideAlerter from '../useOutsideAlerter';
-import { login, resetAuthSlice } from '../../features/auth/authSlice'     // import functions from authslice
+import { login, resetDataSlice } from '../../features/data/dataSlice'     // import functions from authslice
 import { toast } from 'react-toastify'                        // visible error notifications
 import './LoginView.css';
 
@@ -14,8 +14,8 @@ function LoginView(props) {
 
 
     // select values from state
-    const { user, authIsLoading, authIsError, authIsSuccess, authMessage } = useSelector(
-        (state) => state.auth
+    const { user, dataIsLoading, dataIsError, dataIsSuccess, dataMessage } = useSelector(
+        (state) => state.data
     )
 
     // called on each guest login form submit
@@ -34,16 +34,16 @@ function LoginView(props) {
 
     // called on state changes
     useEffect(() => {
-        if (authIsError) {
-            toast.error(authMessage) // print error to toast errors
+        if (dataIsError) {
+            toast.error(dataMessage) // print error to toast errors
         }
 
-        if (authIsSuccess || user) {  // if registered or logged in, 
+        if (dataIsSuccess || user) {  // if registered or logged in, 
             navigate('/')           // send user to dashboard
         }
 
-        dispatch(resetAuthSlice())   // reset state values( authMessage, isloading, iserror, and issuccess ) on each state change
-    }, [user, authIsError, authIsSuccess, authMessage, navigate, dispatch])
+        dispatch(resetDataSlice())   // reset state values( authMessage, isloading, iserror, and issuccess ) on each state change
+    }, [user, dataIsError, dataIsSuccess, dataMessage, navigate, dispatch])
 
 
     const hideComponentVisibility = () => { props.click( false ); }
