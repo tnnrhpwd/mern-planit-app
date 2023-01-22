@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import dataService from './dataService';                          // import the async functional objects from dataService
 
 const initialState = {  // default values for each state change
-  datas: [],
+  data: [],
   dataIsError: false,
   dataIsSuccess: false,
   dataIsLoading: false,
@@ -12,7 +12,7 @@ const initialState = {  // default values for each state change
 
 // Create new data  -- Async functional object -- called from pages using dispatch --CREATE
 export const createData = createAsyncThunk(
-  'datas/create',
+  'data/create',
   async (dataData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token         // get the user token   
@@ -31,7 +31,7 @@ export const createData = createAsyncThunk(
 
 // Get user datas -- READ
 export const getDatas = createAsyncThunk(
-  'datas/getAll',
+  'data/getAll',
   async (_, thunkAPI) => {
     try {
       // const token = thunkAPI.getState().auth.user.token         // get the user token  
@@ -51,7 +51,7 @@ export const getDatas = createAsyncThunk(
 
 // Update user data -- UPDATE
 export const updateData = createAsyncThunk(
-  'datas/update',
+  'data/update',
   async (dataData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
@@ -70,7 +70,7 @@ export const updateData = createAsyncThunk(
 
 // Delete user data -- DELETE
 export const deleteData = createAsyncThunk(
-  'datas/delete',
+  'data/delete',
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token

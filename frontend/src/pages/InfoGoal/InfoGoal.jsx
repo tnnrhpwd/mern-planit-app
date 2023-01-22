@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify'                        // visible error notifications
 // import { deletePlan, getPlans, resetPlanSlice } from './../../features/plans/planSlice'
 // import { deleteGoal, getGoals, resetGoalSlice } from './../../features/goals/goalSlice'
-import { createData, deleteData, getDatas, resetDataSlice } from './../../features/datas/dataSlice'
+import { createData, deleteData, getDatas, resetDataSlice } from './../../features/data/dataSlice'
 import DeleteView from '../../components/DeleteView/DeleteView'
 import Spinner from '../../components/Spinner/Spinner';
 // import CommentResult from '../../components/CommentResult/CommentResult'

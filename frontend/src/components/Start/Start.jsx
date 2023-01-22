@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import Spinner from '../Spinner/Spinner.jsx'
 // import { getPlans, resetPlanSlice, createPlan, updatePlan, deletePlan } from '../../features/plans/planSlice'
-import { getDatas, resetDataSlice, createData } from '../../features/datas/dataSlice'
+import { getDatas, resetDataSlice, createData } from '../../features/data/dataSlice'
 // import { getComments, resetCommentSlice, createComment, updateComment } from '../../features/comments/commentSlice'
 // import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
 import PlanResult from '../PlanResult/PlanResult.jsx'

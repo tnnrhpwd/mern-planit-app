@@ -8,8 +8,7 @@ const data = require('../models/dataModel')
 // @access  Private
 const getData = asyncHandler(async (req, res) => {
   // const data = await data.find({ data: req.user.id }) //  where the request user matches the data user
-  const data = await data.find() //  Get all data
-
+  const datas = await data.find() //  Get all data
 
   res.status(200).json(data) // returns json of comments
 })
@@ -23,7 +22,7 @@ const setData = asyncHandler(async (req, res) => {
     throw new Error('Please add a text field')
   }
 
-  const data = await data.create({
+  const datas = await data.create({
     data: req.body.data,
   })
   
@@ -35,9 +34,9 @@ const setData = asyncHandler(async (req, res) => {
 // @route   PUT /api/Data/:id
 // @access  Private
 const updateData = asyncHandler(async (req, res) => {
-  const comment = await Data.findById(req.params.id)
+  const datas = await data.findById(req.params.id)
 
-  if (!data) {
+  if (!datas) {
     res.status(400)
     throw new Error('Comment not found')
   }
@@ -49,12 +48,12 @@ const updateData = asyncHandler(async (req, res) => {
   }
 
   // Make sure the logged in user matches the comment user
-  if (comment.user.toString() !== req.user.id) {
+  if (datas.user.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not authorized')
   }
 
-  const updatedComment = await User_to_User.findByIdAndUpdate(req.params.id,  { $push: req.body}, {
+  const updatedComment = await data.findByIdAndUpdate(req.params.id,  { $push: req.body}, {
     new: true,
   })
 
@@ -65,9 +64,9 @@ const updateData = asyncHandler(async (req, res) => {
 // @route   DELETE /api/comment/:id
 // @access  Private
 const deleteData = asyncHandler(async (req, res) => {
-  const comment = await Data.findById(req.params.id)
+  const datas = await data.findById(req.params.id)
 
-  if (!comment) {
+  if (!datas) {
     res.status(400)
     throw new Error('Comment not found')
   }
@@ -79,12 +78,12 @@ const deleteData = asyncHandler(async (req, res) => {
   }
 
   // Make sure the logged in user matches the comment user
-  if (comment.user.toString() !== req.user.id) {
+  if (datas.user.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not authorized')
   }
 
-  await comment.remove()
+  await datas.remove()
 
   res.status(200).json({ id: req.params.id })
 })

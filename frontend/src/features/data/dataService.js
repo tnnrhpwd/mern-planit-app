@@ -2,23 +2,23 @@
 // Exported to the Slice
 import axios from 'axios';  // import ability to make http request
 
-const API_URL = '/api/plans/';  // sends base http request here
+const API_URL = '/api/data/';  // sends base http request here
 
-// Create new plan
-const createPlan = async (planData, token) => {
+// Create new data
+const createData = async (dataData, token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         },
     }
 
-    const response = await axios.post(API_URL, planData, config)
+    const response = await axios.post(API_URL, dataData, config)
 
     return response.data
 }
 
-// Get all plans
-const getPlans = async (token) => {
+// Get all datas
+const getData = async (token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -30,37 +30,37 @@ const getPlans = async (token) => {
     return response.data
 }
 
-// Update user plan
-const updatePlan = async ( planData, token ) => {
+// Update user data
+const updateData = async ( dataData, token ) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         },
     }
 
-    const response = await axios.put( API_URL + planData.id, planData, config )
+    const response = await axios.put( API_URL + dataData.id, dataData, config )
 
     return response.data
 }
 
-// Delete user plan
-const deletePlan = async ( planId, token ) => {
+// Delete user data
+const deleteData = async ( dataId, token ) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         },
     }
 
-    const response = await axios.delete( API_URL + planId, config )
+    const response = await axios.delete( API_URL + dataId, config )
 
     return response.data
 }
 
-const planService = {
-    createPlan,
-    getPlans,
-    updatePlan,
-    deletePlan,
+const dataService = {
+    createData,
+    getData,
+    updateData,
+    deleteData,
 }
 
-export default planService;
+export default dataService;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'      // useDispatch-brings in reset,register,login from state
 import { toast } from 'react-toastify'                        // visible error notifications
-import { createData } from '../../features/datas/dataSlice'
+import { createData } from '../../features/data/dataSlice'
 import './PlanInput.css';
 
 function PlanInput() {

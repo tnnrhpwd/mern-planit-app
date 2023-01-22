@@ -5,7 +5,7 @@ import PlanInput from './../../components/PlanInput/PlanInput.jsx';
 import PlanResult from './../../components/PlanResult/PlanResult.jsx';
 import { toast } from 'react-toastify'                        // visible error notifications
 import Spinner from './../../components/Spinner/Spinner.jsx'
-import { getDatas, resetDataSlice } from './../../features/datas/dataSlice'
+import { getDatas, resetDataSlice } from './../../features/data/dataSlice'
 import './Plans.css';
 
 function Datas() {

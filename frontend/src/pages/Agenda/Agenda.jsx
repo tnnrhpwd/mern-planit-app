@@ -5,7 +5,7 @@ import ActionInput from '../../components/ActionInput/ActionInput';
 import ActionResult from '../../components/ActionResult/ActionResult';
 import { toast } from 'react-toastify'                        // visible error notifications
 // import Spinner from './../../components/Spinner/Spinner.jsx'
-import { getDatas, resetDataSlice } from './../../features/datas/dataSlice'
+import { getDatas, resetDataSlice } from './../../features/data/dataSlice'
 // import BuildPlanObjectArray from '../../components/BuildPlanitObjectArray.js';
 import './Agenda.css';
 

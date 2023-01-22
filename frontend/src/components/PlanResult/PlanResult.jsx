@@ -4,7 +4,7 @@ import ShareView from '../ShareView/ShareView.jsx'
 import { toast } from 'react-toastify'                        // visible error notifications
 import CreatedAt from './CreatedAt';
 import { useNavigate } from 'react-router-dom';
-import { updateData } from '../../features/datas/dataSlice'
+import { updateData } from '../../features/data/dataSlice'
 // import { getGoals, resetGoalSlice, createGoal, updateGoal, deleteGoal } from '../../features/goals/goalSlice'
 // import { getComments, resetCommentSlice, createComment, updateComment } from '../../features/comments/commentSlice'
 // import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'

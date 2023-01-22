@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useOutsideAlerter from '../useOutsideAlerter.js'
 import { toast } from 'react-toastify'                        // visible error notifications
-import { deleteData } from '../../features/datas/dataSlice.js';
+import { deleteData } from '../../features/data/dataSlice.js';
 import DeleteView from '../DeleteView/DeleteView.jsx';
 import './ManageView.css';
 

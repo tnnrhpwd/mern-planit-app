@@ -1,7 +1,7 @@
 // The service file only makes the http request and sends the data back to user and local storage.
 import axios from 'axios'; // import ability to make http request
 
-const API_URL = '/api/users/';  // sends base http request here
+const API_URL = '/api/data/';  // sends base http request here
 
 // Register user
 const register = async (userData) => {

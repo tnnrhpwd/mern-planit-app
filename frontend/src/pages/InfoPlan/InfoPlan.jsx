@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'              // page redirects
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify'                        // visible error notifications
-import { createData, deleteData, getDatas, resetDataSlice } from './../../features/datas/dataSlice'
+import { createData, deleteData, getDatas, resetDataSlice } from './../../features/data/dataSlice'
 import DeleteView from '../../components/DeleteView/DeleteView'
 import Spinner from '../../components/Spinner/Spinner';
 import PlanResult from '../../components/PlanResult/PlanResult'

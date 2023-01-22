@@ -23,7 +23,7 @@ function Register() {
 
     // select values from state
     const { user, authIsLoading, authIsError, authIsSuccess, authMessage } = useSelector(
-        (state) => state.auth
+        (state) => state.data
     )
 
     // called on state changes

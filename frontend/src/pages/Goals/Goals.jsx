@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'      // access state vari
 import GoalInput from './../../components/GoalInput/GoalInput.jsx';
 // import GoalResult from './../../components/GoalResult/GoalResult.jsx';
 // import Spinner from './../../components/Spinner/Spinner.jsx'
-import { getDatas, resetDataSlice } from './../../features/datas/dataSlice'
+import { getDatas, resetDataSlice } from './../../features/data/dataSlice'
 import { toast } from 'react-toastify'                        // visible error notifications
 import './Goals.css';
 

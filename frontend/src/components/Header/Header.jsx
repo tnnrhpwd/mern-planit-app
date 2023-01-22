@@ -11,7 +11,7 @@ import './Header.css';
 function Header() {
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
-  const { user } = useSelector((state) => state.datas)   // select values from state
+  const { user } = useSelector((state) => state.data)   // select values from state
   const [ colTheme, setColTheme ] = useState(null);
 
   useEffect(() => {     // RUNS ON START -- Checks browser for color theme preference. Sets dark mode otherwise.

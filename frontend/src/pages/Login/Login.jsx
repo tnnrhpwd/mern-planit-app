@@ -21,7 +21,7 @@ function Login() {
 
     // select values from state
     const { user, authIsLoading, authIsError, authIsSuccess, authMessage } = useSelector(
-        (state) => state.auth
+        (state) => state.datas
     )
 
     // called on state changes
@@ -29,11 +29,9 @@ function Login() {
         if (authIsError) {
         toast.error(authMessage) // print error to toast errors
         }
-
         if (authIsSuccess || user) {  // if registered or logged in, 
         navigate('/')           // send user to dashboard
         }
-
         dispatch(resetAuthSlice())   // reset state values( authMessage, isloading, iserror, and issuccess ) on each state change
     }, [user, authIsError, authIsSuccess, authMessage, navigate, dispatch])
 
@@ -48,27 +46,23 @@ function Login() {
       // called on each login form submit
     const onSubmit = (e) => {
         e.preventDefault()
-
         const userData = {     // get data from input form
         email,
         password,
         }
-
         dispatch(login(userData))   // dispatch connects to the store, then calls the async register function passing userdata as input.
         toast.success("Successfully logged in!", { autoClose: 2000 }) // print error to toast errors
-
-
     }
 
     // called on each guest login form submit
     const handleGuestLogin = (e) => {
         e.preventDefault()
 
-        const userData = {     // get data from input form
-            email: "Guest@gmail.com",
-            password: "Guest",
-        }
-
+        const userData = {
+          // set input data to guest user
+          email: "Guest@gmail.com",
+          password: "Guest",
+        };
         dispatch(login(userData))   // dispatch connects to the store, then calls the async register function passing userdata as input. 
         toast.success("Logged in as Guest", { autoClose: 2000 }) // print error to toast errors
     }
@@ -124,7 +118,6 @@ function Login() {
                 Register
             </button>
         </a>
-        
         <button onClick={handleGuestLogin} className='planit-login-guest'>
             Login as Guest
         </button>
