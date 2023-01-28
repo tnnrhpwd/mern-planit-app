@@ -58,10 +58,10 @@ const deleteData = async ( dataId, token ) => {
 
 // Register user
 const register = async (userData) => {
-    const response = await axios.post(API_URL, userData)  // send user data to /api/data/
+    const response = await axios.post(API_URL, userData)  // send user data to /api/data/ -- creates a new user
   
     if (response.data) {
-      localStorage.setItem('user', JSON.stringify(response.data))   // catches the return data from POST -- contains the JSON Web Token
+      localStorage.setItem('user', JSON.stringify(response.data))   // catches the return data from POST -- contains the JSON Web Token -- logs user in
     }
   
     return response.data    // return JWT
