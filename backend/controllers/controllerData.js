@@ -1,16 +1,18 @@
-// This file contains the functions that deal with the Data objects( schema imported from Models) => Exported to Routes
-const asyncHandler = require('express-async-handler')// sends the errors to the errorhandler
+// This file contains the functions that deal with the User objects( schema imported from Models)  => Exported to Routes(listens + calls these methods on requests)
+const jwt = require('jsonwebtoken') //import json web tokens to send to user on login -- this token will be read when user request user details -- confirms same user
+const bcrypt = require('bcryptjs')  // used to hash passwords
+const asyncHandler = require('express-async-handler') // sends the errors to the errorhandler
 
-const data = require('../models/dataModel')
+const Data = require('../models/dataModel')
 
 // @desc    Get Data
-// @route   GET /api/Data
+// @route   GET /api/data
 // @access  Private
 const getData = asyncHandler(async (req, res) => {
   // const data = await data.find({ data: req.user.id }) //  where the request user matches the data user
-  const datas = await data.find() //  Get all data
+  const datas = await Data.find() //  Get all data
 
-  res.status(200).json(data) // returns json of comments
+  res.status(200).json(Data) // returns json of comments
 })
 
 // @desc    Set data
@@ -22,19 +24,19 @@ const setData = asyncHandler(async (req, res) => {
     throw new Error('Please add a text field')
   }
 
-  const datas = await data.create({
+  const datas = await Data.create({
     data: req.body.data,
   })
   
 
-  res.status(200).json(data)
+  res.status(200).json(Data)
 })
 
 // @desc    Update Data
-// @route   PUT /api/Data/:id
+// @route   PUT /api/data/:id
 // @access  Private
 const updateData = asyncHandler(async (req, res) => {
-  const dataHolder = await data.findById(req.params.id)
+  const dataHolder = await Data.findById(req.params.id)
 
   if (!dataHolder) {
     res.status(400)
@@ -53,7 +55,7 @@ const updateData = asyncHandler(async (req, res) => {
     throw new Error('User not authorized')
   }
 
-  const updatedComment = await data.findByIdAndUpdate(req.params.id,  { $push: req.body}, {
+  const updatedComment = await Data.findByIdAndUpdate(req.params.id,  { $push: req.body}, {
     new: true,
   })
 
@@ -61,10 +63,10 @@ const updateData = asyncHandler(async (req, res) => {
 })
 
 // @desc    Delete data
-// @route   DELETE /api/comment/:id
+// @route   DELETE /api/data/:id
 // @access  Private
 const deleteData = asyncHandler(async (req, res) => {
-  const dataHolder = await data.findById(req.params.id)
+  const dataHolder = await Data.findById(req.params.id)
 
   if (!dataHolder) {
     res.status(400)
@@ -83,14 +85,87 @@ const deleteData = asyncHandler(async (req, res) => {
     throw new Error('User not authorized')
   }
 
-  await data.remove()
+  await Data.remove()
 
   res.status(200).json({ id: req.params.id })
 })
+
+// @desc    Register new user
+// @route   POST /api/data/register
+// @access  Public
+const registerUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body
+
+  if (!email || !password) {
+    res.status(400)
+    throw new Error('Please add all fields')
+  }
+
+  // Check if email exists
+  const emailExists = await Data.findOne({ email })
+
+  if (emailExists) {
+    res.status(400)
+    throw new Error('Email already exists')
+  }
+
+  // Hash password
+  const salt = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(password, salt)
+
+  // Create user
+  const data = await Data.create(
+    email+'|'+
+    hashedPassword
+  )
+
+  if (data) { // if user data successfully created, send JSON web token back to user
+    res.status(201).json({
+      _id: data.id,
+      // email: user.email, // only need to send token back
+      token: generateToken(data._id),   //uses JWT secret 
+    })
+  } else {
+    res.status(400)
+    throw new Error('Invalid user data')
+  }
+})
+
+// @desc    Authenticate a user
+// @route   POST /api/data/login
+// @access  Public
+const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body
+
+  // Check for user email
+  const user = await Data.findOne({ "data": /email/i })
+
+  const userPassword = user.substring(user.indexOf('|') + 1);
+
+  if (user && (await bcrypt.compare(password, userPassword))) {  // if decrypted password equals user password input, send token back to user.
+    res.json({
+      _id: user.id,
+      // email: user.email,            // only need to send token back
+      token: generateToken(user._id),
+    })
+  } else {
+    res.status(400)
+    throw new Error('Invalid credentials')  // showed in frontend 
+  }
+})
+
+// Generate JWT -- sent to user after register + sign in. User stores this token and send it back inside the header on following requests.
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: '30d',
+  })
+}
 
 module.exports = {
   getData,
   setData,
   updateData,
   deleteData,
+  registerUser,
+  loginUser,
 }
