@@ -51,6 +51,7 @@ function Login() {
         email,
         password,
         }
+        console.log(userData)
         dispatch(login(userData))   // dispatch connects to the store, then calls the async register function passing userdata as input.
     }
 

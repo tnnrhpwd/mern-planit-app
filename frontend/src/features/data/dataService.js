@@ -60,15 +60,16 @@ const deleteData = async ( dataId, token ) => {
 const register = async (userData) => {
     const response = await axios.post(API_URL + 'register', userData)  // send user data to /api/data/ -- creates a new user
   
+    console.log("hi")
     if (response.data) {
       localStorage.setItem('user', JSON.stringify(response.data))   // catches the return data from POST -- contains the JSON Web Token -- logs user in
     }
   
     return response.data    // return JWT
-  }
+}
   
-  // Login user
-  const login = async (userData) => {
+// Login user
+const login = async (userData) => {
     const response = await axios.post(API_URL + 'login', userData)    // send user data to /api/data/login/
   
     if (response.data) {
@@ -76,12 +77,12 @@ const register = async (userData) => {
     }
   
     return response.data
-  }
+}
   
-  // Logout user
-  const logout = () => {
+// Logout user
+const logout = () => {
     localStorage.removeItem('user')
-  }
+}
 
 const dataService = {
     createData,

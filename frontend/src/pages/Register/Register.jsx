@@ -52,14 +52,14 @@ function Register() {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        if (password !== password2) { // if passwords dont match, error. Else, 
-            toast.error('Passwords do not match', { autoClose: 2000 })
+        if ((password).length === 0) { // if passwords dont match, error. Else, 
+            toast.error('Please enter a password.', { autoClose: 2000 })
         } else {
             const userData = {  // get data from input form
             email,
             password,
             }
-    
+            console.log(userData)
             dispatch(register(userData))  // dispatch connects to the store, then calls the async register function passing userdata as input.
         }
     }
@@ -100,17 +100,6 @@ function Register() {
                         name='password'
                         value={password}
                         placeholder='Enter password'
-                        onChange={onChange}
-                    />
-                </div>
-                <div className="planit-register-form-group">
-                    <input
-                        type='password'
-                        className='planit-register-form-control'
-                        id='password2'
-                        name='password2'
-                        value={password2}
-                        placeholder='Confirm password'
                         onChange={onChange}
                     />
                 </div>
