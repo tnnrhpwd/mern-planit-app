@@ -99,9 +99,7 @@ export const register = createAsyncThunk(
       return await dataService.register(user)
     } catch (error) {
       const dataMessage =
-        (error.response &&
-          error.response.data &&
-          error.response.data.dataMessage) ||
+        (error.response && error.response.data && error.response.data.dataMessage) ||
         error.dataMessage ||
         error.toString()
       return thunkAPI.rejectWithValue(dataMessage) // check for any errors associated with async register function object imported from authSlice

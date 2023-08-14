@@ -12,7 +12,7 @@ const getData = asyncHandler(async (req, res) => {
   // const data = await data.find({ data: req.user.id }) //  where the request user matches the data user
   const datas = await Data.find() //  Get all data
 
-  res.status(200).json(Data) // returns json of comments
+  res.status(200).json(Data) // returns json of data
 })
 
 // @desc    Set data
@@ -102,11 +102,11 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   // Check if email exists
-  const emailExists = await Data.findOne({ email })
+  const emailExists = await Data.findOne({ data: { $regex: `${email}\\s\\|` } })
 
   if (emailExists) {
     res.status(400)
-    throw new Error('Email already exists')
+    throw new Error("This email is already registered")
   }
 
   // Hash password
@@ -114,15 +114,14 @@ const registerUser = asyncHandler(async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, salt)
 
   // Create user
-  const data = await Data.create(
-    email+'|'+
-    hashedPassword
-  )
+  const data = await Data.create({
+    data:email+" | "+hashedPassword,
+  })
 
   if (data) { // if user data successfully created, send JSON web token back to user
     res.status(201).json({
       _id: data.id,
-      // email: user.email, // only need to send token back
+      email, 
       token: generateToken(data._id),   //uses JWT secret 
     })
   } else {
@@ -138,19 +137,22 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
   // Check for user email
-  const user = await Data.findOne({ "data": /email/i })
-
-  const userPassword = user.substring(user.indexOf('|') + 1);
+  const user = await Data.findOne({ data: { $regex: `${email}\\s\\|` } })
+  if (user === null){
+    res.status(400)
+    throw new Error("Invalid credentials")  // showed in frontend 
+  }
+  const userPassword = user.data.substring(user.data.indexOf('|') + 2);
 
   if (user && (await bcrypt.compare(password, userPassword))) {  // if decrypted password equals user password input, send token back to user.
     res.json({
       _id: user.id,
-      // email: user.email,            // only need to send token back
+      email: email,            // only need to send token back
       token: generateToken(user._id),
     })
   } else {
     res.status(400)
-    throw new Error('Invalid credentials')  // showed in frontend 
+    throw new Error("Invalid credentials")  // showed in frontend 
   }
 })
 

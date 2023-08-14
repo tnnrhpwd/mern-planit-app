@@ -2,7 +2,7 @@ import { useState, useEffect }  from 'react';
 import { useSelector, useDispatch } from 'react-redux'      // useSelector-brings in user,iserror,isloading from state | useDispatch-brings in reset,register,login from state
 import { useNavigate } from 'react-router-dom'              // page redirects
 import { toast } from 'react-toastify'                        // visible error notifications
-import { login, resetDataSlice } from '../../features/data/dataSlice'     // import functions from authslice
+import { login, logout, resetDataSlice } from '../../features/data/dataSlice'     // import functions from authslice
 import Spinner from '../../components/Spinner/Spinner.jsx';
 import './Login.css';
 
@@ -26,14 +26,20 @@ function Login() {
 
     // called on state changes
     useEffect(() => {
+        if (user && !user._id) {
+            toast.error(dataMessage) // print error to toast errors
+            dispatch(logout())  // dispatch connects to the store, then remove user item from local storage
+        }
         if (dataIsError) {
-        toast.error(dataMessage) // print error to toast errors
+            toast.error(dataMessage) // print error to toast errors
+            // dispatch(logout())  // dispatch connects to the store, then remove user item from local storage
         }
         if (dataIsSuccess || user) {  // if registered or logged in, 
-            toast.success("Successfully logged in as "+user, { autoClose: 2000 }) // print error to toast errors
+            toast.success("Successfully logged in as "+user.email, { autoClose: 2000 }) // print error to toast errors
             navigate('/')           // send user to dashboard
+        }else{
+            dispatch(resetDataSlice())   // reset state values( data, dataisloading, dataiserror, datamessage, and dataissuccess ) on each state change
         }
-        dispatch(resetDataSlice())   // reset state values( authMessage, isloading, iserror, and issuccess ) on each state change
     }, [user, dataIsError, dataIsSuccess, dataMessage, navigate, dispatch])
 
     // called on each letter typed into input field
