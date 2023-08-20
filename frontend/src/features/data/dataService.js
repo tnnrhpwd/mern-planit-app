@@ -2,7 +2,7 @@
 // Exported to the Slice
 import axios from 'axios';  // import ability to make http request
 
-const API_URL = '/api/data/';  // sends base http request here
+const API_URL = 'https://mern-plan-web-service.onrender.com/api/data/';  // sends base http request here
 
 // Create new data
 const createData = async (dataData, token) => {
