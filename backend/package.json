@@ -7,7 +7,7 @@
     "build": "npm i",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "startOlder": "node backend/server.js",
-    "server": "nodemon backend/server.js",
+    "server": "nodemon server.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
