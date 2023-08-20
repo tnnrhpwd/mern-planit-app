@@ -6,13 +6,14 @@ const { errorHandler } = require('./middleware/errorMiddleware');    // creates 
 const connectDB = require('./config/db');    // connect to MongoDB using Mongooose
 const { default: mongoose } = require('mongoose');
 const port = process.env.PORT || 5000;  //set port to hold api server
-
+var cors = require('cors')
 
 connectDB()// this async function connects to Mongo database using Mongoose | RAN ON SERVER INITIALIZATION
 
 const app = express() // Calls the express function "express()" and puts new Express application inside the app variable
 
 // app.use adds middleware to the data routes
+app.use(cors())
 app.use(express.json()) // adds middleware that parses json requests and moves data into the request body (regardless of hit url)
 app.use(express.urlencoded({ extended: false }))  // parses data using query-string library rather than qs library (regardless of hit url)
 
