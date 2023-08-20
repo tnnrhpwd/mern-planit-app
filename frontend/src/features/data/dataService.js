@@ -11,7 +11,7 @@ const createData = async (dataData, token) => {
             Authorization: `Bearer ${token}`,
         },
     }
-
+    
     const response = await axios.post(API_URL, dataData, config)
 
     return response.data
@@ -58,6 +58,7 @@ const deleteData = async ( dataId, token ) => {
 
 // Register user
 const register = async (userData) => {
+    console.log(API_URL + 'register')
     const response = await axios.post(API_URL + 'register', userData)  // send user data to /api/data/ -- creates a new user
   
     if (response.data) {
@@ -74,7 +75,7 @@ const login = async (userData) => {
     if (response.data) {
       localStorage.setItem('user', JSON.stringify(response.data))     // catches the return data from POST -- contains the JSON Web Token
     }
-  
+
     return response.data
 }
   
