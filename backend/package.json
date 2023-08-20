@@ -4,6 +4,7 @@
   "description": "where goals meet actions",
   "main": "server.js",
   "scripts": {
+    "build": "npm i",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "startOlder": "node backend/server.js",
     "server": "nodemon backend/server.js",
