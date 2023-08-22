@@ -20,9 +20,8 @@ function Agenda() {
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
 
-  const { user } = useSelector((state) => state.auth)      // select user values from user state
-  const { datas, dataIsError, dataMessage } = useSelector(     // select data values from data state
-    (state) => state.datas
+  const { user, dataIsError, dataMessage } = useSelector(     // select data values from data state
+    (state) => state.data
   )
 
 
