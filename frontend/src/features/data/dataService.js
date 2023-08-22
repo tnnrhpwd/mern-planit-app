@@ -1,8 +1,10 @@
 // The service file only makes the http request and sends the data back to user and local storage.
 // Exported to the Slice
 import axios from 'axios';  // import ability to make http request
+const devMode = (process.env.NODE_ENV === 'development')
 
-const API_URL = (process.env.NODE_ENV === 'development')? '/api/data': 'https://mern-plan-web-service.onrender.com/api/data/';  // sends base http request here
+const API_URL = devMode? '/api/data': 'https://mern-plan-web-service.onrender.com/api/data/';  // sends base http request here
+if (devMode) {console.log("Warning: Running in development mode. Remember to start backend.")}
 
 // Create new data
 const createData = async (dataData, token) => {
