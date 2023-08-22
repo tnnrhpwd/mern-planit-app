@@ -1,0 +1,12 @@
+{
+    "name": "Planit",
+    "version": "1.0.0",
+    "author": "Steven Tanner Hopwood <steven.t.hopwood@gmail.com>",
+    "scripts": {
+        "start": "concurrently \"npm start --prefix frontend\" \"npm start --prefix frontend\""
+    },
+    "devDependencies": {
+      "concurrently": "^7.0.0",
+      "nodemon": "^2.0.15"
+    }
+  }

@@ -1,5 +1,5 @@
 {
-  "name": "mern-planit-app",
+  "name": "planit_backend",
   "version": "1.0.0",
   "description": "where goals meet actions",
   "main": "server.js",
