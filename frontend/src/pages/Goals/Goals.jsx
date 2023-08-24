@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
-import GoalInput from './../../components/GoalInput/GoalInput.jsx';
+// import GoalInput from './../../components/GoalInput/GoalInput.jsx';
 // import GoalResult from './../../components/GoalResult/GoalResult.jsx';
 // import Spinner from './../../components/Spinner/Spinner.jsx'
 import { getDatas, resetDataSlice } from './../../features/data/dataSlice'
@@ -111,7 +111,7 @@ function Goals() {
           { ( user ) &&
             <div className='planit-plans-in'>
               {(showNewGoal) &&
-                <GoalInput />
+                {/* <GoalInput /> */}
               }
             </div>
           }
@@ -127,7 +127,7 @@ function Goals() {
             <div className='planit-plans-my-out'>
               { ( myGoals.length > 0 ) ? (
                 <div className='planit-plans-my-out-result'>
-                  { myGoals }
+                  {/* { myGoals } */}
                 </div>
                ) : ( 
                 <h3>You have not set any goals</h3>
