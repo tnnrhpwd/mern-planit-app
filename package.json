@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "author": "Steven Tanner Hopwood <steven.t.hopwood@gmail.com>",
     "scripts": {
-        "start": "concurrently \"npm start --prefix frontend\" \"npm start --prefix frontend\""
+        "start": "concurrently \"npm start --prefix frontend\" \"npm run server --prefix backend\""
     },
     "devDependencies": {
       "concurrently": "^7.0.0",
