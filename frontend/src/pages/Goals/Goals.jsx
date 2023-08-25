@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
-// import GoalInput from './../../components/GoalInput/GoalInput.jsx';
+import GoalInput from './../../components/GoalInput/GoalInput.jsx';
 // import GoalResult from './../../components/GoalResult/GoalResult.jsx';
 // import Spinner from './../../components/Spinner/Spinner.jsx'
 import { getDatas, resetDataSlice } from './../../features/data/dataSlice'
@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'                        // visible error n
 import './Goals.css';
 
 function Goals() {
-  const [ showNewGoal] = useState(false);
+  const [ showNewGoal, setShowNewGoal] = useState(true);
   const [ showMyGoals ] = useState(false);
   const [ myGoals ] = useState([])
   // const [ showSavedGoals, setShowSavedGoals ] = useState(false)
@@ -29,7 +29,7 @@ function Goals() {
       toast.error(dataMessage, { autoClose: 1000 });
     }
 
-    dispatch(getDatas()) // dispatch connects to the store, then retreives the comments.
+    // dispatch(getDatas()) // dispatch connects to the store, then retreives the comments.
 
     if (!user) {            // if no user, redirect to login
       navigate('/login') 
@@ -85,10 +85,10 @@ function Goals() {
   //   handleAllOutputPlans(goalObjectArray);
   // }, [goalObjectArray, planitObjectArray, user._id])
 
-  // function handleCreateGoalToggle(){
-  //   if(showNewGoal){setShowNewGoal(false)}
-  //   else if(!showNewGoal){setShowNewGoal(true)}
-  // }
+  function handleCreateGoalToggle(){
+    if(showNewGoal){setShowNewGoal(false)}
+    else if(!showNewGoal){setShowNewGoal(true)}
+  }
   // function handleMyGoalsToggle(){
   //   if(showMyGoals){setShowMyGoals(false)}
   //   else if(!showMyGoals){setShowMyGoals(true)}
@@ -104,14 +104,14 @@ function Goals() {
         <br/> 
       </div>
       <div className='planit-plans-create'>
-        <div className='planit-plans-create-text' >
+        <div className='planit-plans-create-text'>
           {
-            showNewGoal ? "Cancel Goal":"Create Goal"
+            <div onClick={handleCreateGoalToggle}>{showNewGoal ? "Cancel Goal":"Create Goal"}</div> 
           }
           { ( user ) &&
             <div className='planit-plans-in'>
               {(showNewGoal) &&
-                {/* <GoalInput /> */}
+                <GoalInput />
               }
             </div>
           }
@@ -127,7 +127,7 @@ function Goals() {
             <div className='planit-plans-my-out'>
               { ( myGoals.length > 0 ) ? (
                 <div className='planit-plans-my-out-result'>
-                  {/* { myGoals } */}
+                  { myGoals }
                 </div>
                ) : ( 
                 <h3>You have not set any goals</h3>
