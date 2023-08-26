@@ -60,7 +60,6 @@ const deleteData = async ( dataId, token ) => {
 
 // Register user
 const register = async (userData) => {
-    console.log(API_URL + 'register')
     const response = await axios.post(API_URL + 'register', userData)  // send user data to /api/data/ -- creates a new user
   
     if (response.data) {
