@@ -11,7 +11,7 @@ function GoalInput() {
 
     const onSubmit = (e) => {
         e.preventDefault()
-
+        console.log({ text })
         dispatch(createData({ text }))   // dispatch connects to the store, then creates a goal with text input
         setText('')                      // empty text field 
         // toast.success("Goal successfully created!", { autoClose: 1000 })

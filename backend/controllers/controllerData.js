@@ -19,10 +19,10 @@ const getData = asyncHandler(async (req, res) => {
 // @route   POST /api/data
 // @access  Private
 const setData = asyncHandler(async (req, res) => {
-  if (!req.body.data) {
-    res.status(400)
-    throw new Error('Please add a text field')
-  }
+  // if (!req.body.data) {
+  //   res.status(400)
+  //   throw new Error('Please add a text field')
+  // }
 
   const datas = await Data.create({
     data: req.body.data,

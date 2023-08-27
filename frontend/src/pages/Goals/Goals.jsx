@@ -19,7 +19,7 @@ function Goals() {
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
 
-  const { user, dataIsError, dataMessage } = useSelector(     // select goal values from data state
+  const { user, dataIsError, dataIsSuccess, dataMessage } = useSelector(     // select goal values from data state
     (state) => state.data
   )
 
@@ -27,6 +27,8 @@ function Goals() {
   useEffect(() => {
     if (dataIsError) {
       toast.error(dataMessage, { autoClose: 1000 });
+    }else if (dataIsSuccess) {
+      toast.success(dataMessage, { autoClose: 1000 });
     }
 
     // dispatch(getDatas()) // dispatch connects to the store, then retreives the comments.
