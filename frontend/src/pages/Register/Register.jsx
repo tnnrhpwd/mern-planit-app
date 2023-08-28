@@ -9,13 +9,13 @@ import './Register.css';
 function Register() {
     // useState variables of input fields
     const [formData, setFormData] = useState({
+        nickname: '',
         email: '',
         password: '',
-        password2: '',
     })
 
     // the state values of the input fields
-    const { email, password, password2 } = formData
+    const { email, password, nickname } = formData
 
     const navigate = useNavigate() // initialization
     const dispatch = useDispatch() // initialization
@@ -56,6 +56,7 @@ function Register() {
             toast.error('Please enter a password.', { autoClose: 2000 })
         } else {
             const userData = {  // get data from input form
+            nickname,
             email,
             password,
             }
@@ -81,6 +82,17 @@ function Register() {
         </section>
         <section className="planit-register-form">
             <form onSubmit={onSubmit}>
+                <div className="planit-register-form-group">
+                    <input
+                        type='nickanme'
+                        className='planit-register-form-control'
+                        id='nickname'
+                        name='nickname'
+                        value={nickname}
+                        placeholder='Enter nickname'
+                        onChange={onChange}
+                    />
+                </div>
                 <div className="planit-register-form-group">
                     <input
                         type='email'
