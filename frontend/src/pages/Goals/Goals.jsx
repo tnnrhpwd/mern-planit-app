@@ -40,7 +40,7 @@ function Goals() {
     return () => {    // reset the goals when state changes
       dispatch(resetDataSlice()) // dispatch connects to the store, then reset state values( goalMessage, isloading, iserror, and issuccess )
     }
-  }, [dataIsError, dataMessage, dispatch, navigate, user])
+  }, [dataIsError, dataIsSuccess, dataMessage, dispatch, navigate, user])
 
   // useEffect(() => {
   //   function handleAllOutputPlans(ObjectArray){ 

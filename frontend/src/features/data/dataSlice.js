@@ -144,7 +144,8 @@ export const dataSlice = createSlice({
       .addCase(createData.fulfilled, (state, action) => {   // create
         state.dataIsLoading = false
         state.dataIsSuccess = true
-        state.datas.push(action.payload)
+        state.dataMessage = 'Data was successfully saved.'
+        state.data.push(action.payload)
       })
       .addCase(createData.rejected, (state, action) => {    // create
         state.dataIsLoading = false
@@ -157,7 +158,7 @@ export const dataSlice = createSlice({
       .addCase(getDatas.fulfilled, (state, action) => {     // get
         state.dataIsLoading = false
         state.dataIsSuccess = true
-        state.datas = action.payload
+        state.data = action.payload
       })
       .addCase(getDatas.rejected, (state, action) => {      // get
         state.dataIsLoading = false
@@ -170,7 +171,7 @@ export const dataSlice = createSlice({
       .addCase(updateData.fulfilled, (state, action) => {   // update
         state.dataIsLoading = false
         state.dataIsSuccess = true
-        state.datas = state.datas.map(
+        state.data = state.data.map(
           data => 
             (data._id === action.payload._id) 
             ? action.payload 
@@ -188,7 +189,7 @@ export const dataSlice = createSlice({
       .addCase(deleteData.fulfilled, (state, action) => {   // delete
         state.dataIsLoading = false
         state.dataIsSuccess = true
-        state.datas = state.datas.filter(               // hides the deleted data from UI when you click delete. Otherwise, It wouldnt disapear until refresh
+        state.data = state.data.filter(               // hides the deleted data from UI when you click delete. Otherwise, It wouldnt disapear until refresh
           (data) => data._id !== action.payload.id
         )
       })

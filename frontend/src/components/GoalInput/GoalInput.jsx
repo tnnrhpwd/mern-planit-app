@@ -5,15 +5,18 @@ import { createData } from './../../features/data/dataSlice'
 import './GoalInput.css';
 
 function GoalInput() {
-    const [text, setText] = useState('')
+    const [stext, setSText] = useState('')
+    const [sstart, setSStart] = useState('')
+    const [send, setSEnd] = useState('')
 
     const dispatch = useDispatch()  // initialization
 
     const onSubmit = (e) => {
         e.preventDefault()
+        const text = 'Goal:'+stext+'|start:'+sstart+'|end:'+send
         console.log({ text })
         dispatch(createData({ text }))   // dispatch connects to the store, then creates a goal with text input
-        setText('')                      // empty text field 
+        setSText('')                      // empty text field 
         // toast.success("Goal successfully created!", { autoClose: 1000 })
     }
 
@@ -25,9 +28,23 @@ function GoalInput() {
                     type='text'
                     name='text'
                     id='planit-goalinput-input'
-                    placeholder='Enter goal for others to solve.'
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}   // change text field value
+                    placeholder='Enter goal descrption.'
+                    value={stext}
+                    onChange={(e) => setSText(e.target.value)}   // change text field value
+                /><input
+                    type='text'
+                    name='text'
+                    id='planit-goalinput-input'
+                    placeholder='Enter goal start time.'
+                    value={sstart}
+                    onChange={(e) => setSStart(e.target.value)}   // change text field value
+                /><input
+                    type='text'
+                    name='text'
+                    id='planit-goalinput-input'
+                    placeholder='Enter goal end time.'
+                    value={send}
+                    onChange={(e) => setSEnd(e.target.value)}   // change text field value
                 />
                 </div>
                 <div className='planit-goalinput-group'>
