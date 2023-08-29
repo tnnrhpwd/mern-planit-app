@@ -52,8 +52,8 @@ function Register() {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        if ((password).length === 0) { // if passwords dont match, error. Else, 
-            toast.error('Please enter a password.', { autoClose: 2000 })
+        if (((nickname).length === 0) || ((email).length === 0) || ((password).length === 0)) { // if passwords dont match, error. Else, 
+            toast.error('Please fill in all blanks.', { autoClose: 2000 })
         } else {
             const userData = {  // get data from input form
             nickname,
@@ -61,7 +61,6 @@ function Register() {
             password,
             }
             dispatch(register(userData))  // dispatch connects to the store, then calls the async register function passing userdata as input.
-            console.log(userData)
         }
     }
 

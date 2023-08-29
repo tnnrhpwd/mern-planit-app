@@ -96,19 +96,24 @@ const deleteData = asyncHandler(async (req, res) => {
 // @route   POST /api/data/register
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body
+  const { nickname, email, password } = req.body
 
-  if (!email || !password) {
+  if (!nickname || !email || !password) {
     res.status(400)
     throw new Error('Please add all fields')
   }
 
   // Check if email exists
-  const emailExists = await Data.findOne({ data: { $regex: `${email}\\s\\|` } })
+  const emailExists = await Data.findOne({ data: { $regex: `${"Email:"+email}\\s\\|` } })
+  // Check if email exists
+  const nicknameExists = await Data.findOne({ data: { $regex: `${"Nickname:"+nickname}\\s\\|` } })
 
   if (emailExists) {
     res.status(400)
-    throw new Error("This email is already registered")
+    throw new Error("This email is already registered.")
+  }if (nicknameExists) {
+    res.status(400)
+    throw new Error("This nickname is already taken.")
   }
 
   // Hash password
@@ -117,13 +122,13 @@ const registerUser = asyncHandler(async (req, res) => {
 
   // Create user
   const data = await Data.create({
-    data:email+" | "+hashedPassword,
+    data:"Nickname:"+nickname+"|Email:"+email+"|Password:"+hashedPassword,
   })
 
   if (data) { // if user data successfully created, send JSON web token back to user
     res.status(201).json({
       _id: data.id,
-      email, 
+      nickname,
       token: generateToken(data._id),   //uses JWT secret 
     })
   } else {
@@ -144,17 +149,17 @@ const loginUser = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error("Invalid credentials")  // showed in frontend 
   }
-  const userPassword = user.data.substring(user.data.indexOf('|') + 2);
-
+  const userPassword = user.data.substring(user.data.indexOf('|Password:') + 22);
+  const userNickname = user.data.substring(user.data.indexOf('Nickname:') + 9,user.data.indexOf('|Email:'))
   if (user && (await bcrypt.compare(password, userPassword))) {  // if decrypted password equals user password input, send token back to user.
     res.json({
       _id: user.id,
-      email: email,            // only need to send token back
+      nickname: userNickname,            // only need to send token back
       token: generateToken(user._id),
     })
   } else {
     res.status(400)
-    throw new Error("Invalid credentials")  // showed in frontend 
+    throw new Error(userPassword)  // showed in frontend 
   }
 })
 

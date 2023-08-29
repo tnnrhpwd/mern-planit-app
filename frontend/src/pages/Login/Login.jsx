@@ -35,7 +35,7 @@ function Login() {
             // dispatch(logout())  // dispatch connects to the store, then remove user item from local storage
         }
         if (dataIsSuccess || user) {  // if registered or logged in, 
-            toast.success("Successfully logged in as "+user.email, { autoClose: 2000 }) // print error to toast errors
+            toast.success("Successfully logged in as "+user.nickname, { autoClose: 2000 }) // print error to toast errors
             navigate('/')           // send user to dashboard
         }else{
             dispatch(resetDataSlice())   // reset state values( data, dataisloading, dataiserror, datamessage, and dataissuccess ) on each state change
