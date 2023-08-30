@@ -12,6 +12,7 @@ function Dashboard() {
   return (<>
     <div className='planit-dashboard'>
       <div className='planit-dashboard-upper'>
+        Welcome to Planit
         {/* <Start/> */}
       </div>
       {/* <div className='planit-dashboard-popular'> */}

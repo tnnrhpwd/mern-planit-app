@@ -102,7 +102,7 @@ function Goals() {
       Goals
       <div className='planit-goals-text'>
         Every journey begins with a step.
-        <br/><br/> Create plans for other peoples' goals, or get their input on your goals.
+        <br/><br/> Plan future goals, analyze prior goals, and follow process flows.
         <br/> 
       </div>
       <div className='planit-plans-create'>

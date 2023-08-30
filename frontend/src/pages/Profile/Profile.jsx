@@ -50,7 +50,7 @@ function Profile() {
         Your Profile
       </div>
       <div className='planit-profile-welcome'>
-        Welcome home {user.email}!
+        Welcome home {user.nickname}!
       </div>
 
       <div className="planit-profile-auth">
