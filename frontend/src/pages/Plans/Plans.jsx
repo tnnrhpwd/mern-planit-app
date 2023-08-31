@@ -14,14 +14,13 @@ function Datas() {
   const [ myDatas, setMyDatas ] = useState([])
   const [ showSavedDatas, setShowSavedDatas ] = useState(false)
   const [ savedDatas, setSavedDatas ] = useState([])
-  const [ dataObjectArray, setDataObjectArray ] = useState([]);
+  // const [ dataObjectArray, setDataObjectArray ] = useState([]);
 
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
 
-  const { user } = useSelector((state) => state.auth)      // select user values from user state
-  const { datas, dataIsLoading, dataIsError, dataMessage } = useSelector(     // select data values from data state
-    (state) => state.datas
+  const { user, dataIsLoading, dataIsError, dataMessage } = useSelector(     // select data values from data state
+    (state) => state.data
   )
 
   // called on state changes
