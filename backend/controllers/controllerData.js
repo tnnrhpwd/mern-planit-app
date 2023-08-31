@@ -144,12 +144,12 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
   // Check for user email
-  const user = await Data.findOne({ data: { $regex: `${email}\\s\\|` } })
+  const user = await Data.findOne({ data: { $regex: `${email}` } })
   if (user === null){
     res.status(400)
-    throw new Error("Invalid credentials")  // showed in frontend 
+    throw new Error(email)  // showed in frontend 
   }
-  const userPassword = user.data.substring(user.data.indexOf('|Password:') + 22);
+  const userPassword = user.data.substring(user.data.indexOf('|Password:') + 10);
   const userNickname = user.data.substring(user.data.indexOf('Nickname:') + 9,user.data.indexOf('|Email:'))
   if (user && (await bcrypt.compare(password, userPassword))) {  // if decrypted password equals user password input, send token back to user.
     res.json({

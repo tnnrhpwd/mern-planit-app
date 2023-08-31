@@ -5,10 +5,10 @@ import PlanInput from './../../components/PlanInput/PlanInput.jsx';
 import PlanResult from './../../components/PlanResult/PlanResult.jsx';
 import { toast } from 'react-toastify'                        // visible error notifications
 import Spinner from './../../components/Spinner/Spinner.jsx'
-import { getDatas, resetDataSlice } from './../../features/data/dataSlice'
+import { resetDataSlice } from './../../features/data/dataSlice'
 import './Plans.css';
 
-function Datas() {
+function Plan() {
   const [ showNewData, setShowNewData] = useState(false);
   const [ showMyDatas, setShowMyDatas ] = useState(false);
   const [ myDatas, setMyDatas ] = useState([])
@@ -30,7 +30,7 @@ function Datas() {
 
     }
 
-    dispatch(getDatas()) // dispatch connects to the store, then retreives the datas.
+    // dispatch(getDatas()) // dispatch connects to the store, then retreives the datas.
 
   
     if (!user) {            // if no user, redirect to login
@@ -43,30 +43,30 @@ function Datas() {
     }
   }, [dataIsError, dataMessage, dispatch, navigate, user])
 
-  useEffect(() => {
-    function handleAllOutputDatas(dataObjectArray){ 
-      var outputMyDatasArray = []; var outputSavedDatasArray = [];
+  // useEffect(() => {
+  //   function handleAllOutputDatas(dataObjectArray){ 
+  //     var outputMyDatasArray = []; var outputSavedDatasArray = [];
 
-      dataObjectArray.forEach( data => {
-        if( ( data[1] === user._id  ) ){
-          outputMyDatasArray.push(<PlanResult 
-            key={"MyDataResult"+data[0]}
-            importDataArray = {data}
-          />)
-        }
-        if( ( data[7].includes(user._id) ) ){
-          outputSavedDatasArray.push(<PlanResult 
-            key={"SavedDataResult"+data[0]}
-            importDataArray = {data}
-          />)
-        }
-      });
+  //     dataObjectArray.forEach( data => {
+  //       if( ( data[1] === user._id  ) ){
+  //         outputMyDatasArray.push(<PlanResult 
+  //           key={"MyDataResult"+data[0]}
+  //           importDataArray = {data}
+  //         />)
+  //       }
+  //       if( ( data[7].includes(user._id) ) ){
+  //         outputSavedDatasArray.push(<PlanResult 
+  //           key={"SavedDataResult"+data[0]}
+  //           importDataArray = {data}
+  //         />)
+  //       }
+  //     });
 
-      setMyDatas(outputMyDatasArray); setSavedDatas(outputSavedDatasArray); 
-    }
+  //     setMyDatas(outputMyDatasArray); setSavedDatas(outputSavedDatasArray); 
+  //   }
 
-    handleAllOutputDatas(dataObjectArray);
-  }, [dataObjectArray, user._id])
+    // handleAllOutputDatas(dataObjectArray);
+  // }, [user._id])
 
   function handleCreateDataToggle(){
     if(showNewData){setShowNewData(false)}
@@ -82,7 +82,7 @@ function Datas() {
     console.log(showSavedDatas)
   }
 
-  if(dataObjectArray.length > 0){
+  // if(dataObjectArray.length > 0){
     return (
       <div className='datait-datas'>
         Datas
@@ -142,7 +142,7 @@ function Datas() {
         </div>
       </div>
     )
-  }else{return <Spinner/>}
+  // }else{return <Spinner/>}
 }
 
-export default Datas
+export default Plan
