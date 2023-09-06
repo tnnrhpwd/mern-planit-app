@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'      // useDispatch-brings in reset,register,login from state
+import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import { toast } from 'react-toastify'                        // visible error notifications
 import { createData } from './../../features/data/dataSlice'
 import './GoalInput.css';
@@ -11,9 +11,13 @@ function GoalInput() {
 
     const dispatch = useDispatch()  // initialization
 
+    const { user, dataIsError, dataIsSuccess, dataMessage } = useSelector(     // select goal values from data state
+    (state) => state.data
+  )
+
     const onSubmit = (e) => {
         e.preventDefault()
-        const text = 'Goal:'+stext+'|start:'+sstart+'|end:'+send
+        const text = 'User'+user._id+'|Goal:'+stext+'|start:'+sstart+'|end:'+send
         console.log({ text })
         dispatch(createData({ text }))   // dispatch connects to the store, then creates a goal with text input
         setSText('')                      // empty text field 
