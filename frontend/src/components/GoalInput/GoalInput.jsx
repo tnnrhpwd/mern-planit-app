@@ -6,8 +6,6 @@ import './GoalInput.css';
 
 function GoalInput() {
     const [stext, setSText] = useState('')
-    const [sstart, setSStart] = useState('')
-    const [send, setSEnd] = useState('')
 
     const dispatch = useDispatch()  // initialization
 
@@ -17,7 +15,7 @@ function GoalInput() {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        const text = 'User'+user._id+'|Goal:'+stext+'|start:'+sstart+'|end:'+send
+        const text = 'User'+user._id+'|Goal:'+stext
         console.log({ text })
         dispatch(createData({ text }))   // dispatch connects to the store, then creates a goal with text input
         setSText('')                      // empty text field 
@@ -32,23 +30,9 @@ function GoalInput() {
                     type='text'
                     name='text'
                     id='planit-goalinput-input'
-                    placeholder='Enter goal descrption.'
+                    placeholder='Enter goal description including stakeholders, milestones, and other project charter information.'
                     value={stext}
                     onChange={(e) => setSText(e.target.value)}   // change text field value
-                /><input
-                    type='text'
-                    name='text'
-                    id='planit-goalinput-input'
-                    placeholder='Enter goal start time.'
-                    value={sstart}
-                    onChange={(e) => setSStart(e.target.value)}   // change text field value
-                /><input
-                    type='text'
-                    name='text'
-                    id='planit-goalinput-input'
-                    placeholder='Enter goal end time.'
-                    value={send}
-                    onChange={(e) => setSEnd(e.target.value)}   // change text field value
                 />
                 </div>
                 <div className='planit-goalinput-group'>
