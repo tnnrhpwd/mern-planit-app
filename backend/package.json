@@ -19,7 +19,8 @@
     "javascript-time-ago": "^2.3.13",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^5.7.0",
-    "mongoose": "^6.3.2"
+    "mongoose": "^6.3.2",
+    "openai": "^4.11.1"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",

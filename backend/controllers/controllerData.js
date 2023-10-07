@@ -1,6 +1,7 @@
 // This file contains the functions that deal with the User objects( schema imported from Models)  => Exported to Routes(listens + calls these methods on requests)
 const jwt = require('jsonwebtoken') //import json web tokens to send to user on login -- this token will be read when user request user details -- confirms same user
 const bcrypt = require('bcryptjs')  // used to hash passwords
+const openaikey = require('openai')
 const asyncHandler = require('express-async-handler') // sends the errors to the errorhandler
 
 const Data = require('../models/dataModel')
