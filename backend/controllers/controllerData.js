@@ -13,6 +13,8 @@ const getData = asyncHandler(async (req, res) => {
   // const data = await data.find({ data: req.user.id }) //  where the request user matches the data user
   const datas = await Data.find() //  Get all data
 
+  // if data should be compressed, then send it to openai. else, pull the requested data from our database.
+
   res.status(200).json(Data) // returns json of data
 })
 

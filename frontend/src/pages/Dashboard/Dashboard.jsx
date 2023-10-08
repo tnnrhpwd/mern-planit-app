@@ -1,7 +1,7 @@
 // import GoalInput from './../../components/GoalInput/GoalInput.jsx';
 // import { getPlans, resetPlanSlice } from './../../features/plans/planSlice'
 // import LeftDashboard from './LeftDashboard.jsx';
-// import MiddleDashboard from './MiddleDashboard.jsx';
+import MiddleDashboard from './MiddleDashboard.jsx';
 import Start from './../../components/Start/Start';
 import './Dashboard.css';
 
@@ -17,8 +17,8 @@ function Dashboard() {
       </div>
       {/* <div className='planit-dashboard-popular'> */}
         {/* <LeftDashboard/> */}
-
-        {/* <MiddleDashboard/> */}
+    
+        <MiddleDashboard/>
 
         {/* <div className='planit-dashboard-popular-right'>
           Right Panel
