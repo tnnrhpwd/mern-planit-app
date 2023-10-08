@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import Spinner from '../Spinner/Spinner.jsx'
 // import { getPlans, resetPlanSlice, createPlan, updatePlan, deletePlan } from '../../features/plans/planSlice'
-import { getDatas, resetDataSlice, createData } from '../../features/data/dataSlice'
+import { getData, resetDataSlice, createData } from '../../features/data/dataSlice'
 // import { getComments, resetCommentSlice, createComment, updateComment } from '../../features/comments/commentSlice'
 // import { getMyData, resetAuthSlice } from '../../features/auth/authSlice'
 import PlanResult from '../PlanResult/PlanResult.jsx'
@@ -24,7 +24,7 @@ function Start() {
     const [ planObjectArray, setPlanObjectArray ] = useState([]);
 
     const [plan, setPlan] = useState('')
-    const [data, setData] = useState('')
+    // const [data, setData] = useState('')
 
 
 
@@ -32,19 +32,9 @@ function Start() {
     const dispatch = useDispatch() // initialization
   
     // const { user } = useSelector((state) => state.auth)      // select user values from user state
-    const { plans, planIsLoading, planIsError, planMessage } = useSelector(     // select data values from data state
+    const { data, user, dataIsLoading, dataIsError, dataMessage } = useSelector(     // select data values from data state
         (state) => state.plans
     )
-    const { datas, dataIsLoading, dataIsError, dataMessage } = useSelector(     // select data values from data state
-        (state) => state.datas
-    )
-    const { comments, commentIsLoading, commentIsError, commentMessage } = useSelector(     // select data values from data state
-        (state) => state.comments
-    )
-    const { user, authIsLoading, authIsError, authMessage } = useSelector(
-        (state) => state.auth
-    )
-
 
     // Scroll to the top on render
     useEffect(() => {
@@ -53,15 +43,6 @@ function Start() {
 
     // called on state changes
     useEffect(() => {
-        if (planIsError) {
-            toast.error(planMessage) // print error to toast errors
-        }
-        if (commentIsError) {
-            toast.error(commentMessage) // print error to toast errors
-        }
-        if (authIsError) {
-            toast.error(authMessage) // print error to toast errors
-        }
         if (dataIsError) {
             toast.error(dataMessage) // print error to toast errors
         }
@@ -72,7 +53,7 @@ function Start() {
         // }
 
 
-        dispatch(getDatas()) // dispatch connects to the store, then retreives the plans that match the logged in user.
+        dispatch(getData()) // dispatch connects to the store, then retreives the plans that match the logged in user.
 
 
 
@@ -81,16 +62,16 @@ function Start() {
         return () => {    // reset the plans when state changes
             dispatch(resetDataSlice()) // dispatch connects to the store, then reset state values( planMessage, planisloading, planiserror, and planissuccess )
         }
-    }, [authIsError, authMessage, commentIsError, commentMessage, dispatch, dataIsError, dataMessage, planIsError, planMessage])
+    }, [dispatch, dataIsError, dataMessage])
 
     useEffect(() => {
         // setPlanObjectArray( BuildPlanObjectArray( datas, plans, comments )[1] )
-    }, [comments, datas, plans])
+    }, [data])
 
     useEffect(() => {
         function handleOutputPlans(planObjectArray){
             if(findPlan===''){return;} // No search guard clause
-            if (!planObjectArray || planObjectArray.length===[]) {return;} // guard clause
+            // if (!planObjectArray || planObjectArray.length===[]) {return;} // guard clause
 
 
             var outputArray = [];
@@ -115,21 +96,21 @@ function Start() {
         }
         handleOutputPlans(planObjectArray)
 
-    }, [findPlan, planObjectArray, plans])
+    }, [findPlan, planObjectArray])
 
     // RUNS ON CREATE PLAN -- sends the new plan and data text to the database
     const onPlanSubmit = (e) => {
         e.preventDefault()
         dispatch(createData({ plan,data }))   // dispatch connects to the store, then creates a plan with text input
         setPlan('')                      // empty plan field
-        setData('')                      // empty data field
+        // setData('')                      // empty data field
     }
 
 
 
 
     // Shows loading animation while getting plans + comments
-    if (authIsLoading) {
+    if (dataIsLoading) {
         return <Spinner />
     }
 

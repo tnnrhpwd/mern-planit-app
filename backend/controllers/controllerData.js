@@ -1,22 +1,46 @@
 // This file contains the functions that deal with the User objects( schema imported from Models)  => Exported to Routes(listens + calls these methods on requests)
 const jwt = require('jsonwebtoken') //import json web tokens to send to user on login -- this token will be read when user request user details -- confirms same user
 const bcrypt = require('bcryptjs')  // used to hash passwords
-const openaikey = require('openai')
+const openai = require('openai')
 const asyncHandler = require('express-async-handler') // sends the errors to the errorhandler
 
 const Data = require('../models/dataModel')
+const openaikey = process.env.OPENAI_KEY
+const client = new openai({ apiKey: openaikey })
 
 // @desc    Get Data
 // @route   GET /api/data
 // @access  Private
 const getData = asyncHandler(async (req, res) => {
-  // const data = await data.find({ data: req.user.id }) //  where the request user matches the data user
-  const datas = await Data.find() //  Get all data
+  const shouldCompress = true; // Check if compression is requested in the query string
+  // res.status(200).json("{ data: datas.map((data) => data.data) }");
 
-  // if data should be compressed, then send it to openai. else, pull the requested data from our database.
+  if (shouldCompress) {
+    // If compression is requested, send a request to OpenAI
 
-  res.status(200).json(Data) // returns json of data
-})
+    const userInput = req.body; // Get user's input from the query string
+
+    try {
+      res.status(200).json({userInput});
+
+      // const response = await client.completions.create({
+      //   model: 'davinci', // Choose the appropriate engine
+      //   prompt: userInput,
+      //   max_tokens: 50, // Adjust as needed
+      // });
+
+      // const compressedData = userInput + response.choices[0].text + response.id + response.model;
+      // res.status(200).json( compressedData );
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred during compression' });
+    }
+  } else {
+    // If compression is not requested, pull the requested data from your database
+    const datas = await Data.find(); // Get all data
+    res.status(200).json({ data: datas.map((data) => data.data) });
+  }
+});
 
 // @desc    Set data
 // @route   POST /api/data

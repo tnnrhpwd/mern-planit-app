@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'              // page redirects
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify'                        // visible error notifications
-import { createData, deleteData, getDatas, resetDataSlice } from './../../features/data/dataSlice'
+import { createData, deleteData, getData, resetDataSlice } from './../../features/data/dataSlice'
 import DeleteView from '../../components/DeleteView/DeleteView'
 import Spinner from '../../components/Spinner/Spinner';
 import PlanResult from '../../components/PlanResult/PlanResult'
@@ -18,11 +18,8 @@ function InfoData() {
     const [ dataObjectArray, setDataObjectArray ] = useState([]);
     const [ showDeleteDataConfirmation, setShowDeleteDataConfirmation ] = useState(false);
 
-    const { datas, dataIsLoading, dataIsError, dataMessage } = useSelector(     // select data values from data state
-        (state) => state.datas
-    )
-    const { user, authIsLoading, authIsError, authMessage } = useSelector(
-        (state) => state.auth
+    const { user, data, dataIsLoading, dataIsError, dataMessage } = useSelector(     // select data values from data state
+        (state) => state.data
     )
 
     const navigate = useNavigate() // initialization
@@ -35,13 +32,13 @@ function InfoData() {
             toast.error(dataMessage) // print error to toast errors
         }
 
-        dispatch(getDatas()) // dispatch connects to the store, then retreives the datas that match the logged in user.
+        dispatch(getData()) // dispatch connects to the store, then retreives the datas that match the logged in user.
   
         
         return () => {    // reset the datas when state changes
         dispatch(resetDataSlice()) // dispatch connects to the store, then reset state values( dataMessage, isloading, iserror, and issuccess )
         }
-    }, [authIsError, authMessage, dataIsError, dataMessage, dispatch, dataIsError, dataMessage, dataIsError, dataMessage])
+    }, [dataIsError, dataMessage, dispatch])
 
 
     useEffect(() => {

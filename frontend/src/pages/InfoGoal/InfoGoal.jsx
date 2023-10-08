@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import { toast } from 'react-toastify'                        // visible error notifications
 // import { deletePlan, getPlans, resetPlanSlice } from './../../features/plans/planSlice'
 // import { deleteGoal, getGoals, resetGoalSlice } from './../../features/goals/goalSlice'
-import { createData, deleteData, getDatas, resetDataSlice } from './../../features/data/dataSlice'
+import { createData, deleteData, getData, resetDataSlice } from './../../features/data/dataSlice'
 import DeleteView from '../../components/DeleteView/DeleteView'
 import Spinner from '../../components/Spinner/Spinner';
 // import CommentResult from '../../components/CommentResult/CommentResult'
@@ -35,7 +35,7 @@ function InfoGoal() {
         }
 
 
-        dispatch(getDatas()) // dispatch connects to the store, then retreives the plans that match the logged in user.
+        dispatch(getData()) // dispatch connects to the store, then retreives the plans that match the logged in user.
   
         
         return () => {    // reset the plans when state changes
