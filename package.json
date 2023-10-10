@@ -3,10 +3,24 @@
   "version": "1.0.0",
   "author": "Steven Tanner Hopwood <steven.t.hopwood@gmail.com>",
   "scripts": {
-      "start": "concurrently \"npm start --prefix frontend\" \"npm run server --prefix backend\""
+    "start": "concurrently \"npm start --prefix frontend\" \"npm run server --prefix backend\"",
+    "test": "jest --watchAll --verbose"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.14.9",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
     "concurrently": "^7.0.0",
+    "jest": "^29.7.0",
     "nodemon": "^2.0.15"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest"
+    }
+  },
+  "dependencies": {
+    "@babel/preset-react": "^7.22.15"
   }
 }
