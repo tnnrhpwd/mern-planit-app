@@ -4,7 +4,7 @@
 // import AboutComponent from '../frontend/src/pages/About/About';
 const mongoose = require('mongoose');   // Object Data Modeling (ODM) library for MongoDB and Node. js
 
-describe('My Stack', ()=>{
+describe('Backend Testing', ()=>{
   it('has a running backend', () => {
       // this async function connects to Mongo database using Mongoose => exported to server.js | RAN ON SERVER INITIALIZATION
       const connectDB = async () => {
