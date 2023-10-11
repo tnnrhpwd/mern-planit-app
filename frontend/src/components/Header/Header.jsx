@@ -3,8 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'    
 import { logout, resetDataSlice } from './../../features/data/dataSlice.js'
 import HeaderDropper from '../HeaderDropper/HeaderDropper.jsx';
-import HeaderLogo from './../../assets/planit192.png';
-import './Header.css';
+// import HeaderLogo from '../../../src/assets/planit192.png';
+// import HeaderLogo from './../../assets/planit192.png';
+// import './Header.css';
 
 
 
@@ -64,11 +65,11 @@ function Header() {
               window.scrollTo(0, 0);
             }}
           >
-            <img
+            {/* <img
               id="planit-header-logo-img"
               src={HeaderLogo}
               alt="website logo"
-            />
+            /> */}
           </a>
         </div>
         {/* <a href='/'> // deleted for now

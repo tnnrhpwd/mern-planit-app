@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';    // allows frontend to send user to different pages
 import { ToastContainer } from 'react-toastify'                               // container to hold error messages        
-import 'react-toastify/dist/ReactToastify.css'                                // styling
+// import 'react-toastify/dist/ReactToastify.css'                                // styling
 import Header from './components/Header/Header.jsx'                           // header
 import About from './pages/About/About.js'                                   // import page
 import Comments from './pages/Comments.jsx'                                   // import page

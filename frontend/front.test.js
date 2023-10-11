@@ -1,7 +1,8 @@
 // App.test.js
-import React from 'react';
+import 'jest-localstorage-mock';
 import { render, screen } from '@testing-library/react';
-import App from './src/App'; // Import your main application component
+const React = require('react');
+const App = require('./src/App'); // Import your main application component
 
 describe('Frontend Testing', ()=>{
   it('has a running frontend', () => {
