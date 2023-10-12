@@ -1,15 +1,15 @@
-// App.test.js
+// front.test.js
 import 'jest-localstorage-mock';
 import { render, screen } from '@testing-library/react';
-const React = require('react');
-const App = require('./src/App'); // Import your main application component
+import App from './src/App';
+import React from 'react';
 
 describe('Frontend Testing', ()=>{
-  it('has a running frontend', () => {
+  it('has a running user-interface', () => {
     render(<App />);
     // const linkElement = screen.getByText(/Welcome to My MERN App/i); // Adjust this to match your actual content
     // expect(linkElement).toBeInTheDocument();
   });
 
-  it.todo('can use OpenAI compression api');
+  it.todo('can communicate with the server');
 })

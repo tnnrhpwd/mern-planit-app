@@ -1,10 +1,10 @@
 import { useRef } from 'react'
 import useOutsideAlerter from '../useOutsideAlerter.js';
-// import HeaderLogo from './../../assets/planit192.png';
+import HeaderLogo from './../../assets/planit192.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'    
 
-// import './HeaderDropper.css'
+import './HeaderDropper.css'
 
 function HeaderDropper(props) {
 
@@ -28,7 +28,7 @@ const hideComponentVisibility = () => {document.getElementById("planit-header-dr
         
         <div className='planit-header-logo-nav'>
           <Link to='/' onClick={() => {window.scrollTo(0,0); document.getElementById("planit-header-dropper__toggle").checked = false;}}>
-            {/* <img id='planit-header-logo-img' src={HeaderLogo} alt='website logo'/> */}
+            <img id='planit-header-logo-img' src={HeaderLogo} alt='website logo'/>
           </Link>
         </div>
         {(props.colTheme==="dark-theme") && <button className='planit-header-dropper-themebutton' onClick={props.setLightMode}>Light Mode</button>}

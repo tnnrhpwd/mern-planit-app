@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';    // allows frontend to send user to different pages
 import { ToastContainer } from 'react-toastify'                               // container to hold error messages        
-// import 'react-toastify/dist/ReactToastify.css'                                // styling
+import 'react-toastify/dist/ReactToastify.css'                                // styling
 import Header from './components/Header/Header.jsx'                           // header
 import About from './pages/About/About.js'                                   // import page
 import Comments from './pages/Comments.jsx'                                   // import page
@@ -16,28 +16,21 @@ import InfoGoal from './pages/InfoGoal/InfoGoal.jsx';                         //
 import InfoPlan from './pages/InfoPlan/InfoPlan.jsx';                         // import page
 import InfoAction from './pages/InfoAction/InfoAction.jsx';                   // import page
 import Agenda from './pages/Agenda/Agenda.jsx';                               // import page
+import React from 'react';
 
 function App() {
   return (<>
     <Router>
     <div className='planit-app'>
-      <Header />
+      {/* <Header /> */}
       <Routes>
         <Route path='/about' element={<About />} />
-        <Route path='/agenda' element={<Agenda />} />
-        <Route path='/comments' element={<Comments />} />
         <Route path='/' element={<Dashboard />} />
-        <Route path='/goals' element={<Goals />} />
-        <Route path='/legal' element={<LegalTerms />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/plans' element={<Plans />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/register' element={<Register />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/about' element={<About />} />
-        <Route path='/goal/:id/' element={<InfoGoal />} />
-        <Route path='/plan/:id/' element={<InfoPlan />} />
-        <Route path='/action/:id/' element={<InfoAction />} />
       </Routes>
     </div>
     </Router>
