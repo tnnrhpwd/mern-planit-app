@@ -40,7 +40,7 @@ export const getData = createAsyncThunk(
     try {
       // const token = thunkAPI.getState().auth.user.token         // get the user token  
       // return await dataService.getDatas(token)      // pass user token to get all datas from the specific user token
-      return await dataService.getData(dataData)      // Get data regardless of user logged in
+      return await dataService.getData()      // Get data regardless of user logged in
     } catch (error) {
       const dataMessage =
         (error.response &&

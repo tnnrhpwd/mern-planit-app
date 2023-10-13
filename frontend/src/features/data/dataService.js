@@ -20,14 +20,14 @@ const createData = async (dataData, token) => {
 }
 
 // Get all datas
-const getData = async (dataData, token) => {
+const getData = async (token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         },
     }
 
-    const response = await axios.get(API_URL, dataData, config)
+    const response = await axios.get(API_URL, config)
 
     return response.data
 }

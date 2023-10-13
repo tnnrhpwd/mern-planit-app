@@ -18,19 +18,17 @@ const getData = asyncHandler(async (req, res) => {
   if (shouldCompress) {
     // If compression is requested, send a request to OpenAI
 
-    const userInput = req.body; // Get user's input from the query string
+    const userInput = req.body.te; // Get user's input from the query string
 
     try {
-      res.status(200).json({userInput});
-
       // const response = await client.completions.create({
       //   model: 'davinci', // Choose the appropriate engine
       //   prompt: userInput,
       //   max_tokens: 50, // Adjust as needed
       // });
 
-      // const compressedData = userInput + response.choices[0].text + response.id + response.model;
-      // res.status(200).json( compressedData );
+      const compressedData = userInput + 'response.choices[0].text + response.id + response.model';
+      res.status(200).json( compressedData );
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'An error occurred during compression' });
@@ -46,10 +44,10 @@ const getData = asyncHandler(async (req, res) => {
 // @route   POST /api/data
 // @access  Private
 const setData = asyncHandler(async (req, res) => {
-  // if (!req.body.data) {
-  //   res.status(400)
-  //   throw new Error('Please add a text field')
-  // }
+  if (!req.body.data) {
+    res.status(400)
+    throw new Error('Please add a text field')
+  }
 
   const { text } = req.body
 
