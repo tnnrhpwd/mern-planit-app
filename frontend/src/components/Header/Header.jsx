@@ -130,7 +130,7 @@ function Header() {
             Dark Mode
           </button>
         )}
-        <button className="planit-header-profile-landscape">
+        {/* <button className="planit-header-profile-landscape">
           {user ? (
             <button className="planit-header-profile-auth" onClick={onLogout}>
               Log out
@@ -140,6 +140,9 @@ function Header() {
               <button className="planit-header-profile-auth">Log in</button>
             </a>
           )}
+        </button> */}
+        <button className="planit-header-profile-auth" onClick={user ? onLogout : undefined}>
+          {user ? "Log out" : <a href="/login">Log in</a>}
         </button>
         <HeaderDropper
           colTheme={colTheme}
