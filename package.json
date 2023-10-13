@@ -22,8 +22,8 @@
     },
     "moduleNameMapper": {
       "\\.(css|less)$": "identity-obj-proxy",
-      "\\.(png|less)$": "identity-obj-proxy",
-      "\\.(svg|less)$": "identity-obj-proxy"
+      "\\.(svg|less)$": "identity-obj-proxy",
+      "\\.(png|less)$": "<rootDir>/frontend/src/assets/__mocks__/mock.js"
     },
     "testEnvironment": "jest-environment-jsdom"
   },
