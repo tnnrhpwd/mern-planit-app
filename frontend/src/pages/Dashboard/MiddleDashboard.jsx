@@ -21,12 +21,12 @@ function MiddleDashboard() {
     // called on state changes
     useEffect(() => {
         if (dataIsError) {
-        console.log(dataMessage)
-        toast.error(dataMessage+data)
+            console.log(dataMessage)
+            toast.error(dataMessage+data)
         }if (dataIsSuccess) {
-        console.log(dataMessage+data)
-        toast.success(dataMessage+data)
-        setReturnedData(dataMessage+data)
+            console.log(dataMessage+data)
+            toast.success(dataMessage+data)
+            setReturnedData(dataMessage+data)
         }
 
     
