@@ -22,7 +22,7 @@ function App() {
   return (<>
     <Router>
     <div className='planit-app'>
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route path='/about' element={<About />} />
         <Route path='/' element={<Dashboard />} />
