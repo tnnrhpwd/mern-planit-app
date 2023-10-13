@@ -4,6 +4,7 @@
   "author": "Steven Tanner Hopwood <steven.t.hopwood@gmail.com>",
   "scripts": {
     "start": "concurrently \"npm start --prefix frontend\" \"npm run server --prefix backend\"",
+    "install": "concurrently \"npm i --prefix frontend\" \"npm i\" \"npm i --prefix backend\"",
     "test": "jest --watchAll --verbose"
   },
   "devDependencies": {
