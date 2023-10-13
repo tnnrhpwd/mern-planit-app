@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'      // access state vari
 import Spinner from './../../components/Spinner/Spinner.jsx'
 import { getData, resetDataSlice } from './../../features/data/dataSlice'
 import { toast } from 'react-toastify'    
+import React from 'react';
 
 
 function MiddleDashboard() {
