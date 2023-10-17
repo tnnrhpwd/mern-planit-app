@@ -171,12 +171,7 @@ export const dataSlice = createSlice({
       .addCase(updateData.fulfilled, (state, action) => {   // update
         state.dataIsLoading = false
         state.dataIsSuccess = true
-        state.data = state.data.map(
-          data => 
-            (data._id === action.payload._id) 
-            ? action.payload 
-            : data 
-        )
+        state.data = action.payload
       })
       .addCase(updateData.rejected, (state, action) => {    // update
         state.dataIsLoading = false

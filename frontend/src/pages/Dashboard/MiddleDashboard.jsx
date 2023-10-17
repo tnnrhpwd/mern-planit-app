@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import Spinner from './../../components/Spinner/Spinner.jsx'
-import { getData, resetDataSlice } from './../../features/data/dataSlice'
+import { updateData, resetDataSlice } from './../../features/data/dataSlice'
 import { toast } from 'react-toastify'    
 import React from 'react';
 
@@ -54,7 +54,7 @@ function MiddleDashboard() {
           }
     
           // Dispatch the getData action with the sentData
-          dispatch(getData({ text: sentData }));
+          dispatch(updateData({ text: sentData }));
     
           // Reset the textarea after sending the data
           setSentData("");
