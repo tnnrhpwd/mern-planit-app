@@ -171,7 +171,8 @@ export const dataSlice = createSlice({
       .addCase(updateData.fulfilled, (state, action) => {   // update
         state.dataIsLoading = false
         state.dataIsSuccess = true
-        state.data = action.payload
+        state.data = action.payload        
+        state.dataMessage = action.payload.text
       })
       .addCase(updateData.rejected, (state, action) => {    // update
         state.dataIsLoading = false
