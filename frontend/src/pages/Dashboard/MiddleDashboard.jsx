@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import Spinner from './../../components/Spinner/Spinner.jsx'
-import { updateData, resetDataSlice } from './../../features/data/dataSlice'
+import { createData, resetDataSlice } from './../../features/data/dataSlice'
 import { toast } from 'react-toastify'    
 import React from 'react';
 
@@ -53,10 +53,9 @@ function MiddleDashboard() {
             return;
           }
     
-          // Dispatch the updateData action with the sentData
-          dispatch(updateData({ 
-            id:"press",
-            text: sentData 
+          // Dispatch the createData action with the sentData
+          dispatch(createData({ 
+            data: sentData 
           }));
     
           // Reset the textarea after sending the data
@@ -82,7 +81,7 @@ function MiddleDashboard() {
                     className='infoplan-newcomment-textarea'
                 />                
                 <button onClick={callData} id='planit-dashboard-popular-left-plans-middledashboard-button'>
-                    Get Data
+                    Compress Data
                 </button>
                 <></>
                 {returnedData}
