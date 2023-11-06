@@ -67,22 +67,29 @@ const updateData = asyncHandler(async (req, res) => {
 
     const userInput = req.body.text; // Get user's input from the query string
 
-    try {
+    // try {
       // const response = await client.completions.create({
       //   model: 'davinci', // Choose the appropriate engine
       //   prompt: userInput,
       //   max_tokens: 50, // Adjust as needed
       // });
-
-      const compressedData = userInput + 'response.choices[0].text + response.id + response.model';
-      res.status(200).json( compressedData );
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'An error occurred during compression' });
-    }
-  } else {
-
-
+    
+      // if (response.choices && response.choices.length > 0) {
+      //   const compressedData = response.choices[0].text; // Extract the compressed data from the OpenAI response.
+    
+      //   // Update the `Data` object in the database with the compressed data.
+      //   const updatedData = await Data.findByIdAndUpdate(req.params.id, { data: compressedData }, {
+      //     new: true,
+      //   });
+    
+      //   res.status(200).json(compressedData);
+      // } else {
+      //   res.status(500).json({ error: 'No compressed data found in the OpenAI response' });
+      // }
+    // } catch (error) {
+    //   console.error(error);
+    //   res.status(500).json({ error: 'An error occurred during compression' });
+    // }
   }
 
   const updatedComment = await Data.findByIdAndUpdate(req.params.id,  { $push: req.body}, {
