@@ -20,7 +20,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^5.7.0",
     "mongoose": "^6.3.2",
-    "openai": "^4.11.1",
+    "openai": "^4.20.0",
     "Planit": "file:.."
   },
   "jest": {
