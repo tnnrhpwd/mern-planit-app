@@ -19,6 +19,7 @@ const protect = asyncHandler(async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
       // Get user from the token -- the JWT payload is holding the id, so we get the ID, find the associated user, and prevent the hashed password from being delivered.
+      // req.user = await Data.findOne({ data: { $regex: `${decoded.id}` } }).select('-password')
       req.user = await Data.findById(decoded.id).select('-password')
 
       next()    // goes to next middleware function

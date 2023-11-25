@@ -141,9 +141,9 @@ function Header() {
             </a>
           )}
         </button> */}
-        <button className="planit-header-profile-auth" onClick={user ? onLogout : undefined}>
+        {/* <button className="planit-header-profile-auth" onClick={user ? onLogout : undefined}>
           {user ? "Log out" : <a href="/login">Log in</a>}
-        </button>
+        </button> */}
         <HeaderDropper
           colTheme={colTheme}
           setLightMode={setLightMode}

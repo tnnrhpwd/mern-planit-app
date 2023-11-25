@@ -1,4 +1,4 @@
-// import './About.css'
+import './About.css'
 
 const portfolioLink = "https://sthopwood.com/"
 

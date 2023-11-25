@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'              // redirect the user
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
 import Spinner from './../../components/Spinner/Spinner.jsx'
-import { createData, resetDataSlice } from './../../features/data/dataSlice'
+import { updateData, resetDataSlice } from './../../features/data/dataSlice'
 import { toast } from 'react-toastify'    
 import React from 'react';
 
@@ -12,7 +12,7 @@ function MiddleDashboard() {
     const dispatch = useDispatch() // initialization
   
     const [ returnedData, setReturnedData ] = useState(null);    
-    const [ sentData, setSentData ] = useState("null");
+    const [ sentData, setSentData ] = useState("");
 
     const { user, data, dataIsLoading, dataIsSuccess, dataIsError, dataMessage } = useSelector(     // select plan values from plan state
         (state) => state.data
@@ -21,12 +21,9 @@ function MiddleDashboard() {
     // called on state changes
     useEffect(() => {
         if (dataIsError) {
-            console.log(dataMessage+"+"+data)
-            toast.error(dataMessage+"+"+data)
+            toast.error(dataMessage)
         }if (dataIsSuccess) {
-            console.log(dataMessage+"+"+data)
-            toast.success(dataMessage+"+"+data)
-            setReturnedData(dataMessage+"+"+data)
+            setReturnedData(data)
         }
 
     
@@ -54,8 +51,10 @@ function MiddleDashboard() {
           }
     
           // Dispatch the createData action with the sentData
-          dispatch(createData({ 
-            data: sentData 
+          dispatch(updateData({ 
+            id: "u",
+            data: sentData,
+            user: user.nickname
           }));
     
           // Reset the textarea after sending the data
@@ -71,29 +70,24 @@ function MiddleDashboard() {
 
     return (
         <div className='planit-dashboard-popular-mid'>
-            Send message to our servers, and we will give you some of our data in return.{sentData}
+            <h2>ChatGPT Text Prediction</h2>
             <div className='planit-dashboard-popular-left-plans'>
-            <textarea 
-                    value={sentData}
-                    name='plan'
-                    placeholder='Enter data to be sent to OpenAI.'
-                    onChange={(e) => setSentData(e.target.value)}   // Update sentData on input change
-                    className='infoplan-newcomment-textarea'
-                />                
+                <textarea
+                value={sentData}
+                name='plan'
+                placeholder='Please enter prompt...'
+                onChange={(e) => setSentData(e.target.value)}
+                className='infoplan-newcomment-textarea'
+                />
                 <button onClick={callData} id='planit-dashboard-popular-left-plans-middledashboard-button'>
-                    Compress Data
+                Send ⚡
                 </button>
-                <></>
-                {returnedData}
-                {/* {plans.length > 0 ? (
-                    <div className='planit-plans-out-result'>
-                    {plans.map((plan) => (
-                        <PlanResult key={plan._id} plan={plan} />
-                    ))}
-                    </div>
-                ) : (
-                    <h3>You have not set any plans</h3>
-                )} */}
+                {returnedData && (
+                <div className='planit-results'>
+                    <h3>Returned Data:</h3>
+                    <p>{returnedData}</p>
+                </div>
+                )}
             </div>
         </div>
     )

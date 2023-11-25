@@ -15,7 +15,7 @@ const { protect } = require('../middleware/authMiddleware')
 
 // listens for HTTP requests on /api/data/
 router.route('/').get(getData).post(setData) // GET + POST -- The lack of middleware here allows anyone to get or post data without being authorized. this must be resolved prior to launch.
-router.route('/:id').delete(protect, updateData).put(protect, deleteData) // DELETE + UPDATE -- The protect middleware here prevents access from users without JWT
+router.route('/:id').delete(protect, deleteData).put(protect, updateData) // DELETE + UPDATE -- The protect middleware here prevents access from users without JWT
 router.post('/register', registerUser)
 router.post('/login', loginUser)
 

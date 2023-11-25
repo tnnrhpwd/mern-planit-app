@@ -2,7 +2,7 @@
     .planit-dashboard-upper{
         padding-top: calc(var(--nav-size)*1);
         min-height: 100vh;
-        min-height: calc(var(--nav-size)*12);
+        min-height: calc(var(--nav-size)*2);
     }
     .planit-dashboard-popular{
         padding: calc(var(--nav-size)*.5);
@@ -18,10 +18,54 @@
         display: block;
         overflow: hidden;
     }
-    .planit-dashboard-popular-mid{
+    /* .planit-dashboard-popular-mid{
         display: block;
         min-height: 100%;
         overflow: hidden;
+    } */
+    /* Add styles for the chatbot interface */
+    .planit-dashboard-popular-mid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        min-height: 100%;
+    }
+    
+    .planit-dashboard-popular-left-plans {
+        width: 100%;
+        max-width: 400px;
+        margin-top: 20px;
+    }
+    
+    .infoplan-newcomment-textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        resize: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    
+    #planit-dashboard-popular-left-plans-middledashboard-button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    #planit-dashboard-popular-left-plans-middledashboard-button:hover {
+        background-color: #45a049;
+    }
+    
+    /* Style for the returned data */
+    .planit-results {
+        margin-top: 20px;
+        font-size: 16px;
     }
     .planit-dashboard-popular-right{
         display: block;
@@ -37,7 +81,7 @@
 @media (orientation: portrait) {
     .planit-dashboard-upper{
         padding-top: calc(var(--nav-size)*1);
-        min-height: calc(var(--nav-size)*9);
+        min-height: calc(var(--nav-size)*1);
     }
     .planit-dashboard-popular{
         padding: calc(var(--nav-size)*.5);
@@ -49,10 +93,53 @@
         display: block;
 
     }
-    .planit-dashboard-popular-mid{
-        display: block;
-        /* height: 100%; */
+    /* Add styles for the chatbot interface */
+    .planit-dashboard-popular-mid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
     }
+    
+    .planit-dashboard-popular-left-plans {
+        width: 100%;
+        max-width: 400px;
+        margin-top: 20px;
+    }
+    
+    .infoplan-newcomment-textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        resize: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    
+    #planit-dashboard-popular-left-plans-middledashboard-button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    #planit-dashboard-popular-left-plans-middledashboard-button:hover {
+        background-color: #45a049;
+    }
+    
+    /* Style for the returned data */
+    .planit-results {
+        margin-top: 20px;
+        font-size: 16px;
+    }
+    
+
+    
     .planit-dashboard-popular-right{
         display: block;
         /* height: 100%; */

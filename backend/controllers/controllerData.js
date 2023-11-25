@@ -40,11 +40,13 @@ const setData = asyncHandler(async (req, res) => {
 // @route   PUT /api/data/:id
 // @access  Private
 const updateData = asyncHandler(async (req, res) => {
+  if (req.params.id === "u") {}else{
   const dataHolder = await Data.findById(req.params.id)
 
   if (!dataHolder) {
     res.status(400)
-    throw new Error('Comment not found')
+    throw new Error('Data input not found')
+  }
   }
 
   // Check for user
@@ -54,49 +56,47 @@ const updateData = asyncHandler(async (req, res) => {
   }
 
   // Make sure the logged in user matches the comment user
-  if (dataHolder.user.toString() !== req.user.id) {
-    res.status(401)
-    throw new Error('User not authorized')
-  }
+  // if (dataHolder.user.toString() !== req.user.id) {
+  //   res.status(401)
+  //   throw new Error('User not authorized')
+  // }
 
   const shouldCompress = true; // Check if compression is requested in the query string
   // res.status(200).json("{ data: datas.map((data) => data.data) }");
 
-  if (shouldCompress) {
-    // If compression is requested, send a request to OpenAI
+  if (shouldCompress) {    // If compression is requested, send a request to OpenAI
+    const userInput = req.body.data; // Get user's input from the query string
 
-    const userInput = req.body.text; // Get user's input from the query string
-
-    // try {
-      // const response = await client.completions.create({
-      //   model: 'davinci', // Choose the appropriate engine
-      //   prompt: userInput,
-      //   max_tokens: 50, // Adjust as needed
-      // });
+    try {
+      const response = await client.completions.create({
+        model: 'davinci', // Choose the appropriate engine
+        prompt: userInput,
+        max_tokens: 50, // Adjust as needed
+      });
     
-      // if (response.choices && response.choices.length > 0) {
-      //   const compressedData = response.choices[0].text; // Extract the compressed data from the OpenAI response.
+      if (response.choices && response.choices.length > 0) {
+        const compressedData = response.choices[0].text; // Extract the compressed data from the OpenAI response.
     
-      //   // Update the `Data` object in the database with the compressed data.
-      //   const updatedData = await Data.findByIdAndUpdate(req.params.id, { data: compressedData }, {
-      //     new: true,
-      //   });
+        // Update the `Data` object in the database with the compressed data.
+        // const updatedData = await Data.findByIdAndUpdate(req.params.id, { data: compressedData }, {
+        //   new: true,
+        // });
     
-      //   res.status(200).json(compressedData);
-      // } else {
-      //   res.status(500).json({ error: 'No compressed data found in the OpenAI response' });
-      // }
-    // } catch (error) {
-    //   console.error(error);
-    //   res.status(500).json({ error: 'An error occurred during compression' });
-    // }
+        res.status(200).json(compressedData);
+      } else {
+        res.status(500).json({ error: 'No compressed data found in the OpenAI response' });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred during compression' });
+    }
   }
 
-  const updatedComment = await Data.findByIdAndUpdate(req.params.id,  { $push: req.body}, {
-    new: true,
-  })
+  // const updatedComment = await Data.findByIdAndUpdate(req.params.id,  { $push: req.body}, {
+  //   new: true,
+  // })
 
-  res.status(200).json(updatedComment)   // return json of updated comment
+  // res.status(200).json(updatedComment)   // return json of updated comment
 })
 
 // @desc    Delete data
