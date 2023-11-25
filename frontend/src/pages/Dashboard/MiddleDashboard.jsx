@@ -71,19 +71,19 @@ function MiddleDashboard() {
     return (
         <div className='planit-dashboard-popular-mid'>
             <h2>ChatGPT Text Prediction</h2>
-            <div className='planit-dashboard-popular-left-plans'>
+            <div className='planit-dashboard-popular-mid-chat'>
                 <textarea
                 value={sentData}
                 name='plan'
                 placeholder='Please enter prompt...'
                 onChange={(e) => setSentData(e.target.value)}
-                className='infoplan-newcomment-textarea'
+                className='planit-dashboard-popular-mid-chat-area'
                 />
-                <button onClick={callData} id='planit-dashboard-popular-left-plans-middledashboard-button'>
+                <button onClick={callData} id='planit-dashboard-popular-mid-chat-button'>
                 Send ⚡
                 </button>
                 {returnedData && (
-                <div className='planit-results'>
+                <div className='planit-dashboard-popular-mid-chat-results'>
                     <h3>Returned Data:</h3>
                     <p>{returnedData}</p>
                 </div>

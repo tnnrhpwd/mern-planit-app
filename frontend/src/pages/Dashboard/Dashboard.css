@@ -31,41 +31,36 @@
         text-align: center;
         min-height: 100%;
     }
-    
-    .planit-dashboard-popular-left-plans {
+    .planit-dashboard-popular-mid-chat {
         width: 100%;
-        max-width: 400px;
-        margin-top: 20px;
+        max-width: calc(var(--nav-size)*12);
+        margin-top: calc(var(--nav-size)*0.5);
     }
-    
-    .infoplan-newcomment-textarea {
+    .planit-dashboard-popular-mid-chat-area {
         width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
+        padding: calc(var(--nav-size)*0.2);
+        margin-bottom: calc(var(--nav-size)*0.2);
         resize: none;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 14px;
+        border: calc(var(--nav-size)*0.05) solid #ccc;
+        border-radius: calc(var(--nav-size)*0.05);
+        font-size: calc(var(--nav-size)*0.3);
     }
-    
-    #planit-dashboard-popular-left-plans-middledashboard-button {
+    #planit-dashboard-popular-mid-chat-button {
         background-color: #4caf50;
         color: white;
-        padding: 10px 15px;
+        padding: calc(var(--nav-size)*0.2) calc(var(--nav-size)*0.3);
         border: none;
-        border-radius: 5px;
+        border-radius: calc(var(--nav-size)*0.1);
         cursor: pointer;
-        font-size: 16px;
+        font-size: calc(var(--nav-size)*0.3);
     }
-    
-    #planit-dashboard-popular-left-plans-middledashboard-button:hover {
+    #planit-dashboard-popular-mid-chat-button:hover {
         background-color: #45a049;
     }
-    
     /* Style for the returned data */
-    .planit-results {
-        margin-top: 20px;
-        font-size: 16px;
+    .planit-dashboard-popular-mid-chat-results {
+        margin-top: calc(var(--nav-size)*0.1);
+        font-size: calc(var(--nav-size)*0.3);
     }
     .planit-dashboard-popular-right{
         display: block;
@@ -88,54 +83,49 @@
         columns: 3;
         height: calc(var(--nav-size)*15);
     }
-    .planit-dashboard-popular-left{
-        /* height: 100%; */
+    /* .planit-dashboard-popular-left{
+        height: 100%;
         display: block;
 
-    }
+    } */
     /* Add styles for the chatbot interface */
     .planit-dashboard-popular-mid {
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 20px;
+        min-height: 100%;
     }
-    
-    .planit-dashboard-popular-left-plans {
+    .planit-dashboard-popular-mid-chat {
         width: 100%;
-        max-width: 400px;
-        margin-top: 20px;
+        max-width: calc(var(--nav-size)*7);
+        margin-top: calc(var(--nav-size)*0.2);
     }
-    
-    .infoplan-newcomment-textarea {
+    .planit-dashboard-popular-mid-chat-area {
         width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
+        padding: calc(var(--nav-size)*0.2);
+        margin-bottom: calc(var(--nav-size)*0.2);
         resize: none;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 14px;
+        border: calc(var(--nav-size)*0.05) solid #ccc;
+        border-radius: calc(var(--nav-size)*0.05);
+        font-size: calc(var(--nav-size)*0.26);
     }
-    
-    #planit-dashboard-popular-left-plans-middledashboard-button {
+    #planit-dashboard-popular-mid-chat-button {
         background-color: #4caf50;
         color: white;
-        padding: 10px 15px;
+        padding: calc(var(--nav-size)*0.2) calc(var(--nav-size)*0.3);
         border: none;
-        border-radius: 5px;
+        border-radius: calc(var(--nav-size)*0.1);
         cursor: pointer;
-        font-size: 16px;
+        font-size: calc(var(--nav-size)*0.3);
     }
-    
-    #planit-dashboard-popular-left-plans-middledashboard-button:hover {
+    #planit-dashboard-popular-mid-chat-button:hover {
         background-color: #45a049;
     }
-    
     /* Style for the returned data */
-    .planit-results {
-        margin-top: 20px;
-        font-size: 16px;
+    .planit-dashboard-popular-mid-chat-results {
+        margin-top: calc(var(--nav-size)*0.1);
+        font-size: calc(var(--nav-size)*0.3);
     }
     
 
