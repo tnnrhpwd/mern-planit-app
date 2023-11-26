@@ -1,10 +1,10 @@
 .planit-header-dropper-themebutton{
-    font-size: calc(var(--nav-size)*0.35);
+    font-size: calc(var(--nav-size)*0.32);
     background-color: var(--bg-accent);
     cursor: pointer;
     position: fixed;
     padding: calc(var(--nav-size)*0.1);
-    margin-left: calc(var(--nav-size)*1.5);
+    margin-left: calc(var(--nav-size)*2.0);
     top: calc(var(--nav-size)*0.27);
     border: calc(var(--nav-size)*0.001) solid black;
 }
