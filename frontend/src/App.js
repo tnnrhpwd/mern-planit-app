@@ -21,18 +21,20 @@ import React from 'react';
 function App() {
   return (<>
     <Router>
-    <div className='planit-app'>
-      <Header />
-      <Routes>
-        <Route path='/about' element={<About />} />
-        <Route path='/' element={<Dashboard />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/settings' element={<Settings />} />
-        <Route path='/about' element={<About />} />
-      </Routes>
-    </div>
+      <div className='planit-app'>
+        <Header />
+        <Routes>
+          <Route path='/about' element={<About />} />
+          <Route path='/agenda' element={<Agenda />} />
+          <Route path='/' element={<Dashboard />} />
+          <Route path='/goals' element={<Goals />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/plans' element={<Plans />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/settings' element={<Settings />} />
+        </Routes>
+      </div>
     </Router>
     <ToastContainer/>
   </>)

@@ -19,9 +19,9 @@ function Goals() {
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
 
-  const { user, dataIsError, dataIsSuccess, dataMessage } = useSelector(     // select goal values from data state
-    (state) => state.data
-  )
+  const { user, data, dataIsLoading, dataIsSuccess, dataIsError, dataMessage } = useSelector(     // select values from state
+  (state) => state.data
+)
 
   // called on state changes
   useEffect(() => {

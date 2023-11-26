@@ -14,7 +14,7 @@ function MiddleDashboard() {
     const [ returnedData, setReturnedData ] = useState(null);    
     const [ sentData, setSentData ] = useState("");
 
-    const { user, data, dataIsLoading, dataIsSuccess, dataIsError, dataMessage } = useSelector(     // select plan values from plan state
+    const { user, data, dataIsLoading, dataIsSuccess, dataIsError, dataMessage } = useSelector(     // select values from state
         (state) => state.data
     )
 

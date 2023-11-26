@@ -8,12 +8,12 @@ import Spinner from './../../components/Spinner/Spinner.jsx'
 import { resetDataSlice } from './../../features/data/dataSlice'
 import './Plans.css';
 
-function Plan() {
+function Plans() {
   const [ showNewData, setShowNewData] = useState(false);
-  const [ showMyDatas, setShowMyDatas ] = useState(false);
-  const [ myDatas, setMyDatas ] = useState([])
-  const [ showSavedDatas, setShowSavedDatas ] = useState(false)
-  const [ savedDatas, setSavedDatas ] = useState([])
+  const [ showMyPlans, setShowMyPlans ] = useState(false);
+  const [ myPlans, setMyPlans ] = useState([])
+  const [ showSavedPlans, setShowSavedPlans ] = useState(false)
+  const [ savedPlans, setSavedPlans ] = useState([])
   // const [ dataObjectArray, setDataObjectArray ] = useState([]);
 
   const navigate = useNavigate() // initialization
@@ -30,7 +30,7 @@ function Plan() {
 
     }
 
-    // dispatch(getDatas()) // dispatch connects to the store, then retreives the datas.
+    // dispatch(getDatas()) // dispatch connects to the store, then retreives the data.
 
   
     if (!user) {            // if no user, redirect to login
@@ -38,7 +38,7 @@ function Plan() {
     }
 
     
-    return () => {    // reset the datas when state changes
+    return () => {    // reset the data when state changes
       dispatch(resetDataSlice()) // dispatch connects to the store, then reset state values( dataMessage, isloading, iserror, and issuccess )
     }
   }, [dataIsError, dataMessage, dispatch, navigate, user])
@@ -72,33 +72,33 @@ function Plan() {
     if(showNewData){setShowNewData(false)}
     else if(!showNewData){setShowNewData(true)}
   }
-  function handleMyDatasToggle(){
-    if(showMyDatas){setShowMyDatas(false)}
-    else if(!showMyDatas){setShowMyDatas(true)}
+  function handleMyPlansToggle(){
+    if(showMyPlans){setShowMyPlans(false)}
+    else if(!showMyPlans){setShowMyPlans(true)}
   }
-  function handleSavedDatasToggle(){
-    if(showSavedDatas){setShowSavedDatas(false)}
-    else if(!showSavedDatas){setShowSavedDatas(true)}
-    console.log(showSavedDatas)
+  function handleSavedPlansToggle(){
+    if(showSavedPlans){setShowSavedPlans(false)}
+    else if(!showSavedPlans){setShowSavedPlans(true)}
+    console.log(showSavedPlans)
   }
 
   // if(dataObjectArray.length > 0){
     return (
-      <div className='datait-datas'>
-        Datas
-        <div className='datait-datas-text'>
+      <div className='planit-plans'>
+        Plans
+        <div className='planit-plans-text'>
           Every journey begins with a step.
         </div>
-        <div  className='datait-datas-create' >
+        <div  className='planit-plans-create' >
           
-          <div onClick={handleCreateDataToggle} className='datait-datas-create-text'>
+          <div onClick={handleCreateDataToggle} className='planit-plans-create-text'>
             {
               showNewData ? "Cancel Data":"Create Data"
             }
           
           </div>
           { ( user ) &&
-            <div className='datait-datas-in'>
+            <div className='planit-plans-in'>
               {(showNewData) &&
                 <PlanInput />
               }
@@ -107,35 +107,35 @@ function Plan() {
           }
         </div>
   
-        <div className='datait-datas-my'>
-          <div onClick={handleMyDatasToggle} className="datait-datas-my-text">
-            My Datas
+        <div className='planit-plans-my'>
+          <div onClick={handleMyPlansToggle} className="planit-plans-my-text">
+            My Plans
           </div>
         
-          { showMyDatas &&
-            <div className='datait-datas-my-out'>
-              { ( myDatas.length > 0 ) ? (
-                <div className='datait-datas-my-out-result'>
-                  { myDatas }
+          { showMyPlans &&
+            <div className='planit-plans-my-out'>
+              { ( myPlans.length > 0 ) ? (
+                <div className='planit-plans-my-out-result'>
+                  { myPlans }
                 </div>
                ) : ( 
-                <h3>You have not set any datas</h3>
+                <h3>You have not set any plans</h3>
               )} 
             </div>
           }
         </div>
-        <div className='datait-datas-saved'>
-          <div onClick={handleSavedDatasToggle} className="datait-datas-saved-text">
-            Saved Datas
+        <div className='planit-plans-saved'>
+          <div onClick={handleSavedPlansToggle} className="planit-plans-saved-text">
+            Saved Plans
           </div>
-          { showSavedDatas &&
-            <div className='datait-datas-saved-out'>
-              { ( savedDatas.length > 0 ) ? (
-                <div className='datait-datas-saved-out-result'>
-                  { savedDatas }
+          { showSavedPlans &&
+            <div className='planit-plans-saved-out'>
+              { ( savedPlans.length > 0 ) ? (
+                <div className='planit-plans-saved-out-result'>
+                  { savedPlans }
                 </div>
               ) : (
-                <h3>You have not set any datas</h3>
+                <h3>You have not set any plans</h3>
               )}
             </div>
           }
@@ -145,4 +145,4 @@ function Plan() {
   // }else{return <Spinner/>}
 }
 
-export default Plan
+export default Plans
