@@ -5,7 +5,7 @@ import ActionInput from '../../components/ActionInput/ActionInput';
 import ActionResult from '../../components/ActionResult/ActionResult';
 import { toast } from 'react-toastify'                        // visible error notifications
 // import Spinner from './../../components/Spinner/Spinner.jsx'
-// import { getDatas, resetDataSlice } from './../../features/data/dataSlice'
+import { getData, resetDataSlice } from './../../features/data/dataSlice'
 // import BuildPlanObjectArray from '../../components/BuildPlanitObjectArray.js';
 import './Agenda.css';
 
@@ -14,54 +14,45 @@ function Agenda() {
   const [ showMyActions, setShowMyActions ] = useState(false)
   const [ showCalendar, setShowCalendar ] = useState(false)
   // const [ planitObjectArray, setPlanitObjectArray ] = useState([]);
-
-  const [ myActions, setMyActions ] = useState(false)
-
+  const [ myActions, setMyActions ] = useState([])
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
 
-  const { user, dataIsError, dataMessage } = useSelector(     // select data values from data state
-    (state) => state.data
-  )
-
+  const { user, data, dataIsLoading, dataIsSuccess, dataIsError, dataMessage } = useSelector(     // select values from state
+  (state) => state.data
+)
 
   // called on state changes
   useEffect(() => {
     if (dataIsError) {
       toast.error(dataMessage) // print error to toast errors
-
     }
 
-    // dispatch(getDatas()) // dispatch connects to the store, then retrieves the datas.
+    dispatch(getData()) // dispatch connects to the store, then retrieves the datas.
 
-
-  
     if (!user) {            // if no user, redirect to login
       navigate('/login') 
     }
-
     
     return () => {    // reset the plans when state changes
-      // dispatch(resetDataSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
+      dispatch(resetDataSlice()) // dispatch connects to the store, then reset state values( dataMessage, isloading, iserror, and issuccess )
     }
   }, [dataIsError, dataMessage, dispatch, navigate, user])
 
   useEffect(() => {
-    function handleAllOutputActions(planitObjectArray){ 
+    function handleAllOutputActions(){ 
       var outputMyActionsArray = [];
 
-      planitObjectArray[3].forEach( selAction => {
-        outputMyActionsArray.push(<ActionResult selAction={selAction}/>)
+      data.data.forEach( (item) => {
+        outputMyActionsArray.push(<ActionResult selAction={item}/>)
       });
 
       setMyActions(outputMyActionsArray)
     }
-    // if(planitObjectArray.length > 0){
-    //   handleAllOutputActions(planitObjectArray);
-    // }
-  }, [user._id])
-
-
+    if((myActions.length === 0) && (data.data)){
+      handleAllOutputActions();
+    }
+  }, [data.data, myActions.length])
 
   const toggleShowCreateAction = () => {
     if(showCreateAction){setShowCreateAction(false)}
@@ -83,9 +74,7 @@ function Agenda() {
         </div>
         <div className='agenda-descr'>
           where plans become actions
-        </div>
-
-        <br/>
+        </div><br/>
 
         <div className='agenda-create'>
           <div className='agenda-selection' onClick={toggleShowCreateAction}> Create Action </div>
@@ -94,9 +83,7 @@ function Agenda() {
               <ActionInput/>
             </div>
           }
-        </div>
-
-        <br/>
+        </div><br/>
 
         <div className='agenda-my'>
           <div className='agenda-selection' onClick={toggleShowMyActions}> My Actions </div>
@@ -105,9 +92,7 @@ function Agenda() {
               { myActions }
             </div>
           }
-        </div>
-
-        <br/>
+        </div><br/>
 
         <div className='agenda-calen'>
           <div className='agenda-selection' onClick={toggleShowCalendar}> My Calendar </div>
@@ -115,8 +100,6 @@ function Agenda() {
             <div>hi</div>
           }
         </div>
-
-
     </div>
   </>)
 }
