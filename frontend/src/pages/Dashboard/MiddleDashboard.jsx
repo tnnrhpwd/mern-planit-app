@@ -43,30 +43,28 @@ function MiddleDashboard() {
     }
 
     async function callData() {
-        try {
-          // Check if sentData is not empty
-          if (sentData.trim() === "") {
-            toast.error("Please enter data to send to OpenAI.");
-            return;
-          }
-    
-          // Dispatch the createData action with the sentData
-          dispatch(updateData({ 
-            id: "u",
-            data: sentData,
-            user: user.nickname
-          }));
-    
-          // Reset the textarea after sending the data
-          setSentData("");
-    
-          // ...other code...
-        } catch (error) {
-          // Handle any errors here
-          console.error(error);
-          toast.error("An error occurred while fetching data from OpenAI.");
+      try {
+        // Check if sentData is not empty
+        if (sentData.trim() === "") {
+          toast.error("Please enter data to send to OpenAI.");
+          return;
         }
+ 
+        // Dispatch the createData action with the sentData
+        dispatch(updateData({ 
+          id: "u",
+          data: sentData,
+          // user: user.nickname
+        }));
+    
+        // Reset the textarea after sending the data
+        setSentData("");
+      } catch (error) {
+        // Handle any errors here
+        console.error(error);
+        toast.error("An error occurred while fetching data from OpenAI.");
       }
+    }
 
     return (
         <div className='planit-dashboard-popular-mid'>

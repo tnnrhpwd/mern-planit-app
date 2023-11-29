@@ -7,27 +7,28 @@ const API_URL = devMode? '/api/data/': 'https://mern-plan-web-service.onrender.c
 if (devMode) {console.log("Warning: Running in development mode. Remember to start backend.")}
 
 // Create new data
-const createData = async (dataData, token) => {
+const createData = async ( dataData, token ) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         },
     }
     
-    const response = await axios.post(API_URL, dataData, config)
+    const response = await axios.post( API_URL, dataData, config )
 
     return response.data
 }
 
-// Get all datas
-const getData = async (token) => {
+// Get all data
+const getData = async ( dataData, token ) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         },
+        params: dataData, // Include dataData as query parameters
     }
 
-    const response = await axios.get(API_URL, config)
+    const response = await axios.get( API_URL, config )
 
     return response.data
 }

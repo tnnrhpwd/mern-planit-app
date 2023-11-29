@@ -12,8 +12,22 @@ const client = new openai({ apiKey: openaikey })
 // @route   GET /api/data
 // @access  Private
 const getData = asyncHandler(async (req, res) => {
-  // If compression is not requested, pull the requested data from your database
-  const datas = await Data.find(); // Get all data
+  // Check for user
+  if (!req.user) {
+    res.status(401)
+    throw new Error('User not found')
+  }
+
+  if (!req.query) {
+    res.status(400)
+    throw new Error('Please add a text field')
+  }
+  // const datas = await Data.find(); // Get all data
+  const searchString = req.query.data.toLowerCase(); // Convert to lowercase
+
+  const datas = await Data.find({ data: { $regex: searchString, $options: 'i' } });
+
+  // res.status(200).json(searchString);
   res.status(200).json({ data: datas.map((data) => data.data) });
 });
 

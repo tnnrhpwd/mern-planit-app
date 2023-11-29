@@ -24,16 +24,27 @@ function Agenda() {
 
   // called on state changes
   useEffect(() => {
-    if (dataIsError) {
-      toast.error(dataMessage) // print error to toast errors
-    }
-
-    dispatch(getData()) // dispatch connects to the store, then retrieves the datas.
-
     if (!user) {            // if no user, redirect to login
       navigate('/login') 
     }
-    
+
+    if (dataIsError) {
+      toast.error(dataMessage) // print error to toast errors      
+      console.error(dataMessage);
+    }
+
+    async function getMyData(){
+      try {
+        dispatch(getData({ 
+          data: "Action:", 
+        })); // dispatch connects to the store, then retrieves the datas.
+      } catch (error) {
+        console.error(error);
+        toast.error(error);
+      }
+    }
+
+    getMyData()
     return () => {    // reset the plans when state changes
       dispatch(resetDataSlice()) // dispatch connects to the store, then reset state values( dataMessage, isloading, iserror, and issuccess )
     }

@@ -38,9 +38,8 @@ export const getData = createAsyncThunk(
   'data/get',
   async (dataData, thunkAPI) => {
     try {
-      // const token = thunkAPI.getState().auth.user.token         // get the user token  
-      // return await dataService.getDatas(token)      // pass user token to get all datas from the specific user token
-      return await dataService.getData()      // Get data regardless of user logged in
+      const token = thunkAPI.getState().data.user.token
+      return await dataService.getData(dataData, token)
     } catch (error) {
       const dataMessage =
         (error.response &&
@@ -48,7 +47,7 @@ export const getData = createAsyncThunk(
           error.response.data.dataMessage) ||
         error.dataMessage ||
         error.toString()
-      return thunkAPI.rejectWithValue(dataMessage)  // check for any errors associated with async getdatas function object imported from dataSlice
+      return thunkAPI.rejectWithValue(dataMessage)
     }
   }
 )
