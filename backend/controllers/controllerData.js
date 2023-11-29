@@ -21,13 +21,18 @@ const getData = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('Please add a text field')
   }
-  // const datas = await Data.find(); // Get all data
-  const searchString = req.query.data.toLowerCase(); // Convert to lowercase
-
-  const datas = await Data.find({ data: { $regex: searchString, $options: 'i' } });
-
-  // res.status(200).json(searchString);
+  const dataSearchString = req.query.data.toLowerCase(); // Convert to lowercase
+  const userSearchString = req.user.id.toLowerCase(); // Convert to lowercase
+  
+  const datas = await Data.find({
+    $and: [
+      { data: { $regex: dataSearchString, $options: 'i' } },
+      { user: userSearchString }, // Assuming 'user' is the field that stores user IDs
+    ],
+  });
+  
   res.status(200).json({ data: datas.map((data) => data.data) });
+  
 });
 
 // @desc    Set data
