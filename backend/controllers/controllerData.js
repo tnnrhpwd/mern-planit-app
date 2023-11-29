@@ -12,8 +12,7 @@ const client = new openai({ apiKey: openaikey })
 // @route   GET /api/data
 // @access  Private
 const getData = asyncHandler(async (req, res) => {
-  // Check for user
-  if (!req.user) {
+  if (!req.user) {  // Check for user
     res.status(401)
     throw new Error('User not found')
   }
@@ -35,19 +34,20 @@ const getData = asyncHandler(async (req, res) => {
 // @route   POST /api/data
 // @access  Private
 const setData = asyncHandler(async (req, res) => {
+  if (!req.user) {  // Check for user
+    res.status(401)
+    throw new Error('User not found')
+  }
   if (!req.body.data) {
     res.status(400)
     throw new Error('Please add a text field')
   }
 
-  const { text } = req.body
-
   const datas = await Data.create({
-    data: text,
+    data: req.body.data,
   })
   
-
-  res.status(200).json(text)
+  res.status(200).json(datas)
 })
 
 // @desc    Update Data
