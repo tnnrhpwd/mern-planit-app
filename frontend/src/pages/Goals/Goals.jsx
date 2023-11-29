@@ -4,14 +4,14 @@ import { useSelector, useDispatch } from 'react-redux'      // access state vari
 import GoalInput from './../../components/GoalInput/GoalInput.jsx';
 // import GoalResult from './../../components/GoalResult/GoalResult.jsx';
 // import Spinner from './../../components/Spinner/Spinner.jsx'
-import { getDatas, resetDataSlice } from './../../features/data/dataSlice'
+import { getData, resetDataSlice } from './../../features/data/dataSlice'
 import { toast } from 'react-toastify'                        // visible error notifications
 import './Goals.css';
 
 function Goals() {
   const [ showNewGoal, setShowNewGoal] = useState(true);
-  const [ showMyGoals ] = useState(false);
-  const [ myGoals ] = useState([])
+  const [ showMyGoals, setShowMyGoals ] = useState(false);
+  const [ myGoals, setMyGoals ] = useState([])
   // const [ showSavedGoals, setShowSavedGoals ] = useState(false)
   // const [ savedGoals, setSavedGoals ] = useState([])
   // const [ goalObjectArray, setGoalObjectArray ] = useState([]);
@@ -25,22 +25,30 @@ function Goals() {
 
   // called on state changes
   useEffect(() => {
-    if (dataIsError) {
-      toast.error(dataMessage, { autoClose: 1000 });
-    }else if (dataIsSuccess) {
-      toast.success(dataMessage, { autoClose: 1000 });
-    }
-
-    // dispatch(getDatas()) // dispatch connects to the store, then retreives the comments.
-
     if (!user) {            // if no user, redirect to login
       navigate('/login') 
     }
+    if (dataIsError) {
+      toast.error(dataMessage, { autoClose: 1000 });
+      console.error(dataMessage);
+    }
 
+    async function getMyData(){
+      try {
+        dispatch(getData({ 
+          data: "Goal:", 
+        })); // dispatch connects to the store, then retrieves the datas.
+      } catch (error) {
+        console.error(error);
+        toast.error(error);
+      }
+    }
+
+    getMyData()
     return () => {    // reset the goals when state changes
       dispatch(resetDataSlice()) // dispatch connects to the store, then reset state values( goalMessage, isloading, iserror, and issuccess )
     }
-  }, [dataIsError, dataIsSuccess, dataMessage, dispatch, navigate, user])
+  }, [dataIsError, dataMessage, dispatch, navigate, user])
 
   // useEffect(() => {
   //   function handleAllOutputPlans(ObjectArray){ 
@@ -91,10 +99,10 @@ function Goals() {
     if(showNewGoal){setShowNewGoal(false)}
     else if(!showNewGoal){setShowNewGoal(true)}
   }
-  // function handleMyGoalsToggle(){
-  //   if(showMyGoals){setShowMyGoals(false)}
-  //   else if(!showMyGoals){setShowMyGoals(true)}
-  // }
+  function handleMyGoalsToggle(){
+    if(showMyGoals){setShowMyGoals(false)}
+    else if(!showMyGoals){setShowMyGoals(true)}
+  }
 
 
   return (

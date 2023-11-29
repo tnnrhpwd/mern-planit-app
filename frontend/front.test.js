@@ -18,4 +18,6 @@ describe('Frontend Testing', ()=>{
   });
 
   it.todo('can communicate with the server');
+    it.todo('can log in');
+    it.todo('can get data');
 })
