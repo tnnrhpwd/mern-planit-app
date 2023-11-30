@@ -15,12 +15,12 @@ import ThumbsDown from './../../assets/thumbs-down.svg';
 import './PlanResult.css';
 
 function DataResult(props) {
-    const planObjectArray = props.importDataArray;
+    const planString = props.importPlanString;
 
     const dispatch = useDispatch()  // initialization
     const navigate = useNavigate();
 
-    const { user } = useSelector((state) => state.auth)      // select user values from user state
+    const { user } = useSelector((state) => state.data)      // select user values from user state
   
     const [ shareView, setShareView ] = useState(null);
     const [ manageView, setManageView ] = useState(null);
@@ -61,76 +61,76 @@ function DataResult(props) {
     function handleManageView(type, id){
         if(!user){ navigate('/login') } // GUARD CLAUSE -- Nonusers go to login.
         if( ( manageView === null ) ){
-            const manageViewComponent = <ManageView plan={planObjectArray[0]} owner={planObjectArray[1]} user={user} view={true} click={setManageView} type={type} />;
+            const manageViewComponent = <ManageView plan={planString} owner={planString} user={user} view={true} click={setManageView} type={type} />;
             setManageView(manageViewComponent);
         }else if( !( manageView === null ) ){
             setManageView(null);
         } 
     }
 
-    if(planObjectArray){
+    if(planString){
         return (<>
             { shareView }
             { manageView }
 
-            <div key={planObjectArray[0]+"0"} className='planit-planresult'>
-                <div key={planObjectArray[0]+"0.1"} className='planit-planresult-1'>
-                    <div key={planObjectArray[0]+"0.11"} className='planit-planresult-date'>
-                        <CreatedAt key={planObjectArray[0]+"0.12"} createdAt={planObjectArray[8]}/>
+            <div key={planString+"0"} className='planit-planresult'>
+                <div key={planString+"0.1"} className='planit-planresult-1'>
+                    <div key={planString+"0.11"} className='planit-planresult-date'>
+                        <CreatedAt key={planString+"0.12"} createdAt={planString}/>
                     </div>
-                    <div key={planObjectArray[0]+"0.13"} className='planit-planresult-share'>
-                        <button key={planObjectArray[0]+"0.14"} className='planit-planresult-share-btn' onClick={() => handleShareView("plan",planObjectArray[0])}>Share</button>
+                    <div key={planString+"0.13"} className='planit-planresult-share'>
+                        <button key={planString+"0.14"} className='planit-planresult-share-btn' onClick={() => handleShareView("plan",planString)}>Share</button>
                     </div>
-                    <div className='planit-planresult-fav' key={planObjectArray[0]+"0.15"}>
+                    <div className='planit-planresult-fav' key={planString+"0.15"}>
                         { (user) ? <>{
-                            <>{ (planObjectArray[7].includes(user._id)) ?
+                            <>{ (planString.includes(user._id)) ?
                                 <>
-                                    <button className='planit-planresult-fav-btn' onClick={() => handleUnfavorite( planObjectArray[0] )} key={planObjectArray[0]+"5.1"}>❤</button>
+                                    <button className='planit-planresult-fav-btn' onClick={() => handleUnfavorite( planString )} key={planString+"5.1"}>❤</button>
                                 </>
                                 :<>
-                                    <button className='planit-planresult-unfav-btn' onClick={() => handleFavorite( planObjectArray[0] )} key={planObjectArray[0]+"5.2"}>♡</button>
+                                    <button className='planit-planresult-unfav-btn' onClick={() => handleFavorite( planString )} key={planString+"5.2"}>♡</button>
                                 </>
                             }</>
                         }</>:null}
                     </div>
-                    <div className='planit-planresult-manageplan' key={planObjectArray[0]+"0.16"}>
+                    <div className='planit-planresult-manageplan' key={planString+"0.16"}>
                         { (user) ? <>{
-                            <button key={planObjectArray[0]+"0.17"} className='planit-planresult-manageplan-btn' onClick={() => handleManageView("plan",planObjectArray[0])} >☸</button>
+                            <button key={planString+"0.17"} className='planit-planresult-manageplan-btn' onClick={() => handleManageView("plan",planString)} >☸</button>
                         }</>:null}
                     </div>
                 </div>
-                <div key={planObjectArray[0]+"0.2"} className='planit-planresult-2'>
-                    <div key={planObjectArray[0]+"2"} className='planit-planresult-goal'><a href={'plan/'+planObjectArray[0]}><button key={planObjectArray[0]+"2button"} className='planit-planresult-goalbutton'>{planObjectArray[2][1]}</button></a></div>
-                    <div key={planObjectArray[0]+"4"} className='planit-planresult-plan'><a href={'plan/'+planObjectArray[0]}><button key={planObjectArray[0]+"4button"} className='planit-planresult-planbutton'>{planObjectArray[3].map(( planElement, planElementIndex ) => (<div key={planObjectArray[0]+"element"+planElement[0]}>{planElement[1]}</div>))}</button></a></div>
+                <div key={planString+"0.2"} className='planit-planresult-2'>
+                    <div key={planString+"2"} className='planit-planresult-goal'><a href={'plan/'+planString}><button key={planString+"2button"} className='planit-planresult-goalbutton'>{planString}</button></a></div>
+                    {/* <div key={planString+"4"} className='planit-planresult-plan'><a href={'plan/'+planString}><button key={planString+"4button"} className='planit-planresult-planbutton'>{planString.map(( planElement, planElementIndex ) => (<div key={planString+"element"+planElement}>{planElement}</div>))}</button></a></div> */}
                 </div>
-                <div key={planObjectArray[0]+"0.3"} className='planit-planresult-3'>
-                    <div key={planObjectArray[0]+"1"} className="planit-planresult-disagree-div">
+                <div key={planString+"0.3"} className='planit-planresult-3'>
+                    <div key={planString+"1"} className="planit-planresult-disagree-div">
                         {(user) ?
-                            <>{(planObjectArray[6].includes(user._id)) ?
-                                <button key={planObjectArray[0]+"1button"} className='planit-planresult-disagreeACT' onClick={() => handleDisagree( planObjectArray[0] )}><img key={planObjectArray[0]+"4.002"} className='planit-planresult-thumb' src={ThumbsDown} alt='thumbs down logo'/></button>
+                            <>{(planString.includes(user._id)) ?
+                                <button key={planString+"1button"} className='planit-planresult-disagreeACT' onClick={() => handleDisagree( planString )}><img key={planString+"4.002"} className='planit-planresult-thumb' src={ThumbsDown} alt='thumbs down logo'/></button>
                             :
-                                <button key={planObjectArray[0]+"1.5button"} className='planit-planresult-disagree' onClick={() => handleDisagree( planObjectArray[0] )}><img key={planObjectArray[0]+"4.001"} className='planit-planresult-thumb' src={ThumbsDown} alt='thumbs down logo'/></button>
+                                <button key={planString+"1.5button"} className='planit-planresult-disagree' onClick={() => handleDisagree( planString )}><img key={planString+"4.001"} className='planit-planresult-thumb' src={ThumbsDown} alt='thumbs down logo'/></button>
                         }</>:null}
                     </div>
-                    <div key={planObjectArray[0]+"3"} className="planit-planresult-agree-div">
+                    <div key={planString+"3"} className="planit-planresult-agree-div">
                         {(user) ?
-                        <>{(planObjectArray[5].includes(user._id)) ?
-                            <button key={planObjectArray[0]+"3button"} className='planit-planresult-agreeACT' onClick={() => handleAgree( planObjectArray[0] )}><img key={planObjectArray[0]+"4.003"} className='planit-planresult-thumb' src={ThumbsUp} alt='thumbs up logo'/></button>
+                        <>{(planString.includes(user._id)) ?
+                            <button key={planString+"3button"} className='planit-planresult-agreeACT' onClick={() => handleAgree( planString )}><img key={planString+"4.003"} className='planit-planresult-thumb' src={ThumbsUp} alt='thumbs up logo'/></button>
                         :
-                            <button key={planObjectArray[0]+"3button"} className='planit-planresult-agree' onClick={() => handleAgree( planObjectArray[0] )}><img key={planObjectArray[0]+"4.004"} className='planit-planresult-thumb' src={ThumbsUp} alt='thumbs up logo'/></button>
+                            <button key={planString+"3button"} className='planit-planresult-agree' onClick={() => handleAgree( planString )}><img key={planString+"4.004"} className='planit-planresult-thumb' src={ThumbsUp} alt='thumbs up logo'/></button>
                         }</>:null}
                     </div>
-                    <div className='planit-planresult-votecomment-holder' key={planObjectArray[0]+"4.005"} >
-                        <a href={'plan/'+planObjectArray[0]} className='planit-planresult-votecomment-link' key={planObjectArray[0]+"4.006"}>
-                            <div className='planit-planresult-votecomment' key={planObjectArray[0]+"4.007"} >
+                    <div className='planit-planresult-votecomment-holder' key={planString+"4.005"} >
+                        <a href={'plan/'+planString} className='planit-planresult-votecomment-link' key={planString+"4.006"}>
+                            <div className='planit-planresult-votecomment' key={planString+"4.007"} >
                                 {/* Needed to add this if statement to add "+" before positive */}
-                                {(planObjectArray[5].length - planObjectArray[6].length > 0)
-                                    ? "+"+(planObjectArray[5].length - planObjectArray[6].length)+" votes "
-                                    : (planObjectArray[5].length - planObjectArray[6].length)+" votes "
+                                {(planString.length - planString.length > 0)
+                                    ? "+"+(planString.length - planString.length)+" votes "
+                                    : (planString.length - planString.length)+" votes "
                                 }
                                 |
                                 {
-                                    " " + ( planObjectArray[4].length ) + " comments"
+                                    " " + ( planString.length ) + " comments"
                                 }
                             </div>
                         </a>
