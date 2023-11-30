@@ -21,7 +21,7 @@ function Goals() {
 
   const { user, data, dataIsLoading, dataIsSuccess, dataIsError, dataMessage } = useSelector(     // select values from state
   (state) => state.data
-)
+  )
 
   // called on state changes
   useEffect(() => {

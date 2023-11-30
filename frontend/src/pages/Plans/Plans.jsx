@@ -5,7 +5,7 @@ import PlanInput from './../../components/PlanInput/PlanInput.jsx';
 import PlanResult from './../../components/PlanResult/PlanResult.jsx';
 import { toast } from 'react-toastify'                        // visible error notifications
 import Spinner from './../../components/Spinner/Spinner.jsx'
-import { resetDataSlice } from './../../features/data/dataSlice'
+import { getData, resetDataSlice } from './../../features/data/dataSlice'
 import './Plans.css';
 
 function Plans() {
@@ -19,25 +19,32 @@ function Plans() {
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
 
-  const { user, dataIsLoading, dataIsError, dataMessage } = useSelector(     // select data values from data state
-    (state) => state.data
+  const { user, data, dataIsLoading, dataIsSuccess, dataIsError, dataMessage } = useSelector(     // select values from state
+  (state) => state.data
   )
 
   // called on state changes
   useEffect(() => {
+    if (!user) {            // if no user, redirect to login
+      navigate('/login') 
+    }
     if (dataIsError) {
       toast.error(dataMessage) // print error to toast errors
 
     }
 
-    // dispatch(getDatas()) // dispatch connects to the store, then retreives the data.
-
-  
-    if (!user) {            // if no user, redirect to login
-      navigate('/login') 
+    async function getMyData(){
+      try {
+        dispatch(getData({ 
+          data: "Goal:", 
+        })); // dispatch connects to the store, then retrieves the datas.
+      } catch (error) {
+        console.error(error);
+        toast.error(error);
+      }
     }
 
-    
+    getMyData()
     return () => {    // reset the data when state changes
       dispatch(resetDataSlice()) // dispatch connects to the store, then reset state values( dataMessage, isloading, iserror, and issuccess )
     }
@@ -93,7 +100,7 @@ function Plans() {
           
           <div onClick={handleCreateDataToggle} className='planit-plans-create-text'>
             {
-              showNewData ? "Cancel Data":"Create Data"
+              showNewData ? "Cancel Plan":"Create Plan"
             }
           
           </div>

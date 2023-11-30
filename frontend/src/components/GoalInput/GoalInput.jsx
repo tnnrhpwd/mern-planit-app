@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'      // access state variables
-import { toast } from 'react-toastify'                        // visible error notifications
 import { createData } from './../../features/data/dataSlice'
 import './GoalInput.css';
 

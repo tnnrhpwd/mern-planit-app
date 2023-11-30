@@ -144,7 +144,7 @@ export const dataSlice = createSlice({
         state.dataIsLoading = false
         state.dataIsSuccess = true
         state.dataMessage = 'Data was successfully saved.'
-        state.data.push(action.payload)
+        state.data.data.push(action.payload)
       })
       .addCase(createData.rejected, (state, action) => {    // create
         state.dataIsLoading = false
