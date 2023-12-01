@@ -4,7 +4,7 @@
   height: calc(var(--nav-size));
   vertical-align: top;
   font-size: calc(var(--nav-size)*0.5);
-position:fixed;
+  position:fixed;
   border-bottom: calc(var(--nav-size)*0.01) solid var(--border-nav);
   text-decoration: none;
   width: 100vw;
@@ -12,8 +12,14 @@ position:fixed;
   z-index: 10;
 }
 .planit-header-logo{
-  display: inline-block;
-
+  display:inline-flex;
+  margin-left: calc(var(--nav-size)*0.5);
+  margin-right: 5vw;
+}
+.planit-header-logo-format{
+  font-size: calc(var(--nav-size)*0.5);
+  color: var(--text-color);
+  height: calc(var(--nav-size));
 }
 .planit-header-title{
   font-size: calc(var(--nav-size)*0.5);

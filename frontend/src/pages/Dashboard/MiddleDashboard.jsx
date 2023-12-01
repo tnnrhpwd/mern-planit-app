@@ -25,14 +25,10 @@ function MiddleDashboard() {
         }if (dataIsSuccess) {
             setReturnedData(data)
         }
-
-    
         if (!user) {            // if no user, redirect to login
           navigate('/login') 
         }
-    
         // dispatch(getDatas()) // dispatch connects to the store, then retreives the plans that match the logged in user.
-    
         return () => {    // reset the plans when state changes
         dispatch(resetDataSlice()) // dispatch connects to the store, then reset state values( planMessage, isloading, iserror, and issuccess )
         }

@@ -13,14 +13,14 @@ function Dashboard() {
   return (<>
     <div className='planit-dashboard'>
       <div className='planit-dashboard-upper'>
-        Welcome to Planit
+        <header className='planit-dashboard-upper-header'>
+          Dream bigger!
+        </header>
         {/* <Start/> */}
       </div>
       {/* <div className='planit-dashboard-popular'> */}
         {/* <LeftDashboard/> */}
-    
         <MiddleDashboard/>
-
         {/* <div className='planit-dashboard-popular-right'>
           Right Panel
           <br/>

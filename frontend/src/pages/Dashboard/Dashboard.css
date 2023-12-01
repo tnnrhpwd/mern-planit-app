@@ -4,6 +4,9 @@
         min-height: 100vh;
         min-height: calc(var(--nav-size)*2);
     }
+    .planit-dashboard-upper-header{
+        padding: calc(var(--nav-size)*0.5);;
+    }
     .planit-dashboard-popular{
         padding: calc(var(--nav-size)*.5);
         padding-right: calc(var(--nav-size)*2);
@@ -77,6 +80,9 @@
     .planit-dashboard-upper{
         padding-top: calc(var(--nav-size)*1);
         min-height: calc(var(--nav-size)*1);
+    }
+    .planit-dashboard-upper-header{
+        padding: calc(var(--nav-size)*0.5);;
     }
     .planit-dashboard-popular{
         padding: calc(var(--nav-size)*.5);

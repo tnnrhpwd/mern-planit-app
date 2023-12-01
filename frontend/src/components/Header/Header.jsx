@@ -5,15 +5,13 @@ import { logout, resetDataSlice } from './../../features/data/dataSlice.js'
 import HeaderDropper from '../HeaderDropper/HeaderDropper.jsx';
 import HeaderLogo from '../../../src/assets/planit192.png';
 import './Header.css';
-
-
+import HeaderBell from '../HeaderBell/HeaderBell.jsx';
 
 function Header() {
   const navigate = useNavigate() // initialization
   const dispatch = useDispatch() // initialization
   const { user } = useSelector((state) => state.data)   // select values from state
   const [ colTheme, setColTheme ] = useState(null);
-
   useEffect(() => {     // RUNS ON START -- Checks browser for color theme preference. Sets dark mode otherwise.
     const theme = localStorage.getItem('theme');
     if(theme==='light-theme') {
@@ -24,7 +22,6 @@ function Header() {
       setDarkMode();
     }
   }, []);
-
   function setDarkMode(){
     setColTheme('dark-theme');  // set theme state variable 
     localStorage.setItem('theme', 'dark-theme'); // store preference in user storage 
@@ -43,32 +40,30 @@ function Header() {
       document.body.classList.add('light-theme');
     }
   }
-
   // declare method to remove user item from local storage)
   const onLogout = () => {
     dispatch(logout())  // dispatch connects to the store, then remove user item from local storage
     dispatch(resetDataSlice())  // dispatch connects to the store, then reset state values( message, isloading, iserror, and issuccess )
     navigate('/')       // send user to dashboard, which will redirect to login page
   }
-
-  
-
-  
   return (
     <>
       <div className="planit-header">
         <div className="planit-header-logo">
           <a
+            className='planit-header-logo-format'
             href="/"
             onClick={() => {
-              window.scrollTo(0, 0);
-            }}
+            window.scrollTo(0, 0);
+          }}
           >
+            Simple
             <img
               id="planit-header-logo-img"
               src={HeaderLogo}
               alt="website logo"
             />
+            Action
           </a>
         </div>
         {/* <a href='/'> // deleted for now
@@ -82,9 +77,9 @@ function Header() {
           </button>
         </a> */}
 
-        <a href="/settings">
+        {/* <a href="/settings">
           <button className="planit-header-link-landscape">Settings</button>
-        </a>
+        </a> */}
         {
           user ? (
             <>
@@ -111,25 +106,25 @@ function Header() {
           // </a>
         }
 
-        <a href="/about">
+        {/* <a href="/about">
           <button className="planit-header-link-landscape">About</button>
-        </a>
-        {colTheme === "dark-theme" && (
+        </a> */}
+        {/* {colTheme === "dark-theme" && (
           <button
             className="planit-header-themebutton-landscape"
             onClick={setLightMode}
           >
             Light Mode
           </button>
-        )}
-        {colTheme === "light-theme" && (
+        )} */}
+        {/* {colTheme === "light-theme" && (
           <button
             className="planit-header-themebutton-landscape"
             onClick={setDarkMode}
           >
             Dark Mode
           </button>
-        )}
+        )} */}
         {/* <button className="planit-header-profile-landscape">
           {user ? (
             <button className="planit-header-profile-auth" onClick={onLogout}>
@@ -145,6 +140,11 @@ function Header() {
           {user ? "Log out" : <a href="/login">Log in</a>}
         </button> */}
         <HeaderDropper
+          colTheme={colTheme}
+          setLightMode={setLightMode}
+          setDarkMode={setDarkMode}
+        />
+        <HeaderBell
           colTheme={colTheme}
           setLightMode={setLightMode}
           setDarkMode={setDarkMode}

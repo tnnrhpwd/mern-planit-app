@@ -8,16 +8,13 @@ import React from 'react';
 import './HeaderDropper.css'
 
 function HeaderDropper(props) {
+  const { user } = useSelector((state) => state.data)   // select values from state
 
-    const { user } = useSelector((state) => state.data)   // select values from state
-
-
-const hideComponentVisibility = () => {document.getElementById("planit-header-dropper__toggle").checked = false;}
+  const hideComponentVisibility = () => {document.getElementById("planit-header-dropper__toggle").checked = false;}
   const ComponentVisibility = () => {return document.getElementById("planit-header-dropper__toggle").checked}
   const toggleButtonRef = useRef(null);  // reference to the dropper toggle button
   const insideComponentRef = useRef(null); // reference to the dropper container
   useOutsideAlerter( "nav", insideComponentRef, toggleButtonRef, ComponentVisibility, hideComponentVisibility ); // listen for clicks outside dropper container && handle the effects
-
 
   return (
     <div className="planit-header-dropper-space">
