@@ -47,7 +47,7 @@ function Profile() {
     return (
       <div className='planit-profile'>
       <div className='planit-profile-title'>
-        Your Profile
+        Profile
       </div>
       <div className='planit-profile-welcome'>
         Welcome home {user.nickname}!

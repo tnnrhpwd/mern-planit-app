@@ -29,14 +29,14 @@ function ActionInput() {
           <textarea
             name='text'
             id='actioninput-input'
-            placeholder='Enter plan description including stakeholders, milestones, and other project charter information.'
+            placeholder='What have you done this week to reach your goals?'
             value={stext}
             onChange={(e) => setSText(e.target.value)} // change text field value
           />
         </div>
         <div className='actioninput-group'>
           <button className='actioninput-submit' type='submit'>
-            Create Plan
+            Submit
           </button>
         </div>
       </form>

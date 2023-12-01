@@ -88,7 +88,7 @@ function Agenda() {
         </div><br/>
 
         <div className='agenda-create'>
-          <div className='agenda-selection' onClick={toggleShowCreateAction}> Create Action </div>
+          <div className='agenda-selection' onClick={toggleShowCreateAction}> Record Action </div>
           { (showCreateAction) &&
             <div>
               <ActionInput/>

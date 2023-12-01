@@ -37,23 +37,27 @@
   .planit-header-bell__box {
     display: block;
     position: fixed;
-    top: -100%;
+    top: calc(var(--nav-size) * -2.5);
     left: calc(var(--nav-size) * 0.3);
     width: calc(var(--nav-size) * 5);
     padding: calc(var(--nav-size) * 0.08) 0;
     list-style: none;
     background-color: var(--bg-nav1);
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    border: calc(var(--nav-size)*0.001) solid var(--border-nav);
+    transform: translateY(calc(var(--nav-size) * 0.15)); /* Initially hidden above the screen */
     transition-duration: 0.25s;
     text-align: left;
   }
   
   .planit-header-bell-box-header {
     font-size: calc(var(--nav-size) * 0.35);
+    margin: calc(var(--nav-size) * 0.1);
   }
   
   .planit-header-bell-box-body {
     font-size: calc(var(--nav-size) * 0.3);
+    margin: calc(var(--nav-size) * 0.1);
   }
   
   

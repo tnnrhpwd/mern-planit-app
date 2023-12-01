@@ -6,7 +6,7 @@
 }
 .planit-profile-title{
     color: var(--text-color);
-    font-size: calc(var(--nav-size)*0.4);
+    font-size: calc(var(--nav-size)*0.5);
     padding-top: calc(var(--nav-size)*0.3);
     text-align: center;
 }
