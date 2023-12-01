@@ -25,8 +25,7 @@ function GoalInput() {
         <div className='planit-goalinput'>
             <form onSubmit={onSubmit}>
                 <div className='planit-goalinput-group'>
-                <input
-                    type='text'
+                <textarea
                     name='text'
                     id='planit-goalinput-input'
                     placeholder='Enter goal description including stakeholders, milestones, and other project charter information.'

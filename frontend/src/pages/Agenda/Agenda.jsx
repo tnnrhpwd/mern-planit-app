@@ -84,7 +84,7 @@ function Agenda() {
           Agenda
         </div>
         <div className='agenda-descr'>
-          where plans become actions
+          Dream bigger.
         </div><br/>
 
         <div className='agenda-create'>

@@ -26,8 +26,7 @@ function PlanInput() {
     <div className='planit-planinput'>
       <form onSubmit={onSubmit}>
         <div className='planit-planinput-group'>
-          <input
-            type='text'
+          <textarea
             name='text'
             id='planit-planinput-input'
             placeholder='Enter plan description including stakeholders, milestones, and other project charter information.'
