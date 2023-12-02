@@ -35,7 +35,7 @@ function GoalInput() {
                 </div>
                 <div className='planit-goalinput-group'>
                 <button className='planit-goalinput-submit' type='submit'>
-                    Create Goal
+                    Submit
                 </button>
                 </div>
             </form>
