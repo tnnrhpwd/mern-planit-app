@@ -57,20 +57,7 @@ function Goals() {
       ObjectArray.forEach( goal => {
         let freqNumPlanGoals = 0; // stores number of goals that include the action
         let freqNumGoalPlans = 0; // stores number of goals on how to complete this goal.
-
-        ObjectArray[1].forEach(( goalarino ) => {
-          goalarino[3].forEach(( innerPlan ) => {
-            if( innerPlan[0] === goal[0] ){
-              freqNumPlanGoals++;
-            }
-          })
-        })
-        ObjectArray[1].forEach(( goalarino ) => {
-          if( goalarino[2][0] === goal[0] ){
-            freqNumGoalPlans++;
-          }
-        })
-
+ 
 
         // const numPlanIncluded = freqNumPlanGoals + freqNumGoalPlans
         if( ( goal[2] === user._id  ) ){
