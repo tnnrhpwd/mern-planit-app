@@ -1,0 +1,78 @@
+@media (orientation: landscape) {
+    .planit-dashboard-popular-mid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        min-height: 100%;
+    }
+    .planit-dashboard-popular-mid-chat {
+        width: 100%;
+        max-width: calc(var(--nav-size)*12);
+        margin-top: calc(var(--nav-size)*0.5);
+    }
+    .planit-dashboard-popular-mid-chat-area {
+        width: 100%;
+        padding: calc(var(--nav-size)*0.2);
+        margin-bottom: calc(var(--nav-size)*0.2);
+        resize: none;
+        border: calc(var(--nav-size)*0.05) solid #ccc;
+        border-radius: calc(var(--nav-size)*0.05);
+        font-size: calc(var(--nav-size)*0.3);
+    }
+    #planit-dashboard-popular-mid-chat-button {
+        background-color: #4caf50;
+        color: white;
+        padding: calc(var(--nav-size)*0.2) calc(var(--nav-size)*0.3);
+        border: none;
+        border-radius: calc(var(--nav-size)*0.1);
+        cursor: pointer;
+        font-size: calc(var(--nav-size)*0.3);
+    }
+    #planit-dashboard-popular-mid-chat-button:hover {
+        background-color: #45a049;
+    }
+}
+@media (orientation: portrait) {
+    .planit-dashboard-popular-mid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        min-height: 100%;
+    }
+    .planit-dashboard-popular-mid-chat {
+        width: 100%;
+        max-width: calc(var(--nav-size)*7);
+        margin-top: calc(var(--nav-size)*0.2);
+    }
+    .planit-dashboard-popular-mid-chat-area {
+        width: 100%;
+        padding: calc(var(--nav-size)*0.2);
+        margin-bottom: calc(var(--nav-size)*0.2);
+        resize: none;
+        border: calc(var(--nav-size)*0.05) solid #ccc;
+        border-radius: calc(var(--nav-size)*0.05);
+        font-size: calc(var(--nav-size)*0.26);
+    }
+    .planit-nnet-chat-history-user-message {
+        margin-left: calc(var(--nav-size)*0.2);        
+        border: calc(var(--nav-size)*0.01) solid var(--green2);
+    }
+    .planit-nnet-chat-history-openai-message {
+        margin-right: calc(var(--nav-size)*0.2);
+        border: calc(var(--nav-size)*0.01) solid var(--text-color);
+    }
+    #planit-dashboard-popular-mid-chat-button {
+        background-color: #4caf50;
+        color: white;
+        padding: calc(var(--nav-size)*0.2) calc(var(--nav-size)*0.3);
+        border: none;
+        border-radius: calc(var(--nav-size)*0.1);
+        cursor: pointer;
+        font-size: calc(var(--nav-size)*0.3);
+    }
+    #planit-dashboard-popular-mid-chat-button:hover {
+        background-color: #45a049;
+    }
+}
