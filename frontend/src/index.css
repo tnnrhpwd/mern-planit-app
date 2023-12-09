@@ -36,7 +36,6 @@ code {
   --red1: #b78c8c;
   --red2: #962525;
   --red3: #5d0d0d;
-
 }
 .Toastify__toast-container{
   font-size: calc(var(--nav-size)*.3) !important;
