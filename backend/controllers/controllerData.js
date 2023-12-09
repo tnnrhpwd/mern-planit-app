@@ -88,7 +88,7 @@ const updateData = asyncHandler(async (req, res) => {
 
     try {
       const response = await client.completions.create({
-        model: 'davinci', // Choose the appropriate engine
+        model: 'gpt-3.5-turbo-instruct', // Choose the appropriate engine
         prompt: userInput,
         max_tokens: 50, // Adjust as needed
       });

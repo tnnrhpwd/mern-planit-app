@@ -21,6 +21,7 @@ const NNetChatView = () => {
   useEffect(() => {
     // If there is a new successful response, update the chat history
     if (dataIsSuccess) {
+      console.log(data)
       if (inputText === '') {
         setChatHistory([...chatHistory, { content: data }]);
       } else {
@@ -78,13 +79,20 @@ const NNetChatView = () => {
     setChatHistory(updatedHistory);
   };
 
-  const handleKeyDown = (e) => {
+  const handleMainKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault(); // Prevents a new line from being added
       handleSend();
     }
   };
 
+  const handleEditKeyDown = (e, index) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault(); // Prevents a new line from being added
+      handleSaveEdit(index);
+    }
+  };
+  
   return (
     <div className='planit-dashboard-popular-mid-chat'>
       <div className='planit-nnet-chat-history'>
@@ -95,6 +103,7 @@ const NNetChatView = () => {
                 <TextareaAutosize
                   value={editedText}
                   onChange={(e) => setEditedText(e.target.value)}
+                  onKeyDown={(e) => handleEditKeyDown(e, index)} // Pass the index
                   className='planit-nnet-chat-history-edit'
                 />
                 <div className='planit-nnet-chat-history-edit-buttons'>
@@ -119,7 +128,7 @@ const NNetChatView = () => {
           value={inputText}
           placeholder='Input text.'
           onChange={(e) => setInputText(e.target.value)}
-          onKeyDown={handleKeyDown} // Add the keydown event handler
+          onKeyDown={handleMainKeyDown} // Add the keydown event handler
           className='planit-dashboard-popular-mid-chat-area'
         />
         <button

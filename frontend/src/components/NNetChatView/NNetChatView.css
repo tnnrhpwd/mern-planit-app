@@ -20,6 +20,7 @@
     .planit-nnet-chat-history-message {
       position: relative;
       margin-left: calc(var(--nav-size) * 0.2);
+      margin-right: calc(var(--nav-size) * 0.2);
       text-align: left;
       margin-bottom: calc(var(--nav-size) * 0.2);
       white-space: pre-line;
@@ -29,9 +30,9 @@
       content: '';
       position: absolute;
       top: 0;
-      left: calc(var(--nav-size) * -0.3);
+      left: calc(var(--nav-size) * -0.1);
       height: 100%;
-      width: calc(var(--nav-size) * 0.1); /* Adjust the width of the green bar as needed */
+      width: calc(var(--nav-size) * 0.05); /* Adjust the width of the green bar as needed */
       background-color: #4caf50; /* Green color */
     }
      
