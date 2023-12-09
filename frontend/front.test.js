@@ -13,8 +13,6 @@ describe('Frontend Testing', ()=>{
           <App />
         </Provider> 
       );
-    // const linkElement = screen.getByText(/Welcome to My MERN App/i); // Adjust this to match your actual content
-    // expect(linkElement).toBeInTheDocument();
   });
 
   it.todo('can communicate with the server');

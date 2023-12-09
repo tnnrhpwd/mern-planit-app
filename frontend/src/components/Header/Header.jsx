@@ -82,7 +82,10 @@ function Header() {
         </a> */}
         {
           user ? (
-            <>
+            <>             
+              <a href="/text">
+                <button className="planit-header-link-landscape">Text</button>
+              </a>       
               <a href="/goals">
                 <button className="planit-header-link-landscape">Goals</button>
               </a>
@@ -93,9 +96,7 @@ function Header() {
                 <button className="planit-header-link-landscape">Agenda</button>
               </a>
               <a href="/profile">
-                <button className="planit-header-link-landscape">
-                  Profile
-                </button>
+                <button className="planit-header-link-landscape">Profile</button>
               </a>
             </>
           ) : null

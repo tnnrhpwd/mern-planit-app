@@ -7,20 +7,17 @@ import React from 'react';
 import './Dashboard.css';
 
 function Dashboard() {
-
-
-
   return (<>
     <div className='planit-dashboard'>
       <div className='planit-dashboard-upper'>
-        {/* <header className='planit-dashboard-upper-header'>
+        <header className='planit-dashboard-upper-header'>
           Dream bigger!
-        </header> */}
+        </header>
         {/* <Start/> */}
       </div>
       {/* <div className='planit-dashboard-popular'> */}
         {/* <LeftDashboard/> */}
-        <MiddleDashboard/>
+        {/* <MiddleDashboard/> */}
         {/* <div className='planit-dashboard-popular-right'>
           Right Panel
           <br/>

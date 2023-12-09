@@ -16,6 +16,7 @@ import InfoGoal from './pages/InfoGoal/InfoGoal.jsx';                         //
 import InfoPlan from './pages/InfoPlan/InfoPlan.jsx';                         // import page
 import InfoAction from './pages/InfoAction/InfoAction.jsx';                   // import page
 import Agenda from './pages/Agenda/Agenda.jsx';                               // import page
+import Net from './pages/Net/Net.jsx';                               // import page
 import React from 'react';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/register' element={<Register />} />
           <Route path='/settings' element={<Settings />} />
+          <Route path='/net' element={<Net />} />
         </Routes>
       </div>
     </Router>

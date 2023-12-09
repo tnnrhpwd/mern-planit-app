@@ -106,9 +106,9 @@ const NNetChatView = () => {
                   onKeyDown={(e) => handleEditKeyDown(e, index)} // Pass the index
                   className='planit-nnet-chat-history-edit'
                 />
-                <div className='planit-nnet-chat-history-edit-buttons'>
-                  <button onClick={() => handleSaveEdit(index)}>Save</button>
-                  <button onClick={handleCancelEdit}>Cancel</button>
+                <div>
+                  <button className='planit-nnet-chat-history-edit-buttons' onClick={() => handleSaveEdit(index)}>Save</button>
+                  <button className='planit-nnet-chat-history-edit-buttons' onClick={handleCancelEdit}>Cancel</button>
                 </div>
               </>
             ) : (
@@ -136,7 +136,7 @@ const NNetChatView = () => {
           disabled={dataIsLoading}
           id='planit-dashboard-popular-mid-chat-gobutton'
         >
-          Go ⚡
+          ⚡
         </button>
       </div>
       {dataIsLoading && <Spinner />}
