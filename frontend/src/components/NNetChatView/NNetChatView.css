@@ -24,7 +24,8 @@
         width: 100%; /* Make it full width */
     }
     .planit-nnet-chat-history {
-        margin-bottom: calc(var(--nav-size) * 1);
+      color: var(--text-color);
+      margin-bottom: calc(var(--nav-size) * 1);
     }
     .planit-nnet-chat-history-message {
       position: relative;

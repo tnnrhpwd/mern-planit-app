@@ -85,7 +85,7 @@ const updateData = asyncHandler(async (req, res) => {
 
   if (shouldCompress) {    // If compression is requested, send a request to OpenAI
     // Check for user
-    if (!req.body.data.includes("tannerh@engineer.com")) {
+    if (!req.user.data.includes("tannerh@engineer.com")) {
       res.status(401)
       throw new Error('User is not authorized.')
     }
