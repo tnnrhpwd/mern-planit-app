@@ -13,6 +13,7 @@ code {
     monospace;
 }
 :root{
+  --light-blue0: #009dff;
   --dark-blue0: #101B22;
   --dark-blue0-grey: #0c141a;
   --dark-blue1: #1a2b36;
