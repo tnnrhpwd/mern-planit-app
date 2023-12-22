@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateData, resetDataSlice } from '../../features/data/dataSlice.js';
 import { toast } from 'react-toastify';
 import Spinner from '../Spinner/Spinner.jsx';
+import NNetBookView from '../NNetBookView/NNetBookView.jsx';
 import TextareaAutosize from 'react-textarea-autosize';
 
 const NNetChatView = () => {
@@ -11,6 +12,7 @@ const NNetChatView = () => {
   const [editedText, setEditedText] = useState(''); // New state for edited content
   const [chatHistory, setChatHistory] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
+  const [bookIsOpen, setBookIsOpen] = useState(false);
 
   // Get the relevant data from the state
   const { data, dataIsSuccess, dataIsLoading, dataIsError, dataMessage } = useSelector(
@@ -52,6 +54,15 @@ const NNetChatView = () => {
       // Handle any errors here
       console.error(error);
       toast.error('An error occurred while fetching data from OpenAI.');
+    }
+  };
+
+  const handleBook = async () => {
+    try {
+      if(bookIsOpen){setBookIsOpen(false)}else{setBookIsOpen(true)}
+    } catch (error) {
+      // Handle any errors here
+
     }
   };
 
@@ -138,9 +149,17 @@ const NNetChatView = () => {
         >
           ⚡
         </button>
+        <button          
+          onClick={handleBook}
+          disabled={dataIsLoading}
+          id='planit-dashboard-popular-mid-chat-bookbutton'
+        >
+          📕
+        </button>
       </div>
       {dataIsLoading && <Spinner />}
-    </div>
+      {bookIsOpen && <NNetBookView/>}
+      </div>
   );
 };
 

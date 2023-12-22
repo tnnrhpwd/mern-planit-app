@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout, resetDataSlice } from './../../features/data/dataSlice.js'
 import HeaderDropper from '../HeaderDropper/HeaderDropper.jsx';
 import HeaderLogo from '../../../src/assets/planit192.png';
-import './Header.css';
 import HeaderBell from '../HeaderBell/HeaderBell.jsx';
+import './Header.css';
 
 function Header() {
   const navigate = useNavigate() // initialization
