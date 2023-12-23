@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateData, resetDataSlice } from '../../features/data/dataSlice.js';
 import { toast } from 'react-toastify';
 import Spinner from '../Spinner/Spinner.jsx';
-import NNetBookView from '../NNetBookView/NNetBookView.jsx';
+import NNetBookView from './NNetBookView.jsx';
 import TextareaAutosize from 'react-textarea-autosize';
 
 const NNetChatView = () => {
@@ -60,6 +60,7 @@ const NNetChatView = () => {
   const handleBook = async () => {
     try {
       if(bookIsOpen){setBookIsOpen(false)}else{setBookIsOpen(true)}
+      console.log(bookIsOpen)
     } catch (error) {
       // Handle any errors here
 
@@ -149,16 +150,9 @@ const NNetChatView = () => {
         >
           ⚡
         </button>
-        <button          
-          onClick={handleBook}
-          disabled={dataIsLoading}
-          id='planit-dashboard-popular-mid-chat-bookbutton'
-        >
-          📕
-        </button>
       </div>
+      <NNetBookView/>
       {dataIsLoading && <Spinner />}
-      {bookIsOpen && <NNetBookView/>}
       </div>
   );
 };
